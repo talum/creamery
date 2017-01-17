@@ -1,0 +1,2 @@
+class Parlor < ApplicationRecord
+end
