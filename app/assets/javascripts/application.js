@@ -11,3 +11,4 @@
 // about supported directives.
 //
 //= require bundle 
+//= require materialize
