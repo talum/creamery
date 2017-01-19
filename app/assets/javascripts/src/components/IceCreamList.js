@@ -3,7 +3,6 @@ import { showIceCreams } from '../actions.js'
 
 class IceCreamList extends React.Component {
   componentWillMount() {
-    debugger
     this.props.dispatch(showIceCreams())
   }
 
