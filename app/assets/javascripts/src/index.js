@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, Link, browserHistory } from 'react-router'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import creameryApp from './reducers.js'
+import thunk from 'redux-thunk'
 import IceCreamListContainer from './components/IceCreamListContainer'
+import store from './store'
 
-let store = createStore(creameryApp)
 
 const App = () => (
   <IceCreamListContainer />

@@ -58,19 +58,23 @@
 
 	var _redux = __webpack_require__(233);
 
-	var _reactRedux = __webpack_require__(256);
+	var _reactRedux = __webpack_require__(254);
 
-	var _reducers = __webpack_require__(254);
+	var _reduxThunk = __webpack_require__(272);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _reducers = __webpack_require__(269);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _IceCreamListContainer = __webpack_require__(255);
+	var _IceCreamListContainer = __webpack_require__(270);
 
 	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var store = (0, _redux.createStore)(_reducers2.default);
+	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
 	var App = function App() {
 	  return _react2.default.createElement(_IceCreamListContainer2.default, null);
@@ -27588,69 +27592,6 @@
 
 /***/ },
 /* 254 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var initialState = {
-	  iceCreams: []
-	};
-
-	var creameryApp = function creameryApp() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case 'show_all':
-	      return state;
-	    default:
-	      return state;
-	  }
-	};
-
-	exports.default = creameryApp;
-
-/***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reactRedux = __webpack_require__(256);
-
-	var _IceCreamList = __webpack_require__(271);
-
-	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    iceCreams: state.iceCreams
-	  };
-	};
-
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    onIceCreamClick: function onIceCreamClick(id) {
-	      dispatch();
-	    }
-	  };
-	};
-
-	var IceCreamListContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_IceCreamList2.default);
-
-	exports.default = IceCreamListContainer;
-
-/***/ },
-/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27658,15 +27599,15 @@
 	exports.__esModule = true;
 	exports.connect = exports.connectAdvanced = exports.Provider = undefined;
 
-	var _Provider = __webpack_require__(257);
+	var _Provider = __webpack_require__(255);
 
 	var _Provider2 = _interopRequireDefault(_Provider);
 
-	var _connectAdvanced = __webpack_require__(261);
+	var _connectAdvanced = __webpack_require__(259);
 
 	var _connectAdvanced2 = _interopRequireDefault(_connectAdvanced);
 
-	var _connect = __webpack_require__(262);
+	var _connect = __webpack_require__(260);
 
 	var _connect2 = _interopRequireDefault(_connect);
 
@@ -27677,7 +27618,7 @@
 	exports.connect = _connect2.default;
 
 /***/ },
-/* 257 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -27687,15 +27628,15 @@
 
 	var _react = __webpack_require__(1);
 
-	var _Subscription = __webpack_require__(258);
+	var _Subscription = __webpack_require__(256);
 
 	var _Subscription2 = _interopRequireDefault(_Subscription);
 
-	var _storeShape = __webpack_require__(259);
+	var _storeShape = __webpack_require__(257);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
-	var _warning = __webpack_require__(260);
+	var _warning = __webpack_require__(258);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -27767,7 +27708,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 258 */
+/* 256 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27865,7 +27806,7 @@
 	exports.default = Subscription;
 
 /***/ },
-/* 259 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27881,7 +27822,7 @@
 	});
 
 /***/ },
-/* 260 */
+/* 258 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27911,7 +27852,7 @@
 	}
 
 /***/ },
-/* 261 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -27932,11 +27873,11 @@
 
 	var _react = __webpack_require__(1);
 
-	var _Subscription = __webpack_require__(258);
+	var _Subscription = __webpack_require__(256);
 
 	var _Subscription2 = _interopRequireDefault(_Subscription);
 
-	var _storeShape = __webpack_require__(259);
+	var _storeShape = __webpack_require__(257);
 
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 
@@ -28193,7 +28134,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 262 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28204,27 +28145,27 @@
 
 	exports.createConnect = createConnect;
 
-	var _connectAdvanced = __webpack_require__(261);
+	var _connectAdvanced = __webpack_require__(259);
 
 	var _connectAdvanced2 = _interopRequireDefault(_connectAdvanced);
 
-	var _shallowEqual = __webpack_require__(263);
+	var _shallowEqual = __webpack_require__(261);
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _mapDispatchToProps = __webpack_require__(264);
+	var _mapDispatchToProps = __webpack_require__(262);
 
 	var _mapDispatchToProps2 = _interopRequireDefault(_mapDispatchToProps);
 
-	var _mapStateToProps = __webpack_require__(267);
+	var _mapStateToProps = __webpack_require__(265);
 
 	var _mapStateToProps2 = _interopRequireDefault(_mapStateToProps);
 
-	var _mergeProps = __webpack_require__(268);
+	var _mergeProps = __webpack_require__(266);
 
 	var _mergeProps2 = _interopRequireDefault(_mergeProps);
 
-	var _selectorFactory = __webpack_require__(269);
+	var _selectorFactory = __webpack_require__(267);
 
 	var _selectorFactory2 = _interopRequireDefault(_selectorFactory);
 
@@ -28326,7 +28267,7 @@
 	exports.default = createConnect();
 
 /***/ },
-/* 263 */
+/* 261 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28354,7 +28295,7 @@
 	}
 
 /***/ },
-/* 264 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28366,7 +28307,7 @@
 
 	var _redux = __webpack_require__(233);
 
-	var _wrapMapToProps = __webpack_require__(265);
+	var _wrapMapToProps = __webpack_require__(263);
 
 	function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
 	  return typeof mapDispatchToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;
@@ -28387,7 +28328,7 @@
 	exports.default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];
 
 /***/ },
-/* 265 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28397,7 +28338,7 @@
 	exports.getDependsOnOwnProps = getDependsOnOwnProps;
 	exports.wrapMapToPropsFunc = wrapMapToPropsFunc;
 
-	var _verifyPlainObject = __webpack_require__(266);
+	var _verifyPlainObject = __webpack_require__(264);
 
 	var _verifyPlainObject2 = _interopRequireDefault(_verifyPlainObject);
 
@@ -28469,7 +28410,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 266 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28481,7 +28422,7 @@
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _warning = __webpack_require__(260);
+	var _warning = __webpack_require__(258);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -28494,7 +28435,7 @@
 	}
 
 /***/ },
-/* 267 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28503,7 +28444,7 @@
 	exports.whenMapStateToPropsIsFunction = whenMapStateToPropsIsFunction;
 	exports.whenMapStateToPropsIsMissing = whenMapStateToPropsIsMissing;
 
-	var _wrapMapToProps = __webpack_require__(265);
+	var _wrapMapToProps = __webpack_require__(263);
 
 	function whenMapStateToPropsIsFunction(mapStateToProps) {
 	  return typeof mapStateToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapStateToProps, 'mapStateToProps') : undefined;
@@ -28518,7 +28459,7 @@
 	exports.default = [whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing];
 
 /***/ },
-/* 268 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28532,7 +28473,7 @@
 	exports.whenMergePropsIsFunction = whenMergePropsIsFunction;
 	exports.whenMergePropsIsOmitted = whenMergePropsIsOmitted;
 
-	var _verifyPlainObject = __webpack_require__(266);
+	var _verifyPlainObject = __webpack_require__(264);
 
 	var _verifyPlainObject2 = _interopRequireDefault(_verifyPlainObject);
 
@@ -28582,7 +28523,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 269 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28592,7 +28533,7 @@
 	exports.pureFinalPropsSelectorFactory = pureFinalPropsSelectorFactory;
 	exports.default = finalPropsSelectorFactory;
 
-	var _verifySubselectors = __webpack_require__(270);
+	var _verifySubselectors = __webpack_require__(268);
 
 	var _verifySubselectors2 = _interopRequireDefault(_verifySubselectors);
 
@@ -28701,7 +28642,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 270 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28709,7 +28650,7 @@
 	exports.__esModule = true;
 	exports.default = verifySubselectors;
 
-	var _warning = __webpack_require__(260);
+	var _warning = __webpack_require__(258);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -28730,6 +28671,69 @@
 	  verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
 	  verify(mergeProps, 'mergeProps', displayName);
 	}
+
+/***/ },
+/* 269 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var initialState = {
+	  iceCreams: []
+	};
+
+	var creameryApp = function creameryApp() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case 'show_all':
+	      return state;
+	    default:
+	      return state;
+	  }
+	};
+
+	exports.default = creameryApp;
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reactRedux = __webpack_require__(254);
+
+	var _IceCreamList = __webpack_require__(271);
+
+	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    iceCreams: state.iceCreams
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onIceCreamClick: function onIceCreamClick(id) {
+	      dispatch();
+	    }
+	  };
+	};
+
+	var IceCreamListContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_IceCreamList2.default);
+
+	exports.default = IceCreamListContainer;
 
 /***/ },
 /* 271 */
@@ -28779,6 +28783,34 @@
 	}(_react2.default.Component);
 
 	exports.default = IceCreamList;
+
+/***/ },
+/* 272 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch,
+	        getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+
+	exports['default'] = thunk;
 
 /***/ }
 /******/ ]);
