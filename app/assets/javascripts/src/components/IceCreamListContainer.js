@@ -7,17 +7,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onIceCreamClick: (id) => {
-      dispatch()
-    }
-  }
-}
 
 const IceCreamListContainer = connect(
     mapStateToProps,
-    mapDispatchToProps
 )(IceCreamList)
 
 export default IceCreamListContainer
