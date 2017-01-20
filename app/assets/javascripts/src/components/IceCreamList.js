@@ -2,8 +2,9 @@ import React from 'react'
 import { showIceCreams } from '../actions.js'
 
 class IceCreamList extends React.Component {
-  componentWillMount() {
-    this.props.dispatch(showIceCreams())
+  constructor(props) {
+    super(props)
+    props.dispatch(showIceCreams())
   }
 
   render() {

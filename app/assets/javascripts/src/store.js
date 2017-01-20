@@ -7,8 +7,4 @@ let store = createStore(
   applyMiddleware(thunk)
 )
 
-function fetchIceCreams() {
-  return axios.get('/api/v1/ice_creams') 
-}
-// do some things
 export default store
