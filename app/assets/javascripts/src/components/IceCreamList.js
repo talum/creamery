@@ -8,7 +8,9 @@ class IceCreamList extends React.Component {
   }
 
   render() {
-    return (<div>Hello ice cream</div>)
+    let iceCreams = this.props.iceCreams
+    let iceCreamTitles = iceCreams.map((iceCream) => iceCream.title).join(' ')
+    return (<div>{iceCreamTitles}</div>)
   }
 }
 

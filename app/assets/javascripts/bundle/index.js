@@ -28733,10 +28733,14 @@
 	  _createClass(IceCreamList, [{
 	    key: 'render',
 	    value: function render() {
+	      var iceCreams = this.props.iceCreams;
+	      var iceCreamTitles = iceCreams.map(function (iceCream) {
+	        return iceCream.title;
+	      }).join(' ');
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Hello ice cream'
+	        iceCreamTitles
 	      );
 	    }
 	  }]);
@@ -28804,42 +28808,29 @@
 /* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _axios = __webpack_require__(274);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
 	var _actions = __webpack_require__(299);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//turn this into a rootReducer
 	var initialState = {
 	  iceCreams: [],
 	  loading: false
-	};
+	}; //turn this into a rootReducer
 
-	function fetchIceCreams() {
-	  return function (dispatch) {
-	    return _axios2.default.get('http://localhost:3000/api/v1/ice_creams').then(function (data) {
-	      console.log(data);
-	    });
-	  };
-	}
 
 	var creameryApp = function creameryApp() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case _actions.SHOW_ICECREAMS:
-	      fetchIceCreams();
+	    case "LOADING":
 	      return Object.assign({}, state, { loading: true });
+	    case _actions.SHOW_ICECREAMS:
+	      return Object.assign({}, state, { iceCreams: action.data });
 	    default:
 	      return state;
 	  }
@@ -30357,8 +30348,11 @@
 	var SHOW_ICECREAMS = exports.SHOW_ICECREAMS = 'SHOW_ICECREAMS'; //actions
 	function showIceCreams() {
 	  return function (dispatch) {
-	    return fetchIceCreams().then(function (data) {
-	      return console.log(data);
+	    return fetchIceCreams().then(function (response) {
+	      return dispatch({
+	        type: SHOW_ICECREAMS,
+	        data: response.data
+	      });
 	    });
 	  };
 	}
@@ -30367,6 +30361,12 @@
 
 	function fetchIceCreams() {
 	  return _axios2.default.get(BASE_URL + '/api/v1/ice_creams');
+	}
+
+	function showLoader() {
+	  return {
+	    type: "LOADING"
+	  };
 	}
 
 /***/ }
