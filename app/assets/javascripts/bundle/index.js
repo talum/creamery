@@ -62,7 +62,7 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _store = __webpack_require__(270);
+	var _store = __webpack_require__(299);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -28674,7 +28674,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _IceCreamListContainer = __webpack_require__(299);
+	var _IceCreamListContainer = __webpack_require__(270);
 
 	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
 
@@ -28700,89 +28700,91 @@
 	  value: true
 	});
 
-	var _redux = __webpack_require__(242);
+	var _reactRedux = __webpack_require__(233);
 
-	var _reduxThunk = __webpack_require__(271);
+	var _IceCreamList = __webpack_require__(271);
 
-	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-	var _reducers = __webpack_require__(272);
-
-	var _reducers2 = _interopRequireDefault(_reducers);
+	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    iceCreams: state.iceCreams,
+	    loading: state.loading
+	  };
+	};
 
-	exports.default = store;
+	var IceCreamListContainer = (0, _reactRedux.connect)(mapStateToProps)(_IceCreamList2.default);
+
+	exports.default = IceCreamListContainer;
 
 /***/ },
 /* 271 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	function createThunkMiddleware(extraArgument) {
-	  return function (_ref) {
-	    var dispatch = _ref.dispatch,
-	        getState = _ref.getState;
-	    return function (next) {
-	      return function (action) {
-	        if (typeof action === 'function') {
-	          return action(dispatch, getState, extraArgument);
-	        }
-
-	        return next(action);
-	      };
-	    };
-	  };
-	}
-
-	var thunk = createThunkMiddleware();
-	thunk.withExtraArgument = createThunkMiddleware;
-
-	exports['default'] = thunk;
-
-/***/ },
-/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _actions = __webpack_require__(273);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var initialState = {
-	  iceCreams: [],
-	  loading: false
-	}; //turn this into a rootReducer
+	var _react = __webpack_require__(1);
 
+	var _react2 = _interopRequireDefault(_react);
 
-	var creameryApp = function creameryApp() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	  var action = arguments[1];
+	var _actions = __webpack_require__(272);
 
-	  switch (action.type) {
-	    case "LOADING":
-	      return Object.assign({}, state, { loading: true });
-	    case _actions.SHOW_ICECREAMS:
-	      return Object.assign({}, state, {
-	        iceCreams: action.data,
-	        loading: false
-	      });
-	    default:
-	      return state;
+	var _IceCreamListItem = __webpack_require__(298);
+
+	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var IceCreamList = function (_React$Component) {
+	  _inherits(IceCreamList, _React$Component);
+
+	  function IceCreamList(props) {
+	    _classCallCheck(this, IceCreamList);
+
+	    var _this = _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
+
+	    props.dispatch((0, _actions.showIceCreams)());
+	    return _this;
 	  }
-	};
 
-	exports.default = creameryApp;
+	  _createClass(IceCreamList, [{
+	    key: 'render',
+	    value: function render() {
+	      var iceCreams = this.props.iceCreams;
+	      var iceCreamListItems = iceCreams.map(function (iceCream) {
+	        return _react2.default.createElement(_IceCreamListItem2.default, { key: iceCream.id, iceCream: iceCream });
+	      });
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.loading && "loading",
+	        iceCreamListItems
+	      );
+	    }
+	  }]);
+
+	  return IceCreamList;
+	}(_react2.default.Component);
+
+	exports.default = IceCreamList;
 
 /***/ },
-/* 273 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28793,7 +28795,7 @@
 	exports.SHOW_ICECREAMS = undefined;
 	exports.showIceCreams = showIceCreams;
 
-	var _axios = __webpack_require__(274);
+	var _axios = __webpack_require__(273);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -28825,21 +28827,21 @@
 	}
 
 /***/ },
-/* 274 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(275);
+	module.exports = __webpack_require__(274);
 
 /***/ },
-/* 275 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
-	var bind = __webpack_require__(277);
-	var Axios = __webpack_require__(278);
-	var defaults = __webpack_require__(279);
+	var utils = __webpack_require__(275);
+	var bind = __webpack_require__(276);
+	var Axios = __webpack_require__(277);
+	var defaults = __webpack_require__(278);
 
 	/**
 	 * Create an instance of Axios
@@ -28872,15 +28874,15 @@
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(296);
-	axios.CancelToken = __webpack_require__(297);
-	axios.isCancel = __webpack_require__(293);
+	axios.Cancel = __webpack_require__(295);
+	axios.CancelToken = __webpack_require__(296);
+	axios.isCancel = __webpack_require__(292);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(298);
+	axios.spread = __webpack_require__(297);
 
 	module.exports = axios;
 
@@ -28889,12 +28891,12 @@
 
 
 /***/ },
-/* 276 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(277);
+	var bind = __webpack_require__(276);
 
 	/*global toString:true*/
 
@@ -29194,7 +29196,7 @@
 
 
 /***/ },
-/* 277 */
+/* 276 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29211,17 +29213,17 @@
 
 
 /***/ },
-/* 278 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(279);
-	var utils = __webpack_require__(276);
-	var InterceptorManager = __webpack_require__(290);
-	var dispatchRequest = __webpack_require__(291);
-	var isAbsoluteURL = __webpack_require__(294);
-	var combineURLs = __webpack_require__(295);
+	var defaults = __webpack_require__(278);
+	var utils = __webpack_require__(275);
+	var InterceptorManager = __webpack_require__(289);
+	var dispatchRequest = __webpack_require__(290);
+	var isAbsoluteURL = __webpack_require__(293);
+	var combineURLs = __webpack_require__(294);
 
 	/**
 	 * Create a new instance of Axios
@@ -29302,13 +29304,13 @@
 
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(276);
-	var normalizeHeaderName = __webpack_require__(280);
+	var utils = __webpack_require__(275);
+	var normalizeHeaderName = __webpack_require__(279);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -29325,10 +29327,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(281);
+	    adapter = __webpack_require__(280);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(281);
+	    adapter = __webpack_require__(280);
 	  }
 	  return adapter;
 	}
@@ -29402,12 +29404,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -29420,18 +29422,18 @@
 
 
 /***/ },
-/* 281 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(276);
-	var settle = __webpack_require__(282);
-	var buildURL = __webpack_require__(285);
-	var parseHeaders = __webpack_require__(286);
-	var isURLSameOrigin = __webpack_require__(287);
-	var createError = __webpack_require__(283);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(288);
+	var utils = __webpack_require__(275);
+	var settle = __webpack_require__(281);
+	var buildURL = __webpack_require__(284);
+	var parseHeaders = __webpack_require__(285);
+	var isURLSameOrigin = __webpack_require__(286);
+	var createError = __webpack_require__(282);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(287);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -29527,7 +29529,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(289);
+	      var cookies = __webpack_require__(288);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -29604,12 +29606,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 282 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(283);
+	var createError = __webpack_require__(282);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -29635,12 +29637,12 @@
 
 
 /***/ },
-/* 283 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(284);
+	var enhanceError = __webpack_require__(283);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -29658,7 +29660,7 @@
 
 
 /***/ },
-/* 284 */
+/* 283 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29683,12 +29685,12 @@
 
 
 /***/ },
-/* 285 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -29757,12 +29759,12 @@
 
 
 /***/ },
-/* 286 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	/**
 	 * Parse headers into an object
@@ -29800,12 +29802,12 @@
 
 
 /***/ },
-/* 287 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29874,7 +29876,7 @@
 
 
 /***/ },
-/* 288 */
+/* 287 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29916,12 +29918,12 @@
 
 
 /***/ },
-/* 289 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29975,12 +29977,12 @@
 
 
 /***/ },
-/* 290 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -30033,15 +30035,15 @@
 
 
 /***/ },
-/* 291 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
-	var transformData = __webpack_require__(292);
-	var isCancel = __webpack_require__(293);
-	var defaults = __webpack_require__(279);
+	var utils = __webpack_require__(275);
+	var transformData = __webpack_require__(291);
+	var isCancel = __webpack_require__(292);
+	var defaults = __webpack_require__(278);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -30118,12 +30120,12 @@
 
 
 /***/ },
-/* 292 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(276);
+	var utils = __webpack_require__(275);
 
 	/**
 	 * Transform the data for a request or a response
@@ -30144,7 +30146,7 @@
 
 
 /***/ },
-/* 293 */
+/* 292 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30155,7 +30157,7 @@
 
 
 /***/ },
-/* 294 */
+/* 293 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30175,7 +30177,7 @@
 
 
 /***/ },
-/* 295 */
+/* 294 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30193,7 +30195,7 @@
 
 
 /***/ },
-/* 296 */
+/* 295 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30218,12 +30220,12 @@
 
 
 /***/ },
-/* 297 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(296);
+	var Cancel = __webpack_require__(295);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -30281,7 +30283,7 @@
 
 
 /***/ },
-/* 298 */
+/* 297 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30314,100 +30316,7 @@
 
 
 /***/ },
-/* 299 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reactRedux = __webpack_require__(233);
-
-	var _IceCreamList = __webpack_require__(300);
-
-	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    iceCreams: state.iceCreams,
-	    loading: state.loading
-	  };
-	};
-
-	var IceCreamListContainer = (0, _reactRedux.connect)(mapStateToProps)(_IceCreamList2.default);
-
-	exports.default = IceCreamListContainer;
-
-/***/ },
-/* 300 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _actions = __webpack_require__(273);
-
-	var _IceCreamListItem = __webpack_require__(301);
-
-	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var IceCreamList = function (_React$Component) {
-	  _inherits(IceCreamList, _React$Component);
-
-	  function IceCreamList(props) {
-	    _classCallCheck(this, IceCreamList);
-
-	    var _this = _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
-
-	    props.dispatch((0, _actions.showIceCreams)());
-	    return _this;
-	  }
-
-	  _createClass(IceCreamList, [{
-	    key: 'render',
-	    value: function render() {
-	      var iceCreams = this.props.iceCreams;
-	      var iceCreamListItems = iceCreams.map(function (iceCream) {
-	        return _react2.default.createElement(_IceCreamListItem2.default, { key: iceCream.id, iceCream: iceCream });
-	      });
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        this.props.loading && "loading",
-	        iceCreamListItems
-	      );
-	    }
-	  }]);
-
-	  return IceCreamList;
-	}(_react2.default.Component);
-
-	exports.default = IceCreamList;
-
-/***/ },
-/* 301 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30456,6 +30365,97 @@
 	}(_react2.default.Component);
 
 	exports.default = IceCreamListItem;
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(242);
+
+	var _reduxThunk = __webpack_require__(300);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _reducers = __webpack_require__(301);
+
+	var _reducers2 = _interopRequireDefault(_reducers);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+	exports.default = store;
+
+/***/ },
+/* 300 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch,
+	        getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+
+	exports['default'] = thunk;
+
+/***/ },
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _actions = __webpack_require__(272);
+
+	var initialState = {
+	  iceCreams: [],
+	  loading: false
+	}; //turn this into a rootReducer
+
+
+	var creameryApp = function creameryApp() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case "LOADING":
+	      return Object.assign({}, state, { loading: true });
+	    case _actions.SHOW_ICECREAMS:
+	      return Object.assign({}, state, {
+	        iceCreams: action.data,
+	        loading: false
+	      });
+	    default:
+	      return state;
+	  }
+	};
+
+	exports.default = creameryApp;
 
 /***/ }
 /******/ ]);
