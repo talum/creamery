@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { addUser } from '../actions.js'
 
 class UserForm extends React.Component {
@@ -15,7 +16,6 @@ class UserForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    debugger
     this.props.dispatch(addUser(this.state.email))
   }
 
@@ -31,5 +31,6 @@ class UserForm extends React.Component {
 }
 
 //connect this form to the store
+let NewUserForm = connect()(UserForm)
 
 export default NewUserForm

@@ -17,6 +17,7 @@ const creameryApp = function creameryApp(state = initialState, action) {
         loading: false
       })
     case ADD_USER:
+      return state
       //concat the new user to the state
     default: 
       return state

@@ -40,7 +40,7 @@ export function addUser(email) {
 }
 
 function postUser(email) {
-  axios.post(`${BASE_URL}/api/v1/users`, {
+  return axios.post(`${BASE_URL}/api/v1/users`, {
     email: email
   })
 }

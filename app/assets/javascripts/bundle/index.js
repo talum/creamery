@@ -28857,7 +28857,7 @@
 	}
 
 	function postUser(email) {
-	  _axios2.default.post(BASE_URL + '/api/v1/users', {
+	  return _axios2.default.post(BASE_URL + '/api/v1/users', {
 	    email: email
 	  });
 	}
@@ -30418,6 +30418,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(233);
+
 	var _actions = __webpack_require__(272);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -30451,7 +30453,6 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
-	      debugger;
 	      this.props.dispatch((0, _actions.addUser)(this.state.email));
 	    }
 	  }, {
@@ -30470,6 +30471,9 @@
 	}(_react2.default.Component);
 
 	//connect this form to the store
+
+
+	var NewUserForm = (0, _reactRedux.connect)()(UserForm);
 
 	exports.default = NewUserForm;
 
@@ -30559,6 +30563,7 @@
 	        loading: false
 	      });
 	    case _actions.ADD_USER:
+	      return state;
 	    //concat the new user to the state
 	    default:
 	      return state;
