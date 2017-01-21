@@ -62,7 +62,11 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _store = __webpack_require__(299);
+	var _NewUserForm = __webpack_require__(299);
+
+	var _NewUserForm2 = _interopRequireDefault(_NewUserForm);
+
+	var _store = __webpack_require__(300);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -75,7 +79,8 @@
 	    _react2.default.createElement(
 	      _reactRouter.Router,
 	      { history: _reactRouter.browserHistory },
-	      _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _NewUserForm2.default })
 	    )
 	  ), document.getElementById('root'));
 	});
@@ -28674,6 +28679,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(178);
+
 	var _IceCreamListContainer = __webpack_require__(270);
 
 	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
@@ -28684,6 +28691,15 @@
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'container' },
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/users' },
+	        'Sign Up'
+	      )
+	    ),
 	    _react2.default.createElement(_IceCreamListContainer2.default, null)
 	  );
 	};
@@ -28792,8 +28808,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.SHOW_ICECREAMS = undefined;
+	exports.ADD_USER = exports.SHOW_ICECREAMS = undefined;
 	exports.showIceCreams = showIceCreams;
+	exports.addUser = addUser;
 
 	var _axios = __webpack_require__(273);
 
@@ -28801,7 +28818,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var SHOW_ICECREAMS = exports.SHOW_ICECREAMS = 'SHOW_ICECREAMS'; //actions
+	var BASE_URL = 'http://localhost:3000'; //actions
+	var SHOW_ICECREAMS = exports.SHOW_ICECREAMS = 'SHOW_ICECREAMS';
+	var ADD_USER = exports.ADD_USER = 'ADD_USER';
+
 	function showIceCreams() {
 	  return function (dispatch) {
 	    dispatch(showLoader());
@@ -28814,8 +28834,6 @@
 	  };
 	}
 
-	var BASE_URL = 'http://localhost:3000';
-
 	function fetchIceCreams() {
 	  return _axios2.default.get(BASE_URL + '/api/v1/ice_creams');
 	}
@@ -28824,6 +28842,24 @@
 	  return {
 	    type: "LOADING"
 	  };
+	}
+
+	function addUser(email) {
+	  return function (dispatch) {
+	    dispatch(showLoader());
+	    return postUser(email).then(function (response) {
+	      return dispatch({
+	        type: ADD_USER,
+	        data: response.data
+	      });
+	    });
+	  };
+	}
+
+	function postUser(email) {
+	  _axios2.default.post(BASE_URL + '/api/v1/users', {
+	    email: email
+	  });
 	}
 
 /***/ },
@@ -30376,13 +30412,84 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _actions = __webpack_require__(272);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserForm = function (_React$Component) {
+	  _inherits(UserForm, _React$Component);
+
+	  function UserForm(props) {
+	    _classCallCheck(this, UserForm);
+
+	    var _this = _possibleConstructorReturn(this, (UserForm.__proto__ || Object.getPrototypeOf(UserForm)).call(this, props));
+
+	    _this.state = { email: '' };
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(UserForm, [{
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      this.setState({ email: event.target.value });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      debugger;
+	      this.props.dispatch((0, _actions.addUser)(this.state.email));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.handleSubmit },
+	        _react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.handleChange }),
+	        _react2.default.createElement('input', { type: 'submit', value: 'submit', onClick: this.handleSubmit })
+	      );
+	    }
+	  }]);
+
+	  return UserForm;
+	}(_react2.default.Component);
+
+	//connect this form to the store
+
+	exports.default = NewUserForm;
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(300);
+	var _reduxThunk = __webpack_require__(301);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(301);
+	var _reducers = __webpack_require__(302);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -30393,7 +30500,7 @@
 	exports.default = store;
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30421,7 +30528,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -30434,6 +30541,7 @@
 
 	var initialState = {
 	  iceCreams: [],
+	  users: [],
 	  loading: false
 	}; //turn this into a rootReducer
 
@@ -30450,6 +30558,8 @@
 	        iceCreams: action.data,
 	        loading: false
 	      });
+	    case _actions.ADD_USER:
+	    //concat the new user to the state
 	    default:
 	      return state;
 	  }
