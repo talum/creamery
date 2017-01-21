@@ -1,5 +1,6 @@
 import React from 'react'
 import { showIceCreams } from '../actions.js'
+import IceCreamListItem from '../components/IceCreamListItem'
 
 class IceCreamList extends React.Component {
   constructor(props) {
@@ -9,8 +10,14 @@ class IceCreamList extends React.Component {
 
   render() {
     let iceCreams = this.props.iceCreams
-    let iceCreamTitles = iceCreams.map((iceCream) => iceCream.title).join(' ')
-    return (<div>{iceCreamTitles}</div>)
+    let iceCreamListItems = iceCreams.map((iceCream) => <IceCreamListItem key={iceCream.id} iceCream={iceCream}/>)
+
+    return (
+      <div>
+        {this.props.loading && "loading"}
+        {iceCreamListItems}
+      </div>
+    )
   }
 }
 

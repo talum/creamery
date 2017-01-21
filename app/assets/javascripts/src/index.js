@@ -2,13 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, Link, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
-import IceCreamListContainer from './components/IceCreamListContainer'
+import App from './components/App'
 import store from './store'
-
-
-const App = () => (
-  <IceCreamListContainer />
-)
 
 document.addEventListener("DOMContentLoaded", function () {
   ReactDOM.render(

@@ -11,7 +11,10 @@ const creameryApp = function creameryApp(state = initialState, action) {
     case "LOADING":
       return Object.assign({}, state, {loading: true})
     case SHOW_ICECREAMS:
-      return Object.assign({}, state, {iceCreams: action.data})
+      return Object.assign({}, state, { 
+        iceCreams: action.data,
+        loading: false
+      })
     default: 
       return state
   }

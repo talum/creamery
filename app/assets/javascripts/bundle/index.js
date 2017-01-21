@@ -58,19 +58,15 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _IceCreamListContainer = __webpack_require__(269);
+	var _App = __webpack_require__(269);
 
-	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
+	var _App2 = _interopRequireDefault(_App);
 
-	var _store = __webpack_require__(271);
+	var _store = __webpack_require__(270);
 
 	var _store2 = _interopRequireDefault(_store);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var App = function App() {
-	  return _react2.default.createElement(_IceCreamListContainer2.default, null);
-	};
 
 	document.addEventListener("DOMContentLoaded", function () {
 	  _reactDom2.default.render(_react2.default.createElement(
@@ -79,7 +75,7 @@
 	    _react2.default.createElement(
 	      _reactRouter.Router,
 	      { history: _reactRouter.browserHistory },
-	      _react2.default.createElement(_reactRouter.Route, { path: '/', component: App })
+	      _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default })
 	    )
 	  ), document.getElementById('root'));
 	});
@@ -28674,23 +28670,25 @@
 	  value: true
 	});
 
-	var _reactRedux = __webpack_require__(233);
+	var _react = __webpack_require__(1);
 
-	var _IceCreamList = __webpack_require__(270);
+	var _react2 = _interopRequireDefault(_react);
 
-	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
+	var _IceCreamListContainer = __webpack_require__(299);
+
+	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    iceCreams: state.iceCreams
-	  };
+	var App = function App() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'container' },
+	    _react2.default.createElement(_IceCreamListContainer2.default, null)
+	  );
 	};
 
-	var IceCreamListContainer = (0, _reactRedux.connect)(mapStateToProps)(_IceCreamList2.default);
-
-	exports.default = IceCreamListContainer;
+	exports.default = App;
 
 /***/ },
 /* 270 */
@@ -28702,71 +28700,13 @@
 	  value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _actions = __webpack_require__(299);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var IceCreamList = function (_React$Component) {
-	  _inherits(IceCreamList, _React$Component);
-
-	  function IceCreamList(props) {
-	    _classCallCheck(this, IceCreamList);
-
-	    var _this = _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
-
-	    props.dispatch((0, _actions.showIceCreams)());
-	    return _this;
-	  }
-
-	  _createClass(IceCreamList, [{
-	    key: 'render',
-	    value: function render() {
-	      var iceCreams = this.props.iceCreams;
-	      var iceCreamTitles = iceCreams.map(function (iceCream) {
-	        return iceCream.title;
-	      }).join(' ');
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        iceCreamTitles
-	      );
-	    }
-	  }]);
-
-	  return IceCreamList;
-	}(_react2.default.Component);
-
-	exports.default = IceCreamList;
-
-/***/ },
-/* 271 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(272);
+	var _reduxThunk = __webpack_require__(271);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(273);
+	var _reducers = __webpack_require__(272);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -28777,7 +28717,7 @@
 	exports.default = store;
 
 /***/ },
-/* 272 */
+/* 271 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28805,7 +28745,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 273 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28814,7 +28754,7 @@
 	  value: true
 	});
 
-	var _actions = __webpack_require__(299);
+	var _actions = __webpack_require__(273);
 
 	var initialState = {
 	  iceCreams: [],
@@ -28830,13 +28770,59 @@
 	    case "LOADING":
 	      return Object.assign({}, state, { loading: true });
 	    case _actions.SHOW_ICECREAMS:
-	      return Object.assign({}, state, { iceCreams: action.data });
+	      return Object.assign({}, state, {
+	        iceCreams: action.data,
+	        loading: false
+	      });
 	    default:
 	      return state;
 	  }
 	};
 
 	exports.default = creameryApp;
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.SHOW_ICECREAMS = undefined;
+	exports.showIceCreams = showIceCreams;
+
+	var _axios = __webpack_require__(274);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SHOW_ICECREAMS = exports.SHOW_ICECREAMS = 'SHOW_ICECREAMS'; //actions
+	function showIceCreams() {
+	  return function (dispatch) {
+	    dispatch(showLoader());
+	    return fetchIceCreams().then(function (response) {
+	      return dispatch({
+	        type: SHOW_ICECREAMS,
+	        data: response.data
+	      });
+	    });
+	  };
+	}
+
+	var BASE_URL = 'http://localhost:3000';
+
+	function fetchIceCreams() {
+	  return _axios2.default.get(BASE_URL + '/api/v1/ice_creams');
+	}
+
+	function showLoader() {
+	  return {
+	    type: "LOADING"
+	  };
+	}
 
 /***/ },
 /* 274 */
@@ -30336,38 +30322,140 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.SHOW_ICECREAMS = undefined;
-	exports.showIceCreams = showIceCreams;
 
-	var _axios = __webpack_require__(274);
+	var _reactRedux = __webpack_require__(233);
 
-	var _axios2 = _interopRequireDefault(_axios);
+	var _IceCreamList = __webpack_require__(300);
+
+	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var SHOW_ICECREAMS = exports.SHOW_ICECREAMS = 'SHOW_ICECREAMS'; //actions
-	function showIceCreams() {
-	  return function (dispatch) {
-	    return fetchIceCreams().then(function (response) {
-	      return dispatch({
-	        type: SHOW_ICECREAMS,
-	        data: response.data
-	      });
-	    });
-	  };
-	}
-
-	var BASE_URL = 'http://localhost:3000';
-
-	function fetchIceCreams() {
-	  return _axios2.default.get(BASE_URL + '/api/v1/ice_creams');
-	}
-
-	function showLoader() {
+	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    type: "LOADING"
+	    iceCreams: state.iceCreams,
+	    loading: state.loading
 	  };
-	}
+	};
+
+	var IceCreamListContainer = (0, _reactRedux.connect)(mapStateToProps)(_IceCreamList2.default);
+
+	exports.default = IceCreamListContainer;
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _actions = __webpack_require__(273);
+
+	var _IceCreamListItem = __webpack_require__(301);
+
+	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var IceCreamList = function (_React$Component) {
+	  _inherits(IceCreamList, _React$Component);
+
+	  function IceCreamList(props) {
+	    _classCallCheck(this, IceCreamList);
+
+	    var _this = _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
+
+	    props.dispatch((0, _actions.showIceCreams)());
+	    return _this;
+	  }
+
+	  _createClass(IceCreamList, [{
+	    key: 'render',
+	    value: function render() {
+	      var iceCreams = this.props.iceCreams;
+	      var iceCreamListItems = iceCreams.map(function (iceCream) {
+	        return _react2.default.createElement(_IceCreamListItem2.default, { key: iceCream.id, iceCream: iceCream });
+	      });
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.loading && "loading",
+	        iceCreamListItems
+	      );
+	    }
+	  }]);
+
+	  return IceCreamList;
+	}(_react2.default.Component);
+
+	exports.default = IceCreamList;
+
+/***/ },
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var IceCreamListItem = function (_React$Component) {
+	  _inherits(IceCreamListItem, _React$Component);
+
+	  function IceCreamListItem() {
+	    _classCallCheck(this, IceCreamListItem);
+
+	    return _possibleConstructorReturn(this, (IceCreamListItem.__proto__ || Object.getPrototypeOf(IceCreamListItem)).apply(this, arguments));
+	  }
+
+	  _createClass(IceCreamListItem, [{
+	    key: 'render',
+	    value: function render() {
+	      var iceCream = this.props.iceCream;
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        iceCream.title,
+	        iceCream.parlor
+	      );
+	    }
+	  }]);
+
+	  return IceCreamListItem;
+	}(_react2.default.Component);
+
+	exports.default = IceCreamListItem;
 
 /***/ }
 /******/ ]);

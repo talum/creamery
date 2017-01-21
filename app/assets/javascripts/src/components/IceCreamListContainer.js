@@ -3,7 +3,8 @@ import IceCreamList from '../components/IceCreamList'
 
 const mapStateToProps = (state) => {
   return {
-    iceCreams: state.iceCreams
+    iceCreams: state.iceCreams,
+    loading: state.loading
   }
 }
 

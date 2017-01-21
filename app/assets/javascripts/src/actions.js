@@ -5,6 +5,7 @@ export const SHOW_ICECREAMS = 'SHOW_ICECREAMS'
 
 export function showIceCreams() {
   return function(dispatch) {
+    dispatch(showLoader())
     return fetchIceCreams().then((response) => 
       dispatch({
         type: SHOW_ICECREAMS,
