@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Router, Route, Link, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import App from './components/App'
-import NewUserForm from './components/NewUserForm'
+import NewUserForm from './components/users/NewUserForm'
 import store from './store'
 
 document.addEventListener("DOMContentLoaded", function () {
