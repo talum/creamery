@@ -1,6 +1,6 @@
 import React from 'react'
-import { showIceCreams } from '../actions/iceCreams'
-import IceCreamListItem from '../components/IceCreamListItem'
+import { showIceCreams } from '../../actions/iceCreams'
+import IceCreamListItem from '../iceCreams/IceCreamListItem'
 
 class IceCreamList extends React.Component {
   constructor(props) {
