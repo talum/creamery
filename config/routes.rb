@@ -11,4 +11,5 @@ Rails.application.routes.draw do
       resources :users, only: :create
     end
   end
+  get '*path', to: "landing#index"
 end
