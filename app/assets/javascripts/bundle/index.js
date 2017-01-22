@@ -30487,10 +30487,19 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'form',
-	        { onSubmit: this.handleSubmit },
-	        _react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.handleChange }),
-	        _react2.default.createElement('input', { type: 'submit', value: 'submit', onClick: this.handleSubmit })
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Sign up for Creamery'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.handleChange, placeholder: 'email address' }),
+	          _react2.default.createElement('input', { type: 'submit', value: 'submit', onClick: this.handleSubmit, className: 'btn waves-effect waves-light' })
+	        )
 	      );
 	    }
 	  }]);

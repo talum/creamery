@@ -21,10 +21,13 @@ class UserForm extends React.Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.email} onChange={this.handleChange} /> 
-        <input type="submit" value="submit" onClick={this.handleSubmit} />
-      </form>
+      <div>
+        <h1>Sign up for Creamery</h1>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.email} onChange={this.handleChange} placeholder="email address" /> 
+          <input type="submit" value="submit" onClick={this.handleSubmit} className="btn waves-effect waves-light" />
+        </form>
+      </div>
     )
   }
 
