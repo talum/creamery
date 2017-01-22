@@ -30470,7 +30470,9 @@
 
 	    var _this = _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
 
-	    props.dispatch((0, _iceCreams.showIceCreams)());
+	    if (!props.length) {
+	      props.dispatch((0, _iceCreams.showIceCreams)());
+	    }
 	    return _this;
 	  }
 
@@ -30653,7 +30655,9 @@
 
 	    var _this = _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).call(this, props));
 
-	    props.dispatch((0, _parlors.showParlors)());
+	    if (!props.length) {
+	      props.dispatch((0, _parlors.showParlors)());
+	    }
 	    return _this;
 	  }
 
@@ -30669,6 +30673,7 @@
 	          null,
 	          'All the Parlors'
 	        ),
+	        this.props.loading && "loading",
 	        _react2.default.createElement(
 	          'ul',
 	          null,
@@ -31034,7 +31039,6 @@
 	    case _parlors.SHOW_PARLORS:
 	      return state.concat(action.data);
 	    case _parlors.ADD_PARLOR:
-	      debugger;
 	      return state.concat(action.data);
 	    default:
 	      return state;

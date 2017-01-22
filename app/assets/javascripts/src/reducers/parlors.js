@@ -7,7 +7,6 @@ export function parlors(state=[], action) {
     case SHOW_PARLORS:
       return state.concat(action.data)
     case ADD_PARLOR:
-      debugger
       return state.concat(action.data)
     default:
       return state
