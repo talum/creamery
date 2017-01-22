@@ -28773,6 +28773,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	// refactor to use shared input field component and submit button component
 	var UserForm = function (_React$Component) {
 	  _inherits(UserForm, _React$Component);
 
@@ -30620,6 +30621,10 @@
 
 	var _parlors = __webpack_require__(304);
 
+	var _NewParlorForm = __webpack_require__(312);
+
+	var _NewParlorForm2 = _interopRequireDefault(_NewParlorForm);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30643,15 +30648,27 @@
 	  _createClass(Parlors, [{
 	    key: 'render',
 	    value: function render() {
+	      var parlors = this.props.parlors;
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'Hooked up some parlors!'
+	          'All the Parlors'
 	        ),
-	        'Parlors'
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          parlors.map(function (parlor) {
+	            return _react2.default.createElement(
+	              'li',
+	              null,
+	              parlor.name
+	            );
+	          })
+	        ),
+	        _react2.default.createElement(_NewParlorForm2.default, null)
 	      );
 	    }
 	  }]);
@@ -30672,6 +30689,7 @@
 	});
 	exports.ADD_PARLOR = exports.SHOW_PARLORS = undefined;
 	exports.showParlors = showParlors;
+	exports.addParlor = addParlor;
 
 	var _axios = __webpack_require__(272);
 
@@ -30702,12 +30720,21 @@
 	  return _axios2.default.get(_actions.BASE_URL + '/api/v1/parlors');
 	}
 
-	function addParlor() {
-	  //todo
+	function addParlor(parlor) {
+	  return function (dispatch) {
+	    dispatch((0, _actions.showLoader)());
+	    return postParlor(parlor).then(function (response) {
+	      dispatch({
+	        type: ADD_PARLOR,
+	        data: response.data
+	      });
+	      dispatch((0, _actions.hideLoader)());
+	    });
+	  };
 	}
 
-	function postParlor() {
-	  //post data
+	function postParlor(parlor) {
+	  return _axios2.default.post(_actions.BASE_URL + '/api/v1/parlors', parlor);
 	}
 
 /***/ },
@@ -30865,6 +30892,7 @@
 	    case _parlors.SHOW_PARLORS:
 	      return state.concat(action.data);
 	    case _parlors.ADD_PARLOR:
+	      debugger;
 	      return state.concat(action.data);
 	    default:
 	      return state;
@@ -30894,6 +30922,167 @@
 	      return state;
 	  }
 	}
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(233);
+
+	var _parlors = __webpack_require__(304);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	//todo: move into shared components
+	var InputField = function (_React$Component) {
+	  _inherits(InputField, _React$Component);
+
+	  function InputField(props) {
+	    _classCallCheck(this, InputField);
+
+	    return _possibleConstructorReturn(this, (InputField.__proto__ || Object.getPrototypeOf(InputField)).call(this, props));
+	  }
+
+	  _createClass(InputField, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('input', { type: 'text', name: this.props.name, value: this.props.value, placeholder: this.props.placeholder, onChange: this.props.handleChange });
+	    }
+	  }]);
+
+	  return InputField;
+	}(_react2.default.Component);
+
+	var SubmitButton = function (_React$Component2) {
+	  _inherits(SubmitButton, _React$Component2);
+
+	  function SubmitButton(props) {
+	    _classCallCheck(this, SubmitButton);
+
+	    return _possibleConstructorReturn(this, (SubmitButton.__proto__ || Object.getPrototypeOf(SubmitButton)).call(this, props));
+	  }
+
+	  _createClass(SubmitButton, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('input', { type: 'submit', value: 'submit', onClick: this.props.handleSubmit, className: 'btn waves-effect waves-light' });
+	    }
+	  }]);
+
+	  return SubmitButton;
+	}(_react2.default.Component);
+
+	var ParlorForm = function (_React$Component3) {
+	  _inherits(ParlorForm, _React$Component3);
+
+	  function ParlorForm(props) {
+	    _classCallCheck(this, ParlorForm);
+
+	    var _this3 = _possibleConstructorReturn(this, (ParlorForm.__proto__ || Object.getPrototypeOf(ParlorForm)).call(this, props));
+
+	    _this3.state = {
+	      name: '',
+	      streetAddress: '',
+	      city: '',
+	      state: '',
+	      zipCode: '',
+	      chain: false
+	    };
+	    _this3.handleChange = _this3.handleChange.bind(_this3);
+	    _this3.handleSubmit = _this3.handleSubmit.bind(_this3);
+	    return _this3;
+	  }
+
+	  _createClass(ParlorForm, [{
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      this.setState(_defineProperty({}, event.target.name, event.target.value));
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      this.props.dispatch((0, _parlors.addParlor)(this.state));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Add New Parlor'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement(InputField, {
+	            name: "name",
+	            value: this.state.name,
+	            placeholder: "name",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(InputField, {
+	            name: "streetAddress",
+	            value: this.state.streetAddress,
+	            placeholder: "Street Address",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(InputField, {
+	            name: "city",
+	            value: this.state.city,
+	            placeholder: "City",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(InputField, {
+	            name: "state",
+	            value: this.state.state,
+	            placeholder: "State",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(InputField, {
+	            name: "zipCode",
+	            value: this.state.zipCode,
+	            placeholder: "Zipcode",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(SubmitButton, { handleSubmit: this.handleSubmit })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ParlorForm;
+	}(_react2.default.Component);
+
+	//connect this form to the store
+
+
+	var NewParlorForm = (0, _reactRedux.connect)()(ParlorForm);
+
+	exports.default = NewParlorForm;
 
 /***/ }
 /******/ ]);

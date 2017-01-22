@@ -1,5 +1,6 @@
 import React from 'react'
 import { showParlors } from '../../actions/parlors'
+import NewParlorForm from '../parlors/NewParlorForm'
 
 class Parlors extends React.Component {
   constructor(props) {
@@ -8,10 +9,16 @@ class Parlors extends React.Component {
   }
 
   render() {
+    let parlors = this.props.parlors
     return(
       <div>
-        <h1>Hooked up some parlors!</h1>
-        Parlors
+        <h1>All the Parlors</h1>
+
+        <ul>
+          {parlors.map((parlor) => <li>{parlor.name}</li>)}
+        </ul>
+        
+        <NewParlorForm />
       </div>
     )
   }

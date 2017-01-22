@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addUser } from '../../actions/users'
 
+// refactor to use shared input field component and submit button component
 class UserForm extends React.Component {
   constructor(props) {
     super(props)

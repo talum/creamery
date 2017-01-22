@@ -24,12 +24,20 @@ function fetchParlors() {
   return axios.get(`${BASE_URL}/api/v1/parlors`)
 }
 
-
-function addParlor() {
-  //todo
+export function addParlor(parlor) {
+  return function(dispatch) {
+    dispatch(showLoader())
+    return postParlor(parlor).then((response) => { 
+      dispatch({
+        type: ADD_PARLOR,
+        data: response.data 
+      })
+      dispatch(hideLoader())
+    })
+  }
 }
 
-function postParlor() {
-  //post data
+function postParlor(parlor) {
+  return axios.post(`${BASE_URL}/api/v1/parlors`, parlor)
 }
 
