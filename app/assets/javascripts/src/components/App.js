@@ -8,6 +8,7 @@ const App = (props) => (
         <div className="brand-logo">Creamery</div>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li><Link to='/users'>Sign Up</Link></li>
+          <li><Link to='/parlors'>Parlors</Link></li>
         </ul>
       </div>
     </nav>

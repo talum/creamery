@@ -1,6 +1,6 @@
 // ice creams reducer
 
-import { SHOW_ICECREAMS } from '../actions/iceCreams.js'
+import { SHOW_ICECREAMS } from '../actions/iceCreams'
 
 export function iceCreams(state=[], action) {
   switch (action.type) {
