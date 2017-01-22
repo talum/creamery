@@ -74,6 +74,10 @@
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
+	var _Parlor = __webpack_require__(315);
+
+	var _Parlor2 = _interopRequireDefault(_Parlor);
+
 	var _store = __webpack_require__(306);
 
 	var _store2 = _interopRequireDefault(_store);
@@ -92,7 +96,8 @@
 	        { path: '/', component: _App2.default },
 	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _IceCreamListContainer2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _NewUserForm2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors', component: _ParlorsContainer2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors', component: _ParlorsContainer2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors/:id', component: _Parlor2.default })
 	      )
 	    )
 	  ), document.getElementById('root'));
@@ -31158,6 +31163,81 @@
 	}(_react2.default.Component);
 
 	exports.default = SubmitButton;
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(233);
+
+	var _parlors = __webpack_require__(304);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Parlor = function (_React$Component) {
+	  _inherits(Parlor, _React$Component);
+
+	  function Parlor(props) {
+	    _classCallCheck(this, Parlor);
+
+	    var _this = _possibleConstructorReturn(this, (Parlor.__proto__ || Object.getPrototypeOf(Parlor)).call(this, props));
+
+	    if (!props.length) {
+	      props.dispatch((0, _parlors.showParlors)());
+	    }
+	    return _this;
+	  }
+
+	  _createClass(Parlor, [{
+	    key: 'render',
+	    value: function render() {
+	      var parlor = this.props.parlors.find(function (parlor) {
+	        debugger;
+	      });
+
+	      if (this.props.loading) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          '"loading"'
+	        );
+	      } else {
+	        return _react2.default.createElement('div', null);
+	      }
+	    }
+	  }]);
+
+	  return Parlor;
+	}(_react2.default.Component);
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    parlors: state.parlors,
+	    loading: state.loading
+	  };
+	};
+
+	var ParlorContainer = (0, _reactRedux.connect)(mapStateToProps)(Parlor);
+
+	exports.default = ParlorContainer;
 
 /***/ }
 /******/ ]);

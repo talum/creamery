@@ -6,6 +6,7 @@ import App from './components/App'
 import NewUserForm from './components/users/NewUserForm'
 import IceCreamListContainer from './components/iceCreams/IceCreamListContainer'
 import ParlorsContainer from './components/parlors/ParlorsContainer'
+import ParlorContainer from './components/parlors/Parlor'
 import store from './store'
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <IndexRoute component={IceCreamListContainer} />
           <Route path="/users" component={NewUserForm} />
           <Route path="/parlors" component={ParlorsContainer} />
+          <Route path="/parlors/:id" component={ParlorContainer} />
         </Route>
       </Router>
     </Provider>,
