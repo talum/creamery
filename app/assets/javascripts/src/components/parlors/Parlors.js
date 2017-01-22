@@ -5,7 +5,10 @@ import NewParlorForm from '../parlors/NewParlorForm'
 class Parlors extends React.Component {
   constructor(props) {
     super(props)
-    props.dispatch(showParlors())
+
+    if (!props.length) {
+      props.dispatch(showParlors())
+    }
   }
 
   render() {
@@ -13,7 +16,7 @@ class Parlors extends React.Component {
     return(
       <div>
         <h1>All the Parlors</h1>
-
+        {this.props.loading && "loading"}
         <ul>
           {parlors.map((parlor) => <li key={parlor.id}>{parlor.name}</li>)}
         </ul>
