@@ -62,11 +62,11 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _NewUserForm = __webpack_require__(307);
+	var _NewUserForm = __webpack_require__(300);
 
 	var _NewUserForm2 = _interopRequireDefault(_NewUserForm);
 
-	var _store = __webpack_require__(300);
+	var _store = __webpack_require__(302);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -30415,201 +30415,6 @@
 	  value: true
 	});
 
-	var _redux = __webpack_require__(242);
-
-	var _reduxThunk = __webpack_require__(301);
-
-	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-	var _reducers = __webpack_require__(302);
-
-	var _reducers2 = _interopRequireDefault(_reducers);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-
-	exports.default = store;
-
-/***/ },
-/* 301 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	function createThunkMiddleware(extraArgument) {
-	  return function (_ref) {
-	    var dispatch = _ref.dispatch,
-	        getState = _ref.getState;
-	    return function (next) {
-	      return function (action) {
-	        if (typeof action === 'function') {
-	          return action(dispatch, getState, extraArgument);
-	        }
-
-	        return next(action);
-	      };
-	    };
-	  };
-	}
-
-	var thunk = createThunkMiddleware();
-	thunk.withExtraArgument = createThunkMiddleware;
-
-	exports['default'] = thunk;
-
-/***/ },
-/* 302 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _redux = __webpack_require__(242);
-
-	var _users = __webpack_require__(303);
-
-	var _iceCreams = __webpack_require__(305);
-
-	var _loading = __webpack_require__(306);
-
-	var creameryApp = (0, _redux.combineReducers)({
-	  users: _users.users,
-	  iceCreams: _iceCreams.iceCreams,
-	  loading: _loading.loading
-	});
-
-	exports.default = creameryApp;
-
-/***/ },
-/* 303 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.users = users;
-
-	var _users = __webpack_require__(304);
-
-	function users() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _users.ADD_USER:
-	      return state;
-	    //concat the new user to the state
-	    default:
-	      return state;
-	  }
-	} // users reducer
-
-/***/ },
-/* 304 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ADD_USER = undefined;
-	exports.addUser = addUser;
-
-	var _axios = __webpack_require__(273);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _actions = __webpack_require__(298);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ADD_USER = exports.ADD_USER = 'ADD_USER'; //users actions
-
-	function addUser(email) {
-	  return function (dispatch) {
-	    dispatch((0, _actions.showLoader)());
-	    return postUser(email).then(function (response) {
-	      return dispatch({
-	        type: ADD_USER,
-	        data: response.data
-	      });
-	    });
-	  };
-	}
-
-	function postUser(email) {
-	  return _axios2.default.post(_actions.BASE_URL + '/api/v1/users', {
-	    email: email
-	  });
-	}
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.iceCreams = iceCreams;
-
-	var _iceCreams = __webpack_require__(272);
-
-	function iceCreams() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _iceCreams.SHOW_ICECREAMS:
-	      return state.concat(action.data);
-	    default:
-	      return state;
-	  }
-	} // ice creams reducer
-
-/***/ },
-/* 306 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.loading = loading;
-	function loading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case "LOADING":
-	      return true;
-	    case "DONE_LOADING":
-	      return false;
-	    default:
-	      return state;
-	  }
-	}
-
-/***/ },
-/* 307 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -30618,7 +30423,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _users = __webpack_require__(304);
+	var _users = __webpack_require__(301);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30674,6 +30479,201 @@
 	var NewUserForm = (0, _reactRedux.connect)()(UserForm);
 
 	exports.default = NewUserForm;
+
+/***/ },
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ADD_USER = undefined;
+	exports.addUser = addUser;
+
+	var _axios = __webpack_require__(273);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _actions = __webpack_require__(298);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ADD_USER = exports.ADD_USER = 'ADD_USER'; //users actions
+
+	function addUser(email) {
+	  return function (dispatch) {
+	    dispatch((0, _actions.showLoader)());
+	    return postUser(email).then(function (response) {
+	      return dispatch({
+	        type: ADD_USER,
+	        data: response.data
+	      });
+	    });
+	  };
+	}
+
+	function postUser(email) {
+	  return _axios2.default.post(_actions.BASE_URL + '/api/v1/users', {
+	    email: email
+	  });
+	}
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(242);
+
+	var _reduxThunk = __webpack_require__(303);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _reducers = __webpack_require__(304);
+
+	var _reducers2 = _interopRequireDefault(_reducers);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+	exports.default = store;
+
+/***/ },
+/* 303 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch,
+	        getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+
+	exports['default'] = thunk;
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(242);
+
+	var _users = __webpack_require__(305);
+
+	var _iceCreams = __webpack_require__(306);
+
+	var _loading = __webpack_require__(307);
+
+	var creameryApp = (0, _redux.combineReducers)({
+	  users: _users.users,
+	  iceCreams: _iceCreams.iceCreams,
+	  loading: _loading.loading
+	});
+
+	exports.default = creameryApp;
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.users = users;
+
+	var _users = __webpack_require__(301);
+
+	function users() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _users.ADD_USER:
+	      return state;
+	    //concat the new user to the state
+	    default:
+	      return state;
+	  }
+	} // users reducer
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.iceCreams = iceCreams;
+
+	var _iceCreams = __webpack_require__(272);
+
+	function iceCreams() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _iceCreams.SHOW_ICECREAMS:
+	      return state.concat(action.data);
+	    default:
+	      return state;
+	  }
+	} // ice creams reducer
+
+/***/ },
+/* 307 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.loading = loading;
+	function loading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case "LOADING":
+	      return true;
+	    case "DONE_LOADING":
+	      return false;
+	    default:
+	      return state;
+	  }
+	}
 
 /***/ }
 /******/ ]);
