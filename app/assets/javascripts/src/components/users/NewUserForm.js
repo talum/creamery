@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addUser } from '../../actions/users'
+import InputField from '../sharedComponents/InputField'
+import SubmitButton from '../sharedComponents/SubmitButton'
 
-// refactor to use shared input field component and submit button component
 class UserForm extends React.Component {
   constructor(props) {
     super(props)
@@ -25,8 +26,13 @@ class UserForm extends React.Component {
       <div>
         <h1>Sign up for Creamery</h1>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.email} onChange={this.handleChange} placeholder="email address" /> 
-          <input type="submit" value="submit" onClick={this.handleSubmit} className="btn waves-effect waves-light" />
+          <InputField
+            name={"email"} 
+            value={this.state.email}
+            placeholder={"email address"}
+            handleChange={this.handleChange}
+          />
+          <SubmitButton handleSubmit={this.handleSubmit} />
         </form>
       </div>
     )

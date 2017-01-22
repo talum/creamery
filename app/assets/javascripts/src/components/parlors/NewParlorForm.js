@@ -1,31 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addParlor } from '../../actions/parlors'
-//todo: move into shared components
-class InputField extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return(
-      <input type="text" name={this.props.name} value={this.props.value} placeholder={this.props.placeholder} onChange={this.props.handleChange}/>
-    )
-  }
-}
-
-class SubmitButton extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return(
-      <input type="submit" value="submit" onClick={this.props.handleSubmit} className="btn waves-effect waves-light" />
-    )
-  }
-
-}
+import InputField from '../sharedComponents/InputField'
+import SubmitButton from '../sharedComponents/SubmitButton'
 
 class ParlorForm extends React.Component {
   constructor(props) {

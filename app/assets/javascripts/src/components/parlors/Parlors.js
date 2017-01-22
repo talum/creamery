@@ -15,7 +15,7 @@ class Parlors extends React.Component {
         <h1>All the Parlors</h1>
 
         <ul>
-          {parlors.map((parlor) => <li>{parlor.name}</li>)}
+          {parlors.map((parlor) => <li key={parlor.id}>{parlor.name}</li>)}
         </ul>
         
         <NewParlorForm />
