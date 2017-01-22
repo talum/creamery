@@ -30530,20 +30530,25 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _reactRouter = __webpack_require__(178);
+
 	var _actions = __webpack_require__(298);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ADD_USER = exports.ADD_USER = 'ADD_USER'; //users actions
+	//users actions
+
+	var ADD_USER = exports.ADD_USER = 'ADD_USER';
 
 	function addUser(email) {
 	  return function (dispatch) {
 	    dispatch((0, _actions.showLoader)());
 	    return postUser(email).then(function (response) {
-	      return dispatch({
+	      dispatch({
 	        type: ADD_USER,
 	        data: response.data
 	      });
+	      _reactRouter.browserHistory.push('/');
 	    });
 	  };
 	}
