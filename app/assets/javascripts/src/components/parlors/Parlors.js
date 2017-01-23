@@ -5,9 +5,11 @@ import NewParlorForm from '../parlors/NewParlorForm'
 class Parlors extends React.Component {
   constructor(props) {
     super(props)
+  }
 
-    if (!props.length) {
-      props.dispatch(showParlors())
+  componentDidMount() {
+    if (!this.props.length) {
+      this.props.dispatch(showParlors())
     }
   }
 

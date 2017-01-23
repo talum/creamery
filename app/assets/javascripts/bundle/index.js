@@ -30473,15 +30473,17 @@
 	  function IceCreamList(props) {
 	    _classCallCheck(this, IceCreamList);
 
-	    var _this = _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
-
-	    if (!props.length) {
-	      props.dispatch((0, _iceCreams.showIceCreams)());
-	    }
-	    return _this;
+	    return _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
 	  }
 
 	  _createClass(IceCreamList, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!this.props.length) {
+	        this.props.dispatch((0, _iceCreams.showIceCreams)());
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var iceCreams = this.props.iceCreams;
@@ -30658,15 +30660,17 @@
 	  function Parlors(props) {
 	    _classCallCheck(this, Parlors);
 
-	    var _this = _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).call(this, props));
-
-	    if (!props.length) {
-	      props.dispatch((0, _parlors.showParlors)());
-	    }
-	    return _this;
+	    return _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).call(this, props));
 	  }
 
 	  _createClass(Parlors, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!this.props.length) {
+	        this.props.dispatch((0, _parlors.showParlors)());
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var parlors = this.props.parlors;
