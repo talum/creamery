@@ -74,7 +74,11 @@
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
-	var _store = __webpack_require__(308);
+	var _Parlor = __webpack_require__(308);
+
+	var _Parlor2 = _interopRequireDefault(_Parlor);
+
+	var _store = __webpack_require__(309);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -92,7 +96,8 @@
 	        { path: '/', component: _App2.default },
 	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _IceCreamListContainer2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _NewUserForm2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors', component: _ParlorsContainer2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors', component: _ParlorsContainer2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors/:id', component: _Parlor2.default })
 	      )
 	    )
 	  ), document.getElementById('root'));
@@ -30558,15 +30563,17 @@
 	  function IceCreamList(props) {
 	    _classCallCheck(this, IceCreamList);
 
-	    var _this = _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
-
-	    if (!props.length) {
-	      props.dispatch((0, _iceCreams.showIceCreams)());
-	    }
-	    return _this;
+	    return _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).call(this, props));
 	  }
 
 	  _createClass(IceCreamList, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!this.props.length) {
+	        this.props.dispatch((0, _iceCreams.showIceCreams)());
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var iceCreams = this.props.iceCreams;
@@ -30723,6 +30730,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(178);
+
 	var _parlors = __webpack_require__(306);
 
 	var _NewParlorForm = __webpack_require__(307);
@@ -30743,15 +30752,17 @@
 	  function Parlors(props) {
 	    _classCallCheck(this, Parlors);
 
-	    var _this = _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).call(this, props));
-
-	    if (!props.length) {
-	      props.dispatch((0, _parlors.showParlors)());
-	    }
-	    return _this;
+	    return _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).call(this, props));
 	  }
 
 	  _createClass(Parlors, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!this.props.length) {
+	        this.props.dispatch((0, _parlors.showParlors)());
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var parlors = this.props.parlors;
@@ -30771,7 +30782,11 @@
 	            return _react2.default.createElement(
 	              'li',
 	              { key: parlor.id },
-	              parlor.name
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/parlors/' + parlor.id },
+	                parlor.name
+	              )
 	            );
 	          })
 	        ),
@@ -30890,20 +30905,25 @@
 
 	    var _this = _possibleConstructorReturn(this, (ParlorForm.__proto__ || Object.getPrototypeOf(ParlorForm)).call(this, props));
 
-	    _this.state = {
-	      name: '',
-	      streetAddress: '',
-	      city: '',
-	      state: '',
-	      zipCode: '',
-	      chain: false
-	    };
+	    _this.state = _this.initialState();
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(ParlorForm, [{
+	    key: 'initialState',
+	    value: function initialState() {
+	      return {
+	        name: '',
+	        streetAddress: '',
+	        city: '',
+	        state: '',
+	        zipCode: '',
+	        chain: false
+	      };
+	    }
+	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
 	      this.setState(_defineProperty({}, event.target.name, event.target.value));
@@ -30913,6 +30933,12 @@
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
 	      this.props.dispatch((0, _parlors.addParlor)(this.state));
+	      this.clearForm();
+	    }
+	  }, {
+	    key: 'clearForm',
+	    value: function clearForm() {
+	      this.setState(this.initialState());
 	    }
 	  }, {
 	    key: 'render',
@@ -30984,13 +31010,104 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(233);
+
+	var _parlors = __webpack_require__(306);
+
+	var _actions = __webpack_require__(297);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Parlor = function (_React$Component) {
+	  _inherits(Parlor, _React$Component);
+
+	  function Parlor(props) {
+	    _classCallCheck(this, Parlor);
+
+	    return _possibleConstructorReturn(this, (Parlor.__proto__ || Object.getPrototypeOf(Parlor)).call(this, props));
+	  }
+
+	  _createClass(Parlor, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!this.props.length) {
+	        this.props.dispatch((0, _parlors.showParlors)());
+	      } else {
+	        this.props.dispatch((0, _actions.hideLoader)());
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var parlor = this.props.parlors.find(function (parlor) {
+	        return parlor.id === parseInt(_this2.props.routeParams.id);
+	      });
+
+	      if (this.props.loading) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          '"loading"'
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            parlor.name
+	          )
+	        );
+	      }
+	    }
+	  }]);
+
+	  return Parlor;
+	}(_react2.default.Component);
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    parlors: state.parlors,
+	    loading: state.loading
+	  };
+	};
+
+	var ParlorContainer = (0, _reactRedux.connect)(mapStateToProps)(Parlor);
+
+	exports.default = ParlorContainer;
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(309);
+	var _reduxThunk = __webpack_require__(310);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(310);
+	var _reducers = __webpack_require__(311);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -31001,7 +31118,7 @@
 	exports.default = store;
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31029,7 +31146,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31040,13 +31157,13 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(311);
+	var _users = __webpack_require__(312);
 
-	var _iceCreams = __webpack_require__(312);
+	var _iceCreams = __webpack_require__(313);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(314);
 
-	var _loading = __webpack_require__(314);
+	var _loading = __webpack_require__(315);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -31058,7 +31175,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31084,7 +31201,7 @@
 	} // users reducer
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31109,7 +31226,7 @@
 	} // ice creams reducer
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31136,7 +31253,7 @@
 	} // parlors reducer
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -31146,7 +31263,7 @@
 	});
 	exports.loading = loading;
 	function loading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 	  var action = arguments[1];
 
 	  switch (action.type) {

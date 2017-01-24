@@ -1,13 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router'
 import { showParlors } from '../../actions/parlors'
 import NewParlorForm from '../parlors/NewParlorForm'
 
 class Parlors extends React.Component {
   constructor(props) {
     super(props)
+  }
 
-    if (!props.length) {
-      props.dispatch(showParlors())
+  componentDidMount() {
+    if (!this.props.length) {
+      this.props.dispatch(showParlors())
     }
   }
 
@@ -18,7 +21,7 @@ class Parlors extends React.Component {
         <h1>All the Parlors</h1>
         {this.props.loading && "loading"}
         <ul>
-          {parlors.map((parlor) => <li key={parlor.id}>{parlor.name}</li>)}
+          {parlors.map((parlor) => <li key={parlor.id}><Link to={`/parlors/${parlor.id}`}>{parlor.name}</Link></li>)}
         </ul>
         
         <NewParlorForm />

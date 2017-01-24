@@ -5,9 +5,11 @@ import IceCreamListItem from '../iceCreams/IceCreamListItem'
 class IceCreamList extends React.Component {
   constructor(props) {
     super(props)
-
-    if (!props.length) {
-      props.dispatch(showIceCreams())
+  }
+  
+  componentDidMount() {
+    if (!this.props.length) {
+      this.props.dispatch(showIceCreams())
     }
   }
 

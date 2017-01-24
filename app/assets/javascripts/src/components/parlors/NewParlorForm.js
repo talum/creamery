@@ -7,7 +7,13 @@ import SubmitButton from '../sharedComponents/SubmitButton'
 class ParlorForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
+    this.state = this.initialState()
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  initialState() {
+    return {
       name: '',
       streetAddress: '',
       city: '',
@@ -15,8 +21,6 @@ class ParlorForm extends React.Component {
       zipCode: '',
       chain: false
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
@@ -28,6 +32,11 @@ class ParlorForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.dispatch(addParlor(this.state))
+    this.clearForm()
+  }
+
+  clearForm() {
+    this.setState(this.initialState())
   }
 
   render() {
