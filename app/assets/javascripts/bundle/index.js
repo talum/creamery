@@ -30730,6 +30730,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(178);
+
 	var _parlors = __webpack_require__(306);
 
 	var _NewParlorForm = __webpack_require__(307);
@@ -30780,7 +30782,11 @@
 	            return _react2.default.createElement(
 	              'li',
 	              { key: parlor.id },
-	              parlor.name
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/parlors/' + parlor.id },
+	                parlor.name
+	              )
 	            );
 	          })
 	        ),
@@ -31014,6 +31020,8 @@
 
 	var _parlors = __webpack_require__(306);
 
+	var _actions = __webpack_require__(297);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31028,19 +31036,25 @@
 	  function Parlor(props) {
 	    _classCallCheck(this, Parlor);
 
-	    var _this = _possibleConstructorReturn(this, (Parlor.__proto__ || Object.getPrototypeOf(Parlor)).call(this, props));
-
-	    if (!props.length) {
-	      props.dispatch((0, _parlors.showParlors)());
-	    }
-	    return _this;
+	    return _possibleConstructorReturn(this, (Parlor.__proto__ || Object.getPrototypeOf(Parlor)).call(this, props));
 	  }
 
 	  _createClass(Parlor, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!this.props.length) {
+	        this.props.dispatch((0, _parlors.showParlors)());
+	      } else {
+	        this.props.dispatch((0, _actions.hideLoader)());
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      var parlor = this.props.parlors.find(function (parlor) {
-	        debugger;
+	        return parlor.id === parseInt(_this2.props.routeParams.id);
 	      });
 
 	      if (this.props.loading) {
@@ -31050,7 +31064,15 @@
 	          '"loading"'
 	        );
 	      } else {
-	        return _react2.default.createElement('div', null);
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            parlor.name
+	          )
+	        );
 	      }
 	    }
 	  }]);
@@ -31241,7 +31263,7 @@
 	});
 	exports.loading = loading;
 	function loading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 	  var action = arguments[1];
 
 	  switch (action.type) {

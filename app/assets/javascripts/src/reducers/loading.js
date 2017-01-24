@@ -1,4 +1,4 @@
-export function loading(state=false, action) {
+export function loading(state=true, action) {
   switch (action.type) {
     case "LOADING":
       return true
