@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { showParlors } from '../../actions/parlors'
 import { hideLoader } from '../../actions'
+
+import NewIceCreamForm from '../../components/iceCreams/NewIceCreamForm'
+
 class Parlor extends React.Component {
   constructor(props) {
     super(props)
@@ -26,6 +29,7 @@ class Parlor extends React.Component {
           <h1>
             { parlor.name }
           </h1>
+          <NewIceCreamForm parlorId={parlor.id}/>
         </div>
       )
     }
