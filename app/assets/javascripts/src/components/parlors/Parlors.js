@@ -9,7 +9,7 @@ class Parlors extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.length) {
+    if (!this.props.parlors.length) {
       this.props.dispatch(showParlors())
     }
   }
