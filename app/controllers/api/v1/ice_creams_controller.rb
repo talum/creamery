@@ -6,6 +6,11 @@ module Api
       end
 
       def create
+        binding.pry
+        @ice_cream = IceCream.new(title: params[:title], parlor_id: params[:parlorId])
+        # add flavors of ice cream too
+        @ice_cream.save
+        render json: @ice_cream
       end
 
       def update

@@ -1,8 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
-
-class NewIceCreamForm extends React.Component {
+import { addIceCream } from '../../actions/iceCreams'
+class IceCreamForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState(props)
@@ -30,7 +31,7 @@ class NewIceCreamForm extends React.Component {
   }
   
   clearForm() {
-    this.setState(this.initialState())
+    this.setState({title: ''})
   }
 
   render() {
@@ -51,5 +52,6 @@ class NewIceCreamForm extends React.Component {
   }
 }
 
+let NewIceCreamForm = connect()(IceCreamForm)
 
 export default NewIceCreamForm

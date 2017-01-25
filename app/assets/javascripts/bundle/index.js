@@ -30604,8 +30604,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.SHOW_ICECREAMS = undefined;
+	exports.ADD_ICECREAM = exports.SHOW_ICECREAMS = undefined;
 	exports.showIceCreams = showIceCreams;
+	exports.addIceCream = addIceCream;
 
 	var _axios = __webpack_require__(272);
 
@@ -30616,6 +30617,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var SHOW_ICECREAMS = exports.SHOW_ICECREAMS = 'SHOW_ICECREAMS'; //ice creams actions
+
+	var ADD_ICECREAM = exports.ADD_ICECREAM = 'ADD_ICECREAM';
 
 	function showIceCreams() {
 	  return function (dispatch) {
@@ -30630,8 +30633,25 @@
 	  };
 	}
 
+	function addIceCream(iceCream) {
+	  return function (dispatch) {
+	    dispatch((0, _actions.showLoader)());
+	    return postIceCream(iceCream).then(function (response) {
+	      dispatch({
+	        type: ADD_ICECREAM,
+	        data: response.data
+	      });
+	    });
+	    dispatch((0, _actions.hideLoader)());
+	  };
+	}
+
 	function fetchIceCreams() {
 	  return _axios2.default.get(_actions.BASE_URL + '/api/v1/ice_creams');
+	}
+
+	function postIceCream(iceCream) {
+	  return _axios2.default.post(_actions.BASE_URL + '/api/v1/ice_creams', iceCream);
 	}
 
 /***/ },
@@ -31112,6 +31132,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(233);
+
 	var _InputField = __webpack_require__(298);
 
 	var _InputField2 = _interopRequireDefault(_InputField);
@@ -31119,6 +31141,8 @@
 	var _SubmitButton = __webpack_require__(299);
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
+
+	var _iceCreams = __webpack_require__(302);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31130,13 +31154,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var NewIceCreamForm = function (_React$Component) {
-	  _inherits(NewIceCreamForm, _React$Component);
+	var IceCreamForm = function (_React$Component) {
+	  _inherits(IceCreamForm, _React$Component);
 
-	  function NewIceCreamForm(props) {
-	    _classCallCheck(this, NewIceCreamForm);
+	  function IceCreamForm(props) {
+	    _classCallCheck(this, IceCreamForm);
 
-	    var _this = _possibleConstructorReturn(this, (NewIceCreamForm.__proto__ || Object.getPrototypeOf(NewIceCreamForm)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (IceCreamForm.__proto__ || Object.getPrototypeOf(IceCreamForm)).call(this, props));
 
 	    _this.state = _this.initialState(props);
 	    _this.handleChange = _this.handleChange.bind(_this);
@@ -31144,7 +31168,7 @@
 	    return _this;
 	  }
 
-	  _createClass(NewIceCreamForm, [{
+	  _createClass(IceCreamForm, [{
 	    key: 'initialState',
 	    value: function initialState(props) {
 	      return {
@@ -31161,13 +31185,13 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
-	      this.props.dispatch(addIceCream(this.state));
+	      this.props.dispatch((0, _iceCreams.addIceCream)(this.state));
 	      this.clearForm();
 	    }
 	  }, {
 	    key: 'clearForm',
 	    value: function clearForm() {
-	      this.setState(this.initialState());
+	      this.setState({ title: '' });
 	    }
 	  }, {
 	    key: 'render',
@@ -31191,8 +31215,10 @@
 	    }
 	  }]);
 
-	  return NewIceCreamForm;
+	  return IceCreamForm;
 	}(_react2.default.Component);
+
+	var NewIceCreamForm = (0, _reactRedux.connect)()(IceCreamForm);
 
 	exports.default = NewIceCreamForm;
 
@@ -31324,6 +31350,8 @@
 
 	  switch (action.type) {
 	    case _iceCreams.SHOW_ICECREAMS:
+	      return state.concat(action.data);
+	    case _iceCreams.ADD_ICECREAM:
 	      return state.concat(action.data);
 	    default:
 	      return state;
