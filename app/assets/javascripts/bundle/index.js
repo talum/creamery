@@ -30785,7 +30785,10 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var parlors = this.props.parlors;
+	      debugger;
+	      var parlorsById = this.props.parlors.byId;
+	      var parlors = Object.values(parlorsById);
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -31367,23 +31370,48 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.parlors = parlors;
+	exports.parlors = undefined;
+
+	var _redux = __webpack_require__(242);
 
 	var _parlors = __webpack_require__(306);
 
-	function parlors() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	//change shape to be {
+	// byId: {id: {
+	//  title: "something",
+	//  date: ""
+	// }},
+	// allIds: [1, 2, 3]
+	//}
+	// parlors reducer
+	function byId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
 
 	  switch (action.type) {
 	    case _parlors.SHOW_PARLORS:
 	      return action.data;
 	    case _parlors.ADD_PARLOR:
-	      return state.concat(action.data);
+	      return state;
 	    default:
 	      return state;
 	  }
-	} // parlors reducer
+	}
+
+	function allIds() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	var parlors = exports.parlors = (0, _redux.combineReducers)({
+	  byId: byId,
+	  allIds: allIds
+	});
 
 /***/ },
 /* 316 */
