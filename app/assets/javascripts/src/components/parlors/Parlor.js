@@ -19,7 +19,9 @@ class Parlor extends React.Component {
   }
 
   render() {
-    let parlor = this.props.parlors.find((parlor) => { return parlor.id === parseInt(this.props.routeParams.id) } )
+    debugger
+    let parlorId = this.props.routeParams.id
+    let parlor = this.props.parlors.byId[parlorId]
 
     if (this.props.loading) {
       return(<div>"loading"</div>)

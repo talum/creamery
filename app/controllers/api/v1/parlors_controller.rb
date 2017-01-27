@@ -2,7 +2,10 @@ module Api
   module V1
     class ParlorsController < ApiController
       def index
-        render json: Parlor.all
+        @parlors = Parlor.all.each_with_object({}) do |parlor, hash| 
+          hash[parlor.id] = ParlorSerializer.new(parlor).attributes
+        end
+        render json: @parlors
       end
 
       def create

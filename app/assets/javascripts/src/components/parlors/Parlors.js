@@ -17,7 +17,7 @@ class Parlors extends React.Component {
   render() {
     let parlorsById = this.props.parlors.byId
     let parlors = Object.values(parlorsById)
-    
+   debugger 
     return(
       <div>
         <h1>All the Parlors</h1>

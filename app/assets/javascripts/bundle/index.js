@@ -30785,10 +30785,9 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      debugger;
 	      var parlorsById = this.props.parlors.byId;
 	      var parlors = Object.values(parlorsById);
-
+	      debugger;
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -31078,11 +31077,9 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-
-	      var parlor = this.props.parlors.find(function (parlor) {
-	        return parlor.id === parseInt(_this2.props.routeParams.id);
-	      });
+	      debugger;
+	      var parlorId = this.props.routeParams.id;
+	      var parlor = this.props.parlors.byId[parlorId];
 
 	      if (this.props.loading) {
 	        return _react2.default.createElement(
