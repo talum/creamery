@@ -30769,16 +30769,16 @@
 	var Parlors = function (_React$Component) {
 	  _inherits(Parlors, _React$Component);
 
-	  function Parlors(props) {
+	  function Parlors() {
 	    _classCallCheck(this, Parlors);
 
-	    return _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).call(this, props));
+	    return _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).apply(this, arguments));
 	  }
 
 	  _createClass(Parlors, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      if (!this.props.parlors.length) {
+	      if (!this.props.parlors.allIds.length) {
 	        this.props.dispatch((0, _parlors.showParlors)());
 	      }
 	    }
@@ -30787,7 +30787,7 @@
 	    value: function render() {
 	      var parlorsById = this.props.parlors.byId;
 	      var parlors = Object.values(parlorsById);
-	      debugger;
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -31059,10 +31059,10 @@
 	var Parlor = function (_React$Component) {
 	  _inherits(Parlor, _React$Component);
 
-	  function Parlor(props) {
+	  function Parlor() {
 	    _classCallCheck(this, Parlor);
 
-	    return _possibleConstructorReturn(this, (Parlor.__proto__ || Object.getPrototypeOf(Parlor)).call(this, props));
+	    return _possibleConstructorReturn(this, (Parlor.__proto__ || Object.getPrototypeOf(Parlor)).apply(this, arguments));
 	  }
 
 	  _createClass(Parlor, [{
@@ -31077,7 +31077,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      debugger;
 	      var parlorId = this.props.routeParams.id;
 	      var parlor = this.props.parlors.byId[parlorId];
 
@@ -31369,18 +31368,15 @@
 	});
 	exports.parlors = undefined;
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // parlors reducer
+
+
 	var _redux = __webpack_require__(242);
 
 	var _parlors = __webpack_require__(306);
 
-	//change shape to be {
-	// byId: {id: {
-	//  title: "something",
-	//  date: ""
-	// }},
-	// allIds: [1, 2, 3]
-	//}
-	// parlors reducer
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	function byId() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
@@ -31389,7 +31385,7 @@
 	    case _parlors.SHOW_PARLORS:
 	      return action.data;
 	    case _parlors.ADD_PARLOR:
-	      return state;
+	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
 	    default:
 	      return state;
 	  }
@@ -31400,6 +31396,10 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
+	    case _parlors.SHOW_PARLORS:
+	      return Object.keys(action.data);
+	    case _parlors.ADD_PARLOR:
+	      return state.concat(action.data.id);
 	    default:
 	      return state;
 	  }

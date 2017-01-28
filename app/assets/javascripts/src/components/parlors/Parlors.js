@@ -4,12 +4,8 @@ import { showParlors } from '../../actions/parlors'
 import NewParlorForm from '../parlors/NewParlorForm'
 
 class Parlors extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
-    if (!this.props.parlors.length) {
+    if (!this.props.parlors.allIds.length) {
       this.props.dispatch(showParlors())
     }
   }
@@ -17,7 +13,7 @@ class Parlors extends React.Component {
   render() {
     let parlorsById = this.props.parlors.byId
     let parlors = Object.values(parlorsById)
-   debugger 
+
     return(
       <div>
         <h1>All the Parlors</h1>

@@ -6,9 +6,6 @@ import { hideLoader } from '../../actions'
 import NewIceCreamForm from '../../components/iceCreams/NewIceCreamForm'
 
 class Parlor extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     if (!this.props.length) {
@@ -19,7 +16,6 @@ class Parlor extends React.Component {
   }
 
   render() {
-    debugger
     let parlorId = this.props.routeParams.id
     let parlor = this.props.parlors.byId[parlorId]
 

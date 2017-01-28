@@ -1,20 +1,13 @@
 // parlors reducer
 import { combineReducers } from 'redux'
-
 import { SHOW_PARLORS, ADD_PARLOR } from '../actions/parlors'
-//change shape to be {
-// byId: {id: {
-//  title: "something",
-//  date: ""
-// }},
-// allIds: [1, 2, 3]
-//}
+
 function byId(state={}, action) {
   switch (action.type) {
     case SHOW_PARLORS:
       return action.data
     case ADD_PARLOR:
-      return state
+      return {...state, [action.data.id]: action.data}
     default:
       return state
   }
@@ -22,6 +15,10 @@ function byId(state={}, action) {
 
 function allIds(state=[], action) {
   switch (action.type) {
+    case SHOW_PARLORS:
+      return Object.keys(action.data)
+    case ADD_PARLOR:
+      return state.concat(action.data.id)
     default:
       return state
   }
