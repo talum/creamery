@@ -2,9 +2,7 @@ module Api
   module V1
     class ParlorsController < ApiController
       def index
-        @parlors = Parlor.all.each_with_object({}) do |parlor, hash| 
-          hash[parlor.id] = ParlorSerializer.new(parlor).attributes
-        end
+        @parlors = as_nested_hash("Parlor")
         render json: @parlors
       end
 

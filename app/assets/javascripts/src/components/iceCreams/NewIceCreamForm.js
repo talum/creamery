@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
 import { addIceCream } from '../../actions/iceCreams'
+
 class IceCreamForm extends React.Component {
   constructor(props) {
     super(props)

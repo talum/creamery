@@ -3,18 +3,14 @@ import { showIceCreams } from '../../actions/iceCreams'
 import IceCreamListItem from '../iceCreams/IceCreamListItem'
 
 class IceCreamList extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  
   componentDidMount() {
-    if (!this.props.length) {
+    if (!this.props.iceCreams.allIds.length) {
       this.props.dispatch(showIceCreams())
     }
   }
 
   render() {
-    let iceCreams = this.props.iceCreams
+    let iceCreams = Object.values(this.props.iceCreams.byId)
     let iceCreamListItems = iceCreams.map((iceCream) => <IceCreamListItem key={iceCream.id} iceCream={iceCream}/>)
 
     return (

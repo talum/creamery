@@ -8,7 +8,7 @@ import NewIceCreamForm from '../../components/iceCreams/NewIceCreamForm'
 class Parlor extends React.Component {
 
   componentDidMount() {
-    if (!this.props.length) {
+    if (!this.props.parlors.allIds.length) {
       this.props.dispatch(showParlors())
     } else {
       this.props.dispatch(hideLoader())
@@ -16,18 +16,22 @@ class Parlor extends React.Component {
   }
 
   render() {
-    let parlorId = this.props.routeParams.id
-    let parlor = this.props.parlors.byId[parlorId]
+    const parlorId = this.props.routeParams.id
+    const parlor = this.props.parlors.byId[parlorId]
 
     if (this.props.loading) {
       return(<div>"loading"</div>)
     } else {
+      let iceCreams = parlor.ice_creams.map((iceCreamId) => { return this.props.iceCreams.byId[iceCreamId] })
+      debugger
       return(
         <div>
           <h1>
             { parlor.name }
           </h1>
-          <NewIceCreamForm parlorId={parlor.id}/>
+          <ul>
+          </ul>
+          <NewIceCreamForm parlorId={parlorId}/>
         </div>
       )
     }
@@ -37,6 +41,7 @@ class Parlor extends React.Component {
 const mapStateToProps = (state) => {
   return {
     parlors: state.parlors,
+    iceCreams: state.iceCreams,
     loading: state.loading
   }
 } 
