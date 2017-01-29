@@ -1,16 +1,13 @@
 //users actions
 
-import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { BASE_URL } from '../actions'
-import { showLoader } from '../actions'
+import { postUsers } from '../adapters/creameryApi'
 
 export const ADD_USER = 'ADD_USER'
 
 export function addUser(email) {
   return function(dispatch) {
-    dispatch(showLoader())
-    return postUser(email).then((response) => {
+    return postUsers(email).then((response) => {
       dispatch({
         type: ADD_USER,
         data: response.data
@@ -20,8 +17,3 @@ export function addUser(email) {
   }
 }
 
-function postUser(email) {
-  return axios.post(`${BASE_URL}/api/v1/users`, {
-    email: email
-  })
-}

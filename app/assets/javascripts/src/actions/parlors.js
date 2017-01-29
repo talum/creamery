@@ -1,7 +1,6 @@
 // parlors actions
 
-import axios from 'axios'
-import { BASE_URL } from '../actions'
+import { fetchParlors, postParlors } from '../adapters/creameryApi'
 
 export const REQUEST_PARLORS = 'REQUEST_PARLORS'
 export const RECEIVE_PARLORS_SUCCESS = 'RECEIVE_PARLORS_SUCCESS'
@@ -31,13 +30,9 @@ export function showParlors() {
   }
 }
 
-function fetchParlors() {
-  return axios.get(`${BASE_URL}/api/v1/parlors`)
-}
-
 export function addParlor(parlor) {
   return function(dispatch) {
-    return postParlor(parlor).then((response) => { 
+    return postParlors(parlor).then((response) => { 
       dispatch({
         type: ADD_PARLOR,
         data: response.data 
@@ -46,7 +41,4 @@ export function addParlor(parlor) {
   }
 }
 
-function postParlor(parlor) {
-  return axios.post(`${BASE_URL}/api/v1/parlors`, parlor)
-}
 

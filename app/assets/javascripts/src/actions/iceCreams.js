@@ -1,7 +1,5 @@
 //ice creams actions
-
-import axios from 'axios'
-import { BASE_URL } from '../actions'
+import { fetchIceCreams, postIceCreams } from '../adapters/creameryApi'
 
 export const REQUEST_ICECREAMS = 'REQUEST_ICECREAMS'
 export const RECEIVE_ICECREAMS_SUCCESS = 'RECEIVE_ICECREAMS_SUCCESS'
@@ -32,7 +30,7 @@ export function showIceCreams() {
 
 export function addIceCream(iceCream) {
   return function(dispatch) {
-      return postIceCream(iceCream).then((response) => {
+      return postIceCreams(iceCream).then((response) => {
         dispatch({
           type: ADD_ICECREAM,
           data: response.data
@@ -41,10 +39,3 @@ export function addIceCream(iceCream) {
   }
 }
 
-function fetchIceCreams() {
-  return axios.get(`${BASE_URL}/api/v1/ice_creams`) 
-}
-
-function postIceCream(iceCream) {
-  return axios.post(`${BASE_URL}/api/v1/ice_creams`, iceCream)
-}
