@@ -5,7 +5,7 @@ const App = (props) => (
   <div>
     <nav>
       <div className="nav-wrapper deep-purple darken-4">
-        <div className="brand-logo">Creamery</div>
+        <div className="brand-logo"><Link to='/'>Creamery</Link></div>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li><Link to='/users'>Sign Up</Link></li>
           <li><Link to='/parlors'>Parlors</Link></li>
@@ -13,7 +13,7 @@ const App = (props) => (
       </div>
     </nav>
     <div className="container">
-      { props.children || "hello"}
+      { props.children }
     </div>
   </div>
 )

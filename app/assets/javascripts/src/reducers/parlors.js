@@ -1,13 +1,13 @@
 // parlors reducer
 import { combineReducers } from 'redux'
-import { SHOW_PARLORS, ADD_PARLOR } from '../actions/parlors'
+import * as parlorActions from '../actions/parlors'
 import { ADD_ICECREAM } from '../actions/iceCreams'
 
 function byId(state={}, action) {
   switch (action.type) {
-    case SHOW_PARLORS:
+    case parlorActions.RECEIVE_PARLORS_SUCCESS:
       return action.data
-    case ADD_PARLOR:
+    case parlorActions.ADD_PARLOR:
       return {
         ...state,
         [action.data.id]: action.data
@@ -15,11 +15,13 @@ function byId(state={}, action) {
     case ADD_ICECREAM:
       let parlorId = action.data.parlor_id
       let parlor = state[parlorId] 
+      let iceCreamId = action.data.id
+
       return {
         ...state,
         [parlorId]: {
           ...parlor,
-          iceCreams: parlor.ice_creams.concat(parlorId)
+          ice_creams: parlor.ice_creams.concat(iceCreamId)
         }
       }
     default:
@@ -29,10 +31,32 @@ function byId(state={}, action) {
 
 function allIds(state=[], action) {
   switch (action.type) {
-    case SHOW_PARLORS:
+    case parlorActions.RECEIVE_PARLORS_SUCCESS:
       return Object.keys(action.data)
-    case ADD_PARLOR:
+    case parlorActions.ADD_PARLOR:
       return state.concat(action.data.id)
+    default:
+      return state
+  }
+}
+
+function isLoading(state=true, action) {
+  switch (action.type) {
+    case parlorActions.REQUEST_PARLORS:
+      return true
+    case parlorActions.RECEIVE_PARLORS_SUCCESS:
+      return false
+    case parlorActions.RECEIVE_PARLORS_ERROR:
+      return false
+    default:
+      return state
+  }
+}
+
+function errors(state=[], action) {
+  switch (action.type) {
+    case parlorActions.RECEIVE_PARLORS_ERROR:
+      return state.concat(action.message)
     default:
       return state
   }
@@ -40,6 +64,8 @@ function allIds(state=[], action) {
 
 export const parlors = combineReducers({
   byId,
-  allIds
+  allIds,
+  isLoading,
+  errors
 })
 

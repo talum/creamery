@@ -30,19 +30,19 @@ class IceCreamForm extends React.Component {
     this.props.dispatch(addIceCream(this.state))
     this.clearForm()
   }
-  
-  clearForm() {
-    this.setState({title: ''})
-  }
 
+  clearForm () {
+    this.setState(this.initialState(this.props))
+  }
+  
   render() {
     return(
       <div>
-        New Ice Cream Form
+        <h2>New Ice Cream Form</h2>
         <form onSubmit={this.handleSubmit}>
           <InputField
             name={"title"}
-            value={this.state.name}
+            value={this.state.title}
             placeholder={"title"}
             handleChange={this.handleChange}
             />

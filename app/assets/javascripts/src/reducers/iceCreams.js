@@ -1,12 +1,12 @@
 // ice creams reducer
 import { combineReducers } from 'redux'
-import { SHOW_ICECREAMS, ADD_ICECREAM } from '../actions/iceCreams'
+import * as iceCreamsActions from '../actions/iceCreams'
 
 export function byId(state={}, action) {
   switch (action.type) {
-    case SHOW_ICECREAMS:
+    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
       return action.data
-    case ADD_ICECREAM:
+    case iceCreamsActions.ADD_ICECREAM:
       return {
         ...state, 
         [action.data.id]: action.data
@@ -18,10 +18,32 @@ export function byId(state={}, action) {
 
 function allIds(state=[], action) {
   switch (action.type) {
-    case SHOW_ICECREAMS:
+    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
       return Object.keys(action.data)
-    case ADD_ICECREAM:
+    case iceCreamsActions.ADD_ICECREAM:
       return state.concat(action.data.id)
+    default:
+      return state
+  }
+}
+
+function isLoading(state=true, action) {
+  switch (action.type) {
+    case iceCreamsActions.REQUEST_ICECREAMS:
+      return true
+    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
+      return false
+    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
+      return false
+    default:
+      return state
+  }
+}
+
+function errors(state=[], action) {
+  switch (action.type) {
+    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
+      return state.concat(action.message)
     default:
       return state
   }
@@ -29,5 +51,7 @@ function allIds(state=[], action) {
 
 export const iceCreams = combineReducers({
   byId,
-  allIds
+  allIds,
+  isLoading,
+  errors
 })

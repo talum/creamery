@@ -28714,7 +28714,11 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'brand-logo' },
-	          'Creamery'
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/' },
+	            'Creamery'
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'ul',
@@ -28743,7 +28747,7 @@
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'container' },
-	      props.children || "hello"
+	      props.children
 	    )
 	  );
 	};
@@ -30385,26 +30389,12 @@
 /* 297 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.showLoader = showLoader;
-	exports.hideLoader = hideLoader;
 	//actions
-
-	function showLoader() {
-	  return {
-	    type: "LOADING"
-	  };
-	}
-
-	function hideLoader() {
-	  return {
-	    type: "DONE_LOADING"
-	  };
-	}
 
 	var BASE_URL = exports.BASE_URL = 'http://localhost:3000';
 
@@ -30604,7 +30594,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_ICECREAM = exports.SHOW_ICECREAMS = undefined;
+	exports.ADD_ICECREAM = exports.RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_SUCCESS = exports.REQUEST_ICECREAMS = undefined;
 	exports.showIceCreams = showIceCreams;
 	exports.addIceCream = addIceCream;
 
@@ -30616,33 +30606,40 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var SHOW_ICECREAMS = exports.SHOW_ICECREAMS = 'SHOW_ICECREAMS'; //ice creams actions
+	//ice creams actions
 
+	var REQUEST_ICECREAMS = exports.REQUEST_ICECREAMS = 'REQUEST_ICECREAMS';
+	var RECEIVE_ICECREAMS_SUCCESS = exports.RECEIVE_ICECREAMS_SUCCESS = 'RECEIVE_ICECREAMS_SUCCESS';
+	var RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_ERROR = 'RECEIVE_ICECREAMS_ERROR';
 	var ADD_ICECREAM = exports.ADD_ICECREAM = 'ADD_ICECREAM';
 
 	function showIceCreams() {
 	  return function (dispatch) {
-	    dispatch((0, _actions.showLoader)());
+	    dispatch({
+	      type: REQUEST_ICECREAMS
+	    });
 	    return fetchIceCreams().then(function (response) {
 	      dispatch({
-	        type: SHOW_ICECREAMS,
+	        type: RECEIVE_ICECREAMS_SUCCESS,
 	        data: response.data
 	      });
-	      dispatch((0, _actions.hideLoader)());
+	    }, function (error) {
+	      dispatch({
+	        type: RECEIVE_ICECREAMS_ERROR,
+	        message: error.message
+	      });
 	    });
 	  };
 	}
 
 	function addIceCream(iceCream) {
 	  return function (dispatch) {
-	    dispatch((0, _actions.showLoader)());
 	    return postIceCream(iceCream).then(function (response) {
 	      dispatch({
 	        type: ADD_ICECREAM,
 	        data: response.data
 	      });
 	    });
-	    dispatch((0, _actions.hideLoader)());
 	  };
 	}
 
@@ -30725,8 +30722,7 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    parlors: state.parlors,
-	    loading: state.loading
+	    parlors: state.parlors
 	  };
 	};
 
@@ -30831,7 +30827,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_PARLOR = exports.SHOW_PARLORS = undefined;
+	exports.ADD_PARLOR = exports.SHOW_PARLORS = exports.RECEIVE_PARLORS_ERROR = exports.RECEIVE_PARLORS_SUCCESS = exports.REQUEST_PARLORS = undefined;
 	exports.showParlors = showParlors;
 	exports.addParlor = addParlor;
 
@@ -30843,19 +30839,29 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var SHOW_PARLORS = exports.SHOW_PARLORS = 'SHOW_PARLORS'; // parlors actions
+	// parlors actions
 
+	var REQUEST_PARLORS = exports.REQUEST_PARLORS = 'REQUEST_PARLORS';
+	var RECEIVE_PARLORS_SUCCESS = exports.RECEIVE_PARLORS_SUCCESS = 'RECEIVE_PARLORS_SUCCESS';
+	var RECEIVE_PARLORS_ERROR = exports.RECEIVE_PARLORS_ERROR = 'RECEIVE_PARLORS_ERROR';
+	var SHOW_PARLORS = exports.SHOW_PARLORS = 'SHOW_PARLORS';
 	var ADD_PARLOR = exports.ADD_PARLOR = 'ADD_PARLOR';
 
 	function showParlors() {
 	  return function (dispatch) {
-	    dispatch((0, _actions.showLoader)());
+	    dispatch({
+	      type: REQUEST_PARLORS
+	    });
 	    return fetchParlors().then(function (response) {
 	      dispatch({
-	        type: SHOW_PARLORS,
+	        type: RECEIVE_PARLORS_SUCCESS,
 	        data: response.data
 	      });
-	      dispatch((0, _actions.hideLoader)());
+	    }, function (error) {
+	      dispatch({
+	        type: RECEIVE_PARLORS_ERROR,
+	        message: error.message
+	      });
 	    });
 	  };
 	}
@@ -30866,13 +30872,11 @@
 
 	function addParlor(parlor) {
 	  return function (dispatch) {
-	    dispatch((0, _actions.showLoader)());
 	    return postParlor(parlor).then(function (response) {
 	      dispatch({
 	        type: ADD_PARLOR,
 	        data: response.data
 	      });
-	      dispatch((0, _actions.hideLoader)());
 	    });
 	  };
 	}
@@ -31042,7 +31046,7 @@
 
 	var _parlors = __webpack_require__(306);
 
-	var _actions = __webpack_require__(297);
+	var _iceCreams = __webpack_require__(302);
 
 	var _NewIceCreamForm = __webpack_require__(309);
 
@@ -31068,10 +31072,10 @@
 	  _createClass(Parlor, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      if (!this.props.parlors.allIds.length) {
+	      // probably just want to fetch the one parlor with associated ice creams
+	      if (!this.props.parlors.allIds.length || !this.props.iceCreams.allIds.length) {
 	        this.props.dispatch((0, _parlors.showParlors)());
-	      } else {
-	        this.props.dispatch((0, _actions.hideLoader)());
+	        this.props.dispatch((0, _iceCreams.showIceCreams)());
 	      }
 	    }
 	  }, {
@@ -31082,17 +31086,22 @@
 	      var parlorId = this.props.routeParams.id;
 	      var parlor = this.props.parlors.byId[parlorId];
 
-	      if (this.props.loading) {
+	      if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
 	        return _react2.default.createElement(
 	          'div',
 	          null,
 	          '"loading"'
 	        );
+	      } else if (this.props.iceCreams.isLoading) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          '"error"'
+	        );
 	      } else {
 	        var iceCreams = parlor.ice_creams.map(function (iceCreamId) {
 	          return _this2.props.iceCreams.byId[iceCreamId];
 	        });
-	        debugger;
 	        return _react2.default.createElement(
 	          'div',
 	          null,
@@ -31101,7 +31110,17 @@
 	            null,
 	            parlor.name
 	          ),
-	          _react2.default.createElement('ul', null),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            iceCreams.map(function (iceCream) {
+	              return _react2.default.createElement(
+	                'li',
+	                { key: iceCream.id },
+	                iceCream.title
+	              );
+	            })
+	          ),
 	          _react2.default.createElement(_NewIceCreamForm2.default, { parlorId: parlorId })
 	        );
 	      }
@@ -31114,8 +31133,7 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    parlors: state.parlors,
-	    iceCreams: state.iceCreams,
-	    loading: state.loading
+	    iceCreams: state.iceCreams
 	  };
 	};
 
@@ -31198,7 +31216,7 @@
 	  }, {
 	    key: 'clearForm',
 	    value: function clearForm() {
-	      this.setState({ title: '' });
+	      this.setState(this.initialState(this.props));
 	    }
 	  }, {
 	    key: 'render',
@@ -31206,13 +31224,17 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'New Ice Cream Form',
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'New Ice Cream Form'
+	        ),
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit },
 	          _react2.default.createElement(_InputField2.default, {
 	            name: "title",
-	            value: this.state.name,
+	            value: this.state.title,
 	            placeholder: "title",
 	            handleChange: this.handleChange
 	          }),
@@ -31301,13 +31323,10 @@
 
 	var _parlors = __webpack_require__(315);
 
-	var _loading = __webpack_require__(316);
-
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
 	  iceCreams: _iceCreams.iceCreams,
-	  parlors: _parlors.parlors,
-	  loading: _loading.loading
+	  parlors: _parlors.parlors
 	});
 
 	exports.default = creameryApp;
@@ -31358,6 +31377,10 @@
 
 	var _iceCreams = __webpack_require__(302);
 
+	var iceCreamsActions = _interopRequireWildcard(_iceCreams);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function byId() {
@@ -31365,9 +31388,9 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case _iceCreams.SHOW_ICECREAMS:
+	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
 	      return action.data;
-	    case _iceCreams.ADD_ICECREAM:
+	    case iceCreamsActions.ADD_ICECREAM:
 	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
 	    default:
 	      return state;
@@ -31379,10 +31402,38 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case _iceCreams.SHOW_ICECREAMS:
+	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
 	      return Object.keys(action.data);
-	    case _iceCreams.ADD_ICECREAM:
+	    case iceCreamsActions.ADD_ICECREAM:
 	      return state.concat(action.data.id);
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case iceCreamsActions.REQUEST_ICECREAMS:
+	      return true;
+	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
+	      return false;
+	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
+	      return false;
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
+	      return state.concat(action.message);
 	    default:
 	      return state;
 	  }
@@ -31390,7 +31441,9 @@
 
 	var iceCreams = exports.iceCreams = (0, _redux.combineReducers)({
 	  byId: byId,
-	  allIds: allIds
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
 	});
 
 /***/ },
@@ -31411,7 +31464,11 @@
 
 	var _parlors = __webpack_require__(306);
 
+	var parlorActions = _interopRequireWildcard(_parlors);
+
 	var _iceCreams = __webpack_require__(302);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -31420,15 +31477,17 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case _parlors.SHOW_PARLORS:
+	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
 	      return action.data;
-	    case _parlors.ADD_PARLOR:
+	    case parlorActions.ADD_PARLOR:
 	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
 	    case _iceCreams.ADD_ICECREAM:
 	      var parlorId = action.data.parlor_id;
 	      var parlor = state[parlorId];
+	      var iceCreamId = action.data.id;
+
 	      return _extends({}, state, _defineProperty({}, parlorId, _extends({}, parlor, {
-	        iceCreams: parlor.ice_creams.concat(parlorId)
+	        ice_creams: parlor.ice_creams.concat(iceCreamId)
 	      })));
 	    default:
 	      return state;
@@ -31440,10 +31499,38 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case _parlors.SHOW_PARLORS:
+	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
 	      return Object.keys(action.data);
-	    case _parlors.ADD_PARLOR:
+	    case parlorActions.ADD_PARLOR:
 	      return state.concat(action.data.id);
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case parlorActions.REQUEST_PARLORS:
+	      return true;
+	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
+	      return false;
+	    case parlorActions.RECEIVE_PARLORS_ERROR:
+	      return false;
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case parlorActions.RECEIVE_PARLORS_ERROR:
+	      return state.concat(action.message);
 	    default:
 	      return state;
 	  }
@@ -31451,32 +31538,10 @@
 
 	var parlors = exports.parlors = (0, _redux.combineReducers)({
 	  byId: byId,
-	  allIds: allIds
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
 	});
-
-/***/ },
-/* 316 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.loading = loading;
-	function loading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case "LOADING":
-	      return true;
-	    case "DONE_LOADING":
-	      return false;
-	    default:
-	      return state;
-	  }
-	}
 
 /***/ }
 /******/ ]);

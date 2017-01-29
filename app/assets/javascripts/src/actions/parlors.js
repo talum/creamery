@@ -2,21 +2,32 @@
 
 import axios from 'axios'
 import { BASE_URL } from '../actions'
-import { showLoader, hideLoader } from '../actions'
 
+export const REQUEST_PARLORS = 'REQUEST_PARLORS'
+export const RECEIVE_PARLORS_SUCCESS = 'RECEIVE_PARLORS_SUCCESS'
+export const RECEIVE_PARLORS_ERROR = 'RECEIVE_PARLORS_ERROR'
 export const SHOW_PARLORS = 'SHOW_PARLORS'
 export const ADD_PARLOR = 'ADD_PARLOR'
 
 export function showParlors() {
   return function(dispatch) {
-    dispatch(showLoader())
-    return fetchParlors().then((response) => {
-      dispatch({
-        type: SHOW_PARLORS,
-        data: response.data
-      })
-      dispatch(hideLoader())
+    dispatch({
+      type: REQUEST_PARLORS
     })
+    return fetchParlors().then(
+      (response) => {
+        dispatch({
+          type: RECEIVE_PARLORS_SUCCESS,
+          data: response.data
+        })
+      },
+      (error) => {
+        dispatch({
+          type: RECEIVE_PARLORS_ERROR,
+          message: error.message 
+        })
+      }
+    )
   }
 }
 
@@ -26,13 +37,11 @@ function fetchParlors() {
 
 export function addParlor(parlor) {
   return function(dispatch) {
-    dispatch(showLoader())
     return postParlor(parlor).then((response) => { 
       dispatch({
         type: ADD_PARLOR,
         data: response.data 
       })
-      dispatch(hideLoader())
     })
   }
 }

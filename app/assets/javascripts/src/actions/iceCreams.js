@@ -2,35 +2,42 @@
 
 import axios from 'axios'
 import { BASE_URL } from '../actions'
-import { showLoader, hideLoader } from '../actions'
 
-export const SHOW_ICECREAMS = 'SHOW_ICECREAMS'
+export const REQUEST_ICECREAMS = 'REQUEST_ICECREAMS'
+export const RECEIVE_ICECREAMS_SUCCESS = 'RECEIVE_ICECREAMS_SUCCESS'
+export const RECEIVE_ICECREAMS_ERROR = 'RECEIVE_ICECREAMS_ERROR' 
 export const ADD_ICECREAM = 'ADD_ICECREAM'
 
 export function showIceCreams() {
   return function(dispatch) {
-    dispatch(showLoader())
-    return fetchIceCreams().then((response) => {
-      dispatch({
-        type: SHOW_ICECREAMS,
-        data: response.data
-      })
-      dispatch(hideLoader())
-    } 
+    dispatch({
+      type: REQUEST_ICECREAMS
+    })
+    return fetchIceCreams().then(
+      (response) => {
+        dispatch({
+          type: RECEIVE_ICECREAMS_SUCCESS,
+          data: response.data
+        })
+      },
+      (error) => {
+        dispatch({
+          type: RECEIVE_ICECREAMS_ERROR,
+          message: error.message
+        })
+      }
     )
   }
 }
 
 export function addIceCream(iceCream) {
   return function(dispatch) {
-    dispatch(showLoader())
       return postIceCream(iceCream).then((response) => {
         dispatch({
           type: ADD_ICECREAM,
           data: response.data
         })
       })
-      dispatch(hideLoader())
   }
 }
 

@@ -1,17 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { showParlors } from '../../actions/parlors'
-import { hideLoader } from '../../actions'
+import { showIceCreams } from '../../actions/iceCreams'
 
 import NewIceCreamForm from '../../components/iceCreams/NewIceCreamForm'
 
 class Parlor extends React.Component {
 
   componentDidMount() {
-    if (!this.props.parlors.allIds.length) {
+    // probably just want to fetch the one parlor with associated ice creams
+    if (!this.props.parlors.allIds.length || !this.props.iceCreams.allIds.length) {
       this.props.dispatch(showParlors())
-    } else {
-      this.props.dispatch(hideLoader())
+      this.props.dispatch(showIceCreams())
     }
   }
 
@@ -19,17 +19,20 @@ class Parlor extends React.Component {
     const parlorId = this.props.routeParams.id
     const parlor = this.props.parlors.byId[parlorId]
 
-    if (this.props.loading) {
+    if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
       return(<div>"loading"</div>)
-    } else {
+    } else if (this.props.iceCreams.isLoading){
+      return(<div>"error"</div>)
+    }else {
       let iceCreams = parlor.ice_creams.map((iceCreamId) => { return this.props.iceCreams.byId[iceCreamId] })
-      debugger
       return(
         <div>
           <h1>
-            { parlor.name }
+            {parlor.name}
           </h1>
           <ul>
+            
+            { iceCreams.map(iceCream => (<li key={iceCream.id}>{iceCream.title}</li>)) }
           </ul>
           <NewIceCreamForm parlorId={parlorId}/>
         </div>
@@ -41,8 +44,7 @@ class Parlor extends React.Component {
 const mapStateToProps = (state) => {
   return {
     parlors: state.parlors,
-    iceCreams: state.iceCreams,
-    loading: state.loading
+    iceCreams: state.iceCreams
   }
 } 
 
