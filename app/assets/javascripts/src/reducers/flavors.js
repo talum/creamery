@@ -1,9 +1,17 @@
 // flavors reducer
 
 import { combineReducers } from 'redux'
+import { ADD_ICECREAM_SUCCESS } from '../actions/iceCreams'
 
 export function byId(state={}, action) {
   switch (action.type) {
+    case ADD_ICECREAM_SUCCESS:
+      let flavors = action.data.flavors // array of flavor objects 
+      let nextState = Object.assign({}, state)
+      flavors.forEach((flavor) => {
+        nextState[flavor.id] = flavor
+      })
+      return nextState
     default: 
       return state
   }
@@ -11,6 +19,10 @@ export function byId(state={}, action) {
 
 function allIds(state=[], action) {
   switch (action.type) {
+    case ADD_ICECREAM_SUCCESS:
+      let flavors = action.data.flavors // array of flavor objects 
+      let flavorIds = flavors.map((flavor) => flavor.id)
+      return [...state, flavorIds]
     default:
       return state
   }
@@ -36,3 +48,4 @@ export const flavors = combineReducers({
   isLoading,
   errors
 })
+

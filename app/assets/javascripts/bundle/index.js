@@ -30620,7 +30620,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_ICECREAM = exports.RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_SUCCESS = exports.REQUEST_ICECREAMS = undefined;
+	exports.ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM = exports.RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_SUCCESS = exports.REQUEST_ICECREAMS = undefined;
 	exports.showIceCreams = showIceCreams;
 	exports.addIceCream = addIceCream;
 
@@ -30630,6 +30630,8 @@
 	var RECEIVE_ICECREAMS_SUCCESS = exports.RECEIVE_ICECREAMS_SUCCESS = 'RECEIVE_ICECREAMS_SUCCESS';
 	var RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_ERROR = 'RECEIVE_ICECREAMS_ERROR';
 	var ADD_ICECREAM = exports.ADD_ICECREAM = 'ADD_ICECREAM';
+	var ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM_SUCCESS = 'ADD_ICECREAM_SUCCESS';
+	var ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_ERROR = 'ADD_ICECREAM_ERROR';
 
 	function showIceCreams() {
 	  return function (dispatch) {
@@ -30652,14 +30654,20 @@
 
 	function addIceCream(iceCream) {
 	  return function (dispatch) {
+	    dispatch({
+	      type: ADD_ICECREAM
+	    });
 	    return (0, _creameryApi.postIceCreams)(iceCream).then(function (response) {
 	      dispatch({
-	        type: ADD_ICECREAM,
+	        type: ADD_ICECREAM_SUCCESS,
 	        data: response.data
 	      });
-	      // dispatch another action to handle updating the flavors and
-	      // icecremaflavors in store?
-	    }, function (error) {});
+	    }, function (error) {
+	      dispatch({
+	        type: ADD_ICECREAM_ERROR,
+	        message: error.message
+	      });
+	    });
 	  };
 	}
 
@@ -31400,7 +31408,7 @@
 	  switch (action.type) {
 	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
 	      return action.data;
-	    case iceCreamsActions.ADD_ICECREAM:
+	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:
 	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
 	    default:
 	      return state;
@@ -31414,7 +31422,7 @@
 	  switch (action.type) {
 	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
 	      return Object.keys(action.data);
-	    case iceCreamsActions.ADD_ICECREAM:
+	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:
 	      return state.concat(action.data.id);
 	    default:
 	      return state;
@@ -31432,6 +31440,12 @@
 	      return false;
 	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
 	      return false;
+	    case iceCreamsActions.ADD_ICECREAM:
+	      return true;
+	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:
+	      return false;
+	    case iceCreamsActions.ADD_ICECREAM_ERROR:
+	      return false;
 	    default:
 	      return state;
 	  }
@@ -31443,6 +31457,8 @@
 
 	  switch (action.type) {
 	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
+	      return state.concat(action.message);
+	    case iceCreamsActions.ADD_ICECREAM_ERROR:
 	      return state.concat(action.message);
 	    default:
 	      return state;
@@ -31491,7 +31507,7 @@
 	      return action.data;
 	    case parlorActions.ADD_PARLOR:
 	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
-	    case _iceCreams.ADD_ICECREAM:
+	    case _iceCreams.ADD_ICECREAM_SUCCESS:
 	      var parlorId = action.data.parlor_id;
 	      var parlor = state[parlorId];
 	      var iceCreamId = action.data.id;
@@ -31563,25 +31579,53 @@
 	  value: true
 	});
 	exports.flavors = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // flavors reducer
+
 	exports.byId = byId;
 
 	var _redux = __webpack_require__(242);
+
+	var _iceCreams = __webpack_require__(302);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	function byId() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
 
-	  switch (action.type) {
-	    default:
-	      return state;
-	  }
-	} // flavors reducer
+	  var _ret = function () {
+	    switch (action.type) {
+	      case _iceCreams.ADD_ICECREAM_SUCCESS:
+	        var flavors = action.data.flavors; // array of flavor objects 
+	        var nextState = Object.assign({}, state);
+	        flavors.forEach(function (flavor) {
+	          nextState[flavor.id] = flavor;
+	        });
+	        return {
+	          v: nextState
+	        };
+	      default:
+	        return {
+	          v: state
+	        };
+	    }
+	  }();
+
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
 
 	function allIds() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	  var action = arguments[1];
 
 	  switch (action.type) {
+	    case _iceCreams.ADD_ICECREAM_SUCCESS:
+	      var _flavors = action.data.flavors; // array of flavor objects 
+	      var flavorIds = _flavors.map(function (flavor) {
+	        return flavor.id;
+	      });
+	      return [].concat(_toConsumableArray(state), [flavorIds]);
 	    default:
 	      return state;
 	  }
@@ -31624,25 +31668,53 @@
 	  value: true
 	});
 	exports.iceCreamFlavors = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // iceCreamFlavors reducer
+
 	exports.byId = byId;
 
 	var _redux = __webpack_require__(242);
+
+	var _iceCreams = __webpack_require__(302);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	function byId() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
 
-	  switch (action.type) {
-	    default:
-	      return state;
-	  }
-	} // iceCreamFlavors reducer
+	  var _ret = function () {
+	    switch (action.type) {
+	      case _iceCreams.ADD_ICECREAM_SUCCESS:
+	        var iceCreamFlavors = action.data.ice_cream_flavors; //array of iceCreamFlavor objects
+	        var nextState = Object.assign({}, state);
+	        iceCreamFlavors.forEach(function (iceCreamFlavor) {
+	          nextState[iceCreamFlavor.id] = iceCreamFlavor;
+	        });
+	        return {
+	          v: nextState
+	        };
+	      default:
+	        return {
+	          v: state
+	        };
+	    }
+	  }();
+
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
 
 	function allIds() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	  var action = arguments[1];
 
 	  switch (action.type) {
+	    case _iceCreams.ADD_ICECREAM_SUCCESS:
+	      var _iceCreamFlavors = action.data.ice_cream_flavors; //array of iceCreamFlavor objects
+	      var iceCreamFlavorIds = _iceCreamFlavors.map(function (iceCreamFlavor) {
+	        return iceCreamFlavor.id;
+	      });
+	      return [].concat(_toConsumableArray(state), [iceCreamFlavorIds]);
 	    default:
 	      return state;
 	  }

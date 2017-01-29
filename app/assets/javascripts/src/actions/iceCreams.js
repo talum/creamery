@@ -5,6 +5,8 @@ export const REQUEST_ICECREAMS = 'REQUEST_ICECREAMS'
 export const RECEIVE_ICECREAMS_SUCCESS = 'RECEIVE_ICECREAMS_SUCCESS'
 export const RECEIVE_ICECREAMS_ERROR = 'RECEIVE_ICECREAMS_ERROR' 
 export const ADD_ICECREAM = 'ADD_ICECREAM'
+export const ADD_ICECREAM_SUCCESS = 'ADD_ICECREAM_SUCCESS'
+export const ADD_ICECREAM_ERROR = 'ADD_ICECREAM_ERROR'
 
 export function showIceCreams() {
   return function(dispatch) {
@@ -30,16 +32,21 @@ export function showIceCreams() {
 
 export function addIceCream(iceCream) {
   return function(dispatch) {
+    dispatch({
+      type: ADD_ICECREAM
+    })
     return postIceCreams(iceCream).then(
       (response) => {
         dispatch({
-          type: ADD_ICECREAM,
+          type: ADD_ICECREAM_SUCCESS,
           data: response.data
         })
-        // dispatch another action to handle updating the flavors and
-        // icecremaflavors in store?
       },
       (error) => {
+        dispatch({
+          type: ADD_ICECREAM_ERROR,
+          message: error.message
+        })
       }
     )
   }

@@ -1,7 +1,7 @@
 // parlors reducer
 import { combineReducers } from 'redux'
 import * as parlorActions from '../actions/parlors'
-import { ADD_ICECREAM } from '../actions/iceCreams'
+import { ADD_ICECREAM_SUCCESS } from '../actions/iceCreams'
 
 function byId(state={}, action) {
   switch (action.type) {
@@ -12,7 +12,7 @@ function byId(state={}, action) {
         ...state,
         [action.data.id]: action.data
       }
-    case ADD_ICECREAM:
+    case ADD_ICECREAM_SUCCESS:
       let parlorId = action.data.parlor_id
       let parlor = state[parlorId] 
       let iceCreamId = action.data.id
