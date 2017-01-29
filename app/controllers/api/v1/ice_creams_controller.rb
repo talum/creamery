@@ -8,7 +8,12 @@ module Api
 
       def create
         @ice_cream = IceCream.new(title: params[:title], parlor_id: params[:parlorId])
-        # add flavors of ice cream too
+        flavor_titles = params[:flavors].split(",").map(&:strip)
+        flavors = flavor_titles.map{|flavor_title| Flavor.find_or_initialize_by(title: flavor_title)}
+        flavors.each do |flavor| 
+          @ice_cream.flavors << flavor
+        end
+
         @ice_cream.save
 
         render json: @ice_cream

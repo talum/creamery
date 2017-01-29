@@ -30657,7 +30657,9 @@
 	        type: ADD_ICECREAM,
 	        data: response.data
 	      });
-	    });
+	      // dispatch another action to handle updating the flavors and
+	      // icecremaflavors in store?
+	    }, function (error) {});
 	  };
 	}
 
@@ -31193,6 +31195,7 @@
 	    value: function initialState(props) {
 	      return {
 	        title: '',
+	        flavors: '',
 	        parlorId: props.parlorId
 	      };
 	    }
@@ -31231,6 +31234,12 @@
 	            name: "title",
 	            value: this.state.title,
 	            placeholder: "title",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "flavors",
+	            value: this.state.flavors,
+	            placeholder: "flavors",
 	            handleChange: this.handleChange
 	          }),
 	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
@@ -31318,10 +31327,16 @@
 
 	var _parlors = __webpack_require__(315);
 
+	var _flavors = __webpack_require__(316);
+
+	var _iceCreamFlavors = __webpack_require__(317);
+
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
 	  iceCreams: _iceCreams.iceCreams,
-	  parlors: _parlors.parlors
+	  parlors: _parlors.parlors,
+	  flavors: _flavors.flavors,
+	  iceCreamFlavors: _iceCreamFlavors.iceCreamFlavors
 	});
 
 	exports.default = creameryApp;
@@ -31532,6 +31547,128 @@
 	}
 
 	var parlors = exports.parlors = (0, _redux.combineReducers)({
+	  byId: byId,
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
+	});
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.flavors = undefined;
+	exports.byId = byId;
+
+	var _redux = __webpack_require__(242);
+
+	function byId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	} // flavors reducer
+
+	function allIds() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	var flavors = exports.flavors = (0, _redux.combineReducers)({
+	  byId: byId,
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
+	});
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.iceCreamFlavors = undefined;
+	exports.byId = byId;
+
+	var _redux = __webpack_require__(242);
+
+	function byId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	} // iceCreamFlavors reducer
+
+	function allIds() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	var iceCreamFlavors = exports.iceCreamFlavors = (0, _redux.combineReducers)({
 	  byId: byId,
 	  allIds: allIds,
 	  isLoading: isLoading,

@@ -30,12 +30,18 @@ export function showIceCreams() {
 
 export function addIceCream(iceCream) {
   return function(dispatch) {
-      return postIceCreams(iceCream).then((response) => {
+    return postIceCreams(iceCream).then(
+      (response) => {
         dispatch({
           type: ADD_ICECREAM,
           data: response.data
         })
-      })
+        // dispatch another action to handle updating the flavors and
+        // icecremaflavors in store?
+      },
+      (error) => {
+      }
+    )
   }
 }
 

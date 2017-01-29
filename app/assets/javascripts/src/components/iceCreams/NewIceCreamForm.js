@@ -15,6 +15,7 @@ class IceCreamForm extends React.Component {
   initialState(props) {
     return {
       title: '',
+      flavors: '',
       parlorId: props.parlorId
     }
   }
@@ -44,6 +45,12 @@ class IceCreamForm extends React.Component {
             name={"title"}
             value={this.state.title}
             placeholder={"title"}
+            handleChange={this.handleChange}
+            />
+          <InputField
+            name={"flavors"}
+            value={this.state.flavors}
+            placeholder={"flavors"}
             handleChange={this.handleChange}
             />
            <SubmitButton handleSubmit={this.handleSubmit}/>
