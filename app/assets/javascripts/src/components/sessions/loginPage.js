@@ -1,6 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import InputField from '../sharedComponents/InputField' 
 import SubmitButton from '../sharedComponents/SubmitButton'
+
+import { loginUser } from '../../action/sessionsActions'
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -21,17 +24,15 @@ class LoginPage extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({
-      ...state,
-      credentials: {
-        [event.target.name]: event.target.value
-      }
-    })
+    const field = event.target.name
+    const credentials = this.state.credentials
+    credentials[field] = event.target.value
+    this.setState({credentials: credentials})
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.dispatch({}) // submit action
+    this.props.dispatch(logInUser(this.state.credentials)) // submit action
   }
 
   render() {
@@ -47,6 +48,7 @@ class LoginPage extends React.Component {
               />
             <InputField
               name={"password"}
+              inputType={"password"}
               value={this.state.credentials.password}
               placeholder={"password"}
               handleChange={this.handleChange}
@@ -58,4 +60,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage
+export default connect()(LoginPage)
