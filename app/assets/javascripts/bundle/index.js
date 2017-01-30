@@ -31300,7 +31300,7 @@
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
-	var _sessionsActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../action/sessionsActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _sessions = __webpack_require__(317);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31346,7 +31346,7 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
-	      this.props.dispatch(logInUser(this.state.credentials)); // submit action
+	      this.props.dispatch((0, _sessions.logInUser)(this.state.credentials)); // submit action
 	    }
 	  }, {
 	    key: 'render',
@@ -31677,6 +31677,50 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.LOGIN_ERROR = exports.LOGIN_SUCCESS = exports.LOGIN = undefined;
+	exports.logInUser = logInUser;
+
+	var _creameryApi = __webpack_require__(272);
+
+	var LOGIN = exports.LOGIN = "LOGIN"; // sessions actions
+	var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = "LOGIN_SUCCESS";
+	var LOGIN_ERROR = exports.LOGIN_ERROR = "LOGIN_ERROR";
+
+	function loginSuccess() {
+	  return {
+	    type: LOGIN_SUCCESS
+	  };
+	}
+
+	function loginError() {
+	  return {
+	    type: LOGIN_ERROR
+	  };
+	}
+
+	function logInUser() {
+	  return function (dispatch) {
+	    dispatch({
+	      type: LOGIN
+	    });
+	    return createSession().then(function (response) {
+	      sessionStorage.setItem('jwt', response.jwt);
+	      dispatch(loginSuccess());
+	    }, function (error) {
+	      console.log(error.message);
+	    });
+	  };
+	}
 
 /***/ }
 /******/ ]);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import InputField from '../sharedComponents/InputField' 
 import SubmitButton from '../sharedComponents/SubmitButton'
 
-import { loginUser } from '../../action/sessionsActions'
+import { logInUser } from '../../actions/sessions'
 
 class LoginPage extends React.Component {
   constructor(props) {
