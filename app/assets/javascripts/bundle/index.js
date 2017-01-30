@@ -78,6 +78,10 @@
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
+	var _loginPage = __webpack_require__(316);
+
+	var _loginPage2 = _interopRequireDefault(_loginPage);
+
 	var _store = __webpack_require__(310);
 
 	var _store2 = _interopRequireDefault(_store);
@@ -96,6 +100,7 @@
 	        { path: '/', component: _App2.default },
 	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _IceCreamListContainer2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _NewUserForm2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _loginPage2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors', component: _ParlorsContainer2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors/:id', component: _Parlor2.default })
 	      )
@@ -28737,6 +28742,24 @@
 	            null,
 	            _react2.default.createElement(
 	              _reactRouter.Link,
+	              { to: '/login' },
+	              'Login'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: 'logout' },
+	              'Logout'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
 	              { to: '/parlors' },
 	              'Parlors'
 	            )
@@ -30460,7 +30483,7 @@
 	  _createClass(InputField, [{
 	    key: "render",
 	    value: function render() {
-	      return _react2.default.createElement("input", { type: "text", name: this.props.name, value: this.props.value, placeholder: this.props.placeholder, onChange: this.props.handleChange });
+	      return _react2.default.createElement("input", { type: this.props.inputType || "text", name: this.props.name, value: this.props.value, placeholder: this.props.placeholder, onChange: this.props.handleChange });
 	    }
 	  }]);
 
@@ -31537,6 +31560,116 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _InputField = __webpack_require__(298);
+
+	var _InputField2 = _interopRequireDefault(_InputField);
+
+	var _SubmitButton = __webpack_require__(299);
+
+	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LoginPage = function (_React$Component) {
+	  _inherits(LoginPage, _React$Component);
+
+	  function LoginPage(props) {
+	    _classCallCheck(this, LoginPage);
+
+	    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props));
+
+	    _this.state = _this.initialState();
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(LoginPage, [{
+	    key: 'initialState',
+	    value: function initialState() {
+	      return {
+	        credentials: {
+	          email: '',
+	          password: ''
+	        }
+	      };
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      this.setState(_extends({}, state, {
+	        credentials: _defineProperty({}, event.target.name, event.target.value)
+	      }));
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      this.props.dispatch({}); // submit action
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Login'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "email",
+	            value: this.state.credentials.email,
+	            placeholder: "email",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "password",
+	            value: this.state.credentials.password,
+	            placeholder: "password",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return LoginPage;
+	}(_react2.default.Component);
+
+	exports.default = LoginPage;
 
 /***/ }
 /******/ ]);
