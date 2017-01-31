@@ -28903,22 +28903,35 @@
 
 	    var _this = _possibleConstructorReturn(this, (UserForm.__proto__ || Object.getPrototypeOf(UserForm)).call(this, props));
 
-	    _this.state = { email: '' };
+	    _this.state = _this.initialState();
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(UserForm, [{
+	    key: 'initialState',
+	    value: function initialState() {
+	      return {
+	        user: {
+	          email: '',
+	          password: '',
+	          password_confirmation: ''
+	        }
+	      };
+	    }
+	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
-	      this.setState({ email: event.target.value });
+	      var userParams = Object.assign({}, this.state.user);
+	      userParams[event.target.name] = event.target.value;
+	      this.setState({ user: userParams });
 	    }
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
-	      this.props.dispatch((0, _users.addUser)(this.state.email));
+	      this.props.dispatch((0, _users.addUser)(this.state));
 	    }
 	  }, {
 	    key: 'render',
@@ -28938,6 +28951,20 @@
 	            name: "email",
 	            value: this.state.email,
 	            placeholder: "email address",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "password",
+	            inputType: "password",
+	            value: this.state.password,
+	            placeholder: "password",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "password_confirmation",
+	            inputType: "password",
+	            value: this.state.password_confirmation,
+	            placeholder: "password confirmation",
 	            handleChange: this.handleChange
 	          }),
 	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
@@ -29034,7 +29061,7 @@
 	}
 
 	function postUsers(payload) {
-	  return post('/users', { email: payload.email });
+	  return post('/users', payload);
 	}
 
 	function fetchParlors() {

@@ -1,6 +1,8 @@
 module Api
   module V1
     class IceCreamsController < ApiController
+      skip_before_action :authenticate
+
       def index
         @ice_creams = as_nested_hash("IceCream")
         render json: @ice_creams

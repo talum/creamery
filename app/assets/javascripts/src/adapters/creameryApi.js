@@ -24,7 +24,7 @@ export function postIceCreams(payload) {
 }
 
 export function postUsers(payload) {
-  return post('/users', {email: payload.email}) 
+  return post('/users', payload) 
 }
 
 export function fetchParlors() {
