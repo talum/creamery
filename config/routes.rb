@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "landing#index"
   namespace :api do
     namespace :v1 do
-      resources :ice_creams, only: [:index, :create, :update]
+      resources :ice_creams, only: [:index, :create, :update, :show]
       resources :comments, only: [:create, :update]
       resources :parlors, only: [:index, :create, :update]
       resources :profiles, only: [:create, :update, :show]

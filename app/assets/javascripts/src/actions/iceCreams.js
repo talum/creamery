@@ -11,12 +11,12 @@ export const REQUEST_ICECREAM = 'REQUEST_ICECREAM'
 export const RECEIVE_ICECREAM_SUCCESS = 'RECEIVE_ICECREAM_SUCCESS'
 export const RECEIVE_ICECREAM_ERROR = 'RECEIVE_ICECREAM_ERROR'
 
-export function showIceCream() {
+export function showIceCream(id) {
   return function(dispatch) {
     dispatch({
       type: REQUEST_ICECREAM
     })
-    return fetchIceCream().then(
+    return fetchIceCream(id).then(
       (response) => {
         dispatch({
           type: RECEIVE_ICECREAM_SUCCESS,

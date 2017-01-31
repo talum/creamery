@@ -1,24 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { showIceCream } from '../actions/iceCreams'
+import { showIceCream } from '../../actions/iceCreams'
 
 class IceCreamDetail extends React.Component {
-  componentDidMount() {
-    debugger
+  componentWillMount() {
     this.props.dispatch(showIceCream(this.props.routeParams.id))
-    //fetch all the related data for the ice cream
-    // all the reviews
-    // all the comments for the reviews?
   }
 
   render() {
-    let iceCream = this.props.iceCream
-    return(
-      <div>
-        {iceCream.title}
-        {iceCream.parlor}
-      </div>
-    )
+    debugger
+    let iceCream = this.props.activeIceCream
+    if (this.props.activeIceCream.isLoading) {
+      return (<div>Loading</div>)
+    } else {
+      return(
+        <div>
+          {iceCream.title}
+          {iceCream.parlor}
+        </div>
+      )
+    }
   }
 }   
 

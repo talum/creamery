@@ -25,7 +25,12 @@ module Api
       end
 
       def show
+        @ice_cream = IceCream.find(params[:id])
+        # need flavors
+        # reviews
+        # review comments
         binding.pry
+        render json: @ice_cream
       end
     end
   end
