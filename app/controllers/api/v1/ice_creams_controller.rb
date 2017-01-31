@@ -25,6 +25,7 @@ module Api
       end
 
       def show
+        binding.pry
       end
     end
   end

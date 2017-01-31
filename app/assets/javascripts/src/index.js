@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import App from './components/App'
 import NewUserForm from './components/users/NewUserForm'
 import IceCreamListContainer from './components/iceCreams/IceCreamListContainer'
+import IceCreamDetail from './components/iceCreams/NewIceCreamForm'
 import ParlorsContainer from './components/parlors/ParlorsContainer'
 import ParlorContainer from './components/parlors/Parlor'
 import LoginPage from './components/sessions/loginPage'
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <Router history={browserHistory} >
         <Route path="/" component={App}>
           <IndexRoute component={IceCreamListContainer} />
+          <Route path="/ice_creams/:id" component={IceCreamDetail} />
           <Route path="/users" component={NewUserForm} />
           <Route path="/login" component={LoginPage} />
           <Route path="/parlors" component={ParlorsContainer} />

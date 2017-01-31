@@ -19,6 +19,10 @@ export function fetchIceCreams() {
   return fetch('/ice_creams')
 }
 
+export function fetchIceCream(id) {
+  return fetch(`/ice_creams/${id}`)
+}
+
 export function postIceCreams(payload) {
   return post('/ice_creams', payload)
 }
@@ -37,4 +41,12 @@ export function postParlors(payload) {
 
 export function createSession(payload) {
   return post('/login', payload)
+}
+
+export function postComments(payload) {
+  return post('/comments', payload)
+}
+
+export function postReviews(payload) {
+  return post('/reviews', payload)
 }

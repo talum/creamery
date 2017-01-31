@@ -70,6 +70,10 @@
 
 	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
 
+	var _NewIceCreamForm = __webpack_require__(311);
+
+	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
+
 	var _ParlorsContainer = __webpack_require__(306);
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
@@ -99,6 +103,7 @@
 	        _reactRouter.Route,
 	        { path: '/', component: _App2.default },
 	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _IceCreamListContainer2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/ice_creams/:id', component: _NewIceCreamForm2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _NewUserForm2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _loginPage2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/parlors', component: _ParlorsContainer2.default }),
@@ -28922,11 +28927,14 @@
 	  value: true
 	});
 	exports.fetchIceCreams = fetchIceCreams;
+	exports.fetchIceCream = fetchIceCream;
 	exports.postIceCreams = postIceCreams;
 	exports.postUsers = postUsers;
 	exports.fetchParlors = fetchParlors;
 	exports.postParlors = postParlors;
 	exports.createSession = createSession;
+	exports.postComments = postComments;
+	exports.postReviews = postReviews;
 
 	var _axios = __webpack_require__(273);
 
@@ -28953,6 +28961,10 @@
 	  return fetch('/ice_creams');
 	}
 
+	function fetchIceCream(id) {
+	  return fetch('/ice_creams/' + id);
+	}
+
 	function postIceCreams(payload) {
 	  return post('/ice_creams', payload);
 	}
@@ -28971,6 +28983,14 @@
 
 	function createSession(payload) {
 	  return post('/login', payload);
+	}
+
+	function postComments(payload) {
+	  return post('/comments', payload);
+	}
+
+	function postReviews(payload) {
+	  return post('/reviews', payload);
 	}
 
 /***/ },
@@ -30814,7 +30834,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM = exports.RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_SUCCESS = exports.REQUEST_ICECREAMS = undefined;
+	exports.RECEIVE_ICECREAM_ERROR = exports.RECEIVE_ICECREAM_SUCCESS = exports.REQUEST_ICECREAM = exports.ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM = exports.RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_SUCCESS = exports.REQUEST_ICECREAMS = undefined;
+	exports.showIceCream = showIceCream;
 	exports.showIceCreams = showIceCreams;
 	exports.addIceCream = addIceCream;
 
@@ -30826,6 +30847,28 @@
 	var ADD_ICECREAM = exports.ADD_ICECREAM = 'ADD_ICECREAM';
 	var ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM_SUCCESS = 'ADD_ICECREAM_SUCCESS';
 	var ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_ERROR = 'ADD_ICECREAM_ERROR';
+	var REQUEST_ICECREAM = exports.REQUEST_ICECREAM = 'REQUEST_ICECREAM';
+	var RECEIVE_ICECREAM_SUCCESS = exports.RECEIVE_ICECREAM_SUCCESS = 'RECEIVE_ICECREAM_SUCCESS';
+	var RECEIVE_ICECREAM_ERROR = exports.RECEIVE_ICECREAM_ERROR = 'RECEIVE_ICECREAM_ERROR';
+
+	function showIceCream() {
+	  return function (dispatch) {
+	    dispatch({
+	      type: REQUEST_ICECREAM
+	    });
+	    return (0, _creameryApi.fetchIceCream)().then(function (response) {
+	      dispatch({
+	        type: RECEIVE_ICECREAM_SUCCESS,
+	        data: response.data
+	      });
+	    }, function (error) {
+	      dispatch({
+	        type: RECEIVE_ICECREAM_ERROR,
+	        message: error.message
+	      });
+	    });
+	  };
+	}
 
 	function showIceCreams() {
 	  return function (dispatch) {
@@ -31647,13 +31690,16 @@
 
 	var _sessions = __webpack_require__(321);
 
+	var _activeIceCream = __webpack_require__(322);
+
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
 	  sessions: _sessions.sessions,
 	  iceCreams: _iceCreams.iceCreams,
 	  parlors: _parlors.parlors,
 	  flavors: _flavors.flavors,
-	  iceCreamFlavors: _iceCreamFlavors.iceCreamFlavors
+	  iceCreamFlavors: _iceCreamFlavors.iceCreamFlavors,
+	  activeIceCream: _activeIceCream.activeIceCream
 	});
 
 	exports.default = creameryApp;
@@ -32125,6 +32171,70 @@
 
 	var sessions = exports.sessions = (0, _redux.combineReducers)({
 	  loggedIn: loggedIn,
+	  isLoading: isLoading,
+	  errors: errors
+	});
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.activeIceCream = undefined;
+	exports.iceCream = iceCream;
+
+	var _redux = __webpack_require__(242);
+
+	var _iceCreams = __webpack_require__(304);
+
+	// active ice cream reducer
+
+	function iceCream() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _iceCreams.RECEIVE_ICECREAM_SUCCESS:
+	      return action.data;
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _iceCreams.RECEIVE_ICECREAM_SUCCESS:
+	      return false;
+	    case _iceCreams.RECEIVE_ICECREAM_ERROR:
+	      return false;
+	    case _iceCreams.REQUEST_ICECREAM:
+	      return true;
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _iceCreams.RECEIVE_ICECREAM_ERROR:
+	      return state.concat(action.data.message);
+	    default:
+	      return state;
+	  }
+	}
+
+	var activeIceCream = exports.activeIceCream = (0, _redux.combineReducers)({
+	  iceCream: iceCream,
 	  isLoading: isLoading,
 	  errors: errors
 	});

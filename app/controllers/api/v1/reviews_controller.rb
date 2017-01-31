@@ -2,6 +2,7 @@ module Api
   module V1
     class ReviewsController < ApiController
       def create
+        binding.pry
       end
 
       def update
