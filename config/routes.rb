@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :profiles, only: [:create, :update, :show]
       resources :reviews, only: [:create, :update, :index]
       resources :users, only: :create
+      post '/login', to: "sessions#create"
     end
   end
   get '*path', to: "landing#index"

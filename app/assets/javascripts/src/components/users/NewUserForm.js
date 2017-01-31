@@ -7,18 +7,30 @@ import SubmitButton from '../sharedComponents/SubmitButton'
 class UserForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { email: '' }
+    this.state = this.initialState()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  initialState() {
+    return {
+      user: {
+        email: '',
+        password: '',
+        password_confirmation: ''
+      }
+    }
+  }
+
   handleChange(event) {
-    this.setState({email: event.target.value})
+    let userParams = Object.assign({}, this.state.user)
+    userParams[event.target.name] = event.target.value
+    this.setState({user: userParams})
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.dispatch(addUser(this.state.email))
+    this.props.dispatch(addUser(this.state))
   }
 
   render() {
@@ -30,6 +42,20 @@ class UserForm extends React.Component {
             name={"email"} 
             value={this.state.email}
             placeholder={"email address"}
+            handleChange={this.handleChange}
+          />
+          <InputField
+            name={"password"} 
+            inputType={"password"}
+            value={this.state.password}
+            placeholder={"password"}
+            handleChange={this.handleChange}
+          />
+          <InputField
+            name={"password_confirmation"} 
+            inputType={"password"}
+            value={this.state.password_confirmation}
+            placeholder={"password confirmation"}
             handleChange={this.handleChange}
           />
           <SubmitButton handleSubmit={this.handleSubmit} />
