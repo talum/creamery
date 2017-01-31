@@ -1,11 +1,16 @@
 // sessions reducer
 import { combineReducers } from 'redux'
+import { browserHistory } from 'react-router'
 import * as sessionsActions from '../actions/sessions'
 
-export function loggedIn(state=false, action) {
+export function loggedIn(state=!!sessionStorage.jwt, action) {
   switch (action.type) {
     case sessionsActions.LOGIN_SUCCESS:
-      return true
+      browserHistory.push('/') 
+      return !!sessionStorage.jwt
+    case sessionsActions.LOGOUT:
+      browserHistory.push('/')
+      return !!sessionStorage.jwt
     default:
       return state
   }

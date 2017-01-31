@@ -20,7 +20,8 @@ class Auth
     ).first
   end
 
-  def auth_secret
+  def self.auth_secret
     ENV["AUTH_SECRET"]
   end
+
 end

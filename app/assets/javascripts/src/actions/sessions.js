@@ -1,9 +1,10 @@
 // sessions actions
-import { fetchIceCreams, postIceCreams } from '../adapters/creameryApi'
+import { createSession } from '../adapters/creameryApi'
 
 export const LOGIN = "LOGIN"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_ERROR = "LOGIN_ERROR"
+export const LOGOUT = "LOGOUT"
 
 function loginSuccess() {
   return {
@@ -17,19 +18,28 @@ function loginError() {
   }
 }
 
-export function logInUser() {
+export function logInUser(payload) {
   return function(dispatch) {
     dispatch({
       type: LOGIN
     })
-    return createSession().then(
+    return createSession(payload)
+      .then(
         (response) => {
-          sessionStorage.setItem('jwt', response.jwt)
+          sessionStorage.setItem('jwt', response.data.jwt)
           dispatch(loginSuccess())
-        },
+        })
+      .catch(
         (error) => {
-          console.log(error.message)
+          dispatch(loginError())
         }
       )
     }
+}
+
+export function logOutUser() {
+  sessionStorage.removeItem('jwt')
+  return {
+    type: LOGOUT 
+  }
 }

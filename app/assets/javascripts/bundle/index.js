@@ -82,7 +82,7 @@
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(311);
+	var _store = __webpack_require__(312);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -28931,6 +28931,10 @@
 	var BASE_URL = 'http://localhost:3000/api/v1'; // api adapter
 
 
+	_axios2.default.defaults.baseURL = BASE_URL;
+	_axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
+	_axios2.default.defaults.headers.post['Content-Type'] = 'application/json';
+
 	function fetch(route) {
 	  return _axios2.default.get('' + (BASE_URL + route));
 	}
@@ -31300,7 +31304,7 @@
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
-	var _sessions = __webpack_require__(317);
+	var _sessions = __webpack_require__(311);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31390,6 +31394,59 @@
 /* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.LOGOUT = exports.LOGIN_ERROR = exports.LOGIN_SUCCESS = exports.LOGIN = undefined;
+	exports.logInUser = logInUser;
+	exports.logOutUser = logOutUser;
+
+	var _creameryApi = __webpack_require__(272);
+
+	var LOGIN = exports.LOGIN = "LOGIN"; // sessions actions
+	var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = "LOGIN_SUCCESS";
+	var LOGIN_ERROR = exports.LOGIN_ERROR = "LOGIN_ERROR";
+	var LOGOUT = exports.LOGOUT = "LOGOUT";
+
+	function loginSuccess() {
+	  return {
+	    type: LOGIN_SUCCESS
+	  };
+	}
+
+	function loginError() {
+	  return {
+	    type: LOGIN_ERROR
+	  };
+	}
+
+	function logInUser(payload) {
+	  return function (dispatch) {
+	    dispatch({
+	      type: LOGIN
+	    });
+	    return (0, _creameryApi.createSession)(payload).then(function (response) {
+	      sessionStorage.setItem('jwt', response.data.jwt);
+	      dispatch(loginSuccess());
+	    }).catch(function (error) {
+	      dispatch(loginError());
+	    });
+	  };
+	}
+
+	function logOutUser() {
+	  sessionStorage.removeItem('jwt');
+	  return {
+	    type: LOGOUT
+	  };
+	}
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -31398,11 +31455,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(312);
+	var _reduxThunk = __webpack_require__(313);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(313);
+	var _reducers = __webpack_require__(314);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -31413,7 +31470,7 @@
 	exports.default = store;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31441,7 +31498,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31452,14 +31509,17 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(314);
+	var _users = __webpack_require__(315);
 
-	var _iceCreams = __webpack_require__(315);
+	var _iceCreams = __webpack_require__(316);
 
-	var _parlors = __webpack_require__(316);
+	var _parlors = __webpack_require__(317);
+
+	var _sessions = __webpack_require__(318);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
+	  sessions: _sessions.sessions,
 	  iceCreams: _iceCreams.iceCreams,
 	  parlors: _parlors.parlors
 	});
@@ -31467,7 +31527,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31493,7 +31553,7 @@
 	} // users reducer
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31582,7 +31642,7 @@
 	});
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31679,48 +31739,77 @@
 	});
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.LOGIN_ERROR = exports.LOGIN_SUCCESS = exports.LOGIN = undefined;
-	exports.logInUser = logInUser;
+	exports.sessions = undefined;
+	exports.loggedIn = loggedIn;
+	exports.isLoading = isLoading;
+	exports.errors = errors;
 
-	var _creameryApi = __webpack_require__(272);
+	var _redux = __webpack_require__(242);
 
-	var LOGIN = exports.LOGIN = "LOGIN"; // sessions actions
-	var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = "LOGIN_SUCCESS";
-	var LOGIN_ERROR = exports.LOGIN_ERROR = "LOGIN_ERROR";
+	var _reactRouter = __webpack_require__(178);
 
-	function loginSuccess() {
-	  return {
-	    type: LOGIN_SUCCESS
-	  };
+	var _sessions = __webpack_require__(311);
+
+	var sessionsActions = _interopRequireWildcard(_sessions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function loggedIn() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !!sessionStorage.jwt;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case sessionsActions.LOGIN_SUCCESS:
+	      _reactRouter.browserHistory.push('/');
+	      return !!sessionStorage.jwt;
+	    case sessionsActions.LOGOUT:
+	      _reactRouter.browserHistory.push('/');
+	      return !!sessionStorage.jwt;
+	    default:
+	      return state;
+	  }
+	} // sessions reducer
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case sessionsActions.LOGIN:
+	      return true;
+	    case sessionsActions.LOGIN_SUCCESS:
+	      return false;
+	    case sessionsActions.LOGIN_ERROR:
+	      return false;
+	    default:
+	      return state;
+	  }
 	}
 
-	function loginError() {
-	  return {
-	    type: LOGIN_ERROR
-	  };
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case sessionsActions.LOGIN_ERROR:
+	      return state.concat(action.message);
+	    default:
+	      return state;
+	  }
 	}
 
-	function logInUser() {
-	  return function (dispatch) {
-	    dispatch({
-	      type: LOGIN
-	    });
-	    return createSession().then(function (response) {
-	      sessionStorage.setItem('jwt', response.jwt);
-	      dispatch(loginSuccess());
-	    }, function (error) {
-	      console.log(error.message);
-	    });
-	  };
-	}
+	var sessions = exports.sessions = (0, _redux.combineReducers)({
+	  loggedIn: loggedIn,
+	  isLoading: isLoading,
+	  errors: errors
+	});
 
 /***/ }
 /******/ ]);

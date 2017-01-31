@@ -1,7 +1,7 @@
 module Api
   module V1
     class ApiController < ActionController::API
-      # before_action: authenticate
+      before_action :authenticate
       
       def logged_in?
         !!current_user
@@ -27,7 +27,7 @@ module Api
      private
     
       def token
-        request.env["HTTP_AUTHORIZATION"].scan(/Bearer(.*)$/).flatten.last
+        request.env["HTTP_AUTHORIZATION"].scan(/Bearer(.*)$/).flatten.last.strip
       end
 
       def auth

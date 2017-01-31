@@ -3,6 +3,10 @@ import axios from 'axios'
 
 const BASE_URL = 'http://localhost:3000/api/v1'
 
+axios.defaults.baseURL = BASE_URL
+axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.jwt}`
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+
 function fetch(route) {
   return axios.get(`${BASE_URL+route}`)
 }
