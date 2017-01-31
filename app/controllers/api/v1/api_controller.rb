@@ -8,7 +8,7 @@ module Api
       end
 
       def current_user
-        if auth_present?
+        if auth_present? && token_present?
           user = User.find(auth["user"])
           @current_user ||= user if user
         end
@@ -28,6 +28,10 @@ module Api
     
       def token
         request.env["HTTP_AUTHORIZATION"].scan(/Bearer(.*)$/).flatten.last.strip
+      end
+
+      def token_present?
+        token != "undefined"
       end
 
       def auth
