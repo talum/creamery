@@ -1,14 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { logOutUser } from '../actions/sessions'  
 
 class Nav extends React.Component {
   constructor(props) {
     super(props)
+    this.logOut = this.logOut.bind(this)
+  }
+
+  logOut() {
+    this.props.dispatch(logOutUser())
   }
 
   loggedInLinks() {
-    return (<li><Link to='logout'>Logout</Link></li>)
+    return (<li onClick={this.logOut}><a href="#">Logout</a></li>)
   }
 
   loggedOutLinks() {
