@@ -19,8 +19,7 @@ class ReviewForm extends React.Component {
       review: {
         title: '',
         content: '',
-        ice_cream_id: ''
-          //grab from active id
+        ice_cream_id: props.iceCreamId
       }
     }
   }

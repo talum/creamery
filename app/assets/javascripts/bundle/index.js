@@ -74,19 +74,19 @@
 
 	var _IceCreamDetail2 = _interopRequireDefault(_IceCreamDetail);
 
-	var _ParlorsContainer = __webpack_require__(307);
+	var _ParlorsContainer = __webpack_require__(309);
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
-	var _Parlor = __webpack_require__(311);
+	var _Parlor = __webpack_require__(313);
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _loginPage = __webpack_require__(313);
+	var _loginPage = __webpack_require__(315);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(314);
+	var _store = __webpack_require__(316);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -30981,6 +30981,10 @@
 
 	var _iceCreams = __webpack_require__(304);
 
+	var _NewReviewForm = __webpack_require__(307);
+
+	var _NewReviewForm2 = _interopRequireDefault(_NewReviewForm);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31035,7 +31039,8 @@
 	              iceCream.parlor,
 	              iceCreamReviews.map(function (review) {
 	                return review.title;
-	              })
+	              }),
+	              _react2.default.createElement(_NewReviewForm2.default, { iceCreamId: iceCream.id })
 	            )
 	          };
 	        }();
@@ -31069,9 +31074,164 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactRedux = __webpack_require__(233);
 
-	var _Parlors = __webpack_require__(308);
+	var _reviews = __webpack_require__(308);
+
+	var _InputField = __webpack_require__(300);
+
+	var _InputField2 = _interopRequireDefault(_InputField);
+
+	var _SubmitButton = __webpack_require__(301);
+
+	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	//TODO: make this a modal that appaers on icecream show
+
+	var ReviewForm = function (_React$Component) {
+	  _inherits(ReviewForm, _React$Component);
+
+	  function ReviewForm(props) {
+	    _classCallCheck(this, ReviewForm);
+
+	    var _this = _possibleConstructorReturn(this, (ReviewForm.__proto__ || Object.getPrototypeOf(ReviewForm)).call(this, props));
+
+	    _this.state = _this.initialState(props);
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(ReviewForm, [{
+	    key: 'initialState',
+	    value: function initialState(props) {
+	      return {
+	        review: {
+	          title: '',
+	          content: '',
+	          ice_cream_id: props.iceCreamId
+	        }
+	      };
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      var reviewParams = Object.assign({}, this.state.review);
+	      reviewParams[event.target.name] = event.target.value;
+	      this.setState({ review: reviewParams });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      this.props.dispatch((0, _reviews.addReview)(this.state));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Add Review'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "title",
+	            value: this.state.review.title,
+	            placeholder: "add a title",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "content",
+	            value: this.state.review.content,
+	            placeholder: "add your review",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ReviewForm;
+	}(_react2.default.Component);
+
+	//connect this form to the store
+
+
+	var NewReviewForm = (0, _reactRedux.connect)()(ReviewForm);
+
+	exports.default = NewReviewForm;
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ADD_REVIEW_ERROR = exports.ADD_REVIEW_SUCCESS = exports.ADD_REVIEW = undefined;
+	exports.addReview = addReview;
+
+	var _creameryApi = __webpack_require__(272);
+
+	var ADD_REVIEW = exports.ADD_REVIEW = 'ADD_REVIEW';
+	var ADD_REVIEW_SUCCESS = exports.ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
+	var ADD_REVIEW_ERROR = exports.ADD_REVIEW_ERROR = 'ADD_REVIEW_ERROR';
+
+	function addReview(review) {
+	  return function (dispatch) {
+	    dispatch({
+	      type: ADD_REVIEW
+	    });
+	    return (0, _creameryApi.postReviews)(review).then(function (response) {
+	      dispatch({
+	        type: ADD_REVIEW_SUCCESS,
+	        data: response.data
+	      });
+	    }, function (error) {
+	      dispatch({
+	        type: ADD_REVIEW_ERROR,
+	        message: error.message
+	      });
+	    });
+	  };
+	}
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reactRedux = __webpack_require__(233);
+
+	var _Parlors = __webpack_require__(310);
 
 	var _Parlors2 = _interopRequireDefault(_Parlors);
 
@@ -31088,7 +31248,7 @@
 	exports.default = ParlorsContainer;
 
 /***/ },
-/* 308 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31105,9 +31265,9 @@
 
 	var _reactRouter = __webpack_require__(178);
 
-	var _parlors = __webpack_require__(309);
+	var _parlors = __webpack_require__(311);
 
-	var _NewParlorForm = __webpack_require__(310);
+	var _NewParlorForm = __webpack_require__(312);
 
 	var _NewParlorForm2 = _interopRequireDefault(_NewParlorForm);
 
@@ -31176,7 +31336,7 @@
 	exports.default = Parlors;
 
 /***/ },
-/* 309 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31228,7 +31388,7 @@
 	}
 
 /***/ },
-/* 310 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31245,7 +31405,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(309);
+	var _parlors = __webpack_require__(311);
 
 	var _InputField = __webpack_require__(300);
 
@@ -31369,7 +31529,7 @@
 	exports.default = NewParlorForm;
 
 /***/ },
-/* 311 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31388,11 +31548,11 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(309);
+	var _parlors = __webpack_require__(311);
 
 	var _iceCreams = __webpack_require__(304);
 
-	var _NewIceCreamForm = __webpack_require__(312);
+	var _NewIceCreamForm = __webpack_require__(314);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
@@ -31490,7 +31650,7 @@
 	exports.default = ParlorContainer;
 
 /***/ },
-/* 312 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31607,7 +31767,7 @@
 	exports.default = NewIceCreamForm;
 
 /***/ },
-/* 313 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31719,7 +31879,7 @@
 	exports.default = (0, _reactRedux.connect)()(LoginPage);
 
 /***/ },
-/* 314 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31730,11 +31890,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(315);
+	var _reduxThunk = __webpack_require__(317);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(316);
+	var _reducers = __webpack_require__(318);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -31745,7 +31905,7 @@
 	exports.default = store;
 
 /***/ },
-/* 315 */
+/* 317 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31773,7 +31933,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 316 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31784,19 +31944,19 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(317);
+	var _users = __webpack_require__(319);
 
-	var _iceCreams = __webpack_require__(318);
+	var _iceCreams = __webpack_require__(320);
 
-	var _parlors = __webpack_require__(319);
+	var _parlors = __webpack_require__(321);
 
-	var _flavors = __webpack_require__(320);
+	var _flavors = __webpack_require__(322);
 
-	var _iceCreamFlavors = __webpack_require__(321);
+	var _iceCreamFlavors = __webpack_require__(323);
 
-	var _sessions = __webpack_require__(322);
+	var _sessions = __webpack_require__(324);
 
-	var _reviews = __webpack_require__(324);
+	var _reviews = __webpack_require__(325);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -31811,7 +31971,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 317 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31837,7 +31997,7 @@
 	} // users reducer
 
 /***/ },
-/* 318 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31857,6 +32017,8 @@
 	var _iceCreams = __webpack_require__(304);
 
 	var iceCreamsActions = _interopRequireWildcard(_iceCreams);
+
+	var _reviews = __webpack_require__(308);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31885,6 +32047,9 @@
 	      return Object.keys(action.data);
 	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
 	      return state.concat(action.data.id);
+	    case _reviews.ADD_REVIEW_SUCCESS:
+	      debugger;
+	      return state;
 	    default:
 	      return state;
 	  }
@@ -31934,7 +32099,7 @@
 	});
 
 /***/ },
-/* 319 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31949,7 +32114,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _parlors = __webpack_require__(309);
+	var _parlors = __webpack_require__(311);
 
 	var parlorActions = _interopRequireWildcard(_parlors);
 
@@ -32031,7 +32196,7 @@
 	});
 
 /***/ },
-/* 320 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32120,7 +32285,7 @@
 	});
 
 /***/ },
-/* 321 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32209,7 +32374,7 @@
 	});
 
 /***/ },
-/* 322 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32282,8 +32447,7 @@
 	});
 
 /***/ },
-/* 323 */,
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

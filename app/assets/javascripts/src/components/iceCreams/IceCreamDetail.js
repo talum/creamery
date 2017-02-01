@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { showIceCream } from '../../actions/iceCreams'
+import NewReviewForm from '../reviews/NewReviewForm'
 
 class IceCreamDetail extends React.Component {
   componentWillMount() {
@@ -25,6 +26,7 @@ class IceCreamDetail extends React.Component {
           {iceCream.title}
           {iceCream.parlor}
           {iceCreamReviews.map((review) => review.title)}
+          <NewReviewForm iceCreamId={iceCream.id}/>
         </div>
       )
     }

@@ -1,6 +1,7 @@
 // ice creams reducer
 import { combineReducers } from 'redux'
 import * as iceCreamsActions from '../actions/iceCreams'
+import { ADD_REVIEW_SUCCESS } from '../actions/reviews'
 
 export function byId(state={}, action) {
   switch (action.type) {
@@ -22,6 +23,9 @@ function allIds(state=[], action) {
       return Object.keys(action.data)
     case iceCreamsActions.ADD_ICECREAM_SUCCESS: case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
       return state.concat(action.data.id)
+    case ADD_REVIEW_SUCCESS:
+        debugger
+      return state
     default:
       return state
   }
