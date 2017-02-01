@@ -8,9 +8,10 @@ class IceCreamDetail extends React.Component {
   }
 
   render() {
-    debugger
-    let iceCream = this.props.activeIceCream
-    if (this.props.activeIceCream.isLoading) {
+    let iceCream = this.props.activeIceCream.iceCream
+    let iceCreamReviews = iceCream.reviews
+
+    if (iceCream.isLoading) {
       return (<div>Loading</div>)
     } else {
       return(

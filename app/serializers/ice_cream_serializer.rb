@@ -1,4 +1,4 @@
 class IceCreamSerializer < ActiveModel::Serializer
-  attributes :id, :title, :parlor_id, :flavors, :ice_cream_flavors
+  attributes :id, :title, :parlor_id, :flavors, :ice_cream_flavors, :reviews
 
 end

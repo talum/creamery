@@ -70,7 +70,7 @@
 
 	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
 
-	var _IceCreamDetail = __webpack_require__(323);
+	var _IceCreamDetail = __webpack_require__(306);
 
 	var _IceCreamDetail2 = _interopRequireDefault(_IceCreamDetail);
 
@@ -82,11 +82,11 @@
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _loginPage = __webpack_require__(312);
+	var _loginPage = __webpack_require__(313);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(313);
+	var _store = __webpack_require__(314);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -30977,19 +30977,9 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _InputField = __webpack_require__(300);
-
-	var _InputField2 = _interopRequireDefault(_InputField);
-
-	var _SubmitButton = __webpack_require__(301);
-
-	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
-
 	var _iceCreams = __webpack_require__(304);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -30997,84 +30987,55 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var IceCreamForm = function (_React$Component) {
-	  _inherits(IceCreamForm, _React$Component);
+	var IceCreamDetail = function (_React$Component) {
+	  _inherits(IceCreamDetail, _React$Component);
 
-	  function IceCreamForm(props) {
-	    _classCallCheck(this, IceCreamForm);
+	  function IceCreamDetail() {
+	    _classCallCheck(this, IceCreamDetail);
 
-	    var _this = _possibleConstructorReturn(this, (IceCreamForm.__proto__ || Object.getPrototypeOf(IceCreamForm)).call(this, props));
-
-	    _this.state = _this.initialState(props);
-	    _this.handleChange = _this.handleChange.bind(_this);
-	    _this.handleSubmit = _this.handleSubmit.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, (IceCreamDetail.__proto__ || Object.getPrototypeOf(IceCreamDetail)).apply(this, arguments));
 	  }
 
-	  _createClass(IceCreamForm, [{
-	    key: 'initialState',
-	    value: function initialState(props) {
-	      return {
-	        title: '',
-	        flavors: '',
-	        parlorId: props.parlorId
-	      };
-	    }
-	  }, {
-	    key: 'handleChange',
-	    value: function handleChange(event) {
-	      this.setState(_defineProperty({}, event.target.name, event.target.value));
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(event) {
-	      event.preventDefault();
-	      this.props.dispatch((0, _iceCreams.addIceCream)(this.state));
-	      this.clearForm();
-	    }
-	  }, {
-	    key: 'clearForm',
-	    value: function clearForm() {
-	      this.setState(this.initialState(this.props));
+	  _createClass(IceCreamDetail, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.dispatch((0, _iceCreams.showIceCream)(this.props.routeParams.id));
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h2',
+	      var iceCream = this.props.activeIceCream.iceCream;
+	      var iceCreamReviews = iceCream.reviews;
+
+	      if (iceCream.isLoading) {
+	        return _react2.default.createElement(
+	          'div',
 	          null,
-	          'New Ice Cream Form'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.handleSubmit },
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "title",
-	            value: this.state.title,
-	            placeholder: "title",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "flavors",
-	            value: this.state.flavors,
-	            placeholder: "flavors",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
-	        )
-	      );
+	          'Loading'
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          iceCream.title,
+	          iceCream.parlor
+	        );
+	      }
 	    }
 	  }]);
 
-	  return IceCreamForm;
+	  return IceCreamDetail;
 	}(_react2.default.Component);
 
-	var NewIceCreamForm = (0, _reactRedux.connect)()(IceCreamForm);
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    activeIceCream: state.activeIceCream
+	  };
+	};
 
-	exports.default = NewIceCreamForm;
+	IceCreamDetail = (0, _reactRedux.connect)(mapStateToProps)(IceCreamDetail);
+
+	exports.default = IceCreamDetail;
 
 /***/ },
 /* 307 */
@@ -31407,7 +31368,7 @@
 
 	var _iceCreams = __webpack_require__(304);
 
-	var _NewIceCreamForm = __webpack_require__(306);
+	var _NewIceCreamForm = __webpack_require__(312);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
@@ -31526,6 +31487,123 @@
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
+	var _iceCreams = __webpack_require__(304);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var IceCreamForm = function (_React$Component) {
+	  _inherits(IceCreamForm, _React$Component);
+
+	  function IceCreamForm(props) {
+	    _classCallCheck(this, IceCreamForm);
+
+	    var _this = _possibleConstructorReturn(this, (IceCreamForm.__proto__ || Object.getPrototypeOf(IceCreamForm)).call(this, props));
+
+	    _this.state = _this.initialState(props);
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(IceCreamForm, [{
+	    key: 'initialState',
+	    value: function initialState(props) {
+	      return {
+	        title: '',
+	        flavors: '',
+	        parlorId: props.parlorId
+	      };
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      this.setState(_defineProperty({}, event.target.name, event.target.value));
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      this.props.dispatch((0, _iceCreams.addIceCream)(this.state));
+	      this.clearForm();
+	    }
+	  }, {
+	    key: 'clearForm',
+	    value: function clearForm() {
+	      this.setState(this.initialState(this.props));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'New Ice Cream Form'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "title",
+	            value: this.state.title,
+	            placeholder: "title",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "flavors",
+	            value: this.state.flavors,
+	            placeholder: "flavors",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return IceCreamForm;
+	}(_react2.default.Component);
+
+	var NewIceCreamForm = (0, _reactRedux.connect)()(IceCreamForm);
+
+	exports.default = NewIceCreamForm;
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(233);
+
+	var _InputField = __webpack_require__(300);
+
+	var _InputField2 = _interopRequireDefault(_InputField);
+
+	var _SubmitButton = __webpack_require__(301);
+
+	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
+
 	var _sessions = __webpack_require__(271);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31613,7 +31691,7 @@
 	exports.default = (0, _reactRedux.connect)()(LoginPage);
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31624,11 +31702,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(314);
+	var _reduxThunk = __webpack_require__(315);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(315);
+	var _reducers = __webpack_require__(316);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -31639,7 +31717,7 @@
 	exports.default = store;
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31667,7 +31745,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31678,19 +31756,19 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(316);
+	var _users = __webpack_require__(317);
 
-	var _iceCreams = __webpack_require__(317);
+	var _iceCreams = __webpack_require__(318);
 
-	var _parlors = __webpack_require__(318);
+	var _parlors = __webpack_require__(319);
 
-	var _flavors = __webpack_require__(319);
+	var _flavors = __webpack_require__(320);
 
-	var _iceCreamFlavors = __webpack_require__(320);
+	var _iceCreamFlavors = __webpack_require__(321);
 
-	var _sessions = __webpack_require__(321);
+	var _sessions = __webpack_require__(322);
 
-	var _activeIceCream = __webpack_require__(322);
+	var _activeIceCream = __webpack_require__(323);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -31705,7 +31783,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31731,7 +31809,7 @@
 	} // users reducer
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31828,7 +31906,7 @@
 	});
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31925,7 +32003,7 @@
 	});
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32014,7 +32092,7 @@
 	});
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32103,7 +32181,7 @@
 	});
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32176,7 +32254,7 @@
 	});
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32238,83 +32316,6 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
-
-/***/ },
-/* 323 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(233);
-
-	var _iceCreams = __webpack_require__(304);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var IceCreamDetail = function (_React$Component) {
-	  _inherits(IceCreamDetail, _React$Component);
-
-	  function IceCreamDetail() {
-	    _classCallCheck(this, IceCreamDetail);
-
-	    return _possibleConstructorReturn(this, (IceCreamDetail.__proto__ || Object.getPrototypeOf(IceCreamDetail)).apply(this, arguments));
-	  }
-
-	  _createClass(IceCreamDetail, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.props.dispatch((0, _iceCreams.showIceCream)(this.props.routeParams.id));
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      debugger;
-	      var iceCream = this.props.activeIceCream;
-	      if (this.props.activeIceCream.isLoading) {
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          'Loading'
-	        );
-	      } else {
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          iceCream.title,
-	          iceCream.parlor
-	        );
-	      }
-	    }
-	  }]);
-
-	  return IceCreamDetail;
-	}(_react2.default.Component);
-
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    activeIceCream: state.activeIceCream
-	  };
-	};
-
-	IceCreamDetail = (0, _reactRedux.connect)(mapStateToProps)(IceCreamDetail);
-
-	exports.default = IceCreamDetail;
 
 /***/ }
 /******/ ]);
