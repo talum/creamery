@@ -5,7 +5,7 @@ import { parlors } from './reducers/parlors'
 import { flavors } from './reducers/flavors'
 import { iceCreamFlavors } from './reducers/iceCreamFlavors'
 import { sessions } from './reducers/sessions'
-import { activeIceCream } from './reducers/activeIceCream'
+import { reviews } from './reducers/reviews'
 
 const creameryApp = combineReducers({
   users,
@@ -14,7 +14,7 @@ const creameryApp = combineReducers({
   parlors,
   flavors,
   iceCreamFlavors,
-  activeIceCream
+  reviews
 })
 
 export default creameryApp

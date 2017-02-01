@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { showParlors } from '../../actions/parlors'
 import { showIceCreams } from '../../actions/iceCreams'
@@ -32,7 +33,7 @@ class Parlor extends React.Component {
           </h1>
           <ul>
             
-            { iceCreams.map(iceCream => (<li key={iceCream.id}>{iceCream.title}</li>)) }
+            { iceCreams.map(iceCream => (<li key={iceCream.id}><Link to={`/ice-creams/${iceCream.id}`}>{iceCream.title}</Link></li>)) }
           </ul>
           <NewIceCreamForm parlorId={parlorId}/>
         </div>
