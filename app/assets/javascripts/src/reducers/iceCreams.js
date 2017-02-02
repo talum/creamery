@@ -12,6 +12,15 @@ export function byId(state={}, action) {
         ...state, 
         [action.data.id]: action.data
       }
+    case ADD_REVIEW_SUCCESS:
+      let iceCream = state[action.data.ice_cream_id]
+      let modifiedIceCream = Object.assign({}, iceCream)
+      modifiedIceCream.review_ids = modifiedIceCream.review_ids.concat(action.data.id)
+
+      return {
+        ...state, 
+        [iceCream.id]: modifiedIceCream  
+      }
     default:
       return state
   }
@@ -23,9 +32,6 @@ function allIds(state=[], action) {
       return Object.keys(action.data)
     case iceCreamsActions.ADD_ICECREAM_SUCCESS: case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
       return state.concat(action.data.id)
-    case ADD_REVIEW_SUCCESS:
-        debugger
-      return state
     default:
       return state
   }

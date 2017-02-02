@@ -31006,8 +31006,6 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      this.props.dispatch((0, _iceCreams.showIceCream)(this.props.routeParams.id));
-	      // fetch the data for that specific ice cream
-	      // have associated resource reducers respond   
 	      // should probably move this to the route handler
 	    }
 	  }, {
@@ -31027,7 +31025,7 @@
 	        var _ret = function () {
 	          var reviews = _this2.props.reviews;
 	          var iceCream = iceCreams.byId[_this2.props.routeParams.id];
-	          var iceCreamReviews = iceCream.reviews.map(function (reviewId) {
+	          var iceCreamReviews = iceCream.review_ids.map(function (reviewId) {
 	            return reviews.byId[reviewId];
 	          });
 
@@ -31037,6 +31035,11 @@
 	              null,
 	              iceCream.title,
 	              iceCream.parlor,
+	              _react2.default.createElement(
+	                'h2',
+	                null,
+	                'Reviews'
+	              ),
 	              iceCreamReviews.map(function (review) {
 	                return review.title;
 	              }),
@@ -32033,6 +32036,12 @@
 	      return action.data;
 	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
 	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
+	    case _reviews.ADD_REVIEW_SUCCESS:
+	      var iceCream = state[action.data.ice_cream_id];
+	      var modifiedIceCream = Object.assign({}, iceCream);
+	      modifiedIceCream.review_ids = modifiedIceCream.review_ids.concat(action.data.id);
+
+	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));
 	    default:
 	      return state;
 	  }
@@ -32047,9 +32056,6 @@
 	      return Object.keys(action.data);
 	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
 	      return state.concat(action.data.id);
-	    case _reviews.ADD_REVIEW_SUCCESS:
-	      debugger;
-	      return state;
 	    default:
 	      return state;
 	  }
@@ -32457,7 +32463,9 @@
 	});
 	exports.reviews = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // reviews reducer
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // reviews reducer
 
 
 	exports.byId = byId;
@@ -32466,7 +32474,11 @@
 
 	var _iceCreams = __webpack_require__(304);
 
+	var _reviews2 = __webpack_require__(308);
+
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function byId() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -32482,6 +32494,10 @@
 	        });
 	        return {
 	          v: nextState
+	        };
+	      case _reviews2.ADD_REVIEW_SUCCESS:
+	        return {
+	          v: _extends({}, state, _defineProperty({}, action.data.id, action.data))
 	        };
 	      default:
 	        return {
@@ -32504,6 +32520,8 @@
 	        return review.id;
 	      });
 	      return [].concat(_toConsumableArray(state), [reviewIds]);
+	    case _reviews2.ADD_REVIEW_SUCCESS:
+	      return [].concat(_toConsumableArray(state), [action.data.id]);
 	    default:
 	      return state;
 	  }
@@ -32514,6 +32532,12 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
+	    case _reviews2.ADD_REVIEW:
+	      return true;
+	    case _reviews2.ADD_REVIEW_SUCCESS:
+	      return false;
+	    case _reviews2.ADD_REVIEW_ERROR:
+	      return false;
 	    default:
 	      return state;
 	  }
@@ -32524,6 +32548,8 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
+	    case _reviews2.ADD_REVIEW_ERROR:
+	      return state.concat(action.message);
 	    default:
 	      return state;
 	  }

@@ -6,8 +6,6 @@ import NewReviewForm from '../reviews/NewReviewForm'
 class IceCreamDetail extends React.Component {
   componentWillMount() {
     this.props.dispatch(showIceCream(this.props.routeParams.id))
-    // fetch the data for that specific ice cream
-    // have associated resource reducers respond   
     // should probably move this to the route handler
   }
 
@@ -19,12 +17,13 @@ class IceCreamDetail extends React.Component {
     } else {
       let reviews = this.props.reviews
       let iceCream = iceCreams.byId[this.props.routeParams.id]
-      let iceCreamReviews = iceCream.reviews.map((reviewId) => reviews.byId[reviewId])
+      const iceCreamReviews = iceCream.review_ids.map((reviewId) => reviews.byId[reviewId] )
 
       return(
         <div>
           {iceCream.title}
           {iceCream.parlor}
+          <h2>Reviews</h2>
           {iceCreamReviews.map((review) => review.title)}
           <NewReviewForm iceCreamId={iceCream.id}/>
         </div>
