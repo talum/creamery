@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { showParlors } from '../../actions/parlors'
 import { showIceCreams } from '../../actions/iceCreams'
 
+import Loader from '../sharedComponents/Loader'
 import NewIceCreamForm from '../../components/iceCreams/NewIceCreamForm'
 
 class Parlor extends React.Component {
@@ -21,7 +22,7 @@ class Parlor extends React.Component {
     const parlor = this.props.parlors.byId[parlorId]
 
     if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
-      return(<div>"loading"</div>)
+      return(<Loader />)
     } else if (this.props.iceCreams.isLoading){
       return(<div>"error"</div>)
     }else {

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { showParlors } from '../../actions/parlors'
 import NewParlorForm from '../parlors/NewParlorForm'
+import Loader from '../sharedComponents/Loader'
 
 class Parlors extends React.Component {
   componentDidMount() {
@@ -17,7 +18,7 @@ class Parlors extends React.Component {
     return(
       <div>
         <h1>All the Parlors</h1>
-        {this.props.loading && "loading"}
+        { this.props.parlors.isLoading && <Loader /> }
         <ul>
           {parlors.map((parlor) => <li key={parlor.id}><Link to={`/parlors/${parlor.id}`}>{parlor.name}</Link></li>)}
         </ul>

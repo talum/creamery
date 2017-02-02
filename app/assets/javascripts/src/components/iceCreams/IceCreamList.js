@@ -1,6 +1,7 @@
 import React from 'react'
 import { showIceCreams } from '../../actions/iceCreams'
 import IceCreamListItem from '../iceCreams/IceCreamListItem'
+import Loader from '../sharedComponents/Loader'
 
 class IceCreamList extends React.Component {
   componentDidMount() {
@@ -13,13 +14,15 @@ class IceCreamList extends React.Component {
     let iceCreams = Object.values(this.props.iceCreams.byId)
     let iceCreamListItems = iceCreams.map((iceCream) => <IceCreamListItem key={iceCream.id} iceCream={iceCream}/>)
 
-    return (
-      <div>
-        {this.props.loading && "loading"}
-        {iceCreamListItems}
-      </div>
-    )
-  }
+    if (this.props.iceCreams.isLoading) {
+      return (<Loader />)
+    } else {
+      return (
+        <div>
+          {iceCreamListItems}
+        </div>
+      )
+    }
 }
 
 export default IceCreamList

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { showIceCream } from '../../actions/iceCreams'
 import NewReviewForm from '../reviews/NewReviewForm'
+import Loader from '../sharedComponents/Loader'
 
 class IceCreamDetail extends React.Component {
   componentWillMount() {
@@ -13,7 +14,7 @@ class IceCreamDetail extends React.Component {
     let iceCreams = this.props.iceCreams
 
     if (iceCreams.isLoading) {
-      return (<div>Loading</div>)
+      return (<Loader />)
     } else {
       let reviews = this.props.reviews
       let iceCream = iceCreams.byId[this.props.routeParams.id]
