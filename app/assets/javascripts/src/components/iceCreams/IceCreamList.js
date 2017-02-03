@@ -23,6 +23,7 @@ class IceCreamList extends React.Component {
         </div>
       )
     }
+  }
 }
 
 export default IceCreamList

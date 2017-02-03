@@ -22,6 +22,9 @@ export function showIceCream(id) {
           type: RECEIVE_ICECREAM_SUCCESS,
           data: response.data
         })
+        // because this loads associated data that's updated in different
+        // actions, we have a race condition. 
+        // need to account for this
       },
       (error) => {
         dispatch({

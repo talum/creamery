@@ -30740,7 +30740,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _IceCreamList = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../iceCreams/IceCreamList\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _IceCreamList = __webpack_require__(303);
 
 	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
 
@@ -30758,7 +30758,81 @@
 	exports.default = IceCreamListContainer;
 
 /***/ },
-/* 303 */,
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _iceCreams = __webpack_require__(305);
+
+	var _IceCreamListItem = __webpack_require__(326);
+
+	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
+
+	var _Loader = __webpack_require__(308);
+
+	var _Loader2 = _interopRequireDefault(_Loader);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var IceCreamList = function (_React$Component) {
+	  _inherits(IceCreamList, _React$Component);
+
+	  function IceCreamList() {
+	    _classCallCheck(this, IceCreamList);
+
+	    return _possibleConstructorReturn(this, (IceCreamList.__proto__ || Object.getPrototypeOf(IceCreamList)).apply(this, arguments));
+	  }
+
+	  _createClass(IceCreamList, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!this.props.iceCreams.allIds.length) {
+	        this.props.dispatch((0, _iceCreams.showIceCreams)());
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var iceCreams = Object.values(this.props.iceCreams.byId);
+	      var iceCreamListItems = iceCreams.map(function (iceCream) {
+	        return _react2.default.createElement(_IceCreamListItem2.default, { key: iceCream.id, iceCream: iceCream });
+	      });
+
+	      if (this.props.iceCreams.isLoading) {
+	        return _react2.default.createElement(_Loader2.default, null);
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          iceCreamListItems
+	        );
+	      }
+	    }
+	  }]);
+
+	  return IceCreamList;
+	}(_react2.default.Component);
+
+	exports.default = IceCreamList;
+
+/***/ },
 /* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -30902,6 +30976,9 @@
 	        type: RECEIVE_ICECREAM_SUCCESS,
 	        data: response.data
 	      });
+	      // because this loads associated data that's updated in different
+	      // actions, we have a race condition. 
+	      // need to account for this
 	    }, function (error) {
 	      dispatch({
 	        type: RECEIVE_ICECREAM_ERROR,
@@ -32475,6 +32552,57 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
+
+/***/ },
+/* 326 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var IceCreamListItem = function (_React$Component) {
+	  _inherits(IceCreamListItem, _React$Component);
+
+	  function IceCreamListItem() {
+	    _classCallCheck(this, IceCreamListItem);
+
+	    return _possibleConstructorReturn(this, (IceCreamListItem.__proto__ || Object.getPrototypeOf(IceCreamListItem)).apply(this, arguments));
+	  }
+
+	  _createClass(IceCreamListItem, [{
+	    key: 'render',
+	    value: function render() {
+	      var iceCream = this.props.iceCream;
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        iceCream.title,
+	        iceCream.parlor
+	      );
+	    }
+	  }]);
+
+	  return IceCreamListItem;
+	}(_react2.default.Component);
+
+	exports.default = IceCreamListItem;
 
 /***/ }
 /******/ ]);
