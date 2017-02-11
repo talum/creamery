@@ -9,7 +9,7 @@ module Api
       end
 
       def create
-        @ice_cream = IceCream.new(title: params[:title], parlor_id: params[:parlorId])
+        @ice_cream = IceCream.new(title: params[:title], parlor_id: params[:parlorId], image: params[:image])
         flavor_titles = params[:flavors].split(",").map(&:strip)
         flavors = flavor_titles.map{|flavor_title| Flavor.find_or_initialize_by(title: flavor_title)}
         flavors.each do |flavor| 
