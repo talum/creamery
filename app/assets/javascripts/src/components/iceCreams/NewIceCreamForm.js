@@ -10,12 +10,15 @@ class IceCreamForm extends React.Component {
     this.state = this.initialState(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleImageChange = this.handleImageChange.bind(this)
   }
 
   initialState(props) {
     return {
       title: '',
       flavors: '',
+      imageName: '',
+      imageFile: '',
       parlorId: props.parlorId
     }
   }
@@ -24,6 +27,21 @@ class IceCreamForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+  }
+
+  handleImageChange(event) {
+    let reader    = new FileReader()
+    let image     = event.target.files[0]
+    let imageName = event.target.value
+
+    reader.readAsDataURL(image)
+    reader.onloadend = () => {
+      this.setState({
+        imageName: imageName,
+        imageFile: reader.result
+      })
+    }
+
   }
 
   handleSubmit(event) {
@@ -53,6 +71,14 @@ class IceCreamForm extends React.Component {
             placeholder={"flavors"}
             handleChange={this.handleChange}
             />
+          <InputField
+            inputType={"file"}
+            handleChange={this.handleImageChange}
+            />
+          <div>
+            //preview component
+            <img src={this.state.imageFile}/>
+          </div>
            <SubmitButton handleSubmit={this.handleSubmit}/>
         </form>
       </div>
