@@ -30959,7 +30959,8 @@
 	        'div',
 	        null,
 	        iceCream.title,
-	        iceCream.parlor
+	        iceCream.parlor,
+	        _react2.default.createElement('img', { src: iceCream.image_url })
 	      );
 	    }
 	  }]);

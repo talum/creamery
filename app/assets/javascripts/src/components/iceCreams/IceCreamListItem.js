@@ -7,6 +7,7 @@ class IceCreamListItem extends React.Component {
       <div>
         {iceCream.title}
         {iceCream.parlor}
+        <img src={iceCream.image_url} />
       </div>
     )
   }
