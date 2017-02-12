@@ -36,8 +36,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'active_model_serializers', '~> 0.10.0'
-gem 'carrierwave'
-gem 'carrierwave-base64'
+
+#for image upload
+gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-base64', '~> 2.4.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -45,6 +47,9 @@ gem 'carrierwave-base64'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'faker'
 end
 
 group :development do
