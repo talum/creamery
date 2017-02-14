@@ -10,8 +10,14 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
-@import "materialize";
 
+@import 'global/_reset.scss';
+@import 'global/_vars.scss';
+@import 'global/_special.scss';
+@import 'global/_typography.scss';
+@import 'site-layout/_site-layout.scss';
+@import 'grid/_flex-grid.scss';
+@import 'components/_card.scss';
+@import 'components/_loader.scss';
+@import 'components/_nav.scss';

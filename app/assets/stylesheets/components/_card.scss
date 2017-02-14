@@ -1,0 +1,29 @@
+.card {
+  border: 1px solid $purple;
+
+  .card__header {
+    padding: $padding--m;
+  }
+
+  .card__body {
+    padding: $padding--m;
+  }
+  
+  .card__footer {
+    padding: $padding--s;
+  }
+}
+
+.card--mosaic {
+  .card__header {
+
+  }
+  .card__body {
+
+  }
+  .card__footer {
+    background-color: $purple-light;
+  } 
+
+}
+

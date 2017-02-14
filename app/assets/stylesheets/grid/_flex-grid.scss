@@ -1,0 +1,8 @@
+.flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  .flex-grid__item {
+    width: 33.33%;
+  }
+}

@@ -28720,8 +28720,12 @@
 	    _react2.default.createElement(_Nav2.default, null),
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'container' },
-	      props.children
+	      { className: 'site-layout' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'site-layout__inner' },
+	        props.children
+	      )
 	    )
 	  );
 	};
@@ -28780,7 +28784,7 @@
 	    value: function loggedInLinks() {
 	      return _react2.default.createElement(
 	        'li',
-	        { onClick: this.logOut },
+	        { className: 'nav__link', onClick: this.logOut },
 	        _react2.default.createElement(
 	          'a',
 	          { href: '#' },
@@ -28796,7 +28800,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'li',
-	          null,
+	          { className: 'nav__link' },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/users' },
@@ -28805,7 +28809,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'li',
-	          null,
+	          { className: 'nav__link' },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/login' },
@@ -28822,10 +28826,10 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'nav-wrapper deep-purple darken-4' },
+	          { className: 'nav' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'brand-logo' },
+	            { className: 'nav__logo' },
 	            _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: '/' },
@@ -28834,10 +28838,10 @@
 	          ),
 	          _react2.default.createElement(
 	            'ul',
-	            { id: 'nav-mobile', className: 'right hide-on-med-and-down' },
+	            { className: 'nav__items' },
 	            _react2.default.createElement(
 	              'li',
-	              null,
+	              { className: 'nav__link' },
 	              _react2.default.createElement(
 	                _reactRouter.Link,
 	                { to: '/parlors' },
@@ -31449,16 +31453,38 @@
 	          this.props.parlors.errors.join(", ")
 	        ),
 	        _react2.default.createElement(
-	          'ul',
-	          null,
+	          'div',
+	          { className: 'flex-grid' },
 	          parlors.map(function (parlor) {
 	            return _react2.default.createElement(
-	              'li',
-	              { key: parlor.id },
+	              'div',
+	              { key: parlor.id, className: 'flex-grid__item' },
 	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/parlors/' + parlor.id },
-	                parlor.name
+	                'div',
+	                { className: 'card card--mosaic' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'card__header' },
+	                  _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/parlors/' + parlor.id },
+	                    _react2.default.createElement(
+	                      'h2',
+	                      { className: 'heading heading--level-1 heading--color-blue' },
+	                      parlor.name
+	                    )
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'card__body' },
+	                  'Image goes here'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'card__footer' },
+	                  'Footer goes here'
+	                )
 	              )
 	            );
 	          })

@@ -1,0 +1,32 @@
+
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $purple;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .nav__inner {
+    padding: $padding--l; 
+  }
+
+  .nav__logo { 
+    padding: $padding--s;
+    color: $white;
+    flex: 2;
+  }
+
+  .nav__items {
+    display: flex;
+    justify-content: space-between;
+
+    .nav__link {
+      color: $white;
+      padding-left: $padding--s;
+      padding-right: $padding--s;
+    }
+  }
+}
