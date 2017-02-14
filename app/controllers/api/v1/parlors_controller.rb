@@ -9,14 +9,19 @@ module Api
       end
 
       def create
-        @parlor = Parlor.create(
+        @parlor = Parlor.new(
           name: params[:parlor][:name],
-          street_address: params[:parlor][:streetAddress],
+          street_address: params[:parlor][:street_address],
           city: params[:parlor][:city],
           state: params[:parlor][:state],
-          zip_code: params[:parlor][:zipCode]
+          zip_code: params[:parlor][:zip_code]
         )
-        render json: @parlor
+
+        if @parlor.save
+          render json: @parlor
+        else
+          render json: @parlor.errors
+        end
       end
 
       def update

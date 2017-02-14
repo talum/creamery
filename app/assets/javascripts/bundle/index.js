@@ -31490,10 +31490,10 @@
 	    value: function initialState() {
 	      return {
 	        name: '',
-	        streetAddress: '',
+	        street_address: '',
 	        city: '',
 	        state: '',
-	        zipCode: '',
+	        zip_code: '',
 	        chain: false
 	      };
 	    }
@@ -31535,8 +31535,8 @@
 	            handleChange: this.handleChange
 	          }),
 	          _react2.default.createElement(_InputField2.default, {
-	            name: "streetAddress",
-	            value: this.state.streetAddress,
+	            name: "street_address",
+	            value: this.state.street_address,
 	            placeholder: "Street Address",
 	            handleChange: this.handleChange
 	          }),
@@ -31553,8 +31553,8 @@
 	            handleChange: this.handleChange
 	          }),
 	          _react2.default.createElement(_InputField2.default, {
-	            name: "zipCode",
-	            value: this.state.zipCode,
+	            name: "zip_code",
+	            value: this.state.zip_code,
 	            placeholder: "Zipcode",
 	            handleChange: this.handleChange
 	          }),

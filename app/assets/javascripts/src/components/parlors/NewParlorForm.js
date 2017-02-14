@@ -15,10 +15,10 @@ class ParlorForm extends React.Component {
   initialState() {
     return {
       name: '',
-      streetAddress: '',
+      street_address: '',
       city: '',
       state: '',
-      zipCode: '',
+      zip_code: '',
       chain: false
     }
   }
@@ -51,8 +51,8 @@ class ParlorForm extends React.Component {
             handleChange={this.handleChange}
           />
           <InputField 
-            name={"streetAddress"}
-            value={this.state.streetAddress}
+            name={"street_address"}
+            value={this.state.street_address}
             placeholder={"Street Address"}
             handleChange={this.handleChange}
           />
@@ -69,8 +69,8 @@ class ParlorForm extends React.Component {
             handleChange={this.handleChange}
           />
           <InputField 
-            name={"zipCode"}
-            value={this.state.zipCode}
+            name={"zip_code"}
+            value={this.state.zip_code}
             placeholder={"Zipcode"}
             handleChange={this.handleChange}
           />
