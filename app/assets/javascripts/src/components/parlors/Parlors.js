@@ -19,9 +19,28 @@ class Parlors extends React.Component {
       <div>
         <h1>All the Parlors</h1>
         { this.props.parlors.isLoading && <Loader /> }
-        <ul>
-          {parlors.map((parlor) => <li key={parlor.id}><Link to={`/parlors/${parlor.id}`}>{parlor.name}</Link></li>)}
-        </ul>
+        <div className="flex-grid">
+          { parlors.map((parlor) => {
+              return (
+                <div key={parlor.id} className="flex-grid__item">
+                  <div className="card card--mosaic">
+                    <div className="card__header">
+                      <Link to={`/parlors/${parlor.id}`}>
+                        <h2 className="heading heading--level-1 heading--color-blue">{parlor.name}</h2>
+                      </Link>
+                    </div>
+                    <div className="card__body">
+                      Image goes here
+                    </div>
+                    <div className="card__footer">
+                      Footer goes here
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+          }
+        </div>
         
         <NewParlorForm />
       </div>

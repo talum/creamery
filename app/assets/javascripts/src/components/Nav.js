@@ -14,14 +14,14 @@ class Nav extends React.Component {
   }
 
   loggedInLinks() {
-    return (<li onClick={this.logOut}><a href="#">Logout</a></li>)
+    return (<li className="nav__link" onClick={this.logOut}><a href="#">Logout</a></li>)
   }
 
   loggedOutLinks() {
     return (
       <span>
-        <li><Link to='/users'>Sign Up</Link></li>
-        <li><Link to='/login'>Login</Link></li>
+        <li className="nav__link"><Link to='/users'>Sign Up</Link></li>
+        <li className="nav__link"><Link to='/login'>Login</Link></li>
       </span>
     )
   }
@@ -29,10 +29,10 @@ class Nav extends React.Component {
   render() {
     return (
       <nav>
-        <div className="nav-wrapper deep-purple darken-4">
-          <div className="brand-logo"><Link to='/'>Creamery</Link></div>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><Link to='/parlors'>Parlors</Link></li>
+        <div className="nav">
+          <div className="nav__logo"><Link to='/'>Creamery</Link></div>
+          <ul className="nav__items">
+            <li className="nav__link"><Link to='/parlors'>Parlors</Link></li>
             { this.props.loggedIn ? this.loggedInLinks() : this.loggedOutLinks() }
           </ul>
         </div>

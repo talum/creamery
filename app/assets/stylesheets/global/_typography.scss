@@ -1,0 +1,18 @@
+//font sizes
+$font-size--s: 8px;
+$font-size--m: 16px;
+$font-size--l: 32px;
+$font-size--xl: 64px;
+
+.heading {}
+
+.heading--level-1 {
+  font-size: $font-size--l;
+} 
+
+.heading--color-white { color: $white; }
+.heading--color-blue  { color: $blue; }
+
+p {
+  font-size: $font-size--m;
+}
