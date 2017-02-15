@@ -7,7 +7,7 @@ function byId(state={}, action) {
   switch (action.type) {
     case parlorActions.RECEIVE_PARLORS_SUCCESS:
       return action.data
-    case parlorActions.ADD_PARLOR:
+    case parlorActions.ADD_PARLOR_SUCCESS:
       return {
         ...state,
         [action.data.id]: action.data
@@ -33,7 +33,7 @@ function allIds(state=[], action) {
   switch (action.type) {
     case parlorActions.RECEIVE_PARLORS_SUCCESS:
       return Object.keys(action.data)
-    case parlorActions.ADD_PARLOR:
+    case parlorActions.ADD_PARLOR_SUCCESS:
       return state.concat(action.data.id)
     default:
       return state
@@ -48,6 +48,12 @@ function isLoading(state=true, action) {
       return false
     case parlorActions.RECEIVE_PARLORS_ERROR:
       return false
+    case parlorActions.ADD_PARLOR:
+      return true
+    case parlorActions.ADD_PARLOR_SUCCESS:
+      return false
+    case parlorActions.ADD_PARLOR_ERROR:
+      return false
     default:
       return state
   }
@@ -56,7 +62,12 @@ function isLoading(state=true, action) {
 function errors(state=[], action) {
   switch (action.type) {
     case parlorActions.RECEIVE_PARLORS_ERROR:
-      return state.concat(action.message)
+      return state.concat(action.errors)
+    case parlorActions.ADD_PARLOR_ERROR:
+        debugger
+      return state.concat(action.errors)
+    case parlorActions.ADD_PARLOR_SUCCESS:
+      return []
     default:
       return state
   }

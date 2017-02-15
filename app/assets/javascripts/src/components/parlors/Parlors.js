@@ -19,6 +19,9 @@ class Parlors extends React.Component {
       <div>
         <h1>All the Parlors</h1>
         { this.props.parlors.isLoading && <Loader /> }
+        <div>
+          { this.props.parlors.errors.join(", ") }
+        </div>
         <ul>
           {parlors.map((parlor) => <li key={parlor.id}><Link to={`/parlors/${parlor.id}`}>{parlor.name}</Link></li>)}
         </ul>

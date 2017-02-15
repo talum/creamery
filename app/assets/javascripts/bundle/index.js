@@ -31357,6 +31357,11 @@
 	        ),
 	        this.props.parlors.isLoading && _react2.default.createElement(_Loader2.default, null),
 	        _react2.default.createElement(
+	          'div',
+	          null,
+	          this.props.parlors.errors.join(", ")
+	        ),
+	        _react2.default.createElement(
 	          'ul',
 	          null,
 	          parlors.map(function (parlor) {
@@ -31390,7 +31395,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_PARLOR = exports.SHOW_PARLORS = exports.RECEIVE_PARLORS_ERROR = exports.RECEIVE_PARLORS_SUCCESS = exports.REQUEST_PARLORS = undefined;
+	exports.ADD_PARLOR_ERROR = exports.ADD_PARLOR_SUCCESS = exports.ADD_PARLOR = exports.SHOW_PARLORS = exports.RECEIVE_PARLORS_ERROR = exports.RECEIVE_PARLORS_SUCCESS = exports.REQUEST_PARLORS = undefined;
 	exports.showParlors = showParlors;
 	exports.addParlor = addParlor;
 
@@ -31402,6 +31407,8 @@
 	var RECEIVE_PARLORS_ERROR = exports.RECEIVE_PARLORS_ERROR = 'RECEIVE_PARLORS_ERROR';
 	var SHOW_PARLORS = exports.SHOW_PARLORS = 'SHOW_PARLORS';
 	var ADD_PARLOR = exports.ADD_PARLOR = 'ADD_PARLOR';
+	var ADD_PARLOR_SUCCESS = exports.ADD_PARLOR_SUCCESS = 'ADD_PARLOR_SUCCESS';
+	var ADD_PARLOR_ERROR = exports.ADD_PARLOR_ERROR = 'ADD_PARLOR_ERROR';
 
 	function showParlors() {
 	  return function (dispatch) {
@@ -31424,10 +31431,18 @@
 
 	function addParlor(parlor) {
 	  return function (dispatch) {
+	    dispatch({
+	      type: ADD_PARLOR
+	    });
 	    return (0, _creameryApi.postParlors)(parlor).then(function (response) {
 	      dispatch({
-	        type: ADD_PARLOR,
+	        type: ADD_PARLOR_SUCCESS,
 	        data: response.data
+	      });
+	    }).catch(function (error) {
+	      dispatch({
+	        type: ADD_PARLOR_ERROR,
+	        errors: error.response.data.errors
 	      });
 	    });
 	  };
@@ -32210,7 +32225,7 @@
 	  switch (action.type) {
 	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
 	      return action.data;
-	    case parlorActions.ADD_PARLOR:
+	    case parlorActions.ADD_PARLOR_SUCCESS:
 	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
 	    case _iceCreams.ADD_ICECREAM_SUCCESS:
 	      var parlorId = action.data.parlor_id;
@@ -32232,7 +32247,7 @@
 	  switch (action.type) {
 	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
 	      return Object.keys(action.data);
-	    case parlorActions.ADD_PARLOR:
+	    case parlorActions.ADD_PARLOR_SUCCESS:
 	      return state.concat(action.data.id);
 	    default:
 	      return state;
@@ -32250,6 +32265,12 @@
 	      return false;
 	    case parlorActions.RECEIVE_PARLORS_ERROR:
 	      return false;
+	    case parlorActions.ADD_PARLOR:
+	      return true;
+	    case parlorActions.ADD_PARLOR_SUCCESS:
+	      return false;
+	    case parlorActions.ADD_PARLOR_ERROR:
+	      return false;
 	    default:
 	      return state;
 	  }
@@ -32261,7 +32282,12 @@
 
 	  switch (action.type) {
 	    case parlorActions.RECEIVE_PARLORS_ERROR:
-	      return state.concat(action.message);
+	      return state.concat(action.errors);
+	    case parlorActions.ADD_PARLOR_ERROR:
+	      debugger;
+	      return state.concat(action.errors);
+	    case parlorActions.ADD_PARLOR_SUCCESS:
+	      return [];
 	    default:
 	      return state;
 	  }

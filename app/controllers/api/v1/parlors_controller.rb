@@ -20,7 +20,7 @@ module Api
         if @parlor.save
           render json: @parlor
         else
-          render json: @parlor.errors
+          render json: { errors: @parlor.errors.full_messages }, status: 422
         end
       end
 
