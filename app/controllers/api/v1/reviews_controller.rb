@@ -4,8 +4,12 @@ module Api
 
       def create
         @review = Review.create(review_params.merge({eater_id: current_user.eater.id}))
-        @review.save
-        render json: @review
+
+        if @review.save
+          render json: @review
+        else
+          render json: { errors: @review.errors.full_messages }, status: 422
+        end
       end
 
       def update

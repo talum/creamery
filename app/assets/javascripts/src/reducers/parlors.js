@@ -64,7 +64,6 @@ function errors(state=[], action) {
     case parlorActions.RECEIVE_PARLORS_ERROR:
       return state.concat(action.errors)
     case parlorActions.ADD_PARLOR_ERROR:
-        debugger
       return state.concat(action.errors)
     case parlorActions.ADD_PARLOR_SUCCESS:
       return []

@@ -16,18 +16,24 @@ module Api
           @ice_cream.flavors << flavor
         end
 
-        @ice_cream.save
-
-        render json: @ice_cream
+        if @ice_cream.save
+          render json: @ice_cream
+        else
+          render json: { errors: @ice_cream.errors.full_messages }, status: 422
+        end
       end
 
       def update
       end
 
       def show
-        @ice_cream = IceCream.find(params[:id])
+        @ice_cream = IceCream.find_by(id: params[:id])
 
-        render json: @ice_cream
+        if @ice_cream
+          render json: @ice_cream
+        else
+          render json: { errors: "Ice cream not found" }, status: 404
+        end
       end
     end
   end

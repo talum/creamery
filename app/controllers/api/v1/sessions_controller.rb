@@ -10,7 +10,7 @@ module Api
           jwt = Auth.issue({user: user.id})
           render json: { jwt: jwt }
         else
-          render json: { error: 'No user matches that email and password combination' }
+          render json: { errors: 'No user matches that email and password combination' }, status: 422
         end
       end
 

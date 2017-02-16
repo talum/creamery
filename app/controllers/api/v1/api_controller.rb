@@ -15,7 +15,7 @@ module Api
       end
 
       def authenticate
-        render json: { error: "unauthorized", status: 401 } unless logged_in?
+        render json: { errors: "unauthorized" }, status: 402 unless logged_in?
       end
 
       def as_nested_hash(klass)

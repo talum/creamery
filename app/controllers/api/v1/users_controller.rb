@@ -7,9 +7,12 @@ module Api
         @user = User.new(user_params)
         @user.build_eater
         @user.build_commentor
-        @user.save
 
-        render json: @user
+        if  @user.save
+          render json: @user
+        else
+          render json: { errors: @user.errors.full_messages }, status: 422
+        end
       end
 
     private
