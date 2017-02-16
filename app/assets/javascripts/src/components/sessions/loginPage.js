@@ -39,6 +39,7 @@ class LoginPage extends React.Component {
     return(
       <div>
         <h1>Login</h1>
+        { this.props.sessions.errors }
         <form onSubmit={this.handleSubmit}>
             <InputField
               name={"email"}
@@ -60,4 +61,10 @@ class LoginPage extends React.Component {
   }
 }
 
-export default connect()(LoginPage)
+const mapStateToProps = (state) => {
+  return {
+    sessions: state.sessions
+  }
+}
+
+export default connect(mapStateToProps, null)(LoginPage)

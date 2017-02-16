@@ -9,7 +9,7 @@ module Api
         @user.build_commentor
 
         if  @user.save
-          render json: @user
+          render json: @user and return
         else
           render json: { errors: @user.errors.full_messages }, status: 422
         end

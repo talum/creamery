@@ -17,7 +17,7 @@ module Api
         end
 
         if @ice_cream.save
-          render json: @ice_cream
+          render json: @ice_cream and return
         else
           render json: { errors: @ice_cream.errors.full_messages }, status: 422
         end
@@ -30,7 +30,7 @@ module Api
         @ice_cream = IceCream.find_by(id: params[:id])
 
         if @ice_cream
-          render json: @ice_cream
+          render json: @ice_cream and return
         else
           render json: { errors: "Ice cream not found" }, status: 404
         end

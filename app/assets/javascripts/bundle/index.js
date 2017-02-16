@@ -28890,9 +28890,10 @@
 	  };
 	}
 
-	function loginError() {
+	function loginError(error) {
 	  return {
-	    type: LOGIN_ERROR
+	    type: LOGIN_ERROR,
+	    errors: error.response.data.errors
 	  };
 	}
 
@@ -28905,7 +28906,7 @@
 	      sessionStorage.setItem('jwt', response.data.jwt);
 	      dispatch(loginSuccess());
 	    }).catch(function (error) {
-	      dispatch(loginError());
+	      dispatch(loginError(error));
 	    });
 	  };
 	}
@@ -31942,6 +31943,7 @@
 	          null,
 	          'Login'
 	        ),
+	        this.props.sessions.errors,
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit },
@@ -31967,7 +31969,13 @@
 	  return LoginPage;
 	}(_react2.default.Component);
 
-	exports.default = (0, _reactRedux.connect)()(LoginPage);
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    sessions: state.sessions
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
 
 /***/ },
 /* 317 */
@@ -32538,9 +32546,9 @@
 
 	  switch (action.type) {
 	    case sessionsActions.LOGIN_ERROR:
-	      return state.concat(action.message);
+	      return state.concat(action.errors);
 	    default:
-	      return state;
+	      return [];
 	  }
 	}
 

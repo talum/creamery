@@ -18,7 +18,7 @@ module Api
         )
 
         if @parlor.save
-          render json: @parlor
+          render json: @parlor and return
         else
           render json: { errors: @parlor.errors.full_messages }, status: 422
         end

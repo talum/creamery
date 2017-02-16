@@ -12,9 +12,10 @@ function loginSuccess() {
   }
 }
 
-function loginError() {
+function loginError(error) {
   return {
-    type: LOGIN_ERROR
+    type: LOGIN_ERROR,
+    errors: error.response.data.errors
   }
 }
 
@@ -31,7 +32,7 @@ export function logInUser(payload) {
         })
       .catch(
         (error) => {
-          dispatch(loginError())
+          dispatch(loginError(error))
         }
       )
     }

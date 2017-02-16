@@ -6,7 +6,7 @@ module Api
         @review = Review.create(review_params.merge({eater_id: current_user.eater.id}))
 
         if @review.save
-          render json: @review
+          render json: @review and return
         else
           render json: { errors: @review.errors.full_messages }, status: 422
         end
