@@ -19,7 +19,7 @@ class Nav extends React.Component {
 
   loggedOutLinks() {
     return (
-      <span>
+      <span className="nav__links">
         <li className="nav__link"><Link to='/users'>Sign Up</Link></li>
         <li className="nav__link"><Link to='/login'>Login</Link></li>
       </span>
@@ -30,11 +30,13 @@ class Nav extends React.Component {
     return (
       <nav>
         <div className="nav">
-          <div className="nav__logo"><Link to='/'>Creamery</Link></div>
-          <ul className="nav__items">
-            <li className="nav__link"><Link to='/parlors'>Parlors</Link></li>
-            { this.props.loggedIn ? this.loggedInLinks() : this.loggedOutLinks() }
-          </ul>
+          <div className="nav__inner">
+            <div className="nav__logo"><Link to='/'>Creamery</Link></div>
+            <ul className="nav__items">
+              <li className="nav__link"><Link to='/parlors'>Parlors</Link></li>
+              { this.props.loggedIn ? this.loggedInLinks() : this.loggedOutLinks() }
+            </ul>
+          </div>
         </div>
       </nav>
     )

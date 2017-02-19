@@ -6,6 +6,12 @@ $font-size--xl: 64px;
 
 .heading {}
 
+.heading--splash {
+  font-size: $font-size--xl;
+  @extend .heading--color-white;
+  @extend .util--text-align-c;
+}
+
 .heading--level-1 {
   font-size: $font-size--l;
 } 
@@ -15,4 +21,8 @@ $font-size--xl: 64px;
 
 p {
   font-size: $font-size--m;
+}
+
+.util--text-align-c {
+  text-align: center;
 }

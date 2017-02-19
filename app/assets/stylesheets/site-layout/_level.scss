@@ -1,0 +1,17 @@
+$level--padding-m: 64px;
+$level--padding-l: $level--padding-m * 2;
+$level--padding-xl: $level--padding-m * 3;
+
+.level {
+  padding: $level--padding-m 0;
+}
+
+.level--padding-xl {
+  padding: $level--padding-xl 0;
+}
+
+.level--has-background-image {
+  background-size: cover;  
+}
+
+

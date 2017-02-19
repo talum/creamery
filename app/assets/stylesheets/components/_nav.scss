@@ -1,21 +1,20 @@
-
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: $purple;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: $white;
 
   .nav__inner {
-    padding: $padding--l; 
+    padding: $padding--s; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .nav__logo { 
     padding: $padding--s;
-    color: $white;
+    color: $gray-dark;
     flex: 2;
   }
 
@@ -23,8 +22,13 @@
     display: flex;
     justify-content: space-between;
 
+    .nav__links {
+      display: flex;
+      // helper for grouped links
+    }
+
     .nav__link {
-      color: $white;
+      color: $gray-dark;
       padding-left: $padding--s;
       padding-right: $padding--s;
     }
