@@ -1,24 +1,6 @@
-# README
+# Creamery
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Do you love ice cream? Me too! This is a React/Redux/Rails app that allows you to review ice cream and keep track of all your favorites. What is the ultimate ice cream in NYC? (Or elsewhere?) Find out here. 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Contributing
+If you want to contribute, I encourage you to. Just fork and open a PR.
