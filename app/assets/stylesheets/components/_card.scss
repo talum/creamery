@@ -1,5 +1,4 @@
 .card {
-  border: 1px solid $purple;
 
   .card__header {
     padding: $padding--m;
@@ -22,7 +21,6 @@
 
   }
   .card__footer {
-    background-color: $purple-light;
   } 
 
 }

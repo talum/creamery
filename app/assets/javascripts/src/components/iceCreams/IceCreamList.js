@@ -5,9 +5,7 @@ import Loader from '../sharedComponents/Loader'
 
 class IceCreamList extends React.Component {
   componentDidMount() {
-    if (!this.props.iceCreams.allIds.length) {
-      this.props.dispatch(showIceCreams())
-    }
+    this.props.dispatch(showIceCreams())
   }
 
   render() {
@@ -20,7 +18,7 @@ class IceCreamList extends React.Component {
       return (
         <div>
           { this.props.iceCreams.errors.join(", ") }
-          <div>
+          <div className="flex-grid">
             {iceCreamListItems}
           </div>
         </div>
