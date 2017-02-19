@@ -28884,6 +28884,12 @@
 	var LOGIN_ERROR = exports.LOGIN_ERROR = "LOGIN_ERROR";
 	var LOGOUT = exports.LOGOUT = "LOGOUT";
 
+	function logIn() {
+	  return {
+	    type: LOGIN
+	  };
+	}
+
 	function loginSuccess() {
 	  return {
 	    type: LOGIN_SUCCESS
@@ -28893,15 +28899,21 @@
 	function loginError(error) {
 	  return {
 	    type: LOGIN_ERROR,
-	    errors: error.response.data.errors
+	    errors: (0, _creameryApi.parseErrors)(error)
 	  };
 	}
 
+	function logOut() {
+	  return {
+	    type: LOGOUT
+	  };
+	}
+
+	// public actions
 	function logInUser(payload) {
 	  return function (dispatch) {
-	    dispatch({
-	      type: LOGIN
-	    });
+	    dispatch(logIn());
+
 	    return (0, _creameryApi.createSession)(payload).then(function (response) {
 	      sessionStorage.setItem('jwt', response.data.jwt);
 	      dispatch(loginSuccess());
@@ -28913,9 +28925,7 @@
 
 	function logOutUser() {
 	  sessionStorage.removeItem('jwt');
-	  return {
-	    type: LOGOUT
-	  };
+	  logOut();
 	}
 
 /***/ },
@@ -28936,6 +28946,7 @@
 	exports.createSession = createSession;
 	exports.postComments = postComments;
 	exports.postReviews = postReviews;
+	exports.parseErrors = parseErrors;
 
 	var _axios = __webpack_require__(273);
 
@@ -28992,6 +29003,10 @@
 
 	function postReviews(payload) {
 	  return post('/reviews', payload);
+	}
+
+	function parseErrors(payload) {
+	  return payload.response.data.errors;
 	}
 
 /***/ },
@@ -30616,7 +30631,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_USER = undefined;
+	exports.ADD_USER_ERROR = exports.ADD_USER = undefined;
 	exports.addUser = addUser;
 
 	var _reactRouter = __webpack_require__(178);
@@ -30626,14 +30641,29 @@
 	//users actions
 
 	var ADD_USER = exports.ADD_USER = 'ADD_USER';
+	var ADD_USER_ERROR = exports.ADD_USER_ERROR = 'ADD_USER_ERROR';
+
+	function addUserSuccess(response) {
+	  return {
+	    type: ADD_USER,
+	    data: response.data
+	  };
+	}
+
+	function addUserError(error) {
+	  return {
+	    type: ADD_USER_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
+	  };
+	}
 
 	function addUser(email) {
 	  return function (dispatch) {
 	    return (0, _creameryApi.postUsers)(email).then(function (response) {
-	      dispatch({
-	        type: ADD_USER,
-	        data: response.data
-	      });
+	      dispatch(addUserSuccess(response));
+	      _reactRouter.browserHistory.push('/');
+	    }).catch(function (error) {
+	      dispatch(addUserError(error));
 	      _reactRouter.browserHistory.push('/');
 	    });
 	  };
@@ -30842,79 +30872,117 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.RECEIVE_ICECREAM_ERROR = exports.RECEIVE_ICECREAM_SUCCESS = exports.REQUEST_ICECREAM = exports.ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM = exports.RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_SUCCESS = exports.REQUEST_ICECREAMS = undefined;
+	exports.ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM = exports.RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_SUCCESS = exports.REQUEST_ICECREAMS = exports.RECEIVE_ICECREAM_ERROR = exports.RECEIVE_ICECREAM_SUCCESS = exports.REQUEST_ICECREAM = undefined;
 	exports.showIceCream = showIceCream;
 	exports.showIceCreams = showIceCreams;
 	exports.addIceCream = addIceCream;
 
 	var _creameryApi = __webpack_require__(272);
 
-	var REQUEST_ICECREAMS = exports.REQUEST_ICECREAMS = 'REQUEST_ICECREAMS'; //ice creams actions
-	var RECEIVE_ICECREAMS_SUCCESS = exports.RECEIVE_ICECREAMS_SUCCESS = 'RECEIVE_ICECREAMS_SUCCESS';
-	var RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_ERROR = 'RECEIVE_ICECREAMS_ERROR';
-	var ADD_ICECREAM = exports.ADD_ICECREAM = 'ADD_ICECREAM';
-	var ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM_SUCCESS = 'ADD_ICECREAM_SUCCESS';
-	var ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_ERROR = 'ADD_ICECREAM_ERROR';
-	var REQUEST_ICECREAM = exports.REQUEST_ICECREAM = 'REQUEST_ICECREAM';
+	var REQUEST_ICECREAM = exports.REQUEST_ICECREAM = 'REQUEST_ICECREAM'; //ice creams actions
 	var RECEIVE_ICECREAM_SUCCESS = exports.RECEIVE_ICECREAM_SUCCESS = 'RECEIVE_ICECREAM_SUCCESS';
 	var RECEIVE_ICECREAM_ERROR = exports.RECEIVE_ICECREAM_ERROR = 'RECEIVE_ICECREAM_ERROR';
 
+	function requestIceCream() {
+	  return {
+	    type: REQUEST_ICECREAM
+	  };
+	}
+
+	function receiveIceCreamSuccess(response) {
+	  return {
+	    type: RECEIVE_ICECREAM_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function receiveIceCreamError(error) {
+	  return {
+	    type: RECEIVE_ICECREAM_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
+	  };
+	}
+
 	function showIceCream(id) {
 	  return function (dispatch) {
-	    dispatch({
-	      type: REQUEST_ICECREAM
-	    });
+	    dispatch(requestIceCream());
+
 	    return (0, _creameryApi.fetchIceCream)(id).then(function (response) {
-	      dispatch({
-	        type: RECEIVE_ICECREAM_SUCCESS,
-	        data: response.data
-	      });
-	      // because this loads associated data that's updated in different
-	      // actions, we have a race condition. 
-	      // need to account for this
-	    }, function (error) {
-	      dispatch({
-	        type: RECEIVE_ICECREAM_ERROR,
-	        message: error.message
-	      });
+	      dispatch(receiveIceCreamSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(receiveIceCreamError(error));
 	    });
+	  };
+	}
+
+	var REQUEST_ICECREAMS = exports.REQUEST_ICECREAMS = 'REQUEST_ICECREAMS';
+	var RECEIVE_ICECREAMS_SUCCESS = exports.RECEIVE_ICECREAMS_SUCCESS = 'RECEIVE_ICECREAMS_SUCCESS';
+	var RECEIVE_ICECREAMS_ERROR = exports.RECEIVE_ICECREAMS_ERROR = 'RECEIVE_ICECREAMS_ERROR';
+
+	function requestIceCreams() {
+	  return {
+	    type: REQUEST_ICECREAMS
+	  };
+	}
+
+	function receiveIceCreamsSuccess(response) {
+	  return {
+	    type: RECEIVE_ICECREAMS_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function receiveIceCreamsError(error) {
+	  return {
+	    type: RECEIVE_ICECREAMS_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
 	  };
 	}
 
 	function showIceCreams() {
 	  return function (dispatch) {
-	    dispatch({
-	      type: REQUEST_ICECREAMS
-	    });
+	    dispatch(requestIceCreams());
+
 	    return (0, _creameryApi.fetchIceCreams)().then(function (response) {
-	      dispatch({
-	        type: RECEIVE_ICECREAMS_SUCCESS,
-	        data: response.data
-	      });
-	    }, function (error) {
-	      dispatch({
-	        type: RECEIVE_ICECREAMS_ERROR,
-	        message: error.message
-	      });
+	      dispatch(receiveIceCreamsSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(receiveIceCreamsError(error));
 	    });
+	  };
+	}
+
+	var ADD_ICECREAM = exports.ADD_ICECREAM = 'ADD_ICECREAM';
+	var ADD_ICECREAM_SUCCESS = exports.ADD_ICECREAM_SUCCESS = 'ADD_ICECREAM_SUCCESS';
+	var ADD_ICECREAM_ERROR = exports.ADD_ICECREAM_ERROR = 'ADD_ICECREAM_ERROR';
+
+	function initiateAddIceCream() {
+	  return {
+	    type: ADD_ICECREAM
+	  };
+	}
+
+	function addIceCreamSuccess(response) {
+	  return {
+	    type: ADD_ICECREAM_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function addIceCreamError(error) {
+	  return {
+	    type: ADD_ICECREAM_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
 	  };
 	}
 
 	function addIceCream(iceCream) {
 	  return function (dispatch) {
-	    dispatch({
-	      type: ADD_ICECREAM
-	    });
+	    dispatch(initiateAddIceCream());
+
 	    return (0, _creameryApi.postIceCreams)(iceCream).then(function (response) {
-	      dispatch({
-	        type: ADD_ICECREAM_SUCCESS,
-	        data: response.data
-	      });
-	    }, function (error) {
-	      dispatch({
-	        type: ADD_ICECREAM_ERROR,
-	        message: error.message
-	      });
+	      dispatch(receiveIceCreamSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(addIceCreamError(error));
 	    });
 	  };
 	}
@@ -31243,21 +31311,34 @@
 	var ADD_REVIEW_SUCCESS = exports.ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
 	var ADD_REVIEW_ERROR = exports.ADD_REVIEW_ERROR = 'ADD_REVIEW_ERROR';
 
+	function initiateAddReview() {
+	  return {
+	    type: ADD_REVIEW
+	  };
+	}
+
+	function addReviewSuccess(response) {
+	  return {
+	    type: ADD_REVIEW_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function addReviewError(error) {
+	  return {
+	    type: ADD_REVIEW_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
+	  };
+	}
+
 	function addReview(review) {
 	  return function (dispatch) {
-	    dispatch({
-	      type: ADD_REVIEW
-	    });
+	    dispatch(initiateAddReview());
+
 	    return (0, _creameryApi.postReviews)(review).then(function (response) {
-	      dispatch({
-	        type: ADD_REVIEW_SUCCESS,
-	        data: response.data
-	      });
-	    }, function (error) {
-	      dispatch({
-	        type: ADD_REVIEW_ERROR,
-	        message: error.message
-	      });
+	      dispatch(addReviewSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(addReviewError(error));
 	    });
 	  };
 	}
@@ -31396,55 +31477,82 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_PARLOR_ERROR = exports.ADD_PARLOR_SUCCESS = exports.ADD_PARLOR = exports.SHOW_PARLORS = exports.RECEIVE_PARLORS_ERROR = exports.RECEIVE_PARLORS_SUCCESS = exports.REQUEST_PARLORS = undefined;
+	exports.ADD_PARLOR_ERROR = exports.ADD_PARLOR_SUCCESS = exports.ADD_PARLOR = exports.RECEIVE_PARLORS_ERROR = exports.RECEIVE_PARLORS_SUCCESS = exports.REQUEST_PARLORS = undefined;
 	exports.showParlors = showParlors;
 	exports.addParlor = addParlor;
 
 	var _creameryApi = __webpack_require__(272);
 
+	//action types
 	var REQUEST_PARLORS = exports.REQUEST_PARLORS = 'REQUEST_PARLORS'; // parlors actions
 
 	var RECEIVE_PARLORS_SUCCESS = exports.RECEIVE_PARLORS_SUCCESS = 'RECEIVE_PARLORS_SUCCESS';
 	var RECEIVE_PARLORS_ERROR = exports.RECEIVE_PARLORS_ERROR = 'RECEIVE_PARLORS_ERROR';
-	var SHOW_PARLORS = exports.SHOW_PARLORS = 'SHOW_PARLORS';
+
+	function requestParlors() {
+	  return {
+	    type: REQUEST_PARLORS
+	  };
+	}
+
+	function receiveParlorsSuccess(response) {
+	  return {
+	    type: RECEIVE_PARLORS_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function receiveParlorsError(error) {
+	  return {
+	    type: RECEIVE_PARLORS_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
+	  };
+	}
+
+	function showParlors() {
+	  return function (dispatch) {
+	    dispatch(requestParlors());
+
+	    return (0, _creameryApi.fetchParlors)().then(function (response) {
+	      dispatch(receiveParlorsSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(receiveParlorsError(error));
+	    });
+	  };
+	}
+
 	var ADD_PARLOR = exports.ADD_PARLOR = 'ADD_PARLOR';
 	var ADD_PARLOR_SUCCESS = exports.ADD_PARLOR_SUCCESS = 'ADD_PARLOR_SUCCESS';
 	var ADD_PARLOR_ERROR = exports.ADD_PARLOR_ERROR = 'ADD_PARLOR_ERROR';
 
-	function showParlors() {
-	  return function (dispatch) {
-	    dispatch({
-	      type: REQUEST_PARLORS
-	    });
-	    return (0, _creameryApi.fetchParlors)().then(function (response) {
-	      dispatch({
-	        type: RECEIVE_PARLORS_SUCCESS,
-	        data: response.data
-	      });
-	    }, function (error) {
-	      dispatch({
-	        type: RECEIVE_PARLORS_ERROR,
-	        message: error.message
-	      });
-	    });
+	function initiateAddParlor() {
+	  return {
+	    type: ADD_PARLOR
+	  };
+	}
+
+	function addParlorSuccess(response) {
+	  return {
+	    type: ADD_PARLOR_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function addParlorError(error) {
+	  return {
+	    type: ADD_PARLOR_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
 	  };
 	}
 
 	function addParlor(parlor) {
 	  return function (dispatch) {
-	    dispatch({
-	      type: ADD_PARLOR
-	    });
+	    dispatch(initiateAddParlor());
+
 	    return (0, _creameryApi.postParlors)(parlor).then(function (response) {
-	      dispatch({
-	        type: ADD_PARLOR_SUCCESS,
-	        data: response.data
-	      });
+	      dispatch(addParlorSuccess(response));
 	    }).catch(function (error) {
-	      dispatch({
-	        type: ADD_PARLOR_ERROR,
-	        errors: error.response.data.errors
-	      });
+	      dispatch(addParlorError(error));
 	    });
 	  };
 	}

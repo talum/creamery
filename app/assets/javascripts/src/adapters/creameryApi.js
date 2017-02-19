@@ -50,3 +50,7 @@ export function postComments(payload) {
 export function postReviews(payload) {
   return post('/reviews', payload)
 }
+
+export function parseErrors(payload) {
+  return payload.response.data.errors
+}
