@@ -23,9 +23,7 @@ class Parlor extends React.Component {
 
     if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
       return(<Loader />)
-    } else if (this.props.iceCreams.isLoading){
-      return(<div>"error"</div>)
-    }else {
+    } else {
       let iceCreams = parlor.ice_creams.map((iceCreamId) => { return this.props.iceCreams.byId[iceCreamId] })
       return(
         <div>
@@ -36,6 +34,9 @@ class Parlor extends React.Component {
             
             { iceCreams.map(iceCream => (<li key={iceCream.id}><Link to={`/ice-creams/${iceCream.id}`}>{iceCream.title}</Link></li>)) }
           </ul>
+          <div>
+            { this.props.iceCreams.errors.join(", ") }
+          </div>
           <NewIceCreamForm parlorId={parlorId}/>
         </div>
       )

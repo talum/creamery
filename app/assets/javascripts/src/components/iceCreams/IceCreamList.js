@@ -19,7 +19,10 @@ class IceCreamList extends React.Component {
     } else {
       return (
         <div>
-          {iceCreamListItems}
+          { this.props.iceCreams.errors.join(", ") }
+          <div>
+            {iceCreamListItems}
+          </div>
         </div>
       )
     }

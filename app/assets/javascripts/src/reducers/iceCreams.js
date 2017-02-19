@@ -58,10 +58,12 @@ function isLoading(state=true, action) {
 
 function errors(state=[], action) {
   switch (action.type) {
-    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR: case iceCreamsActions.RECEIVE_ICECREAM_ERROR:
-      return state.concat(action.message)
+    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
+      return action.errors
+    case iceCreamsActions.RECEIVE_ICECREAM_ERROR:
+      return action.errors
     case iceCreamsActions.ADD_ICECREAM_ERROR:
-      return state.concat(action.message)
+      return action.errors
     default:
       return state
   }

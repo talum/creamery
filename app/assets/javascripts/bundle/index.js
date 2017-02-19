@@ -28925,7 +28925,7 @@
 
 	function logOutUser() {
 	  sessionStorage.removeItem('jwt');
-	  logOut();
+	  return logOut();
 	}
 
 /***/ },
@@ -30852,7 +30852,12 @@
 	        return _react2.default.createElement(
 	          'div',
 	          null,
-	          iceCreamListItems
+	          this.props.iceCreams.errors.join(", "),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            iceCreamListItems
+	          )
 	        );
 	      }
 	    }
@@ -31766,12 +31771,6 @@
 
 	      if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
 	        return _react2.default.createElement(_Loader2.default, null);
-	      } else if (this.props.iceCreams.isLoading) {
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          '"error"'
-	        );
 	      } else {
 	        var iceCreams = parlor.ice_creams.map(function (iceCreamId) {
 	          return _this2.props.iceCreams.byId[iceCreamId];
@@ -31798,6 +31797,11 @@
 	                )
 	              );
 	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            this.props.iceCreams.errors.join(", ")
 	          ),
 	          _react2.default.createElement(_NewIceCreamForm2.default, { parlorId: parlorId })
 	        );
@@ -32197,7 +32201,6 @@
 	  switch (action.type) {
 	    case _users.ADD_USER:
 	      return state;
-	    //concat the new user to the state
 	    default:
 	      return state;
 	  }
@@ -32292,10 +32295,12 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:case iceCreamsActions.RECEIVE_ICECREAM_ERROR:
-	      return state.concat(action.message);
+	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
+	      return action.errors;
+	    case iceCreamsActions.RECEIVE_ICECREAM_ERROR:
+	      return action.errors;
 	    case iceCreamsActions.ADD_ICECREAM_ERROR:
-	      return state.concat(action.message);
+	      return action.errors;
 	    default:
 	      return state;
 	  }
@@ -32398,13 +32403,11 @@
 
 	  switch (action.type) {
 	    case parlorActions.RECEIVE_PARLORS_ERROR:
-	      return state.concat(action.errors);
+	      return action.errors;
 	    case parlorActions.ADD_PARLOR_ERROR:
-	      return state.concat(action.errors);
-	    case parlorActions.ADD_PARLOR_SUCCESS:
-	      return [];
+	      return action.errors;
 	    default:
-	      return state;
+	      return [];
 	  }
 	}
 
@@ -32654,7 +32657,7 @@
 
 	  switch (action.type) {
 	    case sessionsActions.LOGIN_ERROR:
-	      return state.concat(action.errors);
+	      return action.errors;
 	    default:
 	      return [];
 	  }
@@ -32763,9 +32766,9 @@
 
 	  switch (action.type) {
 	    case _reviews2.ADD_REVIEW_ERROR:
-	      return state.concat(action.message);
+	      return action.errors;
 	    default:
-	      return state;
+	      return [];
 	  }
 	}
 

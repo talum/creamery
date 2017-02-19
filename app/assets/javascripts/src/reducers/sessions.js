@@ -32,7 +32,7 @@ export function isLoading(state=false, action) {
 export function errors(state=[], action) {
   switch (action.type) {
     case sessionsActions.LOGIN_ERROR:
-      return state.concat(action.errors)
+      return action.errors
     default:
       return []
   }

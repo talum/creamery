@@ -52,9 +52,9 @@ function isLoading(state=true, action) {
 function errors(state=[], action) {
   switch (action.type) {
     case ADD_REVIEW_ERROR:
-      return state.concat(action.message)
+      return action.errors
     default:
-      return state
+      return []
   }
 }
 

@@ -62,13 +62,11 @@ function isLoading(state=true, action) {
 function errors(state=[], action) {
   switch (action.type) {
     case parlorActions.RECEIVE_PARLORS_ERROR:
-      return state.concat(action.errors)
+      return action.errors
     case parlorActions.ADD_PARLOR_ERROR:
-      return state.concat(action.errors)
-    case parlorActions.ADD_PARLOR_SUCCESS:
-      return []
+      return action.errors
     default:
-      return state
+      return []
   }
 }
 
