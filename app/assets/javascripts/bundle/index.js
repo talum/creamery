@@ -31806,6 +31806,10 @@
 
 	var _iceCreams = __webpack_require__(304);
 
+	var _Modal = __webpack_require__(327);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
 	var _Loader = __webpack_require__(306);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
@@ -31882,6 +31886,7 @@
 	            null,
 	            this.props.iceCreams.errors.join(", ")
 	          ),
+	          _react2.default.createElement(_Modal2.default, { isVisible: true }),
 	          _react2.default.createElement(_NewIceCreamForm2.default, { parlorId: parlorId })
 	        );
 	      }
@@ -32857,6 +32862,40 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
+
+/***/ },
+/* 327 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Modal = function Modal(props) {
+	  if (props.isVisible) {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "site-overlay" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "modal" },
+	        "Modal content"
+	      )
+	    );
+	  } else {
+	    return _react2.default.createElement("div", null);
+	  }
+	};
+
+	exports.default = Modal;
 
 /***/ }
 /******/ ]);

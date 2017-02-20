@@ -1,0 +1,17 @@
+.modal {
+  background-color: $white;
+  height: 300px;
+  width: 70%;
+  z-index: 9999;
+}
+
+.site-overlay {
+  width: 100%;
+  background-color: $black;
+  opacity: 0.5;
+  z-index: 9998;
+  position: fixed;
+  top:0;
+  right:0;
+  height: 100vh;
+}

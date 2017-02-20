@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { showParlors } from '../../actions/parlors'
 import { showIceCreams } from '../../actions/iceCreams'
 
+import Modal from '../sharedComponents/Modal'
 import Loader from '../sharedComponents/Loader'
 import NewIceCreamForm from '../../components/iceCreams/NewIceCreamForm'
 
@@ -37,6 +38,7 @@ class Parlor extends React.Component {
           <div>
             { this.props.iceCreams.errors.join(", ") }
           </div>
+          <Modal isVisible={true}/>
           <NewIceCreamForm parlorId={parlorId}/>
         </div>
       )
