@@ -82,11 +82,11 @@
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _loginPage = __webpack_require__(316);
+	var _loginPage = __webpack_require__(317);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(317);
+	var _store = __webpack_require__(318);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -31806,7 +31806,7 @@
 
 	var _iceCreams = __webpack_require__(304);
 
-	var _Modal = __webpack_require__(327);
+	var _Modal = __webpack_require__(315);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -31814,7 +31814,7 @@
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _NewIceCreamForm = __webpack_require__(315);
+	var _NewIceCreamForm = __webpack_require__(316);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
@@ -31909,6 +31909,59 @@
 
 /***/ },
 /* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Modal = function Modal(props) {
+	  if (props.isVisible) {
+	    return _react2.default.createElement(
+	      "div",
+	      null,
+	      _react2.default.createElement(
+	        "div",
+	        { className: "modal" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "modal__head" },
+	          _react2.default.createElement("div", { className: "modal__title" }),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "modal__close" },
+	            "\xD7"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "modal__body" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "module" },
+	            "Whoo all the modals"
+	          )
+	        )
+	      ),
+	      _react2.default.createElement("div", { className: "modal-overlay" })
+	    );
+	  } else {
+	    return _react2.default.createElement("div", null);
+	  }
+	};
+
+	exports.default = Modal;
+
+/***/ },
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32055,7 +32108,7 @@
 	exports.default = NewIceCreamForm;
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32174,7 +32227,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32185,11 +32238,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(318);
+	var _reduxThunk = __webpack_require__(319);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(319);
+	var _reducers = __webpack_require__(320);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -32200,7 +32253,7 @@
 	exports.default = store;
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32228,7 +32281,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32239,19 +32292,19 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(320);
+	var _users = __webpack_require__(321);
 
-	var _iceCreams = __webpack_require__(321);
+	var _iceCreams = __webpack_require__(322);
 
-	var _parlors = __webpack_require__(322);
+	var _parlors = __webpack_require__(323);
 
-	var _flavors = __webpack_require__(323);
+	var _flavors = __webpack_require__(324);
 
-	var _iceCreamFlavors = __webpack_require__(324);
+	var _iceCreamFlavors = __webpack_require__(325);
 
-	var _sessions = __webpack_require__(325);
+	var _sessions = __webpack_require__(326);
 
-	var _reviews = __webpack_require__(326);
+	var _reviews = __webpack_require__(327);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -32266,7 +32319,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32291,7 +32344,7 @@
 	} // users reducer
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32398,7 +32451,7 @@
 	});
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32503,7 +32556,7 @@
 	});
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32592,7 +32645,7 @@
 	});
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32681,7 +32734,7 @@
 	});
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32754,7 +32807,7 @@
 	});
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32862,40 +32915,6 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
-
-/***/ },
-/* 327 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Modal = function Modal(props) {
-	  if (props.isVisible) {
-	    return _react2.default.createElement(
-	      "div",
-	      { className: "site-overlay" },
-	      _react2.default.createElement(
-	        "div",
-	        { className: "modal" },
-	        "Modal content"
-	      )
-	    );
-	  } else {
-	    return _react2.default.createElement("div", null);
-	  }
-	};
-
-	exports.default = Modal;
 
 /***/ }
 /******/ ]);
