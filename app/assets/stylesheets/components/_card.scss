@@ -1,26 +1,31 @@
 .card {
+  margin: 0 5%;
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+
+  &:hover {
+    -webkit-box-shadow: 0px 8px 8px -4px #999999;
+    -moz-box-shadow: 0px 8px 8px -4px #999999;
+    box-shadow: 0px 8px 8px -4px #999999;
+  }
 
   .card__header {
-    padding: $padding--m;
   }
 
   .card__body {
-    padding: $padding--m;
   }
   
   .card__footer {
-    padding: $padding--s;
   }
 }
 
 .card--mosaic {
   .card__header {
-
   }
   .card__body {
-
   }
   .card__footer {
+    padding: $padding--l;
   } 
 
 }

@@ -1,22 +1,27 @@
 //font sizes
 $font-size--s: 8px;
 $font-size--m: 16px;
-$font-size--l: 32px;
-$font-size--xl: 64px;
+$font-size--l: 24px;
+$font-size--xl: 32px;
+$font-size--xxl: 64px;
 
 .heading {
   font-family: 'Josefin Sans', sans-serif;
 }
 
 .heading--splash {
-  font-size: $font-size--xl;
+  font-size: $font-size--xxl;
   @extend .heading--color-white;
   @extend .util--text-align-c;
 }
 
 .heading--level-1 {
-  font-size: $font-size--l;
+  font-size: $font-size--xl;
 } 
+
+.heading--level-2 {
+  font-size: $font-size--l;
+}
 
 .heading--color-white { color: $white; }
 .heading--color-blue  { color: $blue; }

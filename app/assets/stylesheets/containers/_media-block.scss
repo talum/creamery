@@ -1,0 +1,26 @@
+.media-block {
+  display: flex;
+  flex-wrap: none;
+
+  .media-block__media {
+
+  }
+
+  .media-block__content {
+
+  }
+}
+
+
+.media-block--alt-side {
+  .media-block__media {
+    order: 2;
+  }
+  .media-block__content {
+    order: 1;
+  }
+}
+
+.media-block--spread {
+  justify-content: space-between;
+}

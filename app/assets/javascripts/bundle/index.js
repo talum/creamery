@@ -31062,11 +31062,6 @@
 	          { className: "card card--mosaic" },
 	          _react2.default.createElement(
 	            "div",
-	            { className: "card__header" },
-	            iceCream.title
-	          ),
-	          _react2.default.createElement(
-	            "div",
 	            { className: "card__body" },
 	            _react2.default.createElement("img", { className: "image-frame", src: iceCream.image_url })
 	          ),
@@ -31074,11 +31069,28 @@
 	            "div",
 	            { className: "card__footer" },
 	            _react2.default.createElement(
-	              "button",
-	              null,
-	              "Click me"
+	              "div",
+	              { className: "heading heading--level-2" },
+	              iceCream.title
 	            ),
-	            "Review Count Rating"
+	            _react2.default.createElement(
+	              "div",
+	              { className: "media-block media-block--spread media-block--alt-side" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "media-block__media" },
+	                _react2.default.createElement(
+	                  "button",
+	                  null,
+	                  "Click me"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "media-block__content" },
+	                "Parlor Name"
+	              )
+	            )
 	          )
 	        )
 	      );
