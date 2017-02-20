@@ -31070,25 +31070,33 @@
 	            { className: "card__footer" },
 	            _react2.default.createElement(
 	              "div",
-	              { className: "heading heading--level-2" },
-	              iceCream.title
+	              { className: "module module--padding--s" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "heading heading--level-2" },
+	                iceCream.title
+	              )
 	            ),
 	            _react2.default.createElement(
 	              "div",
-	              { className: "media-block media-block--spread media-block--alt-side" },
+	              { className: "module module--padding--s" },
 	              _react2.default.createElement(
 	                "div",
-	                { className: "media-block__media" },
+	                { className: "media-block media-block--spread media-block--alt-side" },
 	                _react2.default.createElement(
-	                  "button",
-	                  null,
-	                  "Click me"
+	                  "div",
+	                  { className: "media-block__media" },
+	                  _react2.default.createElement(
+	                    "button",
+	                    null,
+	                    "Click me"
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "media-block__content" },
+	                  "Parlor Name"
 	                )
-	              ),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "media-block__content" },
-	                "Parlor Name"
 	              )
 	            )
 	          )
@@ -31495,11 +31503,6 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'All the Parlors'
-	        ),
 	        this.props.parlors.isLoading && _react2.default.createElement(_Loader2.default, null),
 	        _react2.default.createElement(
 	          'div',
@@ -31518,25 +31521,21 @@
 	                { className: 'card card--mosaic' },
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'card__header' },
+	                  { className: 'card__body' },
+	                  'Default Image'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'card__footer' },
 	                  _react2.default.createElement(
 	                    _reactRouter.Link,
 	                    { to: '/parlors/' + parlor.id },
 	                    _react2.default.createElement(
 	                      'h2',
-	                      { className: 'heading heading--level-1 heading--color-blue' },
+	                      { className: 'heading heading--level-1' },
 	                      parlor.name
 	                    )
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'card__body' },
-	                  'Image goes here'
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'card__footer' },
+	                  ),
 	                  'Footer goes here'
 	                )
 	              )

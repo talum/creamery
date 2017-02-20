@@ -5,6 +5,8 @@
   right: 0;
   background-color: $white;
   z-index: 9999;
+  @extend .heading;
+  @extend .heading--level-3;
 
   .nav__inner {
     padding: $padding--s; 

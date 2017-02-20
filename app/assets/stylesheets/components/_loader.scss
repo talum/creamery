@@ -1,5 +1,5 @@
 .loader {
-  width: 100%;
+  text-align: center;
 }
 
 .loader__circle {
@@ -7,7 +7,7 @@
   height: 20px;
   width: 20px;
   margin-right: 10px;
-  background-color: #fc6e51;
+  background-color: $gray-dark;
   border-radius: 50%;
   -webkit-animation: loading 1.6s infinite;
   -moz-animation: loading 1.6s infinite;

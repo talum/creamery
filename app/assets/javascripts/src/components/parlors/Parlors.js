@@ -17,7 +17,6 @@ class Parlors extends React.Component {
 
     return(
       <div>
-        <h1>All the Parlors</h1>
         { this.props.parlors.isLoading && <Loader /> }
         <div>
           { this.props.parlors.errors.join(", ") }
@@ -27,15 +26,13 @@ class Parlors extends React.Component {
               return (
                 <div key={parlor.id} className="flex-grid__item">
                   <div className="card card--mosaic">
-                    <div className="card__header">
-                      <Link to={`/parlors/${parlor.id}`}>
-                        <h2 className="heading heading--level-1 heading--color-blue">{parlor.name}</h2>
-                      </Link>
-                    </div>
                     <div className="card__body">
-                      Image goes here
+                      Default Image
                     </div>
                     <div className="card__footer">
+                      <Link to={`/parlors/${parlor.id}`}>
+                        <h2 className="heading heading--level-1">{parlor.name}</h2>
+                      </Link>
                       Footer goes here
                     </div>
                   </div>
