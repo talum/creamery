@@ -7,14 +7,15 @@ const Modal = (props) => {
         <div className="modal">
           <div className="modal__head">
             <div className="modal__title">
+              {props.modalHead}
             </div>
-            <div className="modal__close">
-              &times;  
+            <div className="modal__close" onClick={props.toggleModal}>
+              &times;
             </div>
           </div>
           <div className="modal__body">
             <div className="module">
-              Whoo all the modals
+              {props.modalBody}
             </div>
           </div>
         </div>
