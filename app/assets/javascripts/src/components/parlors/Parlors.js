@@ -25,15 +25,17 @@ class Parlors extends React.Component {
           { parlors.map((parlor) => {
               return (
                 <div key={parlor.id} className="flex-grid__item">
-                  <div className="card card--mosaic">
-                    <div className="card__body">
-                      Default Image
-                    </div>
-                    <div className="card__footer">
-                      <Link to={`/parlors/${parlor.id}`}>
-                        <h2 className="heading heading--level-1">{parlor.name}</h2>
-                      </Link>
-                      Footer goes here
+                  <div className="module">
+                    <div className="card card--mosaic">
+                      <div className="card__body">
+                        Default Image
+                      </div>
+                      <div className="card__footer">
+                        <Link to={`/parlors/${parlor.id}`}>
+                          <h2 className="heading heading--level-1">{parlor.name}</h2>
+                        </Link>
+                        Footer goes here
+                      </div>
                     </div>
                   </div>
                 </div>

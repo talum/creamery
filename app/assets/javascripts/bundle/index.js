@@ -82,11 +82,11 @@
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _loginPage = __webpack_require__(315);
+	var _loginPage = __webpack_require__(317);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(316);
+	var _store = __webpack_require__(318);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -31059,43 +31059,47 @@
 	        { className: "flex-grid__item" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "card card--mosaic" },
+	          { className: "module" },
 	          _react2.default.createElement(
 	            "div",
-	            { className: "card__body" },
-	            _react2.default.createElement("img", { className: "image-frame", src: iceCream.image_url })
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "card__footer" },
+	            { className: "card card--mosaic" },
 	            _react2.default.createElement(
 	              "div",
-	              { className: "module module--padding--s" },
-	              _react2.default.createElement(
-	                "div",
-	                { className: "heading heading--level-2" },
-	                iceCream.title
-	              )
+	              { className: "card__body" },
+	              _react2.default.createElement("img", { className: "image-frame", src: iceCream.image_url })
 	            ),
 	            _react2.default.createElement(
 	              "div",
-	              { className: "module module--padding--s" },
+	              { className: "card__footer" },
 	              _react2.default.createElement(
 	                "div",
-	                { className: "media-block media-block--spread media-block--alt-side" },
+	                { className: "module module--padding--s" },
 	                _react2.default.createElement(
 	                  "div",
-	                  { className: "media-block__media" },
+	                  { className: "heading heading--level-2" },
+	                  iceCream.title
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "module module--padding--s" },
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "media-block media-block--spread media-block--alt-side" },
 	                  _react2.default.createElement(
-	                    "button",
-	                    null,
-	                    "Click me"
+	                    "div",
+	                    { className: "media-block__media" },
+	                    _react2.default.createElement(
+	                      "button",
+	                      null,
+	                      "Click me"
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    "div",
+	                    { className: "media-block__content" },
+	                    "Parlor Name"
 	                  )
-	                ),
-	                _react2.default.createElement(
-	                  "div",
-	                  { className: "media-block__content" },
-	                  "Parlor Name"
 	                )
 	              )
 	            )
@@ -31518,25 +31522,29 @@
 	              { key: parlor.id, className: 'flex-grid__item' },
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'card card--mosaic' },
+	                { className: 'module' },
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'card__body' },
-	                  'Default Image'
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'card__footer' },
+	                  { className: 'card card--mosaic' },
 	                  _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/parlors/' + parlor.id },
-	                    _react2.default.createElement(
-	                      'h2',
-	                      { className: 'heading heading--level-1' },
-	                      parlor.name
-	                    )
+	                    'div',
+	                    { className: 'card__body' },
+	                    'Default Image'
 	                  ),
-	                  'Footer goes here'
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'card__footer' },
+	                    _react2.default.createElement(
+	                      _reactRouter.Link,
+	                      { to: '/parlors/' + parlor.id },
+	                      _react2.default.createElement(
+	                        'h2',
+	                        { className: 'heading heading--level-1' },
+	                        parlor.name
+	                      )
+	                    ),
+	                    'Footer goes here'
+	                  )
 	                )
 	              )
 	            );
@@ -31806,7 +31814,7 @@
 
 	var _iceCreams = __webpack_require__(304);
 
-	var _Modal = __webpack_require__(326);
+	var _Modal = __webpack_require__(315);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -31814,7 +31822,7 @@
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _NewIceCreamForm = __webpack_require__(327);
+	var _NewIceCreamForm = __webpack_require__(316);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
@@ -31927,815 +31935,6 @@
 /* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(233);
-
-	var _InputField = __webpack_require__(300);
-
-	var _InputField2 = _interopRequireDefault(_InputField);
-
-	var _SubmitButton = __webpack_require__(301);
-
-	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
-
-	var _sessions = __webpack_require__(271);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var LoginPage = function (_React$Component) {
-	  _inherits(LoginPage, _React$Component);
-
-	  function LoginPage(props) {
-	    _classCallCheck(this, LoginPage);
-
-	    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props));
-
-	    _this.state = _this.initialState();
-	    _this.handleChange = _this.handleChange.bind(_this);
-	    _this.handleSubmit = _this.handleSubmit.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(LoginPage, [{
-	    key: 'initialState',
-	    value: function initialState() {
-	      return {
-	        credentials: {
-	          email: '',
-	          password: ''
-	        }
-	      };
-	    }
-	  }, {
-	    key: 'handleChange',
-	    value: function handleChange(event) {
-	      var field = event.target.name;
-	      var credentials = this.state.credentials;
-	      credentials[field] = event.target.value;
-	      this.setState({ credentials: credentials });
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(event) {
-	      event.preventDefault();
-	      this.props.dispatch((0, _sessions.logInUser)(this.state.credentials)); // submit action
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Login'
-	        ),
-	        this.props.sessions.errors,
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.handleSubmit },
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "email",
-	            value: this.state.credentials.email,
-	            placeholder: "email",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "password",
-	            inputType: "password",
-	            value: this.state.credentials.password,
-	            placeholder: "password",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return LoginPage;
-	}(_react2.default.Component);
-
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    sessions: state.sessions
-	  };
-	};
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
-
-/***/ },
-/* 316 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _redux = __webpack_require__(242);
-
-	var _reduxThunk = __webpack_require__(317);
-
-	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-	var _reducers = __webpack_require__(318);
-
-	var _reducers2 = _interopRequireDefault(_reducers);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-
-	exports.default = store;
-
-/***/ },
-/* 317 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	function createThunkMiddleware(extraArgument) {
-	  return function (_ref) {
-	    var dispatch = _ref.dispatch,
-	        getState = _ref.getState;
-	    return function (next) {
-	      return function (action) {
-	        if (typeof action === 'function') {
-	          return action(dispatch, getState, extraArgument);
-	        }
-
-	        return next(action);
-	      };
-	    };
-	  };
-	}
-
-	var thunk = createThunkMiddleware();
-	thunk.withExtraArgument = createThunkMiddleware;
-
-	exports['default'] = thunk;
-
-/***/ },
-/* 318 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _redux = __webpack_require__(242);
-
-	var _users = __webpack_require__(319);
-
-	var _iceCreams = __webpack_require__(320);
-
-	var _parlors = __webpack_require__(321);
-
-	var _flavors = __webpack_require__(322);
-
-	var _iceCreamFlavors = __webpack_require__(323);
-
-	var _sessions = __webpack_require__(324);
-
-	var _reviews = __webpack_require__(325);
-
-	var creameryApp = (0, _redux.combineReducers)({
-	  users: _users.users,
-	  sessions: _sessions.sessions,
-	  iceCreams: _iceCreams.iceCreams,
-	  parlors: _parlors.parlors,
-	  flavors: _flavors.flavors,
-	  iceCreamFlavors: _iceCreamFlavors.iceCreamFlavors,
-	  reviews: _reviews.reviews
-	});
-
-	exports.default = creameryApp;
-
-/***/ },
-/* 319 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.users = users;
-
-	var _users = __webpack_require__(299);
-
-	function users() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _users.ADD_USER:
-	      return state;
-	    default:
-	      return state;
-	  }
-	} // users reducer
-
-/***/ },
-/* 320 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.iceCreams = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // ice creams reducer
-
-
-	exports.byId = byId;
-
-	var _redux = __webpack_require__(242);
-
-	var _iceCreams = __webpack_require__(304);
-
-	var iceCreamsActions = _interopRequireWildcard(_iceCreams);
-
-	var _reviews = __webpack_require__(309);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	function byId() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
-	      return action.data;
-	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
-	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
-	    case _reviews.ADD_REVIEW_SUCCESS:
-	      var iceCream = state[action.data.ice_cream_id];
-	      var modifiedIceCream = Object.assign({}, iceCream);
-	      modifiedIceCream.review_ids = modifiedIceCream.review_ids.concat(action.data.id);
-
-	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));
-	    default:
-	      return state;
-	  }
-	}
-
-	function allIds() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
-	      return Object.keys(action.data);
-	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
-	      return state.concat(action.data.id);
-	    default:
-	      return state;
-	  }
-	}
-
-	function isLoading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case iceCreamsActions.REQUEST_ICECREAMS:
-	      return true;
-	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
-	      return false;
-	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:case iceCreamsActions.RECEIVE_ICECREAM_ERROR:
-	      return false;
-	    case iceCreamsActions.ADD_ICECREAM:
-	      return true;
-	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:
-	      return false;
-	    case iceCreamsActions.ADD_ICECREAM_ERROR:
-	      return false;
-	    default:
-	      return state;
-	  }
-	}
-
-	function errors() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
-	      return action.errors;
-	    case iceCreamsActions.RECEIVE_ICECREAM_ERROR:
-	      return action.errors;
-	    case iceCreamsActions.ADD_ICECREAM_ERROR:
-	      return action.errors;
-	    default:
-	      return state;
-	  }
-	}
-
-	var iceCreams = exports.iceCreams = (0, _redux.combineReducers)({
-	  byId: byId,
-	  allIds: allIds,
-	  isLoading: isLoading,
-	  errors: errors
-	});
-
-/***/ },
-/* 321 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.parlors = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // parlors reducer
-
-
-	var _redux = __webpack_require__(242);
-
-	var _parlors = __webpack_require__(312);
-
-	var parlorActions = _interopRequireWildcard(_parlors);
-
-	var _iceCreams = __webpack_require__(304);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	function byId() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
-	      return action.data;
-	    case parlorActions.ADD_PARLOR_SUCCESS:
-	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
-	    case _iceCreams.ADD_ICECREAM_SUCCESS:
-	      var parlorId = action.data.parlor_id;
-	      var parlor = state[parlorId];
-	      var iceCreamId = action.data.id;
-
-	      return _extends({}, state, _defineProperty({}, parlorId, _extends({}, parlor, {
-	        ice_creams: parlor.ice_creams.concat(iceCreamId)
-	      })));
-	    default:
-	      return state;
-	  }
-	}
-
-	function allIds() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
-	      return Object.keys(action.data);
-	    case parlorActions.ADD_PARLOR_SUCCESS:
-	      return state.concat(action.data.id);
-	    default:
-	      return state;
-	  }
-	}
-
-	function isLoading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case parlorActions.REQUEST_PARLORS:
-	      return true;
-	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
-	      return false;
-	    case parlorActions.RECEIVE_PARLORS_ERROR:
-	      return false;
-	    case parlorActions.ADD_PARLOR:
-	      return true;
-	    case parlorActions.ADD_PARLOR_SUCCESS:
-	      return false;
-	    case parlorActions.ADD_PARLOR_ERROR:
-	      return false;
-	    default:
-	      return state;
-	  }
-	}
-
-	function errors() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case parlorActions.RECEIVE_PARLORS_ERROR:
-	      return action.errors;
-	    case parlorActions.ADD_PARLOR_ERROR:
-	      return action.errors;
-	    default:
-	      return [];
-	  }
-	}
-
-	var parlors = exports.parlors = (0, _redux.combineReducers)({
-	  byId: byId,
-	  allIds: allIds,
-	  isLoading: isLoading,
-	  errors: errors
-	});
-
-/***/ },
-/* 322 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.flavors = undefined;
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // flavors reducer
-
-	exports.byId = byId;
-
-	var _redux = __webpack_require__(242);
-
-	var _iceCreams = __webpack_require__(304);
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	function byId() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	  var action = arguments[1];
-
-	  var _ret = function () {
-	    switch (action.type) {
-	      case _iceCreams.ADD_ICECREAM_SUCCESS:
-	        var flavors = action.data.flavors; // array of flavor objects 
-	        var nextState = Object.assign({}, state);
-	        flavors.forEach(function (flavor) {
-	          nextState[flavor.id] = flavor;
-	        });
-	        return {
-	          v: nextState
-	        };
-	      default:
-	        return {
-	          v: state
-	        };
-	    }
-	  }();
-
-	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	}
-
-	function allIds() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _iceCreams.ADD_ICECREAM_SUCCESS:
-	      var _flavors = action.data.flavors; // array of flavor objects 
-	      var flavorIds = _flavors.map(function (flavor) {
-	        return flavor.id;
-	      });
-	      return [].concat(_toConsumableArray(state), [flavorIds]);
-	    default:
-	      return state;
-	  }
-	}
-
-	function isLoading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    default:
-	      return state;
-	  }
-	}
-
-	function errors() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    default:
-	      return state;
-	  }
-	}
-
-	var flavors = exports.flavors = (0, _redux.combineReducers)({
-	  byId: byId,
-	  allIds: allIds,
-	  isLoading: isLoading,
-	  errors: errors
-	});
-
-/***/ },
-/* 323 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.iceCreamFlavors = undefined;
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // iceCreamFlavors reducer
-
-	exports.byId = byId;
-
-	var _redux = __webpack_require__(242);
-
-	var _iceCreams = __webpack_require__(304);
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	function byId() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	  var action = arguments[1];
-
-	  var _ret = function () {
-	    switch (action.type) {
-	      case _iceCreams.ADD_ICECREAM_SUCCESS:
-	        var iceCreamFlavors = action.data.ice_cream_flavors; //array of iceCreamFlavor objects
-	        var nextState = Object.assign({}, state);
-	        iceCreamFlavors.forEach(function (iceCreamFlavor) {
-	          nextState[iceCreamFlavor.id] = iceCreamFlavor;
-	        });
-	        return {
-	          v: nextState
-	        };
-	      default:
-	        return {
-	          v: state
-	        };
-	    }
-	  }();
-
-	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	}
-
-	function allIds() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _iceCreams.ADD_ICECREAM_SUCCESS:
-	      var _iceCreamFlavors = action.data.ice_cream_flavors; //array of iceCreamFlavor objects
-	      var iceCreamFlavorIds = _iceCreamFlavors.map(function (iceCreamFlavor) {
-	        return iceCreamFlavor.id;
-	      });
-	      return [].concat(_toConsumableArray(state), [iceCreamFlavorIds]);
-	    default:
-	      return state;
-	  }
-	}
-
-	function isLoading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    default:
-	      return state;
-	  }
-	}
-
-	function errors() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    default:
-	      return state;
-	  }
-	}
-
-	var iceCreamFlavors = exports.iceCreamFlavors = (0, _redux.combineReducers)({
-	  byId: byId,
-	  allIds: allIds,
-	  isLoading: isLoading,
-	  errors: errors
-	});
-
-/***/ },
-/* 324 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.sessions = undefined;
-	exports.loggedIn = loggedIn;
-	exports.isLoading = isLoading;
-	exports.errors = errors;
-
-	var _redux = __webpack_require__(242);
-
-	var _reactRouter = __webpack_require__(178);
-
-	var _sessions = __webpack_require__(271);
-
-	var sessionsActions = _interopRequireWildcard(_sessions);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function loggedIn() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !!sessionStorage.jwt;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case sessionsActions.LOGIN_SUCCESS:
-	      _reactRouter.browserHistory.push('/');
-	      return !!sessionStorage.jwt;
-	    case sessionsActions.LOGOUT:
-	      _reactRouter.browserHistory.push('/');
-	      return !!sessionStorage.jwt;
-	    default:
-	      return state;
-	  }
-	} // sessions reducer
-	function isLoading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case sessionsActions.LOGIN:
-	      return true;
-	    case sessionsActions.LOGIN_SUCCESS:
-	      return false;
-	    case sessionsActions.LOGIN_ERROR:
-	      return false;
-	    default:
-	      return state;
-	  }
-	}
-
-	function errors() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case sessionsActions.LOGIN_ERROR:
-	      return action.errors;
-	    default:
-	      return [];
-	  }
-	}
-
-	var sessions = exports.sessions = (0, _redux.combineReducers)({
-	  loggedIn: loggedIn,
-	  isLoading: isLoading,
-	  errors: errors
-	});
-
-/***/ },
-/* 325 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.reviews = undefined;
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // reviews reducer
-
-
-	exports.byId = byId;
-
-	var _redux = __webpack_require__(242);
-
-	var _iceCreams = __webpack_require__(304);
-
-	var _reviews2 = __webpack_require__(309);
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	function byId() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	  var action = arguments[1];
-
-	  var _ret = function () {
-	    switch (action.type) {
-	      case _iceCreams.RECEIVE_ICECREAM_SUCCESS:
-	        var reviews = action.data.reviews;
-	        var nextState = Object.assign({}, state);
-	        reviews.forEach(function (review) {
-	          nextState[review.id] = review;
-	        });
-	        return {
-	          v: nextState
-	        };
-	      case _reviews2.ADD_REVIEW_SUCCESS:
-	        return {
-	          v: _extends({}, state, _defineProperty({}, action.data.id, action.data))
-	        };
-	      default:
-	        return {
-	          v: state
-	        };
-	    }
-	  }();
-
-	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	}
-
-	function allIds() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _iceCreams.RECEIVE_ICECREAM_SUCCESS:
-	      var _reviews = action.data.reviews;
-	      var reviewIds = _reviews.map(function (review) {
-	        return review.id;
-	      });
-	      return [].concat(_toConsumableArray(state), [reviewIds]);
-	    case _reviews2.ADD_REVIEW_SUCCESS:
-	      return [].concat(_toConsumableArray(state), [action.data.id]);
-	    default:
-	      return state;
-	  }
-	}
-
-	function isLoading() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _reviews2.ADD_REVIEW:
-	      return true;
-	    case _reviews2.ADD_REVIEW_SUCCESS:
-	      return false;
-	    case _reviews2.ADD_REVIEW_ERROR:
-	      return false;
-	    default:
-	      return state;
-	  }
-	}
-
-	function errors() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _reviews2.ADD_REVIEW_ERROR:
-	      return action.errors;
-	    default:
-	      return [];
-	  }
-	}
-
-	var reviews = exports.reviews = (0, _redux.combineReducers)({
-	  byId: byId,
-	  allIds: allIds,
-	  isLoading: isLoading,
-	  errors: errors
-	});
-
-/***/ },
-/* 326 */
-/***/ function(module, exports, __webpack_require__) {
-
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -32790,7 +31989,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 327 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32935,6 +32134,815 @@
 	var NewIceCreamForm = (0, _reactRedux.connect)()(IceCreamForm);
 
 	exports.default = NewIceCreamForm;
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(233);
+
+	var _InputField = __webpack_require__(300);
+
+	var _InputField2 = _interopRequireDefault(_InputField);
+
+	var _SubmitButton = __webpack_require__(301);
+
+	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
+
+	var _sessions = __webpack_require__(271);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LoginPage = function (_React$Component) {
+	  _inherits(LoginPage, _React$Component);
+
+	  function LoginPage(props) {
+	    _classCallCheck(this, LoginPage);
+
+	    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props));
+
+	    _this.state = _this.initialState();
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(LoginPage, [{
+	    key: 'initialState',
+	    value: function initialState() {
+	      return {
+	        credentials: {
+	          email: '',
+	          password: ''
+	        }
+	      };
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      var field = event.target.name;
+	      var credentials = this.state.credentials;
+	      credentials[field] = event.target.value;
+	      this.setState({ credentials: credentials });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      this.props.dispatch((0, _sessions.logInUser)(this.state.credentials)); // submit action
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Login'
+	        ),
+	        this.props.sessions.errors,
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "email",
+	            value: this.state.credentials.email,
+	            placeholder: "email",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "password",
+	            inputType: "password",
+	            value: this.state.credentials.password,
+	            placeholder: "password",
+	            handleChange: this.handleChange
+	          }),
+	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return LoginPage;
+	}(_react2.default.Component);
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    sessions: state.sessions
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
+
+/***/ },
+/* 318 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(242);
+
+	var _reduxThunk = __webpack_require__(319);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _reducers = __webpack_require__(320);
+
+	var _reducers2 = _interopRequireDefault(_reducers);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+	exports.default = store;
+
+/***/ },
+/* 319 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch,
+	        getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+
+	exports['default'] = thunk;
+
+/***/ },
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(242);
+
+	var _users = __webpack_require__(321);
+
+	var _iceCreams = __webpack_require__(322);
+
+	var _parlors = __webpack_require__(323);
+
+	var _flavors = __webpack_require__(324);
+
+	var _iceCreamFlavors = __webpack_require__(325);
+
+	var _sessions = __webpack_require__(326);
+
+	var _reviews = __webpack_require__(327);
+
+	var creameryApp = (0, _redux.combineReducers)({
+	  users: _users.users,
+	  sessions: _sessions.sessions,
+	  iceCreams: _iceCreams.iceCreams,
+	  parlors: _parlors.parlors,
+	  flavors: _flavors.flavors,
+	  iceCreamFlavors: _iceCreamFlavors.iceCreamFlavors,
+	  reviews: _reviews.reviews
+	});
+
+	exports.default = creameryApp;
+
+/***/ },
+/* 321 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.users = users;
+
+	var _users = __webpack_require__(299);
+
+	function users() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _users.ADD_USER:
+	      return state;
+	    default:
+	      return state;
+	  }
+	} // users reducer
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.iceCreams = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // ice creams reducer
+
+
+	exports.byId = byId;
+
+	var _redux = __webpack_require__(242);
+
+	var _iceCreams = __webpack_require__(304);
+
+	var iceCreamsActions = _interopRequireWildcard(_iceCreams);
+
+	var _reviews = __webpack_require__(309);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function byId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
+	      return action.data;
+	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
+	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
+	    case _reviews.ADD_REVIEW_SUCCESS:
+	      var iceCream = state[action.data.ice_cream_id];
+	      var modifiedIceCream = Object.assign({}, iceCream);
+	      modifiedIceCream.review_ids = modifiedIceCream.review_ids.concat(action.data.id);
+
+	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));
+	    default:
+	      return state;
+	  }
+	}
+
+	function allIds() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
+	      return Object.keys(action.data);
+	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
+	      return state.concat(action.data.id);
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case iceCreamsActions.REQUEST_ICECREAMS:
+	      return true;
+	    case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
+	      return false;
+	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:case iceCreamsActions.RECEIVE_ICECREAM_ERROR:
+	      return false;
+	    case iceCreamsActions.ADD_ICECREAM:
+	      return true;
+	    case iceCreamsActions.ADD_ICECREAM_SUCCESS:
+	      return false;
+	    case iceCreamsActions.ADD_ICECREAM_ERROR:
+	      return false;
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case iceCreamsActions.RECEIVE_ICECREAMS_ERROR:
+	      return action.errors;
+	    case iceCreamsActions.RECEIVE_ICECREAM_ERROR:
+	      return action.errors;
+	    case iceCreamsActions.ADD_ICECREAM_ERROR:
+	      return action.errors;
+	    default:
+	      return state;
+	  }
+	}
+
+	var iceCreams = exports.iceCreams = (0, _redux.combineReducers)({
+	  byId: byId,
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
+	});
+
+/***/ },
+/* 323 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.parlors = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // parlors reducer
+
+
+	var _redux = __webpack_require__(242);
+
+	var _parlors = __webpack_require__(312);
+
+	var parlorActions = _interopRequireWildcard(_parlors);
+
+	var _iceCreams = __webpack_require__(304);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function byId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
+	      return action.data;
+	    case parlorActions.ADD_PARLOR_SUCCESS:
+	      return _extends({}, state, _defineProperty({}, action.data.id, action.data));
+	    case _iceCreams.ADD_ICECREAM_SUCCESS:
+	      var parlorId = action.data.parlor_id;
+	      var parlor = state[parlorId];
+	      var iceCreamId = action.data.id;
+
+	      return _extends({}, state, _defineProperty({}, parlorId, _extends({}, parlor, {
+	        ice_creams: parlor.ice_creams.concat(iceCreamId)
+	      })));
+	    default:
+	      return state;
+	  }
+	}
+
+	function allIds() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
+	      return Object.keys(action.data);
+	    case parlorActions.ADD_PARLOR_SUCCESS:
+	      return state.concat(action.data.id);
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case parlorActions.REQUEST_PARLORS:
+	      return true;
+	    case parlorActions.RECEIVE_PARLORS_SUCCESS:
+	      return false;
+	    case parlorActions.RECEIVE_PARLORS_ERROR:
+	      return false;
+	    case parlorActions.ADD_PARLOR:
+	      return true;
+	    case parlorActions.ADD_PARLOR_SUCCESS:
+	      return false;
+	    case parlorActions.ADD_PARLOR_ERROR:
+	      return false;
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case parlorActions.RECEIVE_PARLORS_ERROR:
+	      return action.errors;
+	    case parlorActions.ADD_PARLOR_ERROR:
+	      return action.errors;
+	    default:
+	      return [];
+	  }
+	}
+
+	var parlors = exports.parlors = (0, _redux.combineReducers)({
+	  byId: byId,
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
+	});
+
+/***/ },
+/* 324 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.flavors = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // flavors reducer
+
+	exports.byId = byId;
+
+	var _redux = __webpack_require__(242);
+
+	var _iceCreams = __webpack_require__(304);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function byId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+
+	  var _ret = function () {
+	    switch (action.type) {
+	      case _iceCreams.ADD_ICECREAM_SUCCESS:
+	        var flavors = action.data.flavors; // array of flavor objects 
+	        var nextState = Object.assign({}, state);
+	        flavors.forEach(function (flavor) {
+	          nextState[flavor.id] = flavor;
+	        });
+	        return {
+	          v: nextState
+	        };
+	      default:
+	        return {
+	          v: state
+	        };
+	    }
+	  }();
+
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
+
+	function allIds() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _iceCreams.ADD_ICECREAM_SUCCESS:
+	      var _flavors = action.data.flavors; // array of flavor objects 
+	      var flavorIds = _flavors.map(function (flavor) {
+	        return flavor.id;
+	      });
+	      return [].concat(_toConsumableArray(state), [flavorIds]);
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	var flavors = exports.flavors = (0, _redux.combineReducers)({
+	  byId: byId,
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
+	});
+
+/***/ },
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.iceCreamFlavors = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // iceCreamFlavors reducer
+
+	exports.byId = byId;
+
+	var _redux = __webpack_require__(242);
+
+	var _iceCreams = __webpack_require__(304);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function byId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+
+	  var _ret = function () {
+	    switch (action.type) {
+	      case _iceCreams.ADD_ICECREAM_SUCCESS:
+	        var iceCreamFlavors = action.data.ice_cream_flavors; //array of iceCreamFlavor objects
+	        var nextState = Object.assign({}, state);
+	        iceCreamFlavors.forEach(function (iceCreamFlavor) {
+	          nextState[iceCreamFlavor.id] = iceCreamFlavor;
+	        });
+	        return {
+	          v: nextState
+	        };
+	      default:
+	        return {
+	          v: state
+	        };
+	    }
+	  }();
+
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
+
+	function allIds() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _iceCreams.ADD_ICECREAM_SUCCESS:
+	      var _iceCreamFlavors = action.data.ice_cream_flavors; //array of iceCreamFlavor objects
+	      var iceCreamFlavorIds = _iceCreamFlavors.map(function (iceCreamFlavor) {
+	        return iceCreamFlavor.id;
+	      });
+	      return [].concat(_toConsumableArray(state), [iceCreamFlavorIds]);
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	}
+
+	var iceCreamFlavors = exports.iceCreamFlavors = (0, _redux.combineReducers)({
+	  byId: byId,
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
+	});
+
+/***/ },
+/* 326 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.sessions = undefined;
+	exports.loggedIn = loggedIn;
+	exports.isLoading = isLoading;
+	exports.errors = errors;
+
+	var _redux = __webpack_require__(242);
+
+	var _reactRouter = __webpack_require__(178);
+
+	var _sessions = __webpack_require__(271);
+
+	var sessionsActions = _interopRequireWildcard(_sessions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function loggedIn() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !!sessionStorage.jwt;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case sessionsActions.LOGIN_SUCCESS:
+	      _reactRouter.browserHistory.push('/');
+	      return !!sessionStorage.jwt;
+	    case sessionsActions.LOGOUT:
+	      _reactRouter.browserHistory.push('/');
+	      return !!sessionStorage.jwt;
+	    default:
+	      return state;
+	  }
+	} // sessions reducer
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case sessionsActions.LOGIN:
+	      return true;
+	    case sessionsActions.LOGIN_SUCCESS:
+	      return false;
+	    case sessionsActions.LOGIN_ERROR:
+	      return false;
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case sessionsActions.LOGIN_ERROR:
+	      return action.errors;
+	    default:
+	      return [];
+	  }
+	}
+
+	var sessions = exports.sessions = (0, _redux.combineReducers)({
+	  loggedIn: loggedIn,
+	  isLoading: isLoading,
+	  errors: errors
+	});
+
+/***/ },
+/* 327 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.reviews = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // reviews reducer
+
+
+	exports.byId = byId;
+
+	var _redux = __webpack_require__(242);
+
+	var _iceCreams = __webpack_require__(304);
+
+	var _reviews2 = __webpack_require__(309);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function byId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+
+	  var _ret = function () {
+	    switch (action.type) {
+	      case _iceCreams.RECEIVE_ICECREAM_SUCCESS:
+	        var reviews = action.data.reviews;
+	        var nextState = Object.assign({}, state);
+	        reviews.forEach(function (review) {
+	          nextState[review.id] = review;
+	        });
+	        return {
+	          v: nextState
+	        };
+	      case _reviews2.ADD_REVIEW_SUCCESS:
+	        return {
+	          v: _extends({}, state, _defineProperty({}, action.data.id, action.data))
+	        };
+	      default:
+	        return {
+	          v: state
+	        };
+	    }
+	  }();
+
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	}
+
+	function allIds() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _iceCreams.RECEIVE_ICECREAM_SUCCESS:
+	      var _reviews = action.data.reviews;
+	      var reviewIds = _reviews.map(function (review) {
+	        return review.id;
+	      });
+	      return [].concat(_toConsumableArray(state), [reviewIds]);
+	    case _reviews2.ADD_REVIEW_SUCCESS:
+	      return [].concat(_toConsumableArray(state), [action.data.id]);
+	    default:
+	      return state;
+	  }
+	}
+
+	function isLoading() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _reviews2.ADD_REVIEW:
+	      return true;
+	    case _reviews2.ADD_REVIEW_SUCCESS:
+	      return false;
+	    case _reviews2.ADD_REVIEW_ERROR:
+	      return false;
+	    default:
+	      return state;
+	  }
+	}
+
+	function errors() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _reviews2.ADD_REVIEW_ERROR:
+	      return action.errors;
+	    default:
+	      return [];
+	  }
+	}
+
+	var reviews = exports.reviews = (0, _redux.combineReducers)({
+	  byId: byId,
+	  allIds: allIds,
+	  isLoading: isLoading,
+	  errors: errors
+	});
 
 /***/ }
 /******/ ]);
