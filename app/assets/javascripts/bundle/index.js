@@ -31477,6 +31477,10 @@
 
 	var _parlors = __webpack_require__(312);
 
+	var _Modal = __webpack_require__(315);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
 	var _NewParlorForm = __webpack_require__(313);
 
 	var _NewParlorForm2 = _interopRequireDefault(_NewParlorForm);
@@ -31496,10 +31500,16 @@
 	var Parlors = function (_React$Component) {
 	  _inherits(Parlors, _React$Component);
 
-	  function Parlors() {
+	  function Parlors(props) {
 	    _classCallCheck(this, Parlors);
 
-	    return _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Parlors.__proto__ || Object.getPrototypeOf(Parlors)).call(this, props));
+
+	    _this.state = {
+	      modalIsVisible: false
+	    };
+	    _this.toggleModalVisibility = _this.toggleModalVisibility.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Parlors, [{
@@ -31508,6 +31518,13 @@
 	      if (!this.props.parlors.allIds.length) {
 	        this.props.dispatch((0, _parlors.showParlors)());
 	      }
+	    }
+	  }, {
+	    key: 'toggleModalVisibility',
+	    value: function toggleModalVisibility() {
+	      this.setState({
+	        modalIsVisible: !this.state.modalIsVisible
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -31523,6 +31540,11 @@
 	          'div',
 	          null,
 	          this.props.parlors.errors.join(", ")
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.toggleModalVisibility },
+	          'Add New Parlor'
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -31561,7 +31583,11 @@
 	            );
 	          })
 	        ),
-	        _react2.default.createElement(_NewParlorForm2.default, null)
+	        _react2.default.createElement(_Modal2.default, {
+	          isVisible: this.state.modalIsVisible,
+	          toggleModal: this.toggleModalVisibility,
+	          modalBody: _react2.default.createElement(_NewParlorForm2.default, null)
+	        })
 	      );
 	    }
 	  }]);
@@ -31755,37 +31781,61 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit },
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "name",
-	            value: this.state.name,
-	            placeholder: "name",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "street_address",
-	            value: this.state.street_address,
-	            placeholder: "Street Address",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "city",
-	            value: this.state.city,
-	            placeholder: "City",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "state",
-	            value: this.state.state,
-	            placeholder: "State",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "zip_code",
-	            value: this.state.zip_code,
-	            placeholder: "Zipcode",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "name",
+	              value: this.state.name,
+	              placeholder: "name",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "street_address",
+	              value: this.state.street_address,
+	              placeholder: "Street Address",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "state",
+	              value: this.state.state,
+	              placeholder: "State",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "city",
+	              value: this.state.city,
+	              placeholder: "City",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "zip_code",
+	              value: this.state.zip_code,
+	              placeholder: "Zipcode",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	          )
 	        )
 	      );
 	    }
@@ -31877,7 +31927,8 @@
 	    key: 'toggleModalVisibility',
 	    value: function toggleModalVisibility() {
 	      this.setState({
-	        modalIsVisible: !this.state.modalIsVisible });
+	        modalIsVisible: !this.state.modalIsVisible
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -32111,29 +32162,44 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit },
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "title",
-	            value: this.state.title,
-	            placeholder: "title",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "flavors",
-	            value: this.state.flavors,
-	            placeholder: "flavors",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            inputType: "file",
-	            handleChange: this.handleImageChange
-	          }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "title",
+	              value: this.state.title,
+	              placeholder: "title",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "flavors",
+	              value: this.state.flavors,
+	              placeholder: "flavors",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              inputType: "file",
+	              handleChange: this.handleImageChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement('img', { src: this.state.imageFile })
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            '//preview component',
-	            _react2.default.createElement('img', { src: this.state.imageFile })
-	          ),
-	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	          )
 	        )
 	      );
 	    }

@@ -1,14 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { showParlors } from '../../actions/parlors'
+import Modal from '../sharedComponents/Modal'
 import NewParlorForm from '../parlors/NewParlorForm'
 import Loader from '../sharedComponents/Loader'
 
 class Parlors extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      modalIsVisible: false
+    }
+    this.toggleModalVisibility = this.toggleModalVisibility.bind(this)
+  }
+
   componentDidMount() {
     if (!this.props.parlors.allIds.length) {
       this.props.dispatch(showParlors())
     }
+  }
+
+  toggleModalVisibility() {
+    this.setState({
+      modalIsVisible: !this.state.modalIsVisible
+    })
   }
 
   render() {
@@ -21,6 +36,9 @@ class Parlors extends React.Component {
         <div>
           { this.props.parlors.errors.join(", ") }
         </div>
+        <button onClick={this.toggleModalVisibility}>
+          Add New Parlor
+        </button>
         <div className="flex-grid">
           { parlors.map((parlor) => {
               return (
@@ -43,7 +61,13 @@ class Parlors extends React.Component {
             })
           }
         </div>
-        <NewParlorForm />
+        <Modal
+          isVisible={this.state.modalIsVisible}
+          toggleModal={this.toggleModalVisibility}
+          modalBody={
+            <NewParlorForm />
+          }
+        />
       </div>
     )
   }

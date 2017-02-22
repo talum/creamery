@@ -59,27 +59,34 @@ class IceCreamForm extends React.Component {
       <div>
         <h2>New Ice Cream Form</h2>
         <form onSubmit={this.handleSubmit}>
-          <InputField
-            name={"title"}
-            value={this.state.title}
-            placeholder={"title"}
-            handleChange={this.handleChange}
+          <div className="module">
+            <InputField
+              name={"title"}
+              value={this.state.title}
+              placeholder={"title"}
+              handleChange={this.handleChange}
             />
-          <InputField
-            name={"flavors"}
-            value={this.state.flavors}
-            placeholder={"flavors"}
-            handleChange={this.handleChange}
+          </div>
+          <div className="module">
+            <InputField
+              name={"flavors"}
+              value={this.state.flavors}
+              placeholder={"flavors"}
+              handleChange={this.handleChange}
             />
-          <InputField
-            inputType={"file"}
-            handleChange={this.handleImageChange}
+          </div>
+          <div className="module">
+            <InputField
+              inputType={"file"}
+              handleChange={this.handleImageChange}
             />
-          <div>
-            //preview component
+          </div>
+          <div className="module">
             <img src={this.state.imageFile}/>
           </div>
+          <div>
            <SubmitButton handleSubmit={this.handleSubmit}/>
+          </div>
         </form>
       </div>
     )

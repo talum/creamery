@@ -28,7 +28,8 @@ class Parlor extends React.Component {
 
   toggleModalVisibility() {
     this.setState({
-      modalIsVisible: !this.state.modalIsVisible    })
+      modalIsVisible: !this.state.modalIsVisible
+    })
   }
 
   render() {
