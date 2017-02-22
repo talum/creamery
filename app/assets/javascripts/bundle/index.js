@@ -30613,27 +30613,43 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit },
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "email",
-	            value: this.state.email,
-	            placeholder: "email address",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "password",
-	            inputType: "password",
-	            value: this.state.password,
-	            placeholder: "password",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "password_confirmation",
-	            inputType: "password",
-	            value: this.state.password_confirmation,
-	            placeholder: "password confirmation",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "email",
+	              value: this.state.email,
+	              placeholder: "email address",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "password",
+	              inputType: "password",
+	              value: this.state.password,
+	              placeholder: "password",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "password_confirmation",
+	              inputType: "password",
+	              value: this.state.password_confirmation,
+	              placeholder: "password confirmation",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	          )
 	        )
 	      );
 	    }

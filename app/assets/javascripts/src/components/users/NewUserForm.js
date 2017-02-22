@@ -38,27 +38,35 @@ class UserForm extends React.Component {
       <div>
         <h1>Sign up for Creamery</h1>
         <form onSubmit={this.handleSubmit}>
-          <InputField
-            name={"email"} 
-            value={this.state.email}
-            placeholder={"email address"}
-            handleChange={this.handleChange}
-          />
-          <InputField
-            name={"password"} 
-            inputType={"password"}
-            value={this.state.password}
-            placeholder={"password"}
-            handleChange={this.handleChange}
-          />
-          <InputField
-            name={"password_confirmation"} 
-            inputType={"password"}
-            value={this.state.password_confirmation}
-            placeholder={"password confirmation"}
-            handleChange={this.handleChange}
-          />
-          <SubmitButton handleSubmit={this.handleSubmit} />
+          <div className="module">
+            <InputField
+              name={"email"} 
+              value={this.state.email}
+              placeholder={"email address"}
+              handleChange={this.handleChange}
+            />
+          </div>
+          <div className="module">
+            <InputField
+              name={"password"} 
+              inputType={"password"}
+              value={this.state.password}
+              placeholder={"password"}
+              handleChange={this.handleChange}
+            />
+          </div>
+          <div className="module">
+            <InputField
+              name={"password_confirmation"} 
+              inputType={"password"}
+              value={this.state.password_confirmation}
+              placeholder={"password confirmation"}
+              handleChange={this.handleChange}
+            />
+          </div>
+          <div className="module">
+            <SubmitButton handleSubmit={this.handleSubmit} />
+          </div>
         </form>
       </div>
     )
