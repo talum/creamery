@@ -7,7 +7,12 @@ class SubmitButton extends React.Component {
 
   render() {
     return(
-      <input type="submit" value="submit" onClick={this.props.handleSubmit} className="btn waves-effect waves-light" />
+      <input
+        type="submit"
+        value="submit"
+        onClick={this.props.handleSubmit}
+        className="button button--color-black"
+      />
     )
   }
 

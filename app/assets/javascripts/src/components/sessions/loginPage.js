@@ -41,20 +41,26 @@ class LoginPage extends React.Component {
         <h1>Login</h1>
         { this.props.sessions.errors }
         <form onSubmit={this.handleSubmit}>
-            <InputField
-              name={"email"}
-              value={this.state.credentials.email}
-              placeholder={"email"}
-              handleChange={this.handleChange}
-              />
-            <InputField
-              name={"password"}
-              inputType={"password"}
-              value={this.state.credentials.password}
-              placeholder={"password"}
-              handleChange={this.handleChange}
-              />
+            <div className="module">
+              <InputField
+                name={"email"}
+                value={this.state.credentials.email}
+                placeholder={"email"}
+                handleChange={this.handleChange}
+                />
+            </div>
+            <div className="module">
+              <InputField
+                name={"password"}
+                inputType={"password"}
+                value={this.state.credentials.password}
+                placeholder={"password"}
+                handleChange={this.handleChange}
+                />
+            </div>
+            <div className="module">
              <SubmitButton handleSubmit={this.handleSubmit}/>
+            </div>
         </form>
       </div>
     )

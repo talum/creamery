@@ -30732,7 +30732,13 @@
 	  _createClass(InputField, [{
 	    key: "render",
 	    value: function render() {
-	      return _react2.default.createElement("input", { type: this.props.inputType || "text", name: this.props.name, value: this.props.value, placeholder: this.props.placeholder, onChange: this.props.handleChange });
+	      return _react2.default.createElement("input", {
+	        className: "input-field",
+	        type: this.props.inputType || "text",
+	        name: this.props.name, value: this.props.value,
+	        placeholder: this.props.placeholder,
+	        onChange: this.props.handleChange
+	      });
 	    }
 	  }]);
 
@@ -30777,7 +30783,12 @@
 	  _createClass(SubmitButton, [{
 	    key: "render",
 	    value: function render() {
-	      return _react2.default.createElement("input", { type: "submit", value: "submit", onClick: this.props.handleSubmit, className: "btn waves-effect waves-light" });
+	      return _react2.default.createElement("input", {
+	        type: "submit",
+	        value: "submit",
+	        onClick: this.props.handleSubmit,
+	        className: "button button--color-black"
+	      });
 	    }
 	  }]);
 
@@ -32224,20 +32235,32 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit },
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "email",
-	            value: this.state.credentials.email,
-	            placeholder: "email",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "password",
-	            inputType: "password",
-	            value: this.state.credentials.password,
-	            placeholder: "password",
-	            handleChange: this.handleChange
-	          }),
-	          _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "email",
+	              value: this.state.credentials.email,
+	              placeholder: "email",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "password",
+	              inputType: "password",
+	              value: this.state.credentials.password,
+	              placeholder: "password",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	          )
 	        )
 	      );
 	    }

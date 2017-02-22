@@ -7,7 +7,13 @@ class InputField extends React.Component {
 
   render() {
     return(
-      <input type={this.props.inputType || "text"} name={this.props.name} value={this.props.value} placeholder={this.props.placeholder} onChange={this.props.handleChange}/>
+      <input
+        className="input-field"
+        type={this.props.inputType || "text"}
+        name={this.props.name} value={this.props.value}
+        placeholder={this.props.placeholder}
+        onChange={this.props.handleChange}
+      />
     )
   }
 }
