@@ -3,8 +3,14 @@
   border-radius: $border-radius;
   padding: $padding--s;
   border: 0;
+  font-size: $font-size--m;
 }
 
 .button--color-black {
   background-color: $black;
+  &:hover {
+    background-color: $gray-dark;
+  }
 }
+
+.button--width-full { width: 100%; }

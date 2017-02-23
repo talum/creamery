@@ -82,10 +82,10 @@ class IceCreamForm extends React.Component {
             />
           </div>
           <div className="module">
-            <img src={this.state.imageFile}/>
+            <img className="image-frame" src={this.state.imageFile}/>
           </div>
-          <div>
-           <SubmitButton handleSubmit={this.handleSubmit}/>
+          <div className="module">
+            <SubmitButton handleSubmit={this.handleSubmit}/>
           </div>
         </form>
       </div>

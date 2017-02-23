@@ -78,7 +78,7 @@
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
-	var _Parlor = __webpack_require__(314);
+	var _Parlor = __webpack_require__(315);
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
@@ -30803,7 +30803,7 @@
 	        type: "submit",
 	        value: "submit",
 	        onClick: this.props.handleSubmit,
-	        className: "button button--color-black"
+	        className: "button button--color-black button--width-full"
 	      });
 	    }
 	  }]);
@@ -31493,11 +31493,11 @@
 
 	var _parlors = __webpack_require__(312);
 
-	var _Modal = __webpack_require__(315);
+	var _Modal = __webpack_require__(313);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _NewParlorForm = __webpack_require__(313);
+	var _NewParlorForm = __webpack_require__(314);
 
 	var _NewParlorForm2 = _interopRequireDefault(_NewParlorForm);
 
@@ -31706,6 +31706,66 @@
 /* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Modal = function Modal(props) {
+	  if (props.isVisible) {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "modal-overlay" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "modal-overlay__inner" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "modal" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "modal__head" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "modal__title" },
+	              props.modalHead
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "modal__close", onClick: props.toggleModal },
+	              "\xD7"
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "modal__body" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "module" },
+	              props.modalBody
+	            )
+	          )
+	        )
+	      )
+	    );
+	  } else {
+	    return _react2.default.createElement("div", null);
+	  }
+	};
+
+	exports.default = Modal;
+
+/***/ },
+/* 314 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -31868,7 +31928,7 @@
 	exports.default = NewParlorForm;
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31891,7 +31951,7 @@
 
 	var _iceCreams = __webpack_require__(304);
 
-	var _Modal = __webpack_require__(315);
+	var _Modal = __webpack_require__(313);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -32008,63 +32068,6 @@
 	var ParlorContainer = (0, _reactRedux.connect)(mapStateToProps)(Parlor);
 
 	exports.default = ParlorContainer;
-
-/***/ },
-/* 315 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Modal = function Modal(props) {
-	  if (props.isVisible) {
-	    return _react2.default.createElement(
-	      "div",
-	      null,
-	      _react2.default.createElement(
-	        "div",
-	        { className: "modal" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "modal__head" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "modal__title" },
-	            props.modalHead
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "modal__close", onClick: props.toggleModal },
-	            "\xD7"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "modal__body" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "module" },
-	            props.modalBody
-	          )
-	        )
-	      ),
-	      _react2.default.createElement("div", { className: "modal-overlay" })
-	    );
-	  } else {
-	    return _react2.default.createElement("div", null);
-	  }
-	};
-
-	exports.default = Modal;
 
 /***/ },
 /* 316 */
@@ -32209,11 +32212,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'module' },
-	            _react2.default.createElement('img', { src: this.state.imageFile })
+	            _react2.default.createElement('img', { className: 'image-frame', src: this.state.imageFile })
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'module' },
 	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
 	          )
 	        )

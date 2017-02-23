@@ -11,7 +11,7 @@ class SubmitButton extends React.Component {
         type="submit"
         value="submit"
         onClick={this.props.handleSubmit}
-        className="button button--color-black"
+        className="button button--color-black button--width-full"
       />
     )
   }
