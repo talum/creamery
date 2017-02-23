@@ -2,6 +2,8 @@
 
 React/Redux/Rails app to keep track of the trendiest ice creams and parlors. Leave reviews, add comments, etc.
 
+Lives at [https://ice-creamery.herokuapp.com/](https://ice-creamery.herokuapp.com/)
+
 ## Contributing
 * Fork/clone
 * `bundle install`
