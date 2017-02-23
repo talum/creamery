@@ -28895,7 +28895,7 @@
 /* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28904,9 +28904,12 @@
 	exports.logInUser = logInUser;
 	exports.logOutUser = logOutUser;
 
+	var _reactRouter = __webpack_require__(178);
+
 	var _creameryApi = __webpack_require__(272);
 
-	var LOGIN = exports.LOGIN = "LOGIN"; // sessions actions
+	// sessions actions
+	var LOGIN = exports.LOGIN = "LOGIN";
 	var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = "LOGIN_SUCCESS";
 	var LOGIN_ERROR = exports.LOGIN_ERROR = "LOGIN_ERROR";
 	var LOGOUT = exports.LOGOUT = "LOGOUT";
@@ -28943,6 +28946,7 @@
 
 	    return (0, _creameryApi.createSession)(payload).then(function (response) {
 	      sessionStorage.setItem('jwt', response.data.jwt);
+	      _reactRouter.browserHistory.push('/');
 	      dispatch(loginSuccess());
 	    }).catch(function (error) {
 	      dispatch(loginError(error));
@@ -28952,6 +28956,7 @@
 
 	function logOutUser() {
 	  sessionStorage.removeItem('jwt');
+	  _reactRouter.browserHistory.push('/');
 	  return logOut();
 	}
 
@@ -32885,29 +32890,27 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reactRouter = __webpack_require__(178);
-
 	var _sessions = __webpack_require__(271);
 
 	var sessionsActions = _interopRequireWildcard(_sessions);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+	// sessions reducer
 	function loggedIn() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !!sessionStorage.jwt;
 	  var action = arguments[1];
 
 	  switch (action.type) {
 	    case sessionsActions.LOGIN_SUCCESS:
-	      _reactRouter.browserHistory.push('/');
 	      return !!sessionStorage.jwt;
 	    case sessionsActions.LOGOUT:
-	      _reactRouter.browserHistory.push('/');
 	      return !!sessionStorage.jwt;
 	    default:
 	      return state;
 	  }
-	} // sessions reducer
+	}
+
 	function isLoading() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 	  var action = arguments[1];

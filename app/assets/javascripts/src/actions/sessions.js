@@ -1,4 +1,5 @@
 // sessions actions
+import { browserHistory } from 'react-router'
 import { createSession, parseErrors } from '../adapters/creameryApi'
 
 export const LOGIN         = "LOGIN"
@@ -39,6 +40,7 @@ export function logInUser(payload) {
     return createSession(payload)
       .then((response) => {
         sessionStorage.setItem('jwt', response.data.jwt)
+        browserHistory.push('/')
         dispatch(loginSuccess())
       })
       .catch((error) => {
@@ -49,5 +51,6 @@ export function logInUser(payload) {
 
 export function logOutUser() {
   sessionStorage.removeItem('jwt')
+  browserHistory.push('/')
   return logOut()
 }
