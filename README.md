@@ -1,24 +1,10 @@
-# README
+# Creamery
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+React/Redux/Rails app to keep track of the trendiest ice creams and parlors. Leave reviews, add comments, etc.
 
-Things you may want to cover:
+## Contributing
+* Fork/clone
+* `bundle install`
+* `npm start`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+JavaScripts and SCSS are included in the asset pipeline. Rails API supplies the backend, but there's a single index route that renders the initial app to the page.
