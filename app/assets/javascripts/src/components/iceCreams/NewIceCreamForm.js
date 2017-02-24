@@ -47,6 +47,7 @@ class IceCreamForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.dispatch(addIceCream(this.state))
+    this.props.toggleModalVisibility()
     this.clearForm()
   }
 

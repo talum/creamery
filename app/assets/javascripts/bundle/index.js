@@ -28895,7 +28895,7 @@
 /* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28904,9 +28904,12 @@
 	exports.logInUser = logInUser;
 	exports.logOutUser = logOutUser;
 
+	var _reactRouter = __webpack_require__(178);
+
 	var _creameryApi = __webpack_require__(272);
 
-	var LOGIN = exports.LOGIN = "LOGIN"; // sessions actions
+	// sessions actions
+	var LOGIN = exports.LOGIN = "LOGIN";
 	var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = "LOGIN_SUCCESS";
 	var LOGIN_ERROR = exports.LOGIN_ERROR = "LOGIN_ERROR";
 	var LOGOUT = exports.LOGOUT = "LOGOUT";
@@ -28943,6 +28946,7 @@
 
 	    return (0, _creameryApi.createSession)(payload).then(function (response) {
 	      sessionStorage.setItem('jwt', response.data.jwt);
+	      _reactRouter.browserHistory.push('/');
 	      dispatch(loginSuccess());
 	    }).catch(function (error) {
 	      dispatch(loginError(error));
@@ -28952,6 +28956,7 @@
 
 	function logOutUser() {
 	  sessionStorage.removeItem('jwt');
+	  _reactRouter.browserHistory.push('/');
 	  return logOut();
 	}
 
@@ -28985,14 +28990,15 @@
 
 
 	_axios2.default.defaults.baseURL = BASE_URL;
-	_axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
 	_axios2.default.defaults.headers.post['Content-Type'] = 'application/json';
 
 	function fetch(route) {
+	  _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
 	  return _axios2.default.get('' + (BASE_URL + route));
 	}
 
 	function post(route, payload) {
+	  _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
 	  return _axios2.default.post('' + (BASE_URL + route), payload);
 	}
 
@@ -31465,7 +31471,8 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    parlors: state.parlors
+	    parlors: state.parlors,
+	    loggedIn: state.sessions.loggedIn
 	  };
 	};
 
@@ -31547,6 +31554,13 @@
 	    value: function render() {
 	      var parlorsById = this.props.parlors.byId;
 	      var parlors = Object.values(parlorsById);
+	      var addParlorButton = _react2.default.createElement(
+	        'button',
+	        {
+	          className: 'button button--color-black',
+	          onClick: this.toggleModalVisibility },
+	        'Add New Parlor'
+	      );
 
 	      return _react2.default.createElement(
 	        'div',
@@ -31557,11 +31571,7 @@
 	          null,
 	          this.props.parlors.errors.join(", ")
 	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.toggleModalVisibility },
-	          'Add New Parlor'
-	        ),
+	        this.props.loggedIn && addParlorButton,
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'flex-grid' },
@@ -31602,7 +31612,9 @@
 	        _react2.default.createElement(_Modal2.default, {
 	          isVisible: this.state.modalIsVisible,
 	          toggleModal: this.toggleModalVisibility,
-	          modalBody: _react2.default.createElement(_NewParlorForm2.default, null)
+	          modalBody: _react2.default.createElement(_NewParlorForm2.default, {
+	            toggleModalVisibility: this.toggleModalVisibility
+	          })
 	        })
 	      );
 	    }
@@ -31836,6 +31848,7 @@
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
 	      this.props.dispatch((0, _parlors.addParlor)(this.state));
+	      this.props.toggleModalVisibility();
 	      this.clearForm();
 	    }
 	  }, {
@@ -32013,6 +32026,11 @@
 
 	      var parlorId = this.props.routeParams.id;
 	      var parlor = this.props.parlors.byId[parlorId];
+	      var addIceCreamButton = _react2.default.createElement(
+	        'button',
+	        { className: 'button button--color-black', onClick: this.toggleModalVisibility },
+	        'Add New Ice Cream'
+	      );
 
 	      if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
 	        return _react2.default.createElement(_Loader2.default, null);
@@ -32028,11 +32046,7 @@
 	            null,
 	            parlor.name
 	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.toggleModalVisibility },
-	            'Add New Ice Cream'
-	          ),
+	          this.props.loggedIn && addIceCreamButton,
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'flex-grid' },
@@ -32048,7 +32062,10 @@
 	          _react2.default.createElement(_Modal2.default, {
 	            isVisible: this.state.modalIsVisible,
 	            toggleModal: this.toggleModalVisibility,
-	            modalBody: _react2.default.createElement(_NewIceCreamForm2.default, { parlorId: parlorId })
+	            modalBody: _react2.default.createElement(_NewIceCreamForm2.default, {
+	              parlorId: parlorId,
+	              toggleModalVisibility: this.toggleModalVisibility
+	            })
 	          })
 	        );
 	      }
@@ -32061,7 +32078,8 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    parlors: state.parlors,
-	    iceCreams: state.iceCreams
+	    iceCreams: state.iceCreams,
+	    loggedIn: state.sessions.loggedIn
 	  };
 	};
 
@@ -32160,6 +32178,7 @@
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
 	      this.props.dispatch((0, _iceCreams.addIceCream)(this.state));
+	      this.props.toggleModalVisibility();
 	      this.clearForm();
 	    }
 	  }, {
@@ -32885,29 +32904,27 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reactRouter = __webpack_require__(178);
-
 	var _sessions = __webpack_require__(271);
 
 	var sessionsActions = _interopRequireWildcard(_sessions);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+	// sessions reducer
 	function loggedIn() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !!sessionStorage.jwt;
 	  var action = arguments[1];
 
 	  switch (action.type) {
 	    case sessionsActions.LOGIN_SUCCESS:
-	      _reactRouter.browserHistory.push('/');
 	      return !!sessionStorage.jwt;
 	    case sessionsActions.LOGOUT:
-	      _reactRouter.browserHistory.push('/');
 	      return !!sessionStorage.jwt;
 	    default:
 	      return state;
 	  }
-	} // sessions reducer
+	}
+
 	function isLoading() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 	  var action = arguments[1];

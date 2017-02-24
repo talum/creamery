@@ -3,7 +3,8 @@ import Parlors from '../parlors/Parlors'
 
 const mapStateToProps = (state) => {
   return {
-    parlors: state.parlors
+    parlors: state.parlors,
+    loggedIn: state.sessions.loggedIn
   }
 }
 
