@@ -58,7 +58,10 @@ class Parlor extends React.Component {
           isVisible={this.state.modalIsVisible}
           toggleModal={this.toggleModalVisibility}
           modalBody={
-          <NewIceCreamForm parlorId={parlorId}/>
+          <NewIceCreamForm
+            parlorId={parlorId}
+            toggleModalVisibility={this.toggleModalVisibility}
+          />
           }
         />
         </div>

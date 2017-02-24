@@ -65,7 +65,9 @@ class Parlors extends React.Component {
           isVisible={this.state.modalIsVisible}
           toggleModal={this.toggleModalVisibility}
           modalBody={
-            <NewParlorForm />
+            <NewParlorForm 
+              toggleModalVisibility={this.toggleModalVisibility}
+            />
           }
         />
       </div>

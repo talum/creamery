@@ -31607,7 +31607,9 @@
 	        _react2.default.createElement(_Modal2.default, {
 	          isVisible: this.state.modalIsVisible,
 	          toggleModal: this.toggleModalVisibility,
-	          modalBody: _react2.default.createElement(_NewParlorForm2.default, null)
+	          modalBody: _react2.default.createElement(_NewParlorForm2.default, {
+	            toggleModalVisibility: this.toggleModalVisibility
+	          })
 	        })
 	      );
 	    }
@@ -31841,6 +31843,7 @@
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
 	      this.props.dispatch((0, _parlors.addParlor)(this.state));
+	      this.props.toggleModalVisibility();
 	      this.clearForm();
 	    }
 	  }, {
@@ -32053,7 +32056,10 @@
 	          _react2.default.createElement(_Modal2.default, {
 	            isVisible: this.state.modalIsVisible,
 	            toggleModal: this.toggleModalVisibility,
-	            modalBody: _react2.default.createElement(_NewIceCreamForm2.default, { parlorId: parlorId })
+	            modalBody: _react2.default.createElement(_NewIceCreamForm2.default, {
+	              parlorId: parlorId,
+	              toggleModalVisibility: this.toggleModalVisibility
+	            })
 	          })
 	        );
 	      }
@@ -32165,6 +32171,7 @@
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
 	      this.props.dispatch((0, _iceCreams.addIceCream)(this.state));
+	      this.props.toggleModalVisibility();
 	      this.clearForm();
 	    }
 	  }, {
