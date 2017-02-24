@@ -29,6 +29,13 @@ class Parlors extends React.Component {
   render() {
     let parlorsById = this.props.parlors.byId
     let parlors = Object.values(parlorsById)
+    const addParlorButton = (
+      <button 
+        className="button button--color-black"
+        onClick={this.toggleModalVisibility}>
+        Add New Parlor
+      </button>
+    )
 
     return(
       <div>
@@ -36,9 +43,7 @@ class Parlors extends React.Component {
         <div>
           { this.props.parlors.errors.join(", ") }
         </div>
-        <button className="button button--color-black" onClick={this.toggleModalVisibility}>
-          Add New Parlor
-        </button>
+        { this.props.loggedIn && addParlorButton }
         <div className="flex-grid">
           { parlors.map((parlor) => {
               return (

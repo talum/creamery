@@ -35,6 +35,11 @@ class Parlor extends React.Component {
   render() {
     const parlorId = this.props.routeParams.id
     const parlor = this.props.parlors.byId[parlorId]
+    const addIceCreamButton = (
+      <button className="button button--color-black" onClick={this.toggleModalVisibility}>
+        Add New Ice Cream
+      </button>
+    )
 
     if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
       return(<Loader />)
@@ -45,9 +50,7 @@ class Parlor extends React.Component {
           <h1>
             {parlor.name}
           </h1>
-          <button className="button button--color-black" onClick={this.toggleModalVisibility}>
-            Add New Ice Cream
-          </button>
+          {this.props.loggedIn && addIceCreamButton }
           <div className="flex-grid">
             { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream}/>)) }
           </div>
@@ -73,7 +76,8 @@ class Parlor extends React.Component {
 const mapStateToProps = (state) => {
   return {
     parlors: state.parlors,
-    iceCreams: state.iceCreams
+    iceCreams: state.iceCreams,
+    loggedIn: state.sessions.loggedIn
   }
 } 
 

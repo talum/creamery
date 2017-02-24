@@ -31470,7 +31470,8 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    parlors: state.parlors
+	    parlors: state.parlors,
+	    loggedIn: state.sessions.loggedIn
 	  };
 	};
 
@@ -31552,6 +31553,13 @@
 	    value: function render() {
 	      var parlorsById = this.props.parlors.byId;
 	      var parlors = Object.values(parlorsById);
+	      var addParlorButton = _react2.default.createElement(
+	        'button',
+	        {
+	          className: 'button button--color-black',
+	          onClick: this.toggleModalVisibility },
+	        'Add New Parlor'
+	      );
 
 	      return _react2.default.createElement(
 	        'div',
@@ -31562,11 +31570,7 @@
 	          null,
 	          this.props.parlors.errors.join(", ")
 	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'button button--color-black', onClick: this.toggleModalVisibility },
-	          'Add New Parlor'
-	        ),
+	        this.props.loggedIn && addParlorButton,
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'flex-grid' },
@@ -32021,6 +32025,11 @@
 
 	      var parlorId = this.props.routeParams.id;
 	      var parlor = this.props.parlors.byId[parlorId];
+	      var addIceCreamButton = _react2.default.createElement(
+	        'button',
+	        { className: 'button button--color-black', onClick: this.toggleModalVisibility },
+	        'Add New Ice Cream'
+	      );
 
 	      if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
 	        return _react2.default.createElement(_Loader2.default, null);
@@ -32036,11 +32045,7 @@
 	            null,
 	            parlor.name
 	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { className: 'button button--color-black', onClick: this.toggleModalVisibility },
-	            'Add New Ice Cream'
-	          ),
+	          this.props.loggedIn && addIceCreamButton,
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'flex-grid' },
@@ -32072,7 +32077,8 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    parlors: state.parlors,
-	    iceCreams: state.iceCreams
+	    iceCreams: state.iceCreams,
+	    loggedIn: state.sessions.loggedIn
 	  };
 	};
 
