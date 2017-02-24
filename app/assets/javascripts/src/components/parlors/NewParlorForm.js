@@ -32,6 +32,7 @@ class ParlorForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.dispatch(addParlor(this.state))
+    this.props.toggleModalVisibility()
     this.clearForm()
   }
 
