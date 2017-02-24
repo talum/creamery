@@ -28720,7 +28720,7 @@
 	    _react2.default.createElement(_Nav2.default, null),
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'level level--has-background-image level--padding-xl', style: { backgroundImage: "url('http://localhost:3000/assets/ice-cream-splash.jpg')" } },
+	      { className: 'level level--has-background-image level--padding-xl', style: { backgroundImage: "url('/ice-cream-splash.jpg')" } },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'flex-grid' },
