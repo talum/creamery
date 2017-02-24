@@ -28990,14 +28990,15 @@
 
 
 	_axios2.default.defaults.baseURL = BASE_URL;
-	_axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
 	_axios2.default.defaults.headers.post['Content-Type'] = 'application/json';
 
 	function fetch(route) {
+	  _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
 	  return _axios2.default.get('' + (BASE_URL + route));
 	}
 
 	function post(route, payload) {
+	  _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
 	  return _axios2.default.post('' + (BASE_URL + route), payload);
 	}
 
