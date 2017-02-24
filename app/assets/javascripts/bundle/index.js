@@ -31564,7 +31564,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { onClick: this.toggleModalVisibility },
+	          { className: 'button button--color-black', onClick: this.toggleModalVisibility },
 	          'Add New Parlor'
 	        ),
 	        _react2.default.createElement(
@@ -32038,7 +32038,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.toggleModalVisibility },
+	            { className: 'button button--color-black', onClick: this.toggleModalVisibility },
 	            'Add New Ice Cream'
 	          ),
 	          _react2.default.createElement(

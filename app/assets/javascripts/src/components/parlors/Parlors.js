@@ -36,7 +36,7 @@ class Parlors extends React.Component {
         <div>
           { this.props.parlors.errors.join(", ") }
         </div>
-        <button onClick={this.toggleModalVisibility}>
+        <button className="button button--color-black" onClick={this.toggleModalVisibility}>
           Add New Parlor
         </button>
         <div className="flex-grid">

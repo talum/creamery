@@ -45,7 +45,7 @@ class Parlor extends React.Component {
           <h1>
             {parlor.name}
           </h1>
-          <button onClick={this.toggleModalVisibility}>
+          <button className="button button--color-black" onClick={this.toggleModalVisibility}>
             Add New Ice Cream
           </button>
           <div className="flex-grid">
