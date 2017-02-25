@@ -10,6 +10,7 @@ class ParlorForm extends React.Component {
     this.state = this.initialState()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.validateForm = this.validateForm.bind(this)
   }
 
   initialState() {
@@ -31,13 +32,22 @@ class ParlorForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.dispatch(addParlor(this.state))
-    this.props.toggleModalVisibility()
-    this.clearForm()
+    let submissionIsValid = this.validateForm()
+    if (submissionIsValid) {
+      this.props.dispatch(addParlor(this.state))
+      this.props.toggleModalVisibility()
+      this.clearForm()
+    }
   }
 
   clearForm() {
     this.setState(this.initialState())
+  }
+
+  validateForm() {
+    //go through all the input fields and call the validation
+    // toggle the submit button
+    return true
   }
 
   render() {
@@ -49,8 +59,10 @@ class ParlorForm extends React.Component {
             <InputField 
               name={"name"}
               value={this.state.name}
-              placeholder={"name"}
+              placeholder={"Name"}
               handleChange={this.handleChange}
+              isRequired={true}
+              errorMessage="Name is invalid"
             />
           </div>
           <div className="module">
@@ -59,14 +71,7 @@ class ParlorForm extends React.Component {
               value={this.state.street_address}
               placeholder={"Street Address"}
               handleChange={this.handleChange}
-            />
-          </div>
-          <div className="module">
-            <InputField 
-              name={"state"}
-              value={this.state.state}
-              placeholder={"State"}
-              handleChange={this.handleChange}
+              isRequired={true}
             />
           </div>
           <div className="module">
@@ -75,6 +80,16 @@ class ParlorForm extends React.Component {
               value={this.state.city}
               placeholder={"City"}
               handleChange={this.handleChange}
+              isRequired={true}
+            />
+          </div>
+          <div className="module">
+            <InputField 
+              name={"state"}
+              value={this.state.state}
+              placeholder={"State"}
+              handleChange={this.handleChange}
+              isRequired={true}
             />
           </div>
           <div className="module">
@@ -83,6 +98,7 @@ class ParlorForm extends React.Component {
               value={this.state.zip_code}
               placeholder={"Zipcode"}
               handleChange={this.handleChange}
+              isRequired={true}
             />
           </div>
           <div className="module">
