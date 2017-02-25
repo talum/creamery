@@ -8,10 +8,17 @@ module.exports = {
     filename: 'index.js'
   },
   plugins: [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('development'),
-        'API_URL': JSON.stringify('http://localhost:3000')
+        'NODE_ENV': JSON.stringify('production'),
+        'API_URL': JSON.stringify('https://ice-creamery.herokuapp.com')
       }
     })
   ],

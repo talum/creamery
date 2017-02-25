@@ -4,7 +4,7 @@ import Nav from './Nav'
 const App = (props) => (
   <div>
     <Nav />
-    <div className="level level--has-background-image level--padding-xl" style={{backgroundImage: "url('http://localhost:3000/assets/ice-cream-splash.jpg')"}}>
+    <div className="level level--has-background-image level--padding-xl" style={{backgroundImage: "url('/ice-cream-splash.jpg')"}}>
       <div className="flex-grid">
         <div className="flex-grid__item"/>
         <div className="flex-grid__item">
