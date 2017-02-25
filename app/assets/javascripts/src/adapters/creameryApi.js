@@ -1,7 +1,7 @@
 // api adapter
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:3000/api/v1'
+const BASE_URL = `${process.env.API_URL}/api/v1`
 
 axios.defaults.baseURL = BASE_URL
 axios.defaults.headers.post['Content-Type'] = 'application/json'
