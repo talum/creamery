@@ -108,7 +108,7 @@ export function addIceCream(iceCream) {
 
     return postIceCreams(iceCream)
       .then((response) => {
-        dispatch(receiveIceCreamSuccess(response))
+        dispatch(addIceCreamSuccess(response))
       })
       .catch((error) => {
         dispatch(addIceCreamError(error))

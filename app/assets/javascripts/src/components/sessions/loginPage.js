@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField' 
 import SubmitButton from '../sharedComponents/SubmitButton'
 
@@ -8,7 +9,6 @@ import { logInUser } from '../../actions/sessions'
 class LoginPage extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = this.initialState()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)

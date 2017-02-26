@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addParlor } from '../../actions/parlors'
+import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
 
@@ -8,10 +9,11 @@ class ParlorForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState()
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = Form.handleChange.bind(this)
+    this.validateForm = Form.validateForm.bind(this)
+    this.registerField = Form.registerField.bind(this)
+    this.clearForm = Form.clearForm.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.validateForm = this.validateForm.bind(this)
-    this.registerField = this.registerField.bind(this)
     this.fields = []
   }
 
@@ -27,12 +29,6 @@ class ParlorForm extends React.Component {
     }
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
   handleSubmit(event) {
     event.preventDefault()
     let submissionIsValid = this.validateForm()
@@ -41,20 +37,6 @@ class ParlorForm extends React.Component {
       this.props.toggleModalVisibility()
       this.clearForm()
     }
-  }
-
-  clearForm() {
-    this.setState(this.initialState())
-  }
-
-  registerField(field) {
-    this.fields.push(field)
-  }
-
-  validateForm() {
-    let isValid = this.fields.every((field) => field.fieldIsValid())
-    this.setState({isValid: isValid})
-    return isValid
   }
 
   render() {

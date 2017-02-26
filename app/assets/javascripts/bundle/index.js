@@ -78,15 +78,15 @@
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
-	var _Parlor = __webpack_require__(316);
+	var _Parlor = __webpack_require__(317);
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _loginPage = __webpack_require__(318);
+	var _loginPage = __webpack_require__(319);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(319);
+	var _store = __webpack_require__(320);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -30726,11 +30726,18 @@
 	}(_react2.default.Component);
 
 	InputField.defaultProps = {
+	  isRequired: false,
 	  validate: function validate() {
 	    return true;
 	  },
+	  registerField: function registerField() {
+	    //noop
+	  },
 	  inputType: "text",
-	  emptyMessage: "Field is required"
+	  emptyMessage: "Field is required",
+	  validateForm: function validateForm() {
+	    //noop
+	  }
 	};
 
 	exports.default = InputField;
@@ -31040,7 +31047,7 @@
 	    dispatch(initiateAddIceCream());
 
 	    return (0, _creameryApi.postIceCreams)(iceCream).then(function (response) {
-	      dispatch(receiveIceCreamSuccess(response));
+	      dispatch(addIceCreamSuccess(response));
 	    }).catch(function (error) {
 	      dispatch(addIceCreamError(error));
 	    });
@@ -31791,6 +31798,10 @@
 
 	var _parlors = __webpack_require__(313);
 
+	var _Form = __webpack_require__(316);
+
+	var _Form2 = _interopRequireDefault(_Form);
+
 	var _InputField = __webpack_require__(300);
 
 	var _InputField2 = _interopRequireDefault(_InputField);
@@ -31800,8 +31811,6 @@
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -31818,10 +31827,11 @@
 	    var _this = _possibleConstructorReturn(this, (ParlorForm.__proto__ || Object.getPrototypeOf(ParlorForm)).call(this, props));
 
 	    _this.state = _this.initialState();
-	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleChange = _Form2.default.handleChange.bind(_this);
+	    _this.validateForm = _Form2.default.validateForm.bind(_this);
+	    _this.registerField = _Form2.default.registerField.bind(_this);
+	    _this.clearForm = _Form2.default.clearForm.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
-	    _this.validateForm = _this.validateForm.bind(_this);
-	    _this.registerField = _this.registerField.bind(_this);
 	    _this.fields = [];
 	    return _this;
 	  }
@@ -31840,11 +31850,6 @@
 	      };
 	    }
 	  }, {
-	    key: 'handleChange',
-	    value: function handleChange(event) {
-	      this.setState(_defineProperty({}, event.target.name, event.target.value));
-	    }
-	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
@@ -31854,25 +31859,6 @@
 	        this.props.toggleModalVisibility();
 	        this.clearForm();
 	      }
-	    }
-	  }, {
-	    key: 'clearForm',
-	    value: function clearForm() {
-	      this.setState(this.initialState());
-	    }
-	  }, {
-	    key: 'registerField',
-	    value: function registerField(field) {
-	      this.fields.push(field);
-	    }
-	  }, {
-	    key: 'validateForm',
-	    value: function validateForm() {
-	      var isValid = this.fields.every(function (field) {
-	        return field.fieldIsValid();
-	      });
-	      this.setState({ isValid: isValid });
-	      return isValid;
 	    }
 	  }, {
 	    key: 'render',
@@ -31979,6 +31965,45 @@
 
 /***/ },
 /* 316 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var handleChange = function handleChange(event) {
+	  this.setState(_defineProperty({}, event.target.name, event.target.value));
+	};
+
+	var registerField = function registerField(field) {
+	  this.fields.push(field);
+	};
+
+	var validateForm = function validateForm() {
+	  var isValid = this.fields.every(function (field) {
+	    return field.fieldIsValid();
+	  });
+	  this.setState({ isValid: isValid });
+	  return isValid;
+	};
+
+	var clearForm = function clearForm(props) {
+	  this.setState(this.initialState(props));
+	};
+
+	exports.default = {
+	  handleChange: handleChange,
+	  registerField: registerField,
+	  validateForm: validateForm,
+	  clearForm: clearForm
+	};
+
+/***/ },
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32009,7 +32034,7 @@
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _NewIceCreamForm = __webpack_require__(317);
+	var _NewIceCreamForm = __webpack_require__(318);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
@@ -32125,7 +32150,7 @@
 	exports.default = ParlorContainer;
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32142,6 +32167,10 @@
 
 	var _reactRedux = __webpack_require__(233);
 
+	var _Form = __webpack_require__(316);
+
+	var _Form2 = _interopRequireDefault(_Form);
+
 	var _InputField = __webpack_require__(300);
 
 	var _InputField2 = _interopRequireDefault(_InputField);
@@ -32153,8 +32182,6 @@
 	var _iceCreams = __webpack_require__(305);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -32171,9 +32198,13 @@
 	    var _this = _possibleConstructorReturn(this, (IceCreamForm.__proto__ || Object.getPrototypeOf(IceCreamForm)).call(this, props));
 
 	    _this.state = _this.initialState(props);
-	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleChange = _Form2.default.handleChange.bind(_this);
+	    _this.validateForm = _Form2.default.validateForm.bind(_this);
+	    _this.registerField = _Form2.default.registerField.bind(_this);
+	    _this.clearForm = _Form2.default.clearForm.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    _this.handleImageChange = _this.handleImageChange.bind(_this);
+	    _this.fields = [];
 	    return _this;
 	  }
 
@@ -32185,13 +32216,9 @@
 	        flavors: '',
 	        imageName: '',
 	        imageFile: '',
-	        parlorId: props.parlorId
+	        parlorId: props.parlorId,
+	        isValid: false
 	      };
-	    }
-	  }, {
-	    key: 'handleChange',
-	    value: function handleChange(event) {
-	      this.setState(_defineProperty({}, event.target.name, event.target.value));
 	    }
 	  }, {
 	    key: 'handleImageChange',
@@ -32216,12 +32243,7 @@
 	      event.preventDefault();
 	      this.props.dispatch((0, _iceCreams.addIceCream)(this.state));
 	      this.props.toggleModalVisibility();
-	      this.clearForm();
-	    }
-	  }, {
-	    key: 'clearForm',
-	    value: function clearForm() {
-	      this.setState(this.initialState(this.props));
+	      this.clearForm(this.props);
 	    }
 	  }, {
 	    key: 'render',
@@ -32244,7 +32266,10 @@
 	              name: "title",
 	              value: this.state.title,
 	              placeholder: "title",
-	              handleChange: this.handleChange
+	              handleChange: this.handleChange,
+	              isRequired: true,
+	              validateForm: this.validateForm,
+	              registerField: this.registerField
 	            })
 	          ),
 	          _react2.default.createElement(
@@ -32273,7 +32298,10 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'module' },
-	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	            _react2.default.createElement(_SubmitButton2.default, {
+	              isDisabled: !this.state.isValid,
+	              handleSubmit: this.handleSubmit
+	            })
 	          )
 	        )
 	      );
@@ -32288,7 +32316,7 @@
 	exports.default = NewIceCreamForm;
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32304,6 +32332,10 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRedux = __webpack_require__(233);
+
+	var _Form = __webpack_require__(316);
+
+	var _Form2 = _interopRequireDefault(_Form);
 
 	var _InputField = __webpack_require__(300);
 
@@ -32419,7 +32451,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32430,11 +32462,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(320);
+	var _reduxThunk = __webpack_require__(321);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(321);
+	var _reducers = __webpack_require__(322);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -32445,7 +32477,7 @@
 	exports.default = store;
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32473,7 +32505,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32484,19 +32516,19 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(322);
+	var _users = __webpack_require__(323);
 
-	var _iceCreams = __webpack_require__(323);
+	var _iceCreams = __webpack_require__(324);
 
-	var _parlors = __webpack_require__(324);
+	var _parlors = __webpack_require__(325);
 
-	var _flavors = __webpack_require__(325);
+	var _flavors = __webpack_require__(326);
 
-	var _iceCreamFlavors = __webpack_require__(326);
+	var _iceCreamFlavors = __webpack_require__(327);
 
-	var _sessions = __webpack_require__(327);
+	var _sessions = __webpack_require__(328);
 
-	var _reviews = __webpack_require__(328);
+	var _reviews = __webpack_require__(329);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -32511,7 +32543,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32536,7 +32568,7 @@
 	} // users reducer
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32643,7 +32675,7 @@
 	});
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32748,7 +32780,7 @@
 	});
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32837,7 +32869,7 @@
 	});
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32926,7 +32958,7 @@
 	});
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32997,7 +33029,7 @@
 	});
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

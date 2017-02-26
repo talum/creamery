@@ -71,11 +71,18 @@ class InputField extends React.Component {
 }
 
 InputField.defaultProps = {
+  isRequired: false,
   validate: function() {
     return true
   },
+  registerField: function() {
+    //noop
+  },
   inputType: "text",
-  emptyMessage: "Field is required"
+  emptyMessage: "Field is required",
+  validateForm: function() {
+    //noop
+  }
 }
 
 export default InputField

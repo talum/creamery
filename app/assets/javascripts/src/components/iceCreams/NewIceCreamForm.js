@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
 import { addIceCream } from '../../actions/iceCreams'
@@ -8,9 +9,13 @@ class IceCreamForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState(props)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = Form.handleChange.bind(this)
+    this.validateForm = Form.validateForm.bind(this)
+    this.registerField = Form.registerField.bind(this)
+    this.clearForm = Form.clearForm.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleImageChange = this.handleImageChange.bind(this)
+    this.fields = []
   }
 
   initialState(props) {
@@ -19,14 +24,9 @@ class IceCreamForm extends React.Component {
       flavors: '',
       imageName: '',
       imageFile: '',
-      parlorId: props.parlorId
+      parlorId: props.parlorId,
+      isValid: false
     }
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
   }
 
   handleImageChange(event) {
@@ -48,13 +48,9 @@ class IceCreamForm extends React.Component {
     event.preventDefault()
     this.props.dispatch(addIceCream(this.state))
     this.props.toggleModalVisibility()
-    this.clearForm()
+    this.clearForm(this.props)
   }
 
-  clearForm () {
-    this.setState(this.initialState(this.props))
-  }
-  
   render() {
     return(
       <div>
@@ -66,6 +62,9 @@ class IceCreamForm extends React.Component {
               value={this.state.title}
               placeholder={"title"}
               handleChange={this.handleChange}
+              isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
@@ -86,7 +85,10 @@ class IceCreamForm extends React.Component {
             <img className="image-frame" src={this.state.imageFile}/>
           </div>
           <div className="module">
-            <SubmitButton handleSubmit={this.handleSubmit}/>
+            <SubmitButton
+              isDisabled={!this.state.isValid}
+              handleSubmit={this.handleSubmit}
+            />
           </div>
         </form>
       </div>
