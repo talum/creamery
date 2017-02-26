@@ -31806,6 +31806,10 @@
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
+	var _SelectField = __webpack_require__(330);
+
+	var _SelectField2 = _interopRequireDefault(_SelectField);
+
 	var _SubmitButton = __webpack_require__(302);
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
@@ -31859,6 +31863,18 @@
 	        this.props.toggleModalVisibility();
 	        this.clearForm();
 	      }
+	    }
+	  }, {
+	    key: 'stateOptions',
+	    value: function stateOptions() {
+	      var usStates = ["AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY"];
+	      return usStates.map(function (abbr, idx) {
+	        return _react2.default.createElement(
+	          'option',
+	          { key: idx, value: abbr },
+	          abbr
+	        );
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -31917,15 +31933,19 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'module' },
-	            _react2.default.createElement(_InputField2.default, {
-	              name: "state",
-	              value: this.state.state,
-	              placeholder: "State",
-	              handleChange: this.handleChange,
-	              isRequired: true,
-	              validateForm: this.validateForm,
-	              registerField: this.registerField
-	            })
+	            _react2.default.createElement(
+	              _SelectField2.default,
+	              {
+	                name: "state",
+	                value: this.state.state,
+	                placeholder: "State",
+	                handleChange: this.handleChange,
+	                isRequired: true,
+	                registerField: this.registerField,
+	                validateForm: this.validateForm
+	              },
+	              this.stateOptions()
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -33137,6 +33157,136 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
+
+/***/ },
+/* 330 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _InputErrorMessage = __webpack_require__(301);
+
+	var _InputErrorMessage2 = _interopRequireDefault(_InputErrorMessage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SelectField = function (_React$Component) {
+	  _inherits(SelectField, _React$Component);
+
+	  function SelectField(props) {
+	    _classCallCheck(this, SelectField);
+
+	    var _this = _possibleConstructorReturn(this, (SelectField.__proto__ || Object.getPrototypeOf(SelectField)).call(this, props));
+
+	    _this.state = {
+	      isValid: false,
+	      errorIsVisible: false
+	    };
+	    _this.validateField = _this.validateField.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(SelectField, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.registerField(this);
+	    }
+	  }, {
+	    key: 'fieldIsValid',
+	    value: function fieldIsValid() {
+	      var fieldIsValid = this.props.validate(this.state.value);
+	      if (this.props.isRequired && !!this.props.value.length && fieldIsValid) {
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
+	  }, {
+	    key: 'validateField',
+	    value: function validateField(event) {
+	      this.props.validateForm();
+	      var errorIsVisible = void 0;
+	      var message = void 0;
+	      var isValid = this.props.validate(event);
+
+	      if (this.props.isRequired && !this.props.value.length) {
+	        isValid = false;
+	        errorIsVisible = true;
+	        message = this.props.emptyMessage;
+	      } else if (isValid) {
+	        errorIsVisible = false;
+	      } else {
+	        errorIsVisible = true;
+	        message = this.props.errorMessage;
+	      }
+
+	      this.setState({
+	        isValid: isValid,
+	        errorIsVisible: errorIsVisible,
+	        message: message
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'select',
+	          {
+	            className: 'input-field',
+	            name: this.props.name,
+	            value: this.props.value,
+	            placeholder: this.props.placeholder,
+	            onBlur: this.validateField,
+	            onChange: this.props.handleChange
+	          },
+	          this.props.children
+	        ),
+	        _react2.default.createElement(_InputErrorMessage2.default, {
+	          isVisible: this.state.errorIsVisible,
+	          message: this.state.message
+	        })
+	      );
+	    }
+	  }]);
+
+	  return SelectField;
+	}(_react2.default.Component);
+
+	SelectField.defaultProps = {
+	  isRequired: false,
+	  validate: function validate() {
+	    return true;
+	  },
+	  registerField: function registerField() {
+	    //noop
+	  },
+	  inputType: "text",
+	  emptyMessage: "Field is required",
+	  validateForm: function validateForm() {
+	    //noop
+	  }
+	};
+
+	exports.default = SelectField;
 
 /***/ }
 /******/ ]);

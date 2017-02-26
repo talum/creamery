@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { addParlor } from '../../actions/parlors'
 import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
+import SelectField from '../sharedComponents/SelectField'
 import SubmitButton from '../sharedComponents/SubmitButton'
 
 class ParlorForm extends React.Component {
@@ -37,6 +38,11 @@ class ParlorForm extends React.Component {
       this.props.toggleModalVisibility()
       this.clearForm()
     }
+  }
+
+  stateOptions() {
+    let usStates = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY" ]
+    return usStates.map((abbr, idx) => (<option key={idx} value={abbr}>{abbr}</option>))
   }
 
   render() {
@@ -79,15 +85,17 @@ class ParlorForm extends React.Component {
             />
           </div>
           <div className="module">
-            <InputField 
+            <SelectField
               name={"state"}
               value={this.state.state}
               placeholder={"State"}
               handleChange={this.handleChange}
               isRequired={true}
-              validateForm={this.validateForm}
               registerField={this.registerField}
-            />
+              validateForm={this.validateForm}
+            >
+              {this.stateOptions()}
+            </SelectField>
           </div>
           <div className="module">
             <InputField 
