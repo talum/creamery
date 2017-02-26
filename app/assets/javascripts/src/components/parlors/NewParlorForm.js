@@ -11,6 +11,8 @@ class ParlorForm extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.validateForm = this.validateForm.bind(this)
+    this.registerField = this.registerField.bind(this)
+    this.fields = []
   }
 
   initialState() {
@@ -20,7 +22,8 @@ class ParlorForm extends React.Component {
       city: '',
       state: '',
       zip_code: '',
-      chain: false
+      chain: false,
+      isValid: false
     }
   }
 
@@ -44,10 +47,14 @@ class ParlorForm extends React.Component {
     this.setState(this.initialState())
   }
 
+  registerField(field) {
+    this.fields.push(field)
+  }
+
   validateForm() {
-    //go through all the input fields and call the validation
-    // toggle the submit button
-    return true
+    let isValid = this.fields.every((field) => field.fieldIsValid())
+    this.setState({isValid: isValid})
+    return isValid
   }
 
   render() {
@@ -63,6 +70,8 @@ class ParlorForm extends React.Component {
               handleChange={this.handleChange}
               isRequired={true}
               errorMessage="Name is invalid"
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
@@ -72,6 +81,8 @@ class ParlorForm extends React.Component {
               placeholder={"Street Address"}
               handleChange={this.handleChange}
               isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
@@ -81,6 +92,8 @@ class ParlorForm extends React.Component {
               placeholder={"City"}
               handleChange={this.handleChange}
               isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
@@ -90,6 +103,8 @@ class ParlorForm extends React.Component {
               placeholder={"State"}
               handleChange={this.handleChange}
               isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
@@ -99,10 +114,15 @@ class ParlorForm extends React.Component {
               placeholder={"Zipcode"}
               handleChange={this.handleChange}
               isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
-            <SubmitButton handleSubmit={this.handleSubmit}/>
+            <SubmitButton
+              isDisabled={!this.state.isValid}
+              handleSubmit={this.handleSubmit}
+            />
           </div>
         </form>
       </div>

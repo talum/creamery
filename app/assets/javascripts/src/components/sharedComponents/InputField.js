@@ -10,8 +10,22 @@ class InputField extends React.Component {
     } 
     this.validateField = this.validateField.bind(this)
   }
+  componentDidMount() {
+    this.props.registerField(this)
+  }
+
+  fieldIsValid() {
+    let fieldIsValid = this.props.validate(this.state.value)
+    if (this.props.isRequired && !!this.props.value.length && fieldIsValid) {
+      return true 
+    } else {
+      return false
+    }
+  }
 
   validateField(event) {
+    // add the error messages
+    this.props.validateForm()
     let errorIsVisible
     let message
     let isValid = this.props.validate(event)

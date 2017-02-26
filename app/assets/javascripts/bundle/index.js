@@ -30659,8 +30659,25 @@
 	  }
 
 	  _createClass(InputField, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.registerField(this);
+	    }
+	  }, {
+	    key: 'fieldIsValid',
+	    value: function fieldIsValid() {
+	      var fieldIsValid = this.props.validate(this.state.value);
+	      if (this.props.isRequired && !!this.props.value.length && fieldIsValid) {
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
+	  }, {
 	    key: 'validateField',
 	    value: function validateField(event) {
+	      // add the error messages
+	      this.props.validateForm();
 	      var errorIsVisible = void 0;
 	      var message = void 0;
 	      var isValid = this.props.validate(event);
@@ -30788,7 +30805,8 @@
 	        type: "submit",
 	        value: "submit",
 	        onClick: this.props.handleSubmit,
-	        className: "button button--color-black button--width-full"
+	        className: "button button--color-black button--width-full",
+	        disabled: this.props.isDisabled
 	      });
 	    }
 	  }]);
@@ -31803,6 +31821,8 @@
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    _this.validateForm = _this.validateForm.bind(_this);
+	    _this.registerField = _this.registerField.bind(_this);
+	    _this.fields = [];
 	    return _this;
 	  }
 
@@ -31815,7 +31835,8 @@
 	        city: '',
 	        state: '',
 	        zip_code: '',
-	        chain: false
+	        chain: false,
+	        isValid: false
 	      };
 	    }
 	  }, {
@@ -31840,11 +31861,18 @@
 	      this.setState(this.initialState());
 	    }
 	  }, {
+	    key: 'registerField',
+	    value: function registerField(field) {
+	      this.fields.push(field);
+	    }
+	  }, {
 	    key: 'validateForm',
 	    value: function validateForm() {
-	      //go through all the input fields and call the validation
-	      // toggle the submit button
-	      return true;
+	      var isValid = this.fields.every(function (field) {
+	        return field.fieldIsValid();
+	      });
+	      this.setState({ isValid: isValid });
+	      return isValid;
 	    }
 	  }, {
 	    key: 'render',
@@ -31869,7 +31897,9 @@
 	              placeholder: "Name",
 	              handleChange: this.handleChange,
 	              isRequired: true,
-	              errorMessage: 'Name is invalid'
+	              errorMessage: 'Name is invalid',
+	              validateForm: this.validateForm,
+	              registerField: this.registerField
 	            })
 	          ),
 	          _react2.default.createElement(
@@ -31880,7 +31910,9 @@
 	              value: this.state.street_address,
 	              placeholder: "Street Address",
 	              handleChange: this.handleChange,
-	              isRequired: true
+	              isRequired: true,
+	              validateForm: this.validateForm,
+	              registerField: this.registerField
 	            })
 	          ),
 	          _react2.default.createElement(
@@ -31891,7 +31923,9 @@
 	              value: this.state.city,
 	              placeholder: "City",
 	              handleChange: this.handleChange,
-	              isRequired: true
+	              isRequired: true,
+	              validateForm: this.validateForm,
+	              registerField: this.registerField
 	            })
 	          ),
 	          _react2.default.createElement(
@@ -31902,7 +31936,9 @@
 	              value: this.state.state,
 	              placeholder: "State",
 	              handleChange: this.handleChange,
-	              isRequired: true
+	              isRequired: true,
+	              validateForm: this.validateForm,
+	              registerField: this.registerField
 	            })
 	          ),
 	          _react2.default.createElement(
@@ -31913,13 +31949,18 @@
 	              value: this.state.zip_code,
 	              placeholder: "Zipcode",
 	              handleChange: this.handleChange,
-	              isRequired: true
+	              isRequired: true,
+	              validateForm: this.validateForm,
+	              registerField: this.registerField
 	            })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'module' },
-	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	            _react2.default.createElement(_SubmitButton2.default, {
+	              isDisabled: !this.state.isValid,
+	              handleSubmit: this.handleSubmit
+	            })
 	          )
 	        )
 	      );
