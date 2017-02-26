@@ -5,7 +5,7 @@ class InputField extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isValid: false,
+      isValid: null,
       errorIsVisible: false
     } 
     this.validateField = this.validateField.bind(this)
@@ -48,12 +48,22 @@ class InputField extends React.Component {
     })
   }
 
+  borderColor() {
+    let isValid = this.state.isValid
+    if (isValid === true) {
+      return "input-field--border--green"
+    } else if (isValid === false) {
+      return "input-field--border--pink"
+    } else {
+      return 
+    }
+  }
 
   render() {
     return(
       <div>
         <input
-          className="input-field"
+          className={`input-field ${this.borderColor()}`}
           type={this.props.inputType}
           name={this.props.name}
           value={this.props.value}

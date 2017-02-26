@@ -6,7 +6,10 @@
   font-size: $font-size--m;
 }
 
-.input-field:focus {
-  border: 1px solid $gray;
-}
+.input-field:focus { @extend .input-field--border--blue; }
+
+//colors
+.input-field--border--blue  { border-color: $blue } 
+.input-field--border--pink  { border-color: $pink; }
+.input-field--border--green { border-color: $green; }
 

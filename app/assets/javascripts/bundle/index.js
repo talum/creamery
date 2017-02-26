@@ -66,27 +66,27 @@
 
 	var _NewUserForm2 = _interopRequireDefault(_NewUserForm);
 
-	var _IceCreamListContainer = __webpack_require__(303);
+	var _IceCreamListContainer = __webpack_require__(302);
 
 	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
 
-	var _IceCreamDetail = __webpack_require__(308);
+	var _IceCreamDetail = __webpack_require__(307);
 
 	var _IceCreamDetail2 = _interopRequireDefault(_IceCreamDetail);
 
-	var _ParlorsContainer = __webpack_require__(311);
+	var _ParlorsContainer = __webpack_require__(310);
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
-	var _Parlor = __webpack_require__(317);
+	var _Parlor = __webpack_require__(318);
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _loginPage = __webpack_require__(319);
+	var _loginPage = __webpack_require__(320);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(320);
+	var _store = __webpack_require__(321);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -30451,7 +30451,7 @@
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
-	var _SubmitButton = __webpack_require__(302);
+	var _SubmitButton = __webpack_require__(301);
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
@@ -30630,7 +30630,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _InputErrorMessage = __webpack_require__(301);
+	var _InputErrorMessage = __webpack_require__(317);
 
 	var _InputErrorMessage2 = _interopRequireDefault(_InputErrorMessage);
 
@@ -30651,7 +30651,7 @@
 	    var _this = _possibleConstructorReturn(this, (InputField.__proto__ || Object.getPrototypeOf(InputField)).call(this, props));
 
 	    _this.state = {
-	      isValid: false,
+	      isValid: null,
 	      errorIsVisible: false
 	    };
 	    _this.validateField = _this.validateField.bind(_this);
@@ -30700,13 +30700,25 @@
 	      });
 	    }
 	  }, {
+	    key: 'borderColor',
+	    value: function borderColor() {
+	      var isValid = this.state.isValid;
+	      if (isValid === true) {
+	        return "input-field--border--green";
+	      } else if (isValid === false) {
+	        return "input-field--border--pink";
+	      } else {
+	        return;
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement('input', {
-	          className: 'input-field',
+	          className: 'input-field ' + this.borderColor(),
 	          type: this.props.inputType,
 	          name: this.props.name,
 	          value: this.props.value,
@@ -30744,36 +30756,6 @@
 
 /***/ },
 /* 301 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var InputErrorMessage = function InputErrorMessage(props) {
-	  if (props.isVisible) {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      props.message
-	    );
-	  } else {
-	    return _react2.default.createElement('div', null);
-	  }
-	};
-
-	exports.default = InputErrorMessage;
-
-/***/ },
-/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -30824,7 +30806,7 @@
 	exports.default = SubmitButton;
 
 /***/ },
-/* 303 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30835,7 +30817,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _IceCreamList = __webpack_require__(304);
+	var _IceCreamList = __webpack_require__(303);
 
 	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
 
@@ -30853,7 +30835,7 @@
 	exports.default = IceCreamListContainer;
 
 /***/ },
-/* 304 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30868,13 +30850,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
-	var _IceCreamListItem = __webpack_require__(306);
+	var _IceCreamListItem = __webpack_require__(305);
 
 	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
 
-	var _Loader = __webpack_require__(307);
+	var _Loader = __webpack_require__(306);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
@@ -30931,7 +30913,7 @@
 	exports.default = IceCreamList;
 
 /***/ },
-/* 305 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31055,7 +31037,7 @@
 	}
 
 /***/ },
-/* 306 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31103,7 +31085,7 @@
 	            _react2.default.createElement(
 	              "div",
 	              { className: "card__body" },
-	              _react2.default.createElement("img", { className: "image-frame", src: iceCream.image_url })
+	              _react2.default.createElement("img", { className: "image-frame image-frame--top-round", src: iceCream.image_url })
 	            ),
 	            _react2.default.createElement(
 	              "div",
@@ -31152,7 +31134,7 @@
 	exports.default = IceCreamListItem;
 
 /***/ },
-/* 307 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31180,7 +31162,7 @@
 	exports.default = Loader;
 
 /***/ },
-/* 308 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31199,13 +31181,13 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
-	var _NewReviewForm = __webpack_require__(309);
+	var _NewReviewForm = __webpack_require__(308);
 
 	var _NewReviewForm2 = _interopRequireDefault(_NewReviewForm);
 
-	var _Loader = __webpack_require__(307);
+	var _Loader = __webpack_require__(306);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
@@ -31288,7 +31270,7 @@
 	exports.default = IceCreamDetail;
 
 /***/ },
-/* 309 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31305,13 +31287,13 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _reviews = __webpack_require__(310);
+	var _reviews = __webpack_require__(309);
 
 	var _InputField = __webpack_require__(300);
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
-	var _SubmitButton = __webpack_require__(302);
+	var _SubmitButton = __webpack_require__(301);
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
@@ -31406,7 +31388,7 @@
 	exports.default = NewReviewForm;
 
 /***/ },
-/* 310 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31456,7 +31438,7 @@
 	}
 
 /***/ },
-/* 311 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31467,7 +31449,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Parlors = __webpack_require__(312);
+	var _Parlors = __webpack_require__(311);
 
 	var _Parlors2 = _interopRequireDefault(_Parlors);
 
@@ -31485,7 +31467,7 @@
 	exports.default = ParlorsContainer;
 
 /***/ },
-/* 312 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31502,17 +31484,17 @@
 
 	var _reactRouter = __webpack_require__(178);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(312);
 
-	var _Modal = __webpack_require__(314);
+	var _Modal = __webpack_require__(313);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _NewParlorForm = __webpack_require__(315);
+	var _NewParlorForm = __webpack_require__(314);
 
 	var _NewParlorForm2 = _interopRequireDefault(_NewParlorForm);
 
-	var _Loader = __webpack_require__(307);
+	var _Loader = __webpack_require__(306);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
@@ -31630,7 +31612,7 @@
 	exports.default = Parlors;
 
 /***/ },
-/* 313 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31719,7 +31701,7 @@
 	}
 
 /***/ },
-/* 314 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31779,7 +31761,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 315 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31796,9 +31778,9 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(312);
 
-	var _Form = __webpack_require__(316);
+	var _Form = __webpack_require__(315);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -31806,11 +31788,11 @@
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
-	var _SelectField = __webpack_require__(330);
+	var _SelectField = __webpack_require__(316);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 
-	var _SubmitButton = __webpack_require__(302);
+	var _SubmitButton = __webpack_require__(301);
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
@@ -31984,7 +31966,7 @@
 	exports.default = NewParlorForm;
 
 /***/ },
-/* 316 */
+/* 315 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32023,7 +32005,183 @@
 	};
 
 /***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _InputErrorMessage = __webpack_require__(317);
+
+	var _InputErrorMessage2 = _interopRequireDefault(_InputErrorMessage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SelectField = function (_React$Component) {
+	  _inherits(SelectField, _React$Component);
+
+	  function SelectField(props) {
+	    _classCallCheck(this, SelectField);
+
+	    var _this = _possibleConstructorReturn(this, (SelectField.__proto__ || Object.getPrototypeOf(SelectField)).call(this, props));
+
+	    _this.state = {
+	      isValid: null,
+	      errorIsVisible: false
+	    };
+	    _this.validateField = _this.validateField.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(SelectField, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.registerField(this);
+	    }
+	  }, {
+	    key: 'fieldIsValid',
+	    value: function fieldIsValid() {
+	      var fieldIsValid = this.props.validate(this.state.value);
+	      if (this.props.isRequired && !!this.props.value.length && fieldIsValid) {
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
+	  }, {
+	    key: 'borderColor',
+	    value: function borderColor() {
+	      var isValid = this.state.isValid;
+	      if (isValid === true) {
+	        return "input-field--border--green";
+	      } else if (isValid === false) {
+	        return "input-field--border--pink";
+	      } else {
+	        return;
+	      }
+	    }
+	  }, {
+	    key: 'validateField',
+	    value: function validateField(event) {
+	      this.props.validateForm();
+	      var errorIsVisible = void 0;
+	      var message = void 0;
+	      var isValid = this.props.validate(event);
+
+	      if (this.props.isRequired && !this.props.value.length) {
+	        isValid = false;
+	        errorIsVisible = true;
+	        message = this.props.emptyMessage;
+	      } else if (isValid) {
+	        errorIsVisible = false;
+	      } else {
+	        errorIsVisible = true;
+	        message = this.props.errorMessage;
+	      }
+
+	      this.setState({
+	        isValid: isValid,
+	        errorIsVisible: errorIsVisible,
+	        message: message
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'select',
+	          {
+	            className: 'input-field ' + this.borderColor(),
+	            name: this.props.name,
+	            value: this.props.value,
+	            placeholder: this.props.placeholder,
+	            onBlur: this.validateField,
+	            onChange: this.props.handleChange
+	          },
+	          this.props.children
+	        ),
+	        _react2.default.createElement(_InputErrorMessage2.default, {
+	          isVisible: this.state.errorIsVisible,
+	          message: this.state.message
+	        })
+	      );
+	    }
+	  }]);
+
+	  return SelectField;
+	}(_react2.default.Component);
+
+	SelectField.defaultProps = {
+	  isRequired: false,
+	  validate: function validate() {
+	    return true;
+	  },
+	  registerField: function registerField() {
+	    //noop
+	  },
+	  inputType: "text",
+	  emptyMessage: "Field is required",
+	  validateForm: function validateForm() {
+	    //noop
+	  }
+	};
+
+	exports.default = SelectField;
+
+/***/ },
 /* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InputErrorMessage = function InputErrorMessage(props) {
+	  if (props.isVisible) {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "module" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "heading heading--color-pink" },
+	        props.message
+	      )
+	    );
+	  } else {
+	    return _react2.default.createElement("div", null);
+	  }
+	};
+
+	exports.default = InputErrorMessage;
+
+/***/ },
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32042,23 +32200,23 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(312);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
-	var _Modal = __webpack_require__(314);
+	var _Modal = __webpack_require__(313);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Loader = __webpack_require__(307);
+	var _Loader = __webpack_require__(306);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _NewIceCreamForm = __webpack_require__(318);
+	var _NewIceCreamForm = __webpack_require__(319);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
-	var _IceCreamListItem = __webpack_require__(306);
+	var _IceCreamListItem = __webpack_require__(305);
 
 	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
 
@@ -32170,7 +32328,7 @@
 	exports.default = ParlorContainer;
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32187,7 +32345,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Form = __webpack_require__(316);
+	var _Form = __webpack_require__(315);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -32195,11 +32353,11 @@
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
-	var _SubmitButton = __webpack_require__(302);
+	var _SubmitButton = __webpack_require__(301);
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32336,7 +32494,7 @@
 	exports.default = NewIceCreamForm;
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32353,7 +32511,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Form = __webpack_require__(316);
+	var _Form = __webpack_require__(315);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -32361,7 +32519,7 @@
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
-	var _SubmitButton = __webpack_require__(302);
+	var _SubmitButton = __webpack_require__(301);
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
@@ -32471,7 +32629,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32482,11 +32640,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(321);
+	var _reduxThunk = __webpack_require__(322);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(322);
+	var _reducers = __webpack_require__(323);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -32497,7 +32655,7 @@
 	exports.default = store;
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32525,7 +32683,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32536,19 +32694,19 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(323);
+	var _users = __webpack_require__(324);
 
-	var _iceCreams = __webpack_require__(324);
+	var _iceCreams = __webpack_require__(325);
 
-	var _parlors = __webpack_require__(325);
+	var _parlors = __webpack_require__(326);
 
-	var _flavors = __webpack_require__(326);
+	var _flavors = __webpack_require__(327);
 
-	var _iceCreamFlavors = __webpack_require__(327);
+	var _iceCreamFlavors = __webpack_require__(328);
 
-	var _sessions = __webpack_require__(328);
+	var _sessions = __webpack_require__(329);
 
-	var _reviews = __webpack_require__(329);
+	var _reviews = __webpack_require__(330);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -32563,7 +32721,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32588,7 +32746,7 @@
 	} // users reducer
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32605,11 +32763,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
 	var iceCreamsActions = _interopRequireWildcard(_iceCreams);
 
-	var _reviews = __webpack_require__(310);
+	var _reviews = __webpack_require__(309);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -32695,7 +32853,7 @@
 	});
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32710,11 +32868,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(312);
 
 	var parlorActions = _interopRequireWildcard(_parlors);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -32800,7 +32958,7 @@
 	});
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32816,7 +32974,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -32889,7 +33047,7 @@
 	});
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32905,7 +33063,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -32978,7 +33136,7 @@
 	});
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33049,7 +33207,7 @@
 	});
 
 /***/ },
-/* 329 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33068,9 +33226,9 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(305);
+	var _iceCreams = __webpack_require__(304);
 
-	var _reviews2 = __webpack_require__(310);
+	var _reviews2 = __webpack_require__(309);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -33157,136 +33315,6 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
-
-/***/ },
-/* 330 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _InputErrorMessage = __webpack_require__(301);
-
-	var _InputErrorMessage2 = _interopRequireDefault(_InputErrorMessage);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var SelectField = function (_React$Component) {
-	  _inherits(SelectField, _React$Component);
-
-	  function SelectField(props) {
-	    _classCallCheck(this, SelectField);
-
-	    var _this = _possibleConstructorReturn(this, (SelectField.__proto__ || Object.getPrototypeOf(SelectField)).call(this, props));
-
-	    _this.state = {
-	      isValid: false,
-	      errorIsVisible: false
-	    };
-	    _this.validateField = _this.validateField.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(SelectField, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.props.registerField(this);
-	    }
-	  }, {
-	    key: 'fieldIsValid',
-	    value: function fieldIsValid() {
-	      var fieldIsValid = this.props.validate(this.state.value);
-	      if (this.props.isRequired && !!this.props.value.length && fieldIsValid) {
-	        return true;
-	      } else {
-	        return false;
-	      }
-	    }
-	  }, {
-	    key: 'validateField',
-	    value: function validateField(event) {
-	      this.props.validateForm();
-	      var errorIsVisible = void 0;
-	      var message = void 0;
-	      var isValid = this.props.validate(event);
-
-	      if (this.props.isRequired && !this.props.value.length) {
-	        isValid = false;
-	        errorIsVisible = true;
-	        message = this.props.emptyMessage;
-	      } else if (isValid) {
-	        errorIsVisible = false;
-	      } else {
-	        errorIsVisible = true;
-	        message = this.props.errorMessage;
-	      }
-
-	      this.setState({
-	        isValid: isValid,
-	        errorIsVisible: errorIsVisible,
-	        message: message
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'select',
-	          {
-	            className: 'input-field',
-	            name: this.props.name,
-	            value: this.props.value,
-	            placeholder: this.props.placeholder,
-	            onBlur: this.validateField,
-	            onChange: this.props.handleChange
-	          },
-	          this.props.children
-	        ),
-	        _react2.default.createElement(_InputErrorMessage2.default, {
-	          isVisible: this.state.errorIsVisible,
-	          message: this.state.message
-	        })
-	      );
-	    }
-	  }]);
-
-	  return SelectField;
-	}(_react2.default.Component);
-
-	SelectField.defaultProps = {
-	  isRequired: false,
-	  validate: function validate() {
-	    return true;
-	  },
-	  registerField: function registerField() {
-	    //noop
-	  },
-	  inputType: "text",
-	  emptyMessage: "Field is required",
-	  validateForm: function validateForm() {
-	    //noop
-	  }
-	};
-
-	exports.default = SelectField;
 
 /***/ }
 /******/ ]);

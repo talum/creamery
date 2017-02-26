@@ -3,8 +3,10 @@ import React from 'react'
 const InputErrorMessage = (props) => {
   if (props.isVisible) {
     return (
-      <div>
-        { props.message}
+      <div className="module">
+        <div className="heading heading--color-pink">
+          { props.message}
+        </div>
       </div>
     ) 
   } else {
