@@ -12,5 +12,5 @@ Rails.application.routes.draw do
       post '/login', to: "sessions#create"
     end
   end
-  get '*path', to: "landing#index", constraints: -> (req) { !(req.fullpath =~ /^\/assets\/.*/) }
+  get '*path', to: "landing#index", constraints: -> (req) { req.path !~ /\.(png|jpg|js|css)$/ }
 end
