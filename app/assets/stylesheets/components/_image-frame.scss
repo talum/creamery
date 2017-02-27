@@ -1,7 +1,10 @@
+$image-height: 256px;
+
 .image-frame {
   position: relative;
   width: 100%;
-  height: auto;
+  overflow: hidden;
+  max-height: $image-height;
 }
 
 .image-frame--top-round {

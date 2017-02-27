@@ -8,7 +8,9 @@ class IceCreamListItem extends React.Component {
         <div className="module">
           <div className="card card--mosaic">
             <div className="card__body">
-              <img className="image-frame image-frame--top-round" src={iceCream.image_url} />
+              <div className="image-frame image-frame--top-round">
+                <img src={iceCream.image_url} />
+              </div>
             </div>
             <div className="card__footer">
               <div className="module module--padding--s">
