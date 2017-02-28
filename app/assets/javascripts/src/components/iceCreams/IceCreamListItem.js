@@ -21,7 +21,11 @@ class IceCreamListItem extends React.Component {
               <div className="module module--padding--s">
                 <div className="media-block media-block--spread media-block--alt-side">
                   <div className="media-block__media">
-                    <button>Click me</button>
+                    <div className="svg-container svg-container--small">
+                      <svg viewBox='0 0 32 32'>
+                        <path d='M6 0v32l10-10 10 10v-32z'></path>
+                      </svg>
+                    </div>
                   </div>
                   <div className="media-block__content">
                     Parlor Name

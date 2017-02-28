@@ -1,0 +1,19 @@
+svg {
+  fill: currentColor;
+  stroke: currentColor;
+  height: inherit;
+  width: inherit;
+}
+
+.svg-container {
+  @extend .svg-container--fill-gray-light;
+}
+
+.svg-container--small {
+  height: 24px;
+  width: 24px;
+}
+
+.svg-container--fill-gray-light { color: $gray-light; fill: $gray-light; }
+.svg-container--fill-black      { color: $black; fill: $black; }
+.svg-container--fill-pink       { color: $pink; fill: $pink; }
