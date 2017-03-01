@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { showParlors } from '../../actions/parlors'
 import Modal from '../sharedComponents/Modal'
 import IceCreamIcon from '../sharedComponents/IceCreamIcon'
-import IceCreamCone1 from '../sharedComponents/IceCreamCone5'
+import IceCreamCone1 from '../sharedComponents/IceCreamCone1'
 import NewParlorForm from '../parlors/NewParlorForm'
 import Loader from '../sharedComponents/Loader'
 
