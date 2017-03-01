@@ -1,4 +1,5 @@
 import React from 'react'
+import Bookmark from '../sharedComponents/Bookmark'
 
 class IceCreamListItem extends React.Component {
   render() {
@@ -21,11 +22,7 @@ class IceCreamListItem extends React.Component {
               <div className="module module--padding--s">
                 <div className="media-block media-block--spread media-block--alt-side">
                   <div className="media-block__media">
-                    <div className="svg-container svg-container--small">
-                      <svg viewBox='0 0 32 32'>
-                        <path d='M6 0v32l10-10 10 10v-32z'></path>
-                      </svg>
-                    </div>
+                      <Bookmark />
                   </div>
                   <div className="media-block__content">
                     Parlor Name

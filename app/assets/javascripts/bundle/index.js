@@ -70,23 +70,23 @@
 
 	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
 
-	var _IceCreamDetail = __webpack_require__(308);
+	var _IceCreamDetail = __webpack_require__(309);
 
 	var _IceCreamDetail2 = _interopRequireDefault(_IceCreamDetail);
 
-	var _ParlorsContainer = __webpack_require__(311);
+	var _ParlorsContainer = __webpack_require__(312);
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
-	var _Parlor = __webpack_require__(318);
+	var _Parlor = __webpack_require__(321);
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _loginPage = __webpack_require__(320);
+	var _loginPage = __webpack_require__(323);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(321);
+	var _store = __webpack_require__(324);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -30890,7 +30890,7 @@
 
 	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
 
-	var _Loader = __webpack_require__(307);
+	var _Loader = __webpack_require__(308);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
@@ -31074,7 +31074,7 @@
 /* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -31085,6 +31085,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _Bookmark = __webpack_require__(307);
+
+	var _Bookmark2 = _interopRequireDefault(_Bookmark);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31104,62 +31108,54 @@
 	  }
 
 	  _createClass(IceCreamListItem, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      var iceCream = this.props.iceCream;
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "flex-grid__item" },
+	        'div',
+	        { className: 'flex-grid__item' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "module" },
+	          'div',
+	          { className: 'module' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "card card--mosaic" },
+	            'div',
+	            { className: 'card card--mosaic' },
 	            _react2.default.createElement(
-	              "div",
-	              { className: "card__body" },
+	              'div',
+	              { className: 'card__body' },
 	              _react2.default.createElement(
-	                "div",
-	                { className: "image-frame image-frame--top-round" },
-	                _react2.default.createElement("img", { src: iceCream.image_url })
+	                'div',
+	                { className: 'image-frame image-frame--top-round' },
+	                _react2.default.createElement('img', { src: iceCream.image_url })
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "div",
-	              { className: "card__footer" },
+	              'div',
+	              { className: 'card__footer' },
 	              _react2.default.createElement(
-	                "div",
-	                { className: "module module--padding--s" },
+	                'div',
+	                { className: 'module module--padding--s' },
 	                _react2.default.createElement(
-	                  "div",
-	                  { className: "heading heading--level-2" },
+	                  'div',
+	                  { className: 'heading heading--level-2' },
 	                  iceCream.title
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "div",
-	                { className: "module module--padding--s" },
+	                'div',
+	                { className: 'module module--padding--s' },
 	                _react2.default.createElement(
-	                  "div",
-	                  { className: "media-block media-block--spread media-block--alt-side" },
+	                  'div',
+	                  { className: 'media-block media-block--spread media-block--alt-side' },
 	                  _react2.default.createElement(
-	                    "div",
-	                    { className: "media-block__media" },
-	                    _react2.default.createElement(
-	                      "div",
-	                      { className: "svg-container svg-container--small" },
-	                      _react2.default.createElement(
-	                        "svg",
-	                        { viewBox: "0 0 32 32" },
-	                        _react2.default.createElement("path", { d: "M6 0v32l10-10 10 10v-32z" })
-	                      )
-	                    )
+	                    'div',
+	                    { className: 'media-block__media' },
+	                    _react2.default.createElement(_Bookmark2.default, null)
 	                  ),
 	                  _react2.default.createElement(
-	                    "div",
-	                    { className: "media-block__content" },
-	                    "Parlor Name"
+	                    'div',
+	                    { className: 'media-block__content' },
+	                    'Parlor Name'
 	                  )
 	                )
 	              )
@@ -31177,6 +31173,36 @@
 
 /***/ },
 /* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Bookmark = function Bookmark() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'svg-container svg-container--small' },
+	    _react2.default.createElement(
+	      'svg',
+	      { viewBox: '0 0 32 32' },
+	      _react2.default.createElement('path', { d: 'M6 0v32l10-10 10 10v-32z' })
+	    )
+	  );
+	};
+
+	exports.default = Bookmark;
+
+/***/ },
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31204,7 +31230,7 @@
 	exports.default = Loader;
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31225,11 +31251,11 @@
 
 	var _iceCreams = __webpack_require__(305);
 
-	var _NewReviewForm = __webpack_require__(309);
+	var _NewReviewForm = __webpack_require__(310);
 
 	var _NewReviewForm2 = _interopRequireDefault(_NewReviewForm);
 
-	var _Loader = __webpack_require__(307);
+	var _Loader = __webpack_require__(308);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
@@ -31312,7 +31338,7 @@
 	exports.default = IceCreamDetail;
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31329,7 +31355,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _reviews = __webpack_require__(310);
+	var _reviews = __webpack_require__(311);
 
 	var _InputField = __webpack_require__(300);
 
@@ -31430,7 +31456,7 @@
 	exports.default = NewReviewForm;
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31480,7 +31506,7 @@
 	}
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31491,7 +31517,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Parlors = __webpack_require__(312);
+	var _Parlors = __webpack_require__(313);
 
 	var _Parlors2 = _interopRequireDefault(_Parlors);
 
@@ -31509,7 +31535,7 @@
 	exports.default = ParlorsContainer;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31526,17 +31552,25 @@
 
 	var _reactRouter = __webpack_require__(178);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(314);
 
-	var _Modal = __webpack_require__(314);
+	var _Modal = __webpack_require__(315);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _NewParlorForm = __webpack_require__(315);
+	var _IceCreamIcon = __webpack_require__(316);
+
+	var _IceCreamIcon2 = _interopRequireDefault(_IceCreamIcon);
+
+	var _IceCreamCone = __webpack_require__(335);
+
+	var _IceCreamCone2 = _interopRequireDefault(_IceCreamCone);
+
+	var _NewParlorForm = __webpack_require__(318);
 
 	var _NewParlorForm2 = _interopRequireDefault(_NewParlorForm);
 
-	var _Loader = __webpack_require__(307);
+	var _Loader = __webpack_require__(308);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
@@ -31616,7 +31650,7 @@
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'card__body' },
-	                    'Default Image'
+	                    _react2.default.createElement(_IceCreamCone2.default, null)
 	                  ),
 	                  _react2.default.createElement(
 	                    'div',
@@ -31630,7 +31664,24 @@
 	                        parlor.name
 	                      )
 	                    ),
-	                    'Footer goes here'
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'module module--padding--s' },
+	                      _react2.default.createElement(
+	                        'div',
+	                        { className: 'media-block media-block--spread media-block--alt-side' },
+	                        _react2.default.createElement(
+	                          'div',
+	                          { className: 'media-block__media' },
+	                          _react2.default.createElement(_IceCreamIcon2.default, null)
+	                        ),
+	                        _react2.default.createElement(
+	                          'div',
+	                          { className: 'media-block__content' },
+	                          '# of Ice Creams'
+	                        )
+	                      )
+	                    )
 	                  )
 	                )
 	              )
@@ -31654,7 +31705,7 @@
 	exports.default = Parlors;
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31743,7 +31794,7 @@
 	}
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31803,7 +31854,39 @@
 	exports.default = Modal;
 
 /***/ },
-/* 315 */
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var IceCreamIcon = function IceCreamIcon() {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "svg-container svg-container--small" },
+	    _react2.default.createElement(
+	      "svg",
+	      { viewBox: "0 0 100 125" },
+	      _react2.default.createElement("path", { fill: "#000000", d: "M56.733,18.555c-0.237-0.128-0.538-0.047-0.668,0.191c-0.131,0.237-0.045,0.535,0.189,0.667   c0.026,0.013,2.444,1.382,2.783,3.558c0.036,0.242,0.244,0.415,0.483,0.415c0.024,0,0.051-0.002,0.074-0.006   c0.269-0.042,0.452-0.292,0.41-0.561C59.596,20.175,56.849,18.62,56.733,18.555z" }),
+	      _react2.default.createElement("path", { fill: "#000000", d: "M71.394,37.141c0-1.826-1.027-3.393-2.548-4.162c0.269-1.312,0.401-2.637,0.401-3.961   c0-11.041-8.983-20.025-20.029-20.025c-11.04,0-20.024,8.984-20.024,20.025c0,1.283,0.126,2.568,0.375,3.838   c-1.645,0.726-2.797,2.374-2.797,4.285c0,1.294,0.551,2.504,1.461,3.368c-0.386,1.001-0.586,2.06-0.586,3.128   c0,3.59,2.162,6.679,5.247,8.054l15.069,40.614c0.25,0.671,0.891,1.119,1.61,1.119c0.002,0,0.002,0,0.004,0   c0.724-0.003,1.368-0.453,1.612-1.129l14.903-40.901c2.783-1.487,4.705-4.388,4.705-7.757c0-1.143-0.229-2.271-0.662-3.327   C70.927,39.459,71.394,38.332,71.394,37.141z M58.942,60.997h-3.94l1.641-4.735h4.023L58.942,60.997z M56.559,67.531h-3.82   l1.952-5.634h3.924L56.559,67.531z M54.843,72.244h-3.735l1.354-3.908h3.807L54.843,72.244z M52.647,78.271h-3.633l1.842-5.303   h3.722L52.647,78.271z M46.419,78.271l-1.744-4.704l0.208-0.599h4.954l-1.835,5.303H46.419z M47.796,78.859l-0.559,1.614   l-0.601-1.614H47.796z M46.771,67.531l1.957-5.634h4.948l-1.951,5.634H46.771z M51.446,68.336l-1.357,3.908h-4.954l1.356-3.908   H51.446z M45.547,67.531h-3.111l-0.721-1.94l1.19-3.693h4.599L45.547,67.531z M43.198,60.997l1.525-4.735h4.737l-1.645,4.735   H43.198z M42.192,60.997H40.01l-1.315-3.542l0.355-1.193h4.67L42.192,60.997z M41.902,61.897l-0.724,2.247l-0.833-2.247H41.902z    M45.267,68.336l-1.224,3.53l-1.31-3.53H45.267z M53.989,60.997h-4.95l1.65-4.735h4.938L53.989,60.997z M51.029,55.28l1.127-3.25   c1.364-0.421,2.621-1.13,3.636-2.149c0.487,0.487,1.035,0.889,1.615,1.25l-1.44,4.149H51.029z M49.801,55.28H45.04l1.14-3.531   c1.061,0.449,2.215,0.711,3.422,0.711c0.417,0,0.82-0.065,1.226-0.123L49.801,55.28z M44.036,55.28h-4.694l1.138-3.824   c0.955-0.493,1.832-1.127,2.553-1.939c0.651,0.736,1.439,1.31,2.287,1.783L44.036,55.28z M38.346,55.28H37.89l-1.061-2.861   c0.874-0.034,1.712-0.211,2.515-0.491L38.346,55.28z M49.559,86.731l-1.796-4.842l1.048-3.03h3.621L49.559,86.731z M61.023,55.28   h-4.04l1.276-3.689c1.151,0.546,2.406,0.869,3.72,0.869c0.026,0,0.05-0.008,0.076-0.008L61.023,55.28z M67.227,38.259   c-0.45,0.208-0.786,0.601-0.925,1.077c-0.139,0.475-0.064,0.988,0.201,1.405c0.562,0.879,0.86,1.881,0.86,2.896   c0,2.969-2.414,5.384-5.384,5.384c-1.936,0-3.729-1.071-4.685-2.798c-0.303-0.546-0.877-0.886-1.503-0.886   c-0.624,0-1.199,0.34-1.501,0.886c-0.955,1.727-2.75,2.798-4.689,2.798c-2.194,0-4.15-1.315-4.979-3.355   c-0.264-0.646-0.891-1.068-1.59-1.07c-0.697,0-1.327,0.423-1.59,1.068c-0.832,2.04-2.786,3.357-4.979,3.357   c-2.967,0-5.381-2.416-5.381-5.384c0-0.997,0.278-1.948,0.824-2.827c0.275-0.438,0.335-0.979,0.167-1.467   c-0.17-0.49-0.551-0.876-1.037-1.054c-0.503-0.183-0.829-0.634-0.829-1.147c0-0.643,0.489-1.173,1.114-1.239   c0.081,0.015,0.16,0.029,0.218,0.032c0.558,0.057,1.111-0.188,1.468-0.631c0.357-0.439,0.472-1.025,0.312-1.567   c-0.457-1.55-0.69-3.138-0.69-4.718c0-9.148,7.442-16.591,16.59-16.591c9.154,0,16.595,7.443,16.595,16.591   c0,1.569-0.23,3.148-0.686,4.689c-0.15,0.513-0.053,1.066,0.261,1.497c0.316,0.432,0.812,0.692,1.347,0.704   c0.688,0.015,1.224,0.558,1.224,1.233C67.959,37.714,67.581,38.093,67.227,38.259z" })
+	    )
+	  );
+	};
+
+	exports.default = IceCreamIcon;
+
+/***/ },
+/* 317 */,
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31820,9 +31903,9 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(314);
 
-	var _Form = __webpack_require__(316);
+	var _Form = __webpack_require__(319);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -31830,7 +31913,7 @@
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
-	var _SelectField = __webpack_require__(317);
+	var _SelectField = __webpack_require__(320);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 
@@ -32008,7 +32091,7 @@
 	exports.default = NewParlorForm;
 
 /***/ },
-/* 316 */
+/* 319 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32047,7 +32130,7 @@
 	};
 
 /***/ },
-/* 317 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32189,7 +32272,7 @@
 	exports.default = SelectField;
 
 /***/ },
-/* 318 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32208,19 +32291,19 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(314);
 
 	var _iceCreams = __webpack_require__(305);
 
-	var _Modal = __webpack_require__(314);
+	var _Modal = __webpack_require__(315);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Loader = __webpack_require__(307);
+	var _Loader = __webpack_require__(308);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _NewIceCreamForm = __webpack_require__(319);
+	var _NewIceCreamForm = __webpack_require__(322);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
@@ -32336,7 +32419,7 @@
 	exports.default = ParlorContainer;
 
 /***/ },
-/* 319 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32353,7 +32436,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Form = __webpack_require__(316);
+	var _Form = __webpack_require__(319);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -32502,7 +32585,7 @@
 	exports.default = NewIceCreamForm;
 
 /***/ },
-/* 320 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32519,7 +32602,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Form = __webpack_require__(316);
+	var _Form = __webpack_require__(319);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -32637,7 +32720,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
 
 /***/ },
-/* 321 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32648,11 +32731,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(322);
+	var _reduxThunk = __webpack_require__(325);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(323);
+	var _reducers = __webpack_require__(326);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -32663,7 +32746,7 @@
 	exports.default = store;
 
 /***/ },
-/* 322 */
+/* 325 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32691,7 +32774,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 323 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32702,19 +32785,19 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(324);
+	var _users = __webpack_require__(327);
 
-	var _iceCreams = __webpack_require__(325);
+	var _iceCreams = __webpack_require__(328);
 
-	var _parlors = __webpack_require__(326);
+	var _parlors = __webpack_require__(329);
 
-	var _flavors = __webpack_require__(327);
+	var _flavors = __webpack_require__(330);
 
-	var _iceCreamFlavors = __webpack_require__(328);
+	var _iceCreamFlavors = __webpack_require__(331);
 
-	var _sessions = __webpack_require__(329);
+	var _sessions = __webpack_require__(332);
 
-	var _reviews = __webpack_require__(330);
+	var _reviews = __webpack_require__(333);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -32729,7 +32812,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 324 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32754,7 +32837,7 @@
 	} // users reducer
 
 /***/ },
-/* 325 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32775,7 +32858,7 @@
 
 	var iceCreamsActions = _interopRequireWildcard(_iceCreams);
 
-	var _reviews = __webpack_require__(310);
+	var _reviews = __webpack_require__(311);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -32861,7 +32944,7 @@
 	});
 
 /***/ },
-/* 326 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32876,7 +32959,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _parlors = __webpack_require__(313);
+	var _parlors = __webpack_require__(314);
 
 	var parlorActions = _interopRequireWildcard(_parlors);
 
@@ -32966,7 +33049,7 @@
 	});
 
 /***/ },
-/* 327 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33055,7 +33138,7 @@
 	});
 
 /***/ },
-/* 328 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33144,7 +33227,7 @@
 	});
 
 /***/ },
-/* 329 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33215,7 +33298,7 @@
 	});
 
 /***/ },
-/* 330 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33236,7 +33319,7 @@
 
 	var _iceCreams = __webpack_require__(305);
 
-	var _reviews2 = __webpack_require__(310);
+	var _reviews2 = __webpack_require__(311);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -33323,6 +33406,144 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
+
+/***/ },
+/* 334 */,
+/* 335 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var IceCreamCone2 = function IceCreamCone2() {
+		return _react2.default.createElement(
+			"div",
+			{ className: "svg-container svg-container--small" },
+			_react2.default.createElement(
+				"svg",
+				{ viewBox: "100 400 103 800" },
+				_react2.default.createElement(
+					"g",
+					{
+						transform: "matrix(1.3333333,0,0,-1.3333333,0,1280)",
+						id: "g10" },
+					_react2.default.createElement(
+						"g",
+						{
+							transform: "scale(0.1)",
+							id: "g12" },
+						_react2.default.createElement("path", {
+							id: "path38",
+							style: { fill: '#fde2a6', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 4570.6,5089.3 c 0,95.85 -42.82,181.53 -110.16,239.53 4.6,18.47 7.3,37.69 7.3,57.6 0,121.17 -90.58,220.97 -207.69,235.94 -21.67,79.67 -94.32,138.33 -180.85,138.33 -5.58,0 -11.07,-0.36 -16.51,-0.84 -13.04,202.36 -355.4,366.47 -486.33,321.77 142.43,-189.57 -285.43,-424.29 -186.37,-602.88 -92.06,-15.59 -162.24,-95.51 -162.24,-192.01 0,-19.14 2.88,-37.63 8.03,-55.11 -56.14,-45.1 -92.17,-114.23 -92.17,-191.84 0,-135.93 110.19,-246.09 246.1,-246.09 27.42,0 53.71,4.66 78.36,12.95 100.55,-115.04 248.24,-187.8 413.04,-187.8 148.37,0 282.88,58.99 381.62,154.69 170.75,4.45 307.87,143.95 307.87,315.76" }),
+						_react2.default.createElement("path", {
+							id: "path40",
+							style: { fill: '#fdf9e3', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 4293.78,5487.37 c 0,44.8 -4.21,88.58 -11.87,131.15 -7.17,1.61 -14.46,2.9 -21.86,3.85 -21.67,79.67 -94.32,138.33 -180.85,138.33 -5.58,0 -11.07,-0.36 -16.51,-0.84 -13.04,202.36 -355.4,366.47 -486.33,321.77 142.43,-189.57 -285.43,-424.29 -186.37,-602.88 -92.06,-15.59 -162.24,-95.51 -162.24,-192.01 0,-19.14 2.88,-37.63 8.03,-55.11 -56.14,-45.1 -92.17,-114.23 -92.17,-191.84 0,-135.93 110.19,-246.09 246.1,-246.09 27.42,0 53.71,4.66 78.36,12.95 17.14,-19.61 35.75,-37.9 55.49,-54.89 11.2,-0.51 22.43,-0.86 33.75,-0.86 406.74,0 736.47,329.74 736.47,736.47" }),
+						_react2.default.createElement("path", {
+							id: "path42",
+							style: { fill: '#641f15', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3530.18,5414.97 c 10.94,-22.64 41.99,-30.46 69.03,-17.38 26.99,13.06 40.15,42.25 29.21,64.91 l -358.33,740.68 -98.23,-47.52 358.32,-740.69" }),
+						_react2.default.createElement("path", {
+							id: "path44",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3171.86,6155.66 16.64,-34.42 133.81,-26.01 -52.22,107.95 -98.23,-47.52" }),
+						_react2.default.createElement("path", {
+							id: "path46",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3201.76,6093.84 61.18,-126.49 133.82,-26.01 -61.19,126.48 -133.81,26.02" }),
+						_react2.default.createElement("path", {
+							id: "path48",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3276.19,5939.97 61.2,-126.48 133.82,-26.03 -61.2,126.5 -133.82,26.01" }),
+						_react2.default.createElement("path", {
+							id: "path50",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3350.64,5786.08 61.19,-126.48 133.81,-26.01 -61.19,126.49 -133.81,26" }),
+						_react2.default.createElement("path", {
+							id: "path52",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3425.09,5632.2 61.18,-126.47 133.82,-26.03 -61.19,126.48 -133.81,26.02" }),
+						_react2.default.createElement("path", {
+							id: "path54",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3530.18,5414.97 c 10.94,-22.64 41.99,-30.46 69.03,-17.38 23.22,11.23 36.1,34.4 32.3,55.07 l -131.99,25.67 30.66,-63.36" }),
+						_react2.default.createElement("path", {
+							id: "path56",
+							style: { fill: '#641f15', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3492.83,5275.57 c 14.8,-14.32 43.97,-8.39 64.84,13.18 20.87,21.58 25.84,50.92 11.05,65.25 l -484.12,468.42 -75.88,-78.42 484.11,-468.43" }),
+						_react2.default.createElement("path", {
+							id: "path58",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3084.6,5822.42 -75.88,-78.42 19.6,-18.97 134.6,21.62 -78.32,75.77" }),
+						_react2.default.createElement("path", {
+							id: "path60",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3285.77,5627.79 -100.98,97.7 -134.6,-21.62 100.98,-97.73 134.6,21.65" }),
+						_react2.default.createElement("path", {
+							id: "path62",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3408.62,5508.91 -100.97,97.7 -134.61,-21.62 100.98,-97.7 134.6,21.62" }),
+						_react2.default.createElement("path", {
+							id: "path64",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3531.48,5390.03 -100.99,97.73 -134.6,-21.63 100.98,-97.71 134.61,21.61" }),
+						_react2.default.createElement("path", {
+							id: "path66",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3557.67,5288.75 c 20.87,21.58 25.84,50.92 11.05,65.25 l -15.37,14.87 -134.61,-21.6 74.09,-71.7 c 14.8,-14.32 43.97,-8.39 64.84,13.18" }),
+						_react2.default.createElement("path", {
+							id: "path68",
+							style: { fill: '#fdf9e3', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3415.1,5175 c 0,185.15 150.09,335.23 335.22,335.23 185.14,0 335.22,-150.08 335.22,-335.23 0,-185.13 -150.08,-335.21 -335.22,-335.21 -185.13,0 -335.22,150.08 -335.22,335.21" }),
+						_react2.default.createElement("path", {
+							id: "path70",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3902.16,2933.45 165.35,595.96 -321.74,-443.45 42.32,-152.51 c 31.36,-113.06 82.7,-113.06 114.07,0" }),
+						_react2.default.createElement("path", {
+							id: "path72",
+							style: { fill: '#c55622', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 4268.12,4252.45 -611.96,-843.5 89.61,-322.99 321.74,443.45 200.61,723.04" }),
+						_react2.default.createElement("path", {
+							id: "path74",
+							style: { fill: '#c55622', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 4280.34,4715.82 96.19,-69.79 c 0,0.01 0,0.01 0,0.01 l -96.19,69.78 v 0" }),
+						_react2.default.createElement("path", {
+							id: "path76",
+							style: { fill: '#cc632e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 4373.2,4631.18 c 1.38,5.01 2.34,9.92 3.33,14.85 l -96.19,69.79 -713.8,-983.87 89.62,-323 611.96,843.5 105.08,378.73" }),
+						_react2.default.createElement("path", {
+							id: "path78",
+							style: { fill: '#d17137', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 4280.34,4715.82 v 0 l -166.65,120.91 h -69.58 l -567.19,-781.77 89.62,-323.01 713.8,983.87 v 0" }),
+						_react2.default.createElement("path", {
+							id: "path80",
+							style: { fill: '#d88141', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3720.15,4836.73 -332.85,-458.77 89.62,-323 567.19,781.77 h -323.96" }),
+						_react2.default.createElement("path", {
+							id: "path82",
+							style: { fill: '#df914b', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 3473.31,4836.73 c -17.12,0 -33.09,-2.18 -48.03,-5.89 L 3310,4671.93 c 0.87,-13.18 3.17,-26.8 7.04,-40.75 l 70.26,-253.22 332.85,458.77 h -246.84" }),
+						_react2.default.createElement("path", {
+							id: "path84",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "M 4391.36,4836.73 H 3250.85 v -142.45 c 0,-26.41 21.6,-48.01 48,-48.01 h 1092.51 c 26.4,0 48,21.6 48,48.01 v 47.22 47.23 48 h -48" })
+					)
+				)
+			)
+		);
+	};
+
+	exports.default = IceCreamCone2;
 
 /***/ }
 /******/ ]);
