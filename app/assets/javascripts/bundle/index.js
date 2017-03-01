@@ -31562,7 +31562,7 @@
 
 	var _IceCreamIcon2 = _interopRequireDefault(_IceCreamIcon);
 
-	var _IceCreamCone = __webpack_require__(335);
+	var _IceCreamCone = __webpack_require__(334);
 
 	var _IceCreamCone2 = _interopRequireDefault(_IceCreamCone);
 
@@ -33408,8 +33408,7 @@
 	});
 
 /***/ },
-/* 334 */,
-/* 335 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33424,13 +33423,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var IceCreamCone2 = function IceCreamCone2() {
+	var IceCreamCone5 = function IceCreamCone5() {
 		return _react2.default.createElement(
 			"div",
 			{ className: "svg-container svg-container--small" },
 			_react2.default.createElement(
 				"svg",
-				{ viewBox: "100 400 103 800" },
+				{ viewBox: "0 0 2400 1280" },
 				_react2.default.createElement(
 					"g",
 					{
@@ -33442,108 +33441,178 @@
 							transform: "scale(0.1)",
 							id: "g12" },
 						_react2.default.createElement("path", {
-							id: "path38",
-							style: { fill: '#fde2a6', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 4570.6,5089.3 c 0,95.85 -42.82,181.53 -110.16,239.53 4.6,18.47 7.3,37.69 7.3,57.6 0,121.17 -90.58,220.97 -207.69,235.94 -21.67,79.67 -94.32,138.33 -180.85,138.33 -5.58,0 -11.07,-0.36 -16.51,-0.84 -13.04,202.36 -355.4,366.47 -486.33,321.77 142.43,-189.57 -285.43,-424.29 -186.37,-602.88 -92.06,-15.59 -162.24,-95.51 -162.24,-192.01 0,-19.14 2.88,-37.63 8.03,-55.11 -56.14,-45.1 -92.17,-114.23 -92.17,-191.84 0,-135.93 110.19,-246.09 246.1,-246.09 27.42,0 53.71,4.66 78.36,12.95 100.55,-115.04 248.24,-187.8 413.04,-187.8 148.37,0 282.88,58.99 381.62,154.69 170.75,4.45 307.87,143.95 307.87,315.76" }),
+							id: "path250",
+							style: { fill: '#68c280', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' }, d: "m 9664.84,5705.59 c 24.09,292.35 280.58,509.86 572.96,485.79 292.4,-24.06 509.9,-280.57 485.8,-572.94 -24.1,-292.39 -280.6,-509.89 -573,-485.84 -292.32,24.08 -509.83,280.58 -485.76,572.99" }),
 						_react2.default.createElement("path", {
-							id: "path40",
-							style: { fill: '#fdf9e3', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 4293.78,5487.37 c 0,44.8 -4.21,88.58 -11.87,131.15 -7.17,1.61 -14.46,2.9 -21.86,3.85 -21.67,79.67 -94.32,138.33 -180.85,138.33 -5.58,0 -11.07,-0.36 -16.51,-0.84 -13.04,202.36 -355.4,366.47 -486.33,321.77 142.43,-189.57 -285.43,-424.29 -186.37,-602.88 -92.06,-15.59 -162.24,-95.51 -162.24,-192.01 0,-19.14 2.88,-37.63 8.03,-55.11 -56.14,-45.1 -92.17,-114.23 -92.17,-191.84 0,-135.93 110.19,-246.09 246.1,-246.09 27.42,0 53.71,4.66 78.36,12.95 17.14,-19.61 35.75,-37.9 55.49,-54.89 11.2,-0.51 22.43,-0.86 33.75,-0.86 406.74,0 736.47,329.74 736.47,736.47" }),
+							id: "path252",
+							style: { fill: '#a1ddab', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' }, d: "m 10509.5,5785.9 c 10.6,128.15 -20.3,250.08 -81.2,352.9 -58,28.5 -122.2,46.95 -190.5,52.58 -292.38,24.07 -548.87,-193.44 -572.96,-485.79 -15.45,-187.67 68.71,-360.44 208.22,-466.58 325.54,-22.45 609.64,220.72 636.44,546.89" }),
 						_react2.default.createElement("path", {
-							id: "path42",
-							style: { fill: '#641f15', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3530.18,5414.97 c 10.94,-22.64 41.99,-30.46 69.03,-17.38 26.99,13.06 40.15,42.25 29.21,64.91 l -358.33,740.68 -98.23,-47.52 358.32,-740.69" }),
+							id: "path254",
+							style: { fill: '#c7eac8', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10071.9,5954.96 c -6.6,-50.04 -52.6,-85.27 -102.63,-78.63 -50.04,6.62 -85.26,52.59 -78.63,102.63 6.63,50.04 52.58,85.26 102.64,78.63 50.02,-6.62 85.22,-52.58 78.62,-102.63" }),
 						_react2.default.createElement("path", {
-							id: "path44",
+							id: "path256",
+							style: { fill: '#3f1515', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9924.1,5305.86 c 38.58,290.81 305.6,495.28 596.4,456.69 290.8,-38.56 495.3,-305.62 456.7,-596.4 -38.6,-290.82 -305.6,-495.28 -596.4,-456.72 -290.8,38.58 -495.26,305.61 -456.7,596.43" }),
+						_react2.default.createElement("path", {
+							id: "path258",
+							style: { fill: '#5c1b14', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10887.1,5468.68 c 2.8,20.95 4.4,41.8 5,62.48 -81.9,122.46 -214,210.5 -371.6,231.39 -290.8,38.59 -557.82,-165.88 -596.4,-456.69 -11.97,-90.18 -0.5,-178.04 29.59,-257.53 74.71,-50.38 161.81,-84.82 257.21,-97.46 329.7,-43.74 632.5,188.09 676.2,517.81" }),
+						_react2.default.createElement("path", {
+							id: "path260",
+							style: { fill: '#ad491f', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10892.1,6163.77 c -56.7,27.65 -125.1,4.05 -152.8,-52.66 -1.7,-3.56 -3.2,-7.19 -4.6,-10.82 l -228.3,-536.37 c 58.4,-8.3 110.1,-36.93 147.9,-78.63 l 284.8,515.36 c 2,3.31 3.9,6.73 5.7,10.3 27.6,56.73 4,125.16 -52.7,152.82" }),
+						_react2.default.createElement("path", {
+							id: "path262",
 							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3171.86,6155.66 16.64,-34.42 133.81,-26.01 -52.22,107.95 -98.23,-47.52" }),
+							d: "m 10917.8,6146.44 c -7.6,6.73 -16.1,12.66 -25.7,17.33 -56.7,27.65 -125.1,4.05 -152.8,-52.66 -1.7,-3.57 -3.2,-7.19 -4.6,-10.83 l -228.3,-536.36 c 53.3,-7.57 101.2,-31.95 137.8,-67.88 l 284.5,514.89 c 2.1,3.33 4,6.75 5.7,10.32 20.7,42.51 12.7,91.61 -16.6,125.19" }),
 						_react2.default.createElement("path", {
-							id: "path46",
+							id: "path264",
+							style: { fill: '#f47084', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9410.81,5279.59 c 24.08,292.35 280.59,509.86 572.97,485.8 292.42,-24.06 509.82,-280.58 485.82,-572.94 -24.1,-292.4 -280.6,-509.89 -572.99,-485.85 -292.35,24.08 -509.87,280.59 -485.8,572.99" }),
+						_react2.default.createElement("path", {
+							id: "path266",
+							style: { fill: '#f8a6a8', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10255.5,5359.91 c 10.5,128.15 -20.3,250.08 -81.2,352.9 -58,28.5 -122.2,46.95 -190.52,52.58 -292.38,24.06 -548.89,-193.45 -572.97,-485.8 -15.44,-187.67 68.72,-360.43 208.22,-466.57 325.5,-22.45 609.57,220.72 636.47,546.89" }),
+						_react2.default.createElement("path", {
+							id: "path268",
+							style: { fill: '#fad1d0', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9817.87,5528.96 c -6.62,-50.03 -52.58,-85.26 -102.63,-78.62 -50.03,6.62 -85.25,52.58 -78.62,102.62 6.62,50.05 52.57,85.27 102.64,78.64 50.04,-6.62 85.26,-52.58 78.61,-102.64" }),
+						_react2.default.createElement("path", {
+							id: "path270",
 							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3201.76,6093.84 61.18,-126.49 133.82,-26.01 -61.19,126.48 -133.81,26.02" }),
+							d: "m 9670.86,4607.87 231.44,-834.2 231.5,-834.33 c 33.6,-120.91 88.5,-120.91 122.1,0 l 231.5,834.33 231.5,834.2 c 33.6,121.13 -41.8,220.24 -167.5,220.24 h -713.1 c -125.69,0 -201.04,-99.11 -167.44,-220.24" }),
 						_react2.default.createElement("path", {
-							id: "path48",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3276.19,5939.97 61.2,-126.48 133.82,-26.03 -61.2,126.5 -133.82,26.01" }),
-						_react2.default.createElement("path", {
-							id: "path50",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3350.64,5786.08 61.19,-126.48 133.81,-26.01 -61.19,126.49 -133.81,26" }),
-						_react2.default.createElement("path", {
-							id: "path52",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3425.09,5632.2 61.18,-126.47 133.82,-26.03 -61.19,126.48 -133.81,26.02" }),
-						_react2.default.createElement("path", {
-							id: "path54",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3530.18,5414.97 c 10.94,-22.64 41.99,-30.46 69.03,-17.38 23.22,11.23 36.1,34.4 32.3,55.07 l -131.99,25.67 30.66,-63.36" }),
-						_react2.default.createElement("path", {
-							id: "path56",
-							style: { fill: '#641f15', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3492.83,5275.57 c 14.8,-14.32 43.97,-8.39 64.84,13.18 20.87,21.58 25.84,50.92 11.05,65.25 l -484.12,468.42 -75.88,-78.42 484.11,-468.43" }),
-						_react2.default.createElement("path", {
-							id: "path58",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3084.6,5822.42 -75.88,-78.42 19.6,-18.97 134.6,21.62 -78.32,75.77" }),
-						_react2.default.createElement("path", {
-							id: "path60",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3285.77,5627.79 -100.98,97.7 -134.6,-21.62 100.98,-97.73 134.6,21.65" }),
-						_react2.default.createElement("path", {
-							id: "path62",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3408.62,5508.91 -100.97,97.7 -134.61,-21.62 100.98,-97.7 134.6,21.62" }),
-						_react2.default.createElement("path", {
-							id: "path64",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3531.48,5390.03 -100.99,97.73 -134.6,-21.63 100.98,-97.71 134.61,21.61" }),
-						_react2.default.createElement("path", {
-							id: "path66",
-							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3557.67,5288.75 c 20.87,21.58 25.84,50.92 11.05,65.25 l -15.37,14.87 -134.61,-21.6 74.09,-71.7 c 14.8,-14.32 43.97,-8.39 64.84,13.18" }),
-						_react2.default.createElement("path", {
-							id: "path68",
-							style: { fill: '#fdf9e3', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3415.1,5175 c 0,185.15 150.09,335.23 335.22,335.23 185.14,0 335.22,-150.08 335.22,-335.23 0,-185.13 -150.08,-335.21 -335.22,-335.21 -185.13,0 -335.22,150.08 -335.22,335.21" }),
-						_react2.default.createElement("path", {
-							id: "path70",
+							id: "path272",
 							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3902.16,2933.45 165.35,595.96 -321.74,-443.45 42.32,-152.51 c 31.36,-113.06 82.7,-113.06 114.07,0" }),
+							d: "m 10255.9,2939.34 231.5,834.33 231.5,834.2 c 33.6,121.13 -41.8,220.24 -167.5,220.24 h -356.5 V 2848.63 c 22.1,0 44.2,30.25 61,90.71" }),
 						_react2.default.createElement("path", {
-							id: "path72",
-							style: { fill: '#c55622', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 4268.12,4252.45 -611.96,-843.5 89.61,-322.99 321.74,443.45 200.61,723.04" }),
+							id: "path274",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9671.04,4717.01 272.31,111.1 h -60.51 l -198.83,-81.13 c -5.36,-9.36 -9.6,-19.42 -12.97,-29.97" }),
 						_react2.default.createElement("path", {
-							id: "path74",
-							style: { fill: '#c55622', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 4280.34,4715.82 96.19,-69.79 c 0,0.01 0,0.01 0,0.01 l -96.19,69.78 v 0" }),
+							id: "path276",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9681.14,4570.88 630.46,257.23 h -60.5 l -576.12,-235.06 6.16,-22.17" }),
 						_react2.default.createElement("path", {
-							id: "path76",
-							style: { fill: '#cc632e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 4373.2,4631.18 c 1.38,5.01 2.34,9.92 3.33,14.85 l -96.19,69.79 -713.8,-983.87 89.62,-323 611.96,843.5 105.08,378.73" }),
+							id: "path278",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10603.5,4821.62 -891.06,-363.56 6.14,-22.16 917.62,374.36 c -10.1,4.76 -21.1,8.46 -32.7,11.36" }),
 						_react2.default.createElement("path", {
-							id: "path78",
-							style: { fill: '#d17137', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 4280.34,4715.82 v 0 l -166.65,120.91 h -69.58 l -567.19,-781.77 89.62,-323.01 713.8,983.87 v 0" }),
+							id: "path280",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10718.3,4718.18 -968.41,-395.09 6.15,-22.18 967.96,394.93 c -1.4,7.7 -3.3,15.12 -5.7,22.34" }),
 						_react2.default.createElement("path", {
-							id: "path80",
-							style: { fill: '#d88141', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3720.15,4836.73 -332.85,-458.77 89.62,-323 567.19,781.77 h -323.96" }),
+							id: "path282",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9787.33,4188.12 6.16,-22.18 905.21,369.32 7.7,27.83 -919.07,-374.97" }),
 						_react2.default.createElement("path", {
-							id: "path82",
+							id: "path284",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9824.79,4053.12 6.15,-22.15 820.76,334.87 7.7,27.85 -834.61,-340.57" }),
+						_react2.default.createElement("path", {
+							id: "path286",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9862.23,3918.15 6.17,-22.17 736.3,300.41 7.7,27.85 -750.17,-306.09" }),
+						_react2.default.createElement("path", {
+							id: "path288",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9899.7,3783.17 6.14,-22.16 651.86,265.92 7.7,27.86 -665.7,-271.62" }),
+						_react2.default.createElement("path", {
+							id: "path290",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9937.14,3648.2 6.15,-22.16 567.41,231.48 7.7,27.84 -581.26,-237.16" }),
+						_react2.default.createElement("path", {
+							id: "path292",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 9974.58,3513.21 6.16,-22.17 482.96,197.05 7.7,27.85 -496.82,-202.73" }),
+						_react2.default.createElement("path", {
+							id: "path294",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10012,3378.26 6.2,-22.18 398.5,162.55 7.7,27.86 -412.4,-168.23" }),
+						_react2.default.createElement("path", {
+							id: "path296",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10049.5,3243.28 6.1,-22.17 314,128.1 7.8,27.84 -327.9,-133.77" }),
+						_react2.default.createElement("path", {
+							id: "path298",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10087,3108.29 6.1,-22.17 229.5,93.67 7.8,27.82 -243.4,-99.32" }),
+						_react2.default.createElement("path", {
+							id: "path300",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10283.4,3038.18 -159,-64.86 6.1,-22.18 145.1,59.19 7.8,27.85" }),
+						_react2.default.createElement("path", {
+							id: "path302",
+							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10220,2862.08 -30.6,-12.5 c 10.3,-2.32 20.7,1.7 30.6,12.5" }),
+						_react2.default.createElement("path", {
+							id: "path304",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10194.9,4780.48 116.7,47.63 h -60.5 l -56.2,-22.94 v -24.69" }),
+						_react2.default.createElement("path", {
+							id: "path306",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10603.5,4821.62 -408.6,-166.72 v -24.69 l 441.3,180.05 c -10.1,4.76 -21.1,8.46 -32.7,11.36" }),
+						_react2.default.createElement("path", {
+							id: "path308",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10718.3,4718.16 -523.4,-213.52 v -24.68 l 529.1,215.88 c -1.4,7.7 -3.3,15.12 -5.7,22.32" }),
+						_react2.default.createElement("path", {
+							id: "path310",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10194.9,4354.38 v -24.67 l 503.8,205.55 7.7,27.86 -511.5,-208.74" }),
+						_react2.default.createElement("path", {
+							id: "path312",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10659.4,4393.66 -464.5,-189.54 v -24.67 l 456.8,186.39 7.7,27.82" }),
+						_react2.default.createElement("path", {
+							id: "path314",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10194.9,4053.86 v -24.67 l 409.8,167.2 7.7,27.83 -417.5,-170.36" }),
+						_react2.default.createElement("path", {
+							id: "path316",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10194.9,3903.59 v -24.66 l 362.8,148.02 7.7,27.84 -370.5,-151.2" }),
+						_react2.default.createElement("path", {
+							id: "path318",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10518.4,3885.35 -323.5,-132 v -24.67 l 315.8,128.85 7.7,27.82" }),
+						_react2.default.createElement("path", {
+							id: "path320",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10194.9,3603.1 v -24.67 l 268.8,109.66 4.3,15.66 3.4,12.17 -276.5,-112.82" }),
+						_react2.default.createElement("path", {
+							id: "path322",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10194.9,3452.83 v -24.67 l 221.8,90.49 7.7,27.83 -229.5,-93.65" }),
+						_react2.default.createElement("path", {
+							id: "path324",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10377.4,3377.05 -182.5,-74.46 v -24.68 l 174.7,71.3 7.8,27.84" }),
+						_react2.default.createElement("path", {
+							id: "path326",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10194.9,3127.64 127.7,52.15 7.8,27.82 -135.5,-55.29 v -24.68" }),
+						_react2.default.createElement("path", {
+							id: "path328",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10276.1,3011.91 7.2,26.25 -88.4,-36.1 v -24.68 l 80.7,32.97 0.5,1.56" }),
+						_react2.default.createElement("path", {
+							id: "path330",
+							style: { fill: '#cf5d1e', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
+							d: "m 10194.9,2851.81 v -3.18 c 8.5,0 16.9,4.53 25.1,13.45 l -25.1,-10.27" }),
+						_react2.default.createElement("path", {
+							id: "path332",
 							style: { fill: '#df914b', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "m 3473.31,4836.73 c -17.12,0 -33.09,-2.18 -48.03,-5.89 L 3310,4671.93 c 0.87,-13.18 3.17,-26.8 7.04,-40.75 l 70.26,-253.22 332.85,458.77 h -246.84" }),
-						_react2.default.createElement("path", {
-							id: "path84",
-							style: { fill: '#be4920', fillOpacity: 1, fillRule: 'nonzero', stroke: 'none' },
-							d: "M 4391.36,4836.73 H 3250.85 v -142.45 c 0,-26.41 21.6,-48.01 48,-48.01 h 1092.51 c 26.4,0 48,21.6 48,48.01 v 47.22 47.23 48 h -48" })
+							d: "M 10728.2,4828.11 H 9600.61 v -129.53 c 0,-33.52 27.42,-60.94 60.95,-60.94 h 1066.64 c 33.5,0 60.9,27.42 60.9,60.94 v 34.29 34.28 60.96 h -60.9" })
 					)
 				)
 			)
 		);
 	};
 
-	exports.default = IceCreamCone2;
+	exports.default = IceCreamCone5;
 
 /***/ }
 /******/ ]);

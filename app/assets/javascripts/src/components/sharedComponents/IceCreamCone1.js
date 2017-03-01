@@ -2,7 +2,7 @@ import React from 'react'
 
 const IceCreamCone1 = () => (
   <div className="svg-container svg-container--small">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103 800">
+    <svg viewBox="0 0 400 1280">
        <g
          transform="matrix(1.3333333,0,0,-1.3333333,0,1280)"
          id="g10">
