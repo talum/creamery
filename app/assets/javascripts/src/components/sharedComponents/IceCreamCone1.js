@@ -1,7 +1,7 @@
 import React from 'react'
 
 const IceCreamCone1 = () => (
-  <div className="svg-container svg-container--small">
+  <div className="svg-container svg-container--small button__icon">
     <svg viewBox="-30 -630 400 320">
        <g
          transform="matrix(1,0,0,-1,0,1)"

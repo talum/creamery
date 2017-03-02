@@ -13,4 +13,17 @@
   }
 }
 
+.button--color-green {
+  background-color: $green;
+}
+
 .button--width-full { width: 100%; }
+
+.button--circle { border-radius: 50%; }
+
+.button--circle {
+  &.button--has-icon {
+    padding: $padding--s;
+    .button__icon {}
+  }
+}

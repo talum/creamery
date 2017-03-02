@@ -1,10 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { showParlors } from '../../actions/parlors'
 import Modal from '../sharedComponents/Modal'
-import IceCreamIcon from '../sharedComponents/IceCreamIcon'
-import IceCreamCone1 from '../sharedComponents/IceCreamCone1'
 import NewParlorForm from '../parlors/NewParlorForm'
+import ParlorItem from '../parlors/ParlorItem'
 import Loader from '../sharedComponents/Loader'
 
 class Parlors extends React.Component {
@@ -50,28 +48,7 @@ class Parlors extends React.Component {
           { parlors.map((parlor) => {
               return (
                 <div key={parlor.id} className="flex-grid__item">
-                  <div className="module">
-                    <div className="card card--mosaic">
-                      <div className="card__body">
-                        <IceCreamCone1 />
-                      </div>
-                      <div className="card__footer">
-                        <Link to={`/parlors/${parlor.id}`}>
-                          <h2 className="heading heading--level-1">{parlor.name}</h2>
-                        </Link>
-                        <div className="module module--padding--s">
-                          <div className="media-block media-block--spread media-block--alt-side">
-                            <div className="media-block__media">
-                              <IceCreamIcon />
-                            </div>
-                            <div className="media-block__content">
-                            # of Ice Creams
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <ParlorItem parlor={parlor} />
                 </div>
               )
             })
