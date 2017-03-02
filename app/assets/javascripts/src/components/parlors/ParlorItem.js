@@ -22,9 +22,7 @@ const ParlorItem = (props) => (
         <div className="module">
           <div className="media-block">
             <div className="media-block__media">
-              <div className="button--circle button--has-icon button--color-green">
-                { iceCreamConeIcon() }
-              </div>
+              { iceCreamConeIcon() }
             </div>
             <div className="media-block__content">
               <div className="module">
