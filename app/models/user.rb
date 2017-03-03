@@ -6,4 +6,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   has_secure_password
+
+  def admin!
+    self.update(admin: true)
+  end
 end
