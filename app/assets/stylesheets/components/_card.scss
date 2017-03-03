@@ -29,3 +29,15 @@
 
 }
 
+.card--horizon {
+  .card__header {
+
+  }
+  .card__body {
+    padding: $padding--m;
+  }
+  .card__footer {
+    padding: $padding--s $padding--m;
+    background-color: $mint;
+  }
+}

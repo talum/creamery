@@ -17,7 +17,7 @@ function iceCreamConeIcon() {
 
 const ParlorItem = (props) => (
   <div className="module">
-    <div className="card card--mosaic">
+    <div className="card card--horizon">
       <div className="card__body">
         <div className="module">
           <div className="media-block">

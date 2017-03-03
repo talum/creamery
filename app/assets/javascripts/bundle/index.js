@@ -32244,7 +32244,7 @@
 	    { className: 'module' },
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'card card--mosaic' },
+	      { className: 'card card--horizon' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'card__body' },
