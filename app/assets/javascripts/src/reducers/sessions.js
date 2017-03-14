@@ -35,8 +35,20 @@ export function errors(state=[], action) {
   }
 }
 
+export function isAdmin(state=false, action) {
+  switch (action.type) {
+    case sessionsActions.LOGIN_SUCCESS:
+      return !!sessionStorage.isAdmin
+    case sessionsActions.LOGOUT:
+      return !!sessionStorage.isAdmin
+    default:
+      return !!sessionStorage.isAdmin
+  }
+}
+
 export const sessions = combineReducers({
   loggedIn,
+  isAdmin,
   isLoading,
   errors
 })

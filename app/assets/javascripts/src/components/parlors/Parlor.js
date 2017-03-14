@@ -19,11 +19,8 @@ class Parlor extends React.Component {
   }
 
   componentDidMount() {
-    // probably just want to fetch the one parlor with associated ice creams
-    if (!this.props.parlors.allIds.length || !this.props.iceCreams.allIds.length) {
-      this.props.dispatch(showParlors())
-      this.props.dispatch(showIceCreams())
-    }
+    this.props.dispatch(showParlors())
+    this.props.dispatch(showIceCreams())
   }
 
   toggleModalVisibility() {
@@ -43,6 +40,8 @@ class Parlor extends React.Component {
 
     if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
       return(<Loader />)
+    } else if (!parlor) {
+      return (<div><h1>Sorry, this parlor does not exist</h1></div>)
     } else {
       let iceCreams = parlor.ice_creams.map((iceCreamId) => { return this.props.iceCreams.byId[iceCreamId] })
       return(
@@ -50,7 +49,7 @@ class Parlor extends React.Component {
           <h1>
             {parlor.name}
           </h1>
-          {this.props.loggedIn && addIceCreamButton }
+          {this.props.isAdmin && addIceCreamButton }
           <div className="flex-grid">
             { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream}/>)) }
           </div>
@@ -77,7 +76,8 @@ const mapStateToProps = (state) => {
   return {
     parlors: state.parlors,
     iceCreams: state.iceCreams,
-    loggedIn: state.sessions.loggedIn
+    loggedIn: state.sessions.loggedIn,
+    isAdmin: state.sessions.isAdmin
   }
 } 
 

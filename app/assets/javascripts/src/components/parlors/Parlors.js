@@ -43,7 +43,7 @@ class Parlors extends React.Component {
         <div>
           { this.props.parlors.errors.join(", ") }
         </div>
-        { this.props.loggedIn && addParlorButton }
+        { this.props.isAdmin && addParlorButton }
         <div className="flex-grid">
           { parlors.map((parlor) => {
               return (

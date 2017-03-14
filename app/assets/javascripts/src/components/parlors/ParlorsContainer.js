@@ -4,7 +4,8 @@ import Parlors from '../parlors/Parlors'
 const mapStateToProps = (state) => {
   return {
     parlors: state.parlors,
-    loggedIn: state.sessions.loggedIn
+    loggedIn: state.sessions.loggedIn,
+    isAdmin: state.sessions.isAdmin
   }
 }
 

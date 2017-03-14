@@ -45,7 +45,8 @@ class Nav extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.sessions.loggedIn
+    loggedIn: state.sessions.loggedIn,
+    isAdmin: state.sessions.isAdmin
   }
 }
 

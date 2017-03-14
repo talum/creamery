@@ -13,9 +13,10 @@ function logIn() {
   }
 }
 
-function loginSuccess() {
+function loginSuccess(response) {
   return {
-    type: LOGIN_SUCCESS
+    type: LOGIN_SUCCESS,
+    data: response.data
   }
 }
 
@@ -40,8 +41,9 @@ export function logInUser(payload) {
     return createSession(payload)
       .then((response) => {
         sessionStorage.setItem('jwt', response.data.jwt)
+        sessionStorage.setItem('isAdmin', response.data.is_admin)
         browserHistory.push('/')
-        dispatch(loginSuccess())
+        dispatch(loginSuccess(response))
       })
       .catch((error) => {
         dispatch(loginError(error))
@@ -51,6 +53,7 @@ export function logInUser(payload) {
 
 export function logOutUser() {
   sessionStorage.removeItem('jwt')
+  sessionStorage.removeItem('isAdmin')
   browserHistory.push('/')
   return logOut()
 }

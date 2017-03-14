@@ -28780,7 +28780,8 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    loggedIn: state.sessions.loggedIn
+	    loggedIn: state.sessions.loggedIn,
+	    isAdmin: state.sessions.isAdmin
 	  };
 	};
 
@@ -28817,9 +28818,10 @@
 	  };
 	}
 
-	function loginSuccess() {
+	function loginSuccess(response) {
 	  return {
-	    type: LOGIN_SUCCESS
+	    type: LOGIN_SUCCESS,
+	    data: response.data
 	  };
 	}
 
@@ -28843,8 +28845,9 @@
 
 	    return (0, _creameryApi.createSession)(payload).then(function (response) {
 	      sessionStorage.setItem('jwt', response.data.jwt);
+	      sessionStorage.setItem('isAdmin', response.data.is_admin);
 	      _reactRouter.browserHistory.push('/');
-	      dispatch(loginSuccess());
+	      dispatch(loginSuccess(response));
 	    }).catch(function (error) {
 	      dispatch(loginError(error));
 	    });
@@ -28853,6 +28856,7 @@
 
 	function logOutUser() {
 	  sessionStorage.removeItem('jwt');
+	  sessionStorage.removeItem('isAdmin');
 	  _reactRouter.browserHistory.push('/');
 	  return logOut();
 	}
@@ -31526,7 +31530,8 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    parlors: state.parlors,
-	    loggedIn: state.sessions.loggedIn
+	    loggedIn: state.sessions.loggedIn,
+	    isAdmin: state.sessions.isAdmin
 	  };
 	};
 
@@ -31627,7 +31632,7 @@
 	          null,
 	          this.props.parlors.errors.join(", ")
 	        ),
-	        this.props.loggedIn && addParlorButton,
+	        this.props.isAdmin && addParlorButton,
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'flex-grid' },
@@ -33263,11 +33268,8 @@
 	  _createClass(Parlor, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      // probably just want to fetch the one parlor with associated ice creams
-	      if (!this.props.parlors.allIds.length || !this.props.iceCreams.allIds.length) {
-	        this.props.dispatch((0, _parlors.showParlors)());
-	        this.props.dispatch((0, _iceCreams.showIceCreams)());
-	      }
+	      this.props.dispatch((0, _parlors.showParlors)());
+	      this.props.dispatch((0, _iceCreams.showIceCreams)());
 	    }
 	  }, {
 	    key: 'toggleModalVisibility',
@@ -33291,6 +33293,16 @@
 
 	      if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
 	        return _react2.default.createElement(_Loader2.default, null);
+	      } else if (!parlor) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Sorry, this parlor does not exist'
+	          )
+	        );
 	      } else {
 	        var iceCreams = parlor.ice_creams.map(function (iceCreamId) {
 	          return _this2.props.iceCreams.byId[iceCreamId];
@@ -33303,7 +33315,7 @@
 	            null,
 	            parlor.name
 	          ),
-	          this.props.loggedIn && addIceCreamButton,
+	          this.props.isAdmin && addIceCreamButton,
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'flex-grid' },
@@ -33336,7 +33348,8 @@
 	  return {
 	    parlors: state.parlors,
 	    iceCreams: state.iceCreams,
-	    loggedIn: state.sessions.loggedIn
+	    loggedIn: state.sessions.loggedIn,
+	    isAdmin: state.sessions.isAdmin
 	  };
 	};
 
@@ -34165,6 +34178,7 @@
 	exports.loggedIn = loggedIn;
 	exports.isLoading = isLoading;
 	exports.errors = errors;
+	exports.isAdmin = isAdmin;
 
 	var _redux = __webpack_require__(242);
 
@@ -34217,8 +34231,23 @@
 	  }
 	}
 
+	function isAdmin() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case sessionsActions.LOGIN_SUCCESS:
+	      return !!sessionStorage.isAdmin;
+	    case sessionsActions.LOGOUT:
+	      return !!sessionStorage.isAdmin;
+	    default:
+	      return !!sessionStorage.isAdmin;
+	  }
+	}
+
 	var sessions = exports.sessions = (0, _redux.combineReducers)({
 	  loggedIn: loggedIn,
+	  isAdmin: isAdmin,
 	  isLoading: isLoading,
 	  errors: errors
 	});

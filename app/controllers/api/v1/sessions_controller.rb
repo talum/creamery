@@ -8,7 +8,7 @@ module Api
 
         if user && user.authenticate(auth_params[:password])
           jwt = Auth.issue({user: user.id})
-          render json: { jwt: jwt } and return
+          render json: { jwt: jwt, is_admin: user.admin? } and return
         else
           render json: { errors: 'No user matches that email and password combination' }, status: 422
         end
