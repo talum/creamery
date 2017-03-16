@@ -35,6 +35,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 #for image upload
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64', '~> 2.4.0'
+gem 'fog-aws'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
