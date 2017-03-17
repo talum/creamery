@@ -2,16 +2,19 @@ import React from 'react'
 import { showParlors } from '../../actions/parlors'
 import Modal from '../sharedComponents/Modal'
 import NewParlorForm from '../parlors/NewParlorForm'
-import ParlorItem from '../parlors/ParlorItem'
+import FilteredParlors from '../parlors/FilteredParlors'
 import Loader from '../sharedComponents/Loader'
+import SearchBar from '../sharedComponents/SearchBar'
 
 class Parlors extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalIsVisible: false
+      modalIsVisible: false,
+      searchTerm: ""
     }
     this.toggleModalVisibility = this.toggleModalVisibility.bind(this)
+    this.handleSearchInputChange = this.handleSearchInputChange.bind(this)
   }
 
   componentDidMount() {
@@ -26,6 +29,10 @@ class Parlors extends React.Component {
     })
   }
 
+  handleSearchInputChange(event) {
+    this.setState({searchTerm: event.target.value})
+  }
+
   render() {
     let parlorsById = this.props.parlors.byId
     let parlors = Object.values(parlorsById)
@@ -36,35 +43,29 @@ class Parlors extends React.Component {
         Add New Parlor
       </button>
     )
-
-    return(
-      <div>
-        { this.props.parlors.isLoading && <Loader /> }
+    if (this.props.parlors.isLoading) {
+      return (<Loader />)
+    } else {
+      return(
         <div>
-          { this.props.parlors.errors.join(", ") }
+          <div>
+            { this.props.parlors.errors.join(", ") }
+          </div>
+          { this.props.isAdmin && addParlorButton }
+          <SearchBar searchTerm={this.state.searchTerm} handleSearchInputChange={this.handleSearchInputChange}/>
+          <FilteredParlors parlors={parlors} searchTerm={this.state.searchTerm} />
+          <Modal
+            isVisible={this.state.modalIsVisible}
+            toggleModal={this.toggleModalVisibility}
+            modalBody={
+              <NewParlorForm 
+                toggleModalVisibility={this.toggleModalVisibility}
+              />
+            }
+          />
         </div>
-        { this.props.isAdmin && addParlorButton }
-        <div className="flex-grid">
-          { parlors.map((parlor) => {
-              return (
-                <div key={parlor.id} className="flex-grid__item">
-                  <ParlorItem parlor={parlor} />
-                </div>
-              )
-            })
-          }
-        </div>
-        <Modal
-          isVisible={this.state.modalIsVisible}
-          toggleModal={this.toggleModalVisibility}
-          modalBody={
-            <NewParlorForm 
-              toggleModalVisibility={this.toggleModalVisibility}
-            />
-          }
-        />
-      </div>
-    )
+      )
+    }
   }
 }
 
