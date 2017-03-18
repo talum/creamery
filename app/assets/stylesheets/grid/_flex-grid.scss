@@ -6,3 +6,14 @@
     width: 33.33%;
   }
 }
+
+@media (max-width: $breakpoint-medium) {
+  .flex-grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    .flex-grid__item {
+      width: 100%;
+    }
+  }
+}

@@ -7,3 +7,11 @@
   }
 }
 
+@media (max-width: $breakpoint-medium) {
+  .site-layout {
+    .site-layout__inner {
+      padding-left: $padding--l;
+      padding-right: $padding--l;
+    }
+  }
+}

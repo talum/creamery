@@ -6,12 +6,15 @@ $level--padding-xl: $level--padding-m * 3;
   padding: $level--padding-m 0;
 }
 
-.level--padding-xl {
-  padding: $level--padding-xl 0;
-}
-
 .level--has-background-image {
+  padding: $level--padding-xl 0;
   background-size: cover;  
 }
 
 
+@media (max-width: $breakpoint-medium) {
+.level--has-background-image {
+  padding: $level--padding-m 0;
+  background-size: cover;  
+}
+}
