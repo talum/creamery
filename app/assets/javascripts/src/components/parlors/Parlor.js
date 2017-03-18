@@ -46,10 +46,10 @@ class Parlor extends React.Component {
       let iceCreams = parlor.ice_creams.map((iceCreamId) => { return this.props.iceCreams.byId[iceCreamId] })
       return(
         <div>
-          <h1>
-            {parlor.name}
-          </h1>
-          {this.props.isAdmin && addIceCreamButton }
+          <div className="module">
+            <h1>{parlor.name}</h1>
+            {this.props.isAdmin && addIceCreamButton }
+          </div>
           <div className="flex-grid">
             { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream}/>)) }
           </div>

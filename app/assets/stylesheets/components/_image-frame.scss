@@ -1,13 +1,20 @@
-$image-height: 226px;
+$image-height-medium: 226px;
 
 .image-frame {
   position: relative;
   width: 100%;
   overflow: hidden;
-  max-height: $image-height;
+}
+
+.image-frame--medium {
+  max-height: $image-height-medium;
 }
 
 .image-frame--top-round {
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
+}
+
+.image-frame--upload {
+  //no-op
 }

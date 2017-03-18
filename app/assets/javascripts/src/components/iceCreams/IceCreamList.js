@@ -28,7 +28,7 @@ class IceCreamList extends React.Component {
       return (
         <div>
           { this.props.iceCreams.errors.join(", ") }
-          <SearchBar searchTerm={this.state.searchTerm} handleSearchInputChange={this.handleSearchInputChange}/>
+          <SearchBar searchTerm={this.state.searchTerm} handleSearchInputChange={this.handleSearchInputChange} placeholderText={"Search ice cream"}/>
           <FilteredIceCreams iceCreams={iceCreams} searchTerm={this.state.searchTerm}/>
         </div>
       )

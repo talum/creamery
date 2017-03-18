@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addUser } from '../../actions/users'
+import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
 
@@ -10,6 +11,9 @@ class UserForm extends React.Component {
     this.state = this.initialState()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.validateForm = Form.validateForm.bind(this)
+    this.registerField = Form.registerField.bind(this)
+    this.fields = []
   }
 
   initialState() {
@@ -36,7 +40,7 @@ class UserForm extends React.Component {
   render() {
     return(
       <div>
-        <h1>Sign up for Creamery</h1>
+        <h1 className="util--padding-ls">Sign up for Creamery</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="module">
             <InputField
@@ -44,6 +48,9 @@ class UserForm extends React.Component {
               value={this.state.email}
               placeholder={"email address"}
               handleChange={this.handleChange}
+              isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
@@ -53,6 +60,9 @@ class UserForm extends React.Component {
               value={this.state.password}
               placeholder={"password"}
               handleChange={this.handleChange}
+              isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
@@ -62,6 +72,9 @@ class UserForm extends React.Component {
               value={this.state.password_confirmation}
               placeholder={"password confirmation"}
               handleChange={this.handleChange}
+              isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">

@@ -38,7 +38,7 @@ class Parlors extends React.Component {
     let parlors = Object.values(parlorsById)
     const addParlorButton = (
       <button 
-        className="button button--color-black"
+        className="button button--color-black "
         onClick={this.toggleModalVisibility}>
         Add New Parlor
       </button>
@@ -48,11 +48,11 @@ class Parlors extends React.Component {
     } else {
       return(
         <div>
-          <div>
+          <div className="module">
             { this.props.parlors.errors.join(", ") }
+            { this.props.isAdmin && addParlorButton }
           </div>
-          { this.props.isAdmin && addParlorButton }
-          <SearchBar searchTerm={this.state.searchTerm} handleSearchInputChange={this.handleSearchInputChange}/>
+          <SearchBar searchTerm={this.state.searchTerm} handleSearchInputChange={this.handleSearchInputChange} placeholderText={"Search parlors"}/>
           <FilteredParlors parlors={parlors} searchTerm={this.state.searchTerm} />
           <Modal
             isVisible={this.state.modalIsVisible}

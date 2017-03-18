@@ -1,6 +1,9 @@
 .modal {
   margin-left: auto;
   margin-right: auto;
+  border-radius: $border-radius;
+  background-color: $white;
+  padding: $padding--l;
   max-width: 60%;
   padding-bottom: $padding--xxl;
   @extend .z-index--4;
@@ -14,7 +17,7 @@
     }
     .modal__close {
       align-self: right;
-      color: $white;
+      color: $black;
       padding-right: $padding--s;
       font-size: $font-size--l;
     }

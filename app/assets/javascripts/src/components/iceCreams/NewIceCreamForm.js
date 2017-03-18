@@ -54,7 +54,7 @@ class IceCreamForm extends React.Component {
   render() {
     return(
       <div>
-        <h2>New Ice Cream Form</h2>
+        <h2 className="util--padding-ls">New Ice Cream Form</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="module">
             <InputField

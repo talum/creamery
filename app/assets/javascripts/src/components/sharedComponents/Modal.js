@@ -20,6 +20,7 @@ const Modal = (props) => {
               </div>
             </div>
           </div>
+          <div className="modal-outer" onClick={() => console.log('clicked')}/>
         </div>
       </div>
     )

@@ -10,8 +10,11 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState()
+    this.validateForm = Form.validateForm.bind(this)
+    this.registerField = Form.registerField.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.fields = []
   }
 
   initialState() {
@@ -38,8 +41,8 @@ class LoginPage extends React.Component {
   render() {
     return(
       <div>
-        <h1>Login</h1>
-        { this.props.sessions.errors }
+        <h1 className="util--padding-ls">Login</h1>
+        <div className="module">{ this.props.sessions.errors }</div>
         <form onSubmit={this.handleSubmit}>
             <div className="module">
               <InputField
@@ -47,6 +50,9 @@ class LoginPage extends React.Component {
                 value={this.state.credentials.email}
                 placeholder={"email"}
                 handleChange={this.handleChange}
+                isRequired={true}
+                validateForm={this.validateForm}
+                registerField={this.registerField}
                 />
             </div>
             <div className="module">
@@ -56,10 +62,16 @@ class LoginPage extends React.Component {
                 value={this.state.credentials.password}
                 placeholder={"password"}
                 handleChange={this.handleChange}
+                isRequired={true}
+                validateForm={this.validateForm}
+                registerField={this.registerField}
                 />
             </div>
             <div className="module">
-             <SubmitButton handleSubmit={this.handleSubmit}/>
+             <SubmitButton 
+              isDisabled={!this.state.isValid}
+              handleSubmit={this.handleSubmit}
+            />
             </div>
         </form>
       </div>

@@ -48,7 +48,7 @@ class ParlorForm extends React.Component {
   render() {
     return(
       <div>
-        <h1>Add New Parlor</h1>
+        <h1 className="util--padding-ls">Add New Parlor</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="module">
             <InputField 
