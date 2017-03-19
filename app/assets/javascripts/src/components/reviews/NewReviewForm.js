@@ -1,58 +1,73 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Form from '../sharedComponents/Form'
 import { addReview } from '../../actions/reviews'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
-
-//TODO: make this a modal that appaers on icecream show
 
 class ReviewForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState(props)
+    this.validateForm = Form.validateForm.bind(this)
+    this.registerField = Form.registerField.bind(this)
+    this.clearForm = Form.clearForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.fields = []
   }
 
   initialState(props) {
     return {
-      review: {
-        title: '',
-        content: '',
-        ice_cream_id: props.iceCreamId
-      }
+      title: '',
+      content: '',
+      ice_cream_id: props.iceCreamId
     }
   }
 
   handleChange(event) {
-    let reviewParams = Object.assign({}, this.state.review)
-    reviewParams[event.target.name] = event.target.value
-    this.setState({review: reviewParams})
+    this.setState({[event.target.name]: event.target.value})
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.dispatch(addReview(this.state))
+    this.props.dispatch(addReview({review: this.state}))
+    this.props.toggleModalVisibility()
   }
 
   render() {
     return(
       <div>
-        <h2>Add Review</h2>
+        <h2 className="util--padding-ls">Add Review</h2>
         <form onSubmit={this.handleSubmit}>
-          <InputField
-            name={"title"} 
-            value={this.state.review.title}
-            placeholder={"add a title"}
-            handleChange={this.handleChange}
-          />
-          <InputField
-            name={"content"} 
-            value={this.state.review.content}
-            placeholder={"add your review"}
-            handleChange={this.handleChange}
-          />
-          <SubmitButton handleSubmit={this.handleSubmit} />
+          <div className="module">
+            <InputField
+              name={"title"} 
+              value={this.state.title}
+              placeholder={"Add a title"}
+              handleChange={this.handleChange}
+              isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
+            />
+          </div>
+          <div className="module">
+            <InputField
+              name={"content"} 
+              value={this.state.content}
+              placeholder={"Add your review"}
+              handleChange={this.handleChange}
+              isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
+            />
+          </div>
+          <div className="module">
+            <SubmitButton
+              isDisabled={!this.state.isValid}
+              handleSubmit={this.handleSubmit}
+            />
+          </div>
         </form>
       </div>
     )

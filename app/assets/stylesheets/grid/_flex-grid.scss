@@ -7,11 +7,26 @@
   }
 }
 
-@media (max-width: $breakpoint-medium) {
-  .flex-grid {
-    display: flex;
-    flex-wrap: wrap;
+.flex-grid--thirds {
+  .flex-grid__item {
+    width: 33.33%;
+  }
+}
 
+.flex-grid--halves {
+  .flex-grid__item {
+    width: 50%;
+  }
+}
+
+@media (max-width: $breakpoint-medium) {
+  .flex-grid--thirds {
+    .flex-grid__item {
+      width: 100%;
+    }
+  }
+
+  .flex-grid--halves {
     .flex-grid__item {
       width: 100%;
     }

@@ -50,7 +50,7 @@ class Parlor extends React.Component {
             <h1>{parlor.name}</h1>
             {this.props.isAdmin && addIceCreamButton }
           </div>
-          <div className="flex-grid">
+          <div className="flex-grid flex-grid--thirds">
             { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream} parlor={parlor}/>)) }
           </div>
           <div>

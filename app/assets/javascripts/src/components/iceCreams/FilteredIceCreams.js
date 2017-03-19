@@ -17,7 +17,7 @@ const FilteredIceCreams = ({parlors, iceCreams, searchTerm}) => {
   })
 
   return (
-    <div className="flex-grid">
+    <div className="flex-grid flex-grid--thirds">
       { iceCreamItems }
     </div>
   ) 

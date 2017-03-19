@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import Bookmark from '../sharedComponents/Bookmark'
 
 class IceCreamListItem extends React.Component {
@@ -16,9 +17,11 @@ class IceCreamListItem extends React.Component {
             </div>
             <div className="card__footer">
               <div className="module module--padding--s">
-                <div className="heading heading--level-2">
-                  {iceCream.title}
-                </div>
+                <Link to={`/ice-creams/${iceCream.id}`} >
+                  <div className="heading heading--level-2">
+                    {iceCream.title}
+                  </div>
+                </Link>
               </div>
               <div className="module module--padding--s">
                 <div className="media-block media-block--spread media-block--alt-side">
@@ -26,7 +29,9 @@ class IceCreamListItem extends React.Component {
                       <Bookmark />
                   </div>
                   <div className="media-block__content">
-                    {parlor.name}
+                    <Link to={`/parlors/${parlor.id}`} >
+                      {parlor.name}
+                    </Link>
                   </div>
                 </div>
               </div>

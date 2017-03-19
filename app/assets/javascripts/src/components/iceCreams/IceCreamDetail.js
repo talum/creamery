@@ -1,17 +1,38 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Modal from '../sharedComponents/Modal'
 import { showIceCream } from '../../actions/iceCreams'
 import NewReviewForm from '../reviews/NewReviewForm'
 import Loader from '../sharedComponents/Loader'
 
 class IceCreamDetail extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      modalIsVisible: false
+    }
+    this.toggleModalVisibility = this.toggleModalVisibility.bind(this)
+  }
+
   componentWillMount() {
     this.props.dispatch(showIceCream(this.props.routeParams.id))
-    // should probably move this to the route handler
+  }
+
+  toggleModalVisibility() {
+    this.setState({
+      modalIsVisible: !this.state.modalIsVisible
+    })
   }
 
   render() {
     let iceCreams = this.props.iceCreams
+    const addReviewButton = (
+      <button 
+        className="button button--color-black "
+        onClick={this.toggleModalVisibility}>
+        Add New Review
+      </button>
+    )
 
     if (iceCreams.isLoading) {
       return (<Loader />)
@@ -22,11 +43,35 @@ class IceCreamDetail extends React.Component {
 
       return(
         <div>
-          {iceCream.title}
-          {iceCream.parlor}
-          <h2>Reviews</h2>
-          {iceCreamReviews.map((review) => review.title)}
-          <NewReviewForm iceCreamId={iceCream.id}/>
+          <div className="module">
+            <h2 className="heading heading--level-1">{iceCream.title}</h2>
+            <h3 className="heading heading--level-3">{iceCream.parlor}</h3>
+          </div>
+          <div className="flex-grid flex-grid--halves">
+            <div className="flex-grid__item">
+              <div className="module">
+                <div className="image-frame">
+                  <img src={iceCream.image_url} />
+                </div>
+              </div>
+            </div>
+            <div className="flex-grid__item">
+              <div className="module">
+                <h3 className="heading heaading--level-4">Reviews</h3>
+                { this.props.loggedIn && addReviewButton }
+                <ul>
+                  {iceCreamReviews.map((review) => <li><h4>{review.title}</h4><p>{review.content}</p></li>)}
+                </ul>
+              </div>
+            </div>
+            <Modal
+              isVisible={this.state.modalIsVisible}
+              toggleModal={this.toggleModalVisibility}
+              modalBody={
+                <NewReviewForm toggleModalVisibility={this.toggleModalVisibility} iceCreamId={iceCream.id}/>
+              }
+            />
+          </div>
         </div>
       )
     }
@@ -36,7 +81,8 @@ class IceCreamDetail extends React.Component {
 const mapStateToProps = (state) => {
   return {
     iceCreams: state.iceCreams,
-    reviews: state.reviews
+    reviews: state.reviews,
+    loggedIn: state.sessions.loggedIn
   }
 }
 

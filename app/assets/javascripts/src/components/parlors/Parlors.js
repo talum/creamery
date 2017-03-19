@@ -18,9 +18,7 @@ class Parlors extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.parlors.allIds.length) {
-      this.props.dispatch(showParlors())
-    }
+    this.props.dispatch(showParlors())
   }
 
   toggleModalVisibility() {

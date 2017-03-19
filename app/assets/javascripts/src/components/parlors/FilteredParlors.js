@@ -16,7 +16,7 @@ const FilteredParlors = ({parlors, searchTerm}) => {
     </div>))
 
   return (
-    <div className="flex-grid">
+    <div className="flex-grid flex-grid--thirds">
       { parlorItems }
     </div>
   ) 
