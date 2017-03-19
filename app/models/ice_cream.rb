@@ -8,5 +8,5 @@ class IceCream < ApplicationRecord
   validates :title, presence: true
   validates :parlor_id, presence: true
 
-  mount_base64_uploader :image, ImageUploader
+  mount_base64_uploader :image, ImageUploader, file_name: -> () { SecureRandom.hex(10) }
 end
