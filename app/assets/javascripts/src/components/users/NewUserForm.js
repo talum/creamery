@@ -18,23 +18,19 @@ class UserForm extends React.Component {
 
   initialState() {
     return {
-      user: {
-        email: '',
-        password: '',
-        password_confirmation: ''
-      }
+      email: '',
+      password: '',
+      password_confirmation: ''
     }
   }
 
   handleChange(event) {
-    let userParams = Object.assign({}, this.state.user)
-    userParams[event.target.name] = event.target.value
-    this.setState({user: userParams})
+    this.setState({[event.target.name]: event.target.value})
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.dispatch(addUser(this.state))
+    this.props.dispatch(addUser({user: this.state}))
   }
 
   render() {
@@ -78,7 +74,10 @@ class UserForm extends React.Component {
             />
           </div>
           <div className="module">
-            <SubmitButton handleSubmit={this.handleSubmit} />
+            <SubmitButton 
+              isDisabled={!this.state.isValid}
+              handleSubmit={this.handleSubmit}
+            />
           </div>
         </form>
       </div>

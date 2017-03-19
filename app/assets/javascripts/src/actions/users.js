@@ -20,9 +20,9 @@ function addUserError(error) {
   }
 } 
 
-export function addUser(email) {
+export function addUser(payload) {
   return function(dispatch) {
-    return postUsers(email)
+    return postUsers(payload)
       .then((response) => {
         dispatch(addUserSuccess(response))
         browserHistory.push('/')
