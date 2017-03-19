@@ -18,6 +18,7 @@
 .button--color-rose       { background-color: $rose; }
 .button--color-lavender   { background-color: $lavender; }
 .button--color-blue-light { background-color: $blue-light; }
+.button--color-gray       { background-color: $gray; }
 
 
 .button--width-full { width: 100%; }
@@ -34,4 +35,8 @@ $button--icon--size-m: 32px;
 .button__icon {
   height: $button--icon--size-m;
   width: $button--icon--size-m;
+}
+
+.button:disabled {
+  @extend .button--color-gray;
 }

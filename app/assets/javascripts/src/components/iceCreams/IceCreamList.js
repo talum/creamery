@@ -1,5 +1,6 @@
 import React from 'react'
 import { showIceCreams } from '../../actions/iceCreams'
+import { showParlors } from '../../actions/parlors'
 import Loader from '../sharedComponents/Loader'
 import SearchBar from '../sharedComponents/SearchBar'
 import FilteredIceCreams from './FilteredIceCreams'
@@ -13,6 +14,7 @@ class IceCreamList extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(showIceCreams())
+    this.props.dispatch(showParlors())
   }
 
   handleSearchInputChange(event) {
@@ -21,15 +23,16 @@ class IceCreamList extends React.Component {
 
   render() {
     let iceCreams = Object.values(this.props.iceCreams.byId)
+    let parlors   = this.props.parlors.byId
 
-    if (this.props.iceCreams.isLoading) {
+    if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
       return (<Loader />)
     } else {
       return (
         <div>
           { this.props.iceCreams.errors.join(", ") }
           <SearchBar searchTerm={this.state.searchTerm} handleSearchInputChange={this.handleSearchInputChange} placeholderText={"Search ice cream"}/>
-          <FilteredIceCreams iceCreams={iceCreams} searchTerm={this.state.searchTerm}/>
+          <FilteredIceCreams parlors={parlors} iceCreams={iceCreams} searchTerm={this.state.searchTerm}/>
         </div>
       )
     }

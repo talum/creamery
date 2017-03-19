@@ -4,6 +4,7 @@ import Bookmark from '../sharedComponents/Bookmark'
 class IceCreamListItem extends React.Component {
   render() {
     let iceCream = this.props.iceCream
+    let parlor = this.props.parlor
     return(
       <div className="flex-grid__item">
         <div className="module">
@@ -25,7 +26,7 @@ class IceCreamListItem extends React.Component {
                       <Bookmark />
                   </div>
                   <div className="media-block__content">
-                    Parlor Name
+                    {parlor.name}
                   </div>
                 </div>
               </div>

@@ -51,7 +51,7 @@ class Parlor extends React.Component {
             {this.props.isAdmin && addIceCreamButton }
           </div>
           <div className="flex-grid">
-            { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream}/>)) }
+            { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream} parlor={parlor}/>)) }
           </div>
           <div>
             { this.props.iceCreams.errors.join(", ") }

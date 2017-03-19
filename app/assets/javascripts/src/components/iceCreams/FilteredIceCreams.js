@@ -1,7 +1,7 @@
 import React from 'react'
 import IceCreamListItem from '../iceCreams/IceCreamListItem'
 
-const FilteredIceCreams = ({iceCreams, searchTerm}) => {
+const FilteredIceCreams = ({parlors, iceCreams, searchTerm}) => {
   let iceCreamItems
 
   if (searchTerm === "") {
@@ -9,9 +9,12 @@ const FilteredIceCreams = ({iceCreams, searchTerm}) => {
   } else {
     iceCreamItems = iceCreams.filter((iceCream) => iceCream.title.toLowerCase().includes(searchTerm.toLowerCase()))  
   }
-
-  iceCreamItems = iceCreamItems.map((iceCream) => (
-      <IceCreamListItem key={iceCream.id} iceCream={iceCream} />))
+  iceCreamItems = iceCreamItems.map((iceCream) => {
+    let parlor = parlors[iceCream.parlor_id]
+    return (
+      <IceCreamListItem key={iceCream.id} iceCream={iceCream} parlor={parlor} />
+    )
+  })
 
   return (
     <div className="flex-grid">

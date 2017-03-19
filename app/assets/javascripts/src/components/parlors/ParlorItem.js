@@ -36,12 +36,12 @@ const ParlorItem = (props) => (
       </div>
       <div className="card__footer">
         <div className="module module--padding--s">
-          <div className="media-block media-block--spread media-block--alt-side">
+          <div className="media-block">
             <div className="media-block__media">
               <IceCreamIcon />
             </div>
             <div className="media-block__content">
-            # of Ice Creams
+              { props.parlor.ice_creams.length }
             </div>
           </div>
         </div>
