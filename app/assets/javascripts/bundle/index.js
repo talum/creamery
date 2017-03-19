@@ -31507,6 +31507,10 @@
 
 	var _NewReviewForm2 = _interopRequireDefault(_NewReviewForm);
 
+	var _Review = __webpack_require__(342);
+
+	var _Review2 = _interopRequireDefault(_Review);
+
 	var _Loader = __webpack_require__(308);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
@@ -31611,30 +31615,21 @@
 	                    'div',
 	                    { className: 'module' },
 	                    _react2.default.createElement(
-	                      'h3',
-	                      { className: 'heading heaading--level-4' },
-	                      'Reviews'
-	                    ),
-	                    _this2.props.loggedIn && addReviewButton,
-	                    _react2.default.createElement(
-	                      'ul',
-	                      null,
-	                      iceCreamReviews.map(function (review) {
-	                        return _react2.default.createElement(
-	                          'li',
-	                          null,
-	                          _react2.default.createElement(
-	                            'h4',
-	                            null,
-	                            review.title
-	                          ),
-	                          _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            review.content
-	                          )
-	                        );
-	                      })
+	                      'div',
+	                      { className: 'util--padding-ls' },
+	                      _react2.default.createElement(
+	                        'h3',
+	                        { className: 'heading heaading--level-3' },
+	                        'Reviews'
+	                      ),
+	                      _this2.props.loggedIn && addReviewButton,
+	                      _react2.default.createElement(
+	                        'ul',
+	                        null,
+	                        iceCreamReviews.map(function (review) {
+	                          return _react2.default.createElement(_Review2.default, { review: review });
+	                        })
+	                      )
 	                    )
 	                  )
 	                ),
@@ -34662,6 +34657,42 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
+
+/***/ },
+/* 342 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Review = function Review(_ref) {
+	  var review = _ref.review;
+	  return _react2.default.createElement(
+	    "li",
+	    { key: review.id, className: "list-item" },
+	    _react2.default.createElement(
+	      "h3",
+	      null,
+	      review.title
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      review.content
+	    )
+	  );
+	};
+
+	exports.default = Review;
 
 /***/ }
 /******/ ]);

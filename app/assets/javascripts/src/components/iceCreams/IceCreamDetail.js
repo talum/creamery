@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Modal from '../sharedComponents/Modal'
 import { showIceCream } from '../../actions/iceCreams'
 import NewReviewForm from '../reviews/NewReviewForm'
+import Review from '../reviews/Review'
 import Loader from '../sharedComponents/Loader'
 
 class IceCreamDetail extends React.Component {
@@ -57,11 +58,13 @@ class IceCreamDetail extends React.Component {
             </div>
             <div className="flex-grid__item">
               <div className="module">
-                <h3 className="heading heaading--level-4">Reviews</h3>
-                { this.props.loggedIn && addReviewButton }
-                <ul>
-                  {iceCreamReviews.map((review) => <li><h4>{review.title}</h4><p>{review.content}</p></li>)}
-                </ul>
+                <div className="util--padding-ls">
+                  <h3 className="heading heaading--level-3">Reviews</h3>
+                  { this.props.loggedIn && addReviewButton }
+                  <ul>
+                    {iceCreamReviews.map((review) => <Review review={review}/>)}
+                  </ul>
+                </div>
               </div>
             </div>
             <Modal
