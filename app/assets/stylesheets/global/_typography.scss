@@ -39,3 +39,9 @@ p {
 .util--text-align-c {
   text-align: center;
 }
+
+@media (max-width: $breakpoint-medium) {
+  .heading--splash {
+    font-size: $font-size--xl;
+  }
+}

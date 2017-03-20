@@ -33,7 +33,7 @@ class Parlors extends React.Component {
 
   render() {
     let parlorsById = this.props.parlors.byId
-    let parlors = Object.values(parlorsById)
+    let parlors = this.props.parlors.allIds.map((id) => parlorsById[id])
     const addParlorButton = (
       <button 
         className="button button--color-black "

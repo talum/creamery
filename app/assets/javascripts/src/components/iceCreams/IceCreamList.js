@@ -22,7 +22,7 @@ class IceCreamList extends React.Component {
   }
 
   render() {
-    let iceCreams = Object.values(this.props.iceCreams.byId)
+    let iceCreams = this.props.iceCreams.allIds.map((id) => this.props.iceCreams.byId[id])
     let parlors   = this.props.parlors.byId
 
     if (this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
