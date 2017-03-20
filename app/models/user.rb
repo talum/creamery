@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_one :profile
   has_one :eater
   has_one :commentor
+  has_many :favorites
 
   validates :email, presence: true, uniqueness: true
 

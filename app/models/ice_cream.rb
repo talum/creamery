@@ -4,6 +4,7 @@ class IceCream < ApplicationRecord
   has_many :ice_cream_flavors
   has_many :flavors, through: :ice_cream_flavors
   belongs_to :parlor
+  has_many :favorites, as: :favoritable
 
   validates :title, presence: true
   validates :parlor_id, presence: true
