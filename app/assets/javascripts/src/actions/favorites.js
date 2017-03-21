@@ -10,13 +10,13 @@ export function addFavorite(iceCreamId) {
       type: ADD_FAVORITE,
       iceCreamId: iceCreamId 
     })
-    return postFavorites(iceCreamId)
+    return postFavorites({favoritableId: iceCreamId, favoritableType: 'IceCream'})
       .then((response) => {
         dispatch(addFavoriteSuccess(response))
       })
-    .catch((error) => {
-        dispatch(addFavoriteError(error))
-    })
+      .catch((error) => {
+          dispatch(addFavoriteError(error))
+      })
   }
 }
 

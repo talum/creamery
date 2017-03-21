@@ -1,13 +1,13 @@
 import React from 'react'
 
 const Bookmark = ({iceCreamId, favorites, loggedIn, handleAddFavorite}) => {
-  let isLiked = favorites.includes((favorite) => {
-    favorite.user_id === parseInt(sessionStorage.currentUserId)
+  let isLiked = favorites.find((favorite) => {
+    return favorite.user_id === parseInt(sessionStorage.currentUserId)
   })
 
   let handleClick
   if (loggedIn) {
-    if (isLiked) {
+    if (!!isLiked) {
       handleClick = function() {
         console.log('delete favorite')
       }

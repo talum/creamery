@@ -28948,8 +28948,8 @@
 	  return post('/reviews', payload);
 	}
 
-	function postFavorites(iceCreamId) {
-	  return post('/favorites', { iceCreamId: iceCreamId });
+	function postFavorites(payload) {
+	  return post('/favorites', payload);
 	}
 
 	function deleteFavorite(payload) {
@@ -30928,7 +30928,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _IceCreamList = __webpack_require__(306);
+	var _IceCreamList = __webpack_require__(305);
 
 	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
 
@@ -30955,51 +30955,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE = undefined;
-	exports.addFavorite = addFavorite;
-
-	var _creameryApi = __webpack_require__(272);
-
-	var ADD_FAVORITE = exports.ADD_FAVORITE = 'ADD_FAVORITE';
-	var ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE_SUCCESS = 'ADD_FAVORITE_SUCCESS';
-	var ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_ERROR = 'ADD_FAVORITE_ERROR';
-
-	function addFavorite(iceCreamId) {
-	  return function (dispatch) {
-	    dispatch({
-	      type: ADD_FAVORITE,
-	      iceCreamId: iceCreamId
-	    });
-	    return (0, _creameryApi.postFavorites)(iceCreamId).then(function (response) {
-	      dispatch(addFavoriteSuccess(response));
-	    }).catch(function (error) {
-	      dispatch(addFavoriteError(error));
-	    });
-	  };
-	}
-
-	function addFavoriteSuccess(response) {
-	  return {
-	    type: ADD_FAVORITE_SUCCESS,
-	    data: response.data
-	  };
-	}
-
-	function addFavoriteError(error) {
-	  return {
-	    type: ADD_FAVORITE_ERROR
-	  };
-	}
-
-/***/ },
-/* 306 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -31007,11 +30962,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
-	var _parlors = __webpack_require__(308);
+	var _parlors = __webpack_require__(307);
 
-	var _favorites = __webpack_require__(305);
+	var _favorites = __webpack_require__(308);
 
 	var _Loader = __webpack_require__(309);
 
@@ -31099,7 +31054,7 @@
 	exports.default = IceCreamList;
 
 /***/ },
-/* 307 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31223,7 +31178,7 @@
 	}
 
 /***/ },
-/* 308 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31308,6 +31263,51 @@
 	    }).catch(function (error) {
 	      dispatch(addParlorError(error));
 	    });
+	  };
+	}
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE = undefined;
+	exports.addFavorite = addFavorite;
+
+	var _creameryApi = __webpack_require__(272);
+
+	var ADD_FAVORITE = exports.ADD_FAVORITE = 'ADD_FAVORITE';
+	var ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE_SUCCESS = 'ADD_FAVORITE_SUCCESS';
+	var ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_ERROR = 'ADD_FAVORITE_ERROR';
+
+	function addFavorite(iceCreamId) {
+	  return function (dispatch) {
+	    dispatch({
+	      type: ADD_FAVORITE,
+	      iceCreamId: iceCreamId
+	    });
+	    return (0, _creameryApi.postFavorites)({ favoritableId: iceCreamId, favoritableType: 'IceCream' }).then(function (response) {
+	      dispatch(addFavoriteSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(addFavoriteError(error));
+	    });
+	  };
+	}
+
+	function addFavoriteSuccess(response) {
+	  return {
+	    type: ADD_FAVORITE_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function addFavoriteError(error) {
+	  return {
+	    type: ADD_FAVORITE_ERROR
 	  };
 	}
 
@@ -31552,13 +31552,13 @@
 	      loggedIn = _ref.loggedIn,
 	      handleAddFavorite = _ref.handleAddFavorite;
 
-	  var isLiked = favorites.includes(function (favorite) {
-	    favorite.user_id === parseInt(sessionStorage.currentUserId);
+	  var isLiked = favorites.find(function (favorite) {
+	    return favorite.user_id === parseInt(sessionStorage.currentUserId);
 	  });
 
 	  var handleClick = void 0;
 	  if (loggedIn) {
-	    if (isLiked) {
+	    if (!!isLiked) {
 	      handleClick = function handleClick() {
 	        console.log('delete favorite');
 	      };
@@ -31607,7 +31607,7 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
 	var _NewReviewForm = __webpack_require__(316);
 
@@ -32108,7 +32108,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _parlors = __webpack_require__(308);
+	var _parlors = __webpack_require__(307);
 
 	var _Modal = __webpack_require__(315);
 
@@ -32235,7 +32235,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(308);
+	var _parlors = __webpack_require__(307);
 
 	var _Form = __webpack_require__(300);
 
@@ -33642,9 +33642,9 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(308);
+	var _parlors = __webpack_require__(307);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
 	var _Modal = __webpack_require__(315);
 
@@ -33811,7 +33811,7 @@
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34233,11 +34233,13 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
 	var iceCreamsActions = _interopRequireWildcard(_iceCreams);
 
 	var _reviews = __webpack_require__(317);
+
+	var _favorites = __webpack_require__(308);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -34256,6 +34258,12 @@
 	      var iceCream = state[action.data.ice_cream_id];
 	      var modifiedIceCream = Object.assign({}, iceCream);
 	      modifiedIceCream.review_ids = modifiedIceCream.review_ids.concat(action.data.id);
+
+	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));
+	    case _favorites.ADD_FAVORITE_SUCCESS:
+	      var iceCream = state[action.data.favoritable_id];
+	      var modifiedIceCream = Object.assign({}, iceCream);
+	      modifiedIceCream.favorites = modifiedIceCream.favorites.concat(action.data);
 
 	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));
 	    default:
@@ -34338,11 +34346,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _parlors = __webpack_require__(308);
+	var _parlors = __webpack_require__(307);
 
 	var parlorActions = _interopRequireWildcard(_parlors);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -34444,7 +34452,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -34533,7 +34541,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -34712,7 +34720,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(307);
+	var _iceCreams = __webpack_require__(306);
 
 	var _reviews2 = __webpack_require__(317);
 

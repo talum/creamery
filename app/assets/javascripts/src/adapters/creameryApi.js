@@ -57,8 +57,8 @@ export function postReviews(payload) {
   return post('/reviews', payload)
 }
 
-export function postFavorites(iceCreamId) {
-  return post('/favorites', {iceCreamId: iceCreamId})
+export function postFavorites(payload) {
+  return post('/favorites', payload)
 }
 
 export function deleteFavorite(payload) {
