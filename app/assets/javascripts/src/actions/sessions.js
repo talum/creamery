@@ -41,6 +41,7 @@ export function logInUser(payload) {
     return createSession(payload)
       .then((response) => {
         sessionStorage.setItem('jwt', response.data.jwt)
+        sessionStorage.setItem('currentUserId', response.data.current_user_id)
         sessionStorage.setItem('isAdmin', response.data.is_admin)
         browserHistory.push('/')
         dispatch(loginSuccess(response))
@@ -53,6 +54,7 @@ export function logInUser(payload) {
 
 export function logOutUser() {
   sessionStorage.removeItem('jwt')
+  sessionStorage.removeItem('currentUserId')
   sessionStorage.removeItem('isAdmin')
   browserHistory.push('/')
   return logOut()

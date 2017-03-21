@@ -4,7 +4,8 @@ import IceCreamList from '../iceCreams/IceCreamList'
 const mapStateToProps = (state) => {
   return {
     parlors: state.parlors,
-    iceCreams: state.iceCreams
+    iceCreams: state.iceCreams,
+    loggedIn: state.sessions.loggedIn
   }
 }
 
