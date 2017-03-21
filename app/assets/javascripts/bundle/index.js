@@ -31556,20 +31556,23 @@
 	    return favorite.user_id === parseInt(sessionStorage.currentUserId);
 	  });
 
-	  var handleClick = void 0;
+	  var handleClick = void 0,
+	      bookmarkClass = void 0;
 	  if (loggedIn) {
 	    if (!!isLiked) {
 	      handleClick = function handleClick() {
 	        console.log('delete favorite');
 	      };
+	      bookmarkClass = 'svg-container--fill-blue';
 	    } else {
 	      handleClick = function handleClick() {
 	        handleAddFavorite(iceCreamId);
 	      };
+	      bookmarkClass = 'svg-container--fill-gray-light';
 	    }
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'svg-container svg-container--small', onClick: handleClick },
+	      { className: 'svg-container svg-container--small svg-container--hoverable ' + bookmarkClass, onClick: handleClick },
 	      _react2.default.createElement(
 	        'svg',
 	        { viewBox: '0 0 32 32' },

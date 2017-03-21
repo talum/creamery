@@ -14,6 +14,12 @@ svg {
   width: 24px;
 }
 
-.svg-container--fill-gray-light { color: $gray-light; fill: $gray-light; }
 .svg-container--fill-black      { color: $black; fill: $black; }
-.svg-container--fill-pink       { color: $pink; fill: $pink; }
+.svg-container--fill-gray-light {
+  color: $gray-light; fill: $gray-light;
+  &.svg-container--hoverable:hover { color: $gray; fill: $gray; }
+}
+.svg-container--fill-blue       {
+  color: $blue; fill: blue;
+  &.svg-container--hoverable:hover { color: $blue-light; fill: $blue-light; }
+} 
