@@ -16,6 +16,11 @@ function post(route, payload) {
   return axios.post(`${BASE_URL+route}`, payload)
 }
 
+function destroy(route, payload) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.jwt}`
+  return axios.delete(`${BASE_URL+route}`, payload)
+}
+
 export function fetchIceCreams() {
   return fetch('/ice_creams')
 }
@@ -50,6 +55,14 @@ export function postComments(payload) {
 
 export function postReviews(payload) {
   return post('/reviews', payload)
+}
+
+export function postFavorites(payload) {
+  return post('/favorites', payload)
+}
+
+export function deleteFavorite(payload) {
+  return delete('/favorites', payload)
 }
 
 export function parseErrors(payload) {
