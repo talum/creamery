@@ -9,7 +9,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-
 const IceCreamListContainer = connect(mapStateToProps)(IceCreamList)
 
 export default IceCreamListContainer

@@ -70,23 +70,23 @@
 
 	var _IceCreamListContainer2 = _interopRequireDefault(_IceCreamListContainer);
 
-	var _IceCreamDetail = __webpack_require__(313);
+	var _IceCreamDetail = __webpack_require__(314);
 
 	var _IceCreamDetail2 = _interopRequireDefault(_IceCreamDetail);
 
-	var _ParlorsContainer = __webpack_require__(318);
+	var _ParlorsContainer = __webpack_require__(319);
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
-	var _Parlor = __webpack_require__(330);
+	var _Parlor = __webpack_require__(331);
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _loginPage = __webpack_require__(332);
+	var _loginPage = __webpack_require__(333);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(333);
+	var _store = __webpack_require__(334);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -28881,6 +28881,8 @@
 	exports.createSession = createSession;
 	exports.postComments = postComments;
 	exports.postReviews = postReviews;
+	exports.postFavorites = postFavorites;
+	exports.deleteFavorite = deleteFavorite;
 	exports.parseErrors = parseErrors;
 
 	var _axios = __webpack_require__(273);
@@ -28903,6 +28905,11 @@
 	function post(route, payload) {
 	  _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
 	  return _axios2.default.post('' + (BASE_URL + route), payload);
+	}
+
+	function destroy(route, payload) {
+	  _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
+	  return _axios2.default.delete('' + (BASE_URL + route), payload);
 	}
 
 	function fetchIceCreams() {
@@ -28939,6 +28946,14 @@
 
 	function postReviews(payload) {
 	  return post('/reviews', payload);
+	}
+
+	function postFavorites(iceCreamId) {
+	  return post('/favorites', { iceCreamId: iceCreamId });
+	}
+
+	function deleteFavorite(payload) {
+	  return delete ('/favorites', payload);
 	}
 
 	function parseErrors(payload) {
@@ -30913,7 +30928,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _IceCreamList = __webpack_require__(305);
+	var _IceCreamList = __webpack_require__(306);
 
 	var _IceCreamList2 = _interopRequireDefault(_IceCreamList);
 
@@ -30940,6 +30955,51 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE = undefined;
+	exports.addFavorite = addFavorite;
+
+	var _creameryApi = __webpack_require__(272);
+
+	var ADD_FAVORITE = exports.ADD_FAVORITE = 'ADD_FAVORITE';
+	var ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE_SUCCESS = 'ADD_FAVORITE_SUCCESS';
+	var ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_ERROR = 'ADD_FAVORITE_ERROR';
+
+	function addFavorite(iceCreamId) {
+	  return function (dispatch) {
+	    dispatch({
+	      type: ADD_FAVORITE,
+	      iceCreamId: iceCreamId
+	    });
+	    return (0, _creameryApi.postFavorites)(iceCreamId).then(function (response) {
+	      dispatch(addFavoriteSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(addFavoriteError(error));
+	    });
+	  };
+	}
+
+	function addFavoriteSuccess(response) {
+	  return {
+	    type: ADD_FAVORITE_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function addFavoriteError(error) {
+	  return {
+	    type: ADD_FAVORITE_ERROR
+	  };
+	}
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -30947,19 +31007,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
-	var _parlors = __webpack_require__(307);
+	var _parlors = __webpack_require__(308);
 
-	var _Loader = __webpack_require__(308);
+	var _favorites = __webpack_require__(305);
+
+	var _Loader = __webpack_require__(309);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _SearchBar = __webpack_require__(309);
+	var _SearchBar = __webpack_require__(310);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
-	var _FilteredIceCreams = __webpack_require__(310);
+	var _FilteredIceCreams = __webpack_require__(311);
 
 	var _FilteredIceCreams2 = _interopRequireDefault(_FilteredIceCreams);
 
@@ -30981,6 +31043,7 @@
 
 	    _this.state = { searchTerm: "" };
 	    _this.handleSearchInputChange = _this.handleSearchInputChange.bind(_this);
+	    _this.handleAddFavorite = _this.handleAddFavorite.bind(_this);
 	    return _this;
 	  }
 
@@ -30989,6 +31052,11 @@
 	    value: function componentDidMount() {
 	      this.props.dispatch((0, _iceCreams.showIceCreams)());
 	      this.props.dispatch((0, _parlors.showParlors)());
+	    }
+	  }, {
+	    key: 'handleAddFavorite',
+	    value: function handleAddFavorite(iceCreamId) {
+	      this.props.dispatch((0, _favorites.addFavorite)(iceCreamId));
 	    }
 	  }, {
 	    key: 'handleSearchInputChange',
@@ -31013,7 +31081,13 @@
 	          null,
 	          this.props.iceCreams.errors.join(", "),
 	          _react2.default.createElement(_SearchBar2.default, { searchTerm: this.state.searchTerm, handleSearchInputChange: this.handleSearchInputChange, placeholderText: "Search ice cream" }),
-	          _react2.default.createElement(_FilteredIceCreams2.default, { parlors: parlors, iceCreams: iceCreams, searchTerm: this.state.searchTerm, loggedIn: this.props.loggedIn })
+	          _react2.default.createElement(_FilteredIceCreams2.default, {
+	            parlors: parlors,
+	            iceCreams: iceCreams,
+	            searchTerm: this.state.searchTerm,
+	            loggedIn: this.props.loggedIn,
+	            handleAddFavorite: this.handleAddFavorite
+	          })
 	        );
 	      }
 	    }
@@ -31025,7 +31099,7 @@
 	exports.default = IceCreamList;
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31149,7 +31223,7 @@
 	}
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31238,7 +31312,7 @@
 	}
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31266,7 +31340,7 @@
 	exports.default = Loader;
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31295,7 +31369,7 @@
 	exports.default = SearchBar;
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31308,7 +31382,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _IceCreamListItem = __webpack_require__(311);
+	var _IceCreamListItem = __webpack_require__(312);
 
 	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
 
@@ -31318,7 +31392,8 @@
 	  var parlors = _ref.parlors,
 	      iceCreams = _ref.iceCreams,
 	      searchTerm = _ref.searchTerm,
-	      loggedIn = _ref.loggedIn;
+	      loggedIn = _ref.loggedIn,
+	      handleAddFavorite = _ref.handleAddFavorite;
 
 	  var iceCreamItems = void 0;
 
@@ -31331,7 +31406,7 @@
 	  }
 	  iceCreamItems = iceCreamItems.map(function (iceCream) {
 	    var parlor = parlors[iceCream.parlor_id];
-	    return _react2.default.createElement(_IceCreamListItem2.default, { key: iceCream.id, iceCream: iceCream, parlor: parlor, loggedIn: loggedIn });
+	    return _react2.default.createElement(_IceCreamListItem2.default, { key: iceCream.id, iceCream: iceCream, parlor: parlor, loggedIn: loggedIn, handleAddFavorite: handleAddFavorite });
 	  });
 
 	  return _react2.default.createElement(
@@ -31344,7 +31419,7 @@
 	exports.default = FilteredIceCreams;
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31361,7 +31436,7 @@
 
 	var _reactRouter = __webpack_require__(178);
 
-	var _Bookmark = __webpack_require__(312);
+	var _Bookmark = __webpack_require__(313);
 
 	var _Bookmark2 = _interopRequireDefault(_Bookmark);
 
@@ -31430,7 +31505,7 @@
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'media-block__media' },
-	                    _react2.default.createElement(_Bookmark2.default, { favorites: iceCream.favorites, loggedIn: this.props.loggedIn })
+	                    _react2.default.createElement(_Bookmark2.default, { iceCreamId: iceCream.id, favorites: iceCream.favorites, loggedIn: this.props.loggedIn, handleAddFavorite: this.props.handleAddFavorite })
 	                  ),
 	                  _react2.default.createElement(
 	                    'div',
@@ -31456,7 +31531,7 @@
 	exports.default = IceCreamListItem;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31472,19 +31547,29 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Bookmark = function Bookmark(_ref) {
-	  var favorites = _ref.favorites,
-	      loggedIn = _ref.loggedIn;
+	  var iceCreamId = _ref.iceCreamId,
+	      favorites = _ref.favorites,
+	      loggedIn = _ref.loggedIn,
+	      handleAddFavorite = _ref.handleAddFavorite;
 
 	  var isLiked = favorites.includes(function (favorite) {
 	    favorite.user_id === parseInt(sessionStorage.currentUserId);
 	  });
 
+	  var handleClick = void 0;
 	  if (loggedIn) {
-	    // if not liked, on click create like
-	    // if liked, on click destroy like
+	    if (isLiked) {
+	      handleClick = function handleClick() {
+	        console.log('delete favorite');
+	      };
+	    } else {
+	      handleClick = function handleClick() {
+	        handleAddFavorite(iceCreamId);
+	      };
+	    }
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'svg-container svg-container--small' },
+	      { className: 'svg-container svg-container--small', onClick: handleClick },
 	      _react2.default.createElement(
 	        'svg',
 	        { viewBox: '0 0 32 32' },
@@ -31499,7 +31584,7 @@
 	exports.default = Bookmark;
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31518,21 +31603,21 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Modal = __webpack_require__(314);
+	var _Modal = __webpack_require__(315);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
-	var _NewReviewForm = __webpack_require__(315);
+	var _NewReviewForm = __webpack_require__(316);
 
 	var _NewReviewForm2 = _interopRequireDefault(_NewReviewForm);
 
-	var _Review = __webpack_require__(317);
+	var _Review = __webpack_require__(318);
 
 	var _Review2 = _interopRequireDefault(_Review);
 
-	var _Loader = __webpack_require__(308);
+	var _Loader = __webpack_require__(309);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
@@ -31685,7 +31770,7 @@
 	exports.default = IceCreamDetail;
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31748,7 +31833,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31769,7 +31854,7 @@
 
 	var _Form2 = _interopRequireDefault(_Form);
 
-	var _reviews = __webpack_require__(316);
+	var _reviews = __webpack_require__(317);
 
 	var _InputField = __webpack_require__(301);
 
@@ -31892,7 +31977,7 @@
 	exports.default = NewReviewForm;
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31942,7 +32027,7 @@
 	}
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31978,7 +32063,7 @@
 	exports.default = Review;
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31989,7 +32074,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Parlors = __webpack_require__(319);
+	var _Parlors = __webpack_require__(320);
 
 	var _Parlors2 = _interopRequireDefault(_Parlors);
 
@@ -32008,7 +32093,7 @@
 	exports.default = ParlorsContainer;
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32023,25 +32108,25 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _parlors = __webpack_require__(307);
+	var _parlors = __webpack_require__(308);
 
-	var _Modal = __webpack_require__(314);
+	var _Modal = __webpack_require__(315);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _NewParlorForm = __webpack_require__(320);
+	var _NewParlorForm = __webpack_require__(321);
 
 	var _NewParlorForm2 = _interopRequireDefault(_NewParlorForm);
 
-	var _FilteredParlors = __webpack_require__(322);
+	var _FilteredParlors = __webpack_require__(323);
 
 	var _FilteredParlors2 = _interopRequireDefault(_FilteredParlors);
 
-	var _Loader = __webpack_require__(308);
+	var _Loader = __webpack_require__(309);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _SearchBar = __webpack_require__(309);
+	var _SearchBar = __webpack_require__(310);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
@@ -32133,7 +32218,7 @@
 	exports.default = Parlors;
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32150,7 +32235,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(307);
+	var _parlors = __webpack_require__(308);
 
 	var _Form = __webpack_require__(300);
 
@@ -32160,7 +32245,7 @@
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
-	var _SelectField = __webpack_require__(321);
+	var _SelectField = __webpack_require__(322);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 
@@ -32338,7 +32423,7 @@
 	exports.default = NewParlorForm;
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32480,7 +32565,7 @@
 	exports.default = SelectField;
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32493,7 +32578,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ParlorItem = __webpack_require__(323);
+	var _ParlorItem = __webpack_require__(324);
 
 	var _ParlorItem2 = _interopRequireDefault(_ParlorItem);
 
@@ -32531,7 +32616,7 @@
 	exports.default = FilteredParlors;
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32546,27 +32631,27 @@
 
 	var _reactRouter = __webpack_require__(178);
 
-	var _IceCreamIcon = __webpack_require__(324);
+	var _IceCreamIcon = __webpack_require__(325);
 
 	var _IceCreamIcon2 = _interopRequireDefault(_IceCreamIcon);
 
-	var _IceCreamCone = __webpack_require__(325);
+	var _IceCreamCone = __webpack_require__(326);
 
 	var _IceCreamCone2 = _interopRequireDefault(_IceCreamCone);
 
-	var _IceCreamCone3 = __webpack_require__(326);
+	var _IceCreamCone3 = __webpack_require__(327);
 
 	var _IceCreamCone4 = _interopRequireDefault(_IceCreamCone3);
 
-	var _IceCreamCone5 = __webpack_require__(327);
+	var _IceCreamCone5 = __webpack_require__(328);
 
 	var _IceCreamCone6 = _interopRequireDefault(_IceCreamCone5);
 
-	var _IceCreamCone7 = __webpack_require__(328);
+	var _IceCreamCone7 = __webpack_require__(329);
 
 	var _IceCreamCone8 = _interopRequireDefault(_IceCreamCone7);
 
-	var _IceCreamCone9 = __webpack_require__(329);
+	var _IceCreamCone9 = __webpack_require__(330);
 
 	var _IceCreamCone10 = _interopRequireDefault(_IceCreamCone9);
 
@@ -32648,7 +32733,7 @@
 	exports.default = ParlorItem;
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32679,7 +32764,7 @@
 	exports.default = IceCreamIcon;
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32768,7 +32853,7 @@
 	exports.default = IceCreamCone1;
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32909,7 +32994,7 @@
 	exports.default = IceCreamCone2;
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33066,7 +33151,7 @@
 	exports.default = IceCreamCone3;
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33327,7 +33412,7 @@
 	exports.default = IceCreamCone4;
 
 /***/ },
-/* 329 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33538,7 +33623,7 @@
 	exports.default = IceCreamCone5;
 
 /***/ },
-/* 330 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33557,23 +33642,23 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _parlors = __webpack_require__(307);
+	var _parlors = __webpack_require__(308);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
-	var _Modal = __webpack_require__(314);
+	var _Modal = __webpack_require__(315);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Loader = __webpack_require__(308);
+	var _Loader = __webpack_require__(309);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _NewIceCreamForm = __webpack_require__(331);
+	var _NewIceCreamForm = __webpack_require__(332);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
-	var _IceCreamListItem = __webpack_require__(311);
+	var _IceCreamListItem = __webpack_require__(312);
 
 	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
 
@@ -33697,7 +33782,7 @@
 	exports.default = ParlorContainer;
 
 /***/ },
-/* 331 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33726,7 +33811,7 @@
 
 	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33863,7 +33948,7 @@
 	exports.default = NewIceCreamForm;
 
 /***/ },
-/* 332 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34014,7 +34099,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
 
 /***/ },
-/* 333 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34025,11 +34110,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(334);
+	var _reduxThunk = __webpack_require__(335);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(335);
+	var _reducers = __webpack_require__(336);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -34040,7 +34125,7 @@
 	exports.default = store;
 
 /***/ },
-/* 334 */
+/* 335 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34068,7 +34153,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 335 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34079,19 +34164,19 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(336);
+	var _users = __webpack_require__(337);
 
-	var _iceCreams = __webpack_require__(337);
+	var _iceCreams = __webpack_require__(338);
 
-	var _parlors = __webpack_require__(338);
+	var _parlors = __webpack_require__(339);
 
-	var _flavors = __webpack_require__(339);
+	var _flavors = __webpack_require__(340);
 
-	var _iceCreamFlavors = __webpack_require__(340);
+	var _iceCreamFlavors = __webpack_require__(341);
 
-	var _sessions = __webpack_require__(341);
+	var _sessions = __webpack_require__(342);
 
-	var _reviews = __webpack_require__(342);
+	var _reviews = __webpack_require__(343);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -34106,7 +34191,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 336 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34131,7 +34216,7 @@
 	} // users reducer
 
 /***/ },
-/* 337 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34148,11 +34233,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
 	var iceCreamsActions = _interopRequireWildcard(_iceCreams);
 
-	var _reviews = __webpack_require__(316);
+	var _reviews = __webpack_require__(317);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -34238,7 +34323,7 @@
 	});
 
 /***/ },
-/* 338 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34253,11 +34338,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _parlors = __webpack_require__(307);
+	var _parlors = __webpack_require__(308);
 
 	var parlorActions = _interopRequireWildcard(_parlors);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -34343,7 +34428,7 @@
 	});
 
 /***/ },
-/* 339 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34359,7 +34444,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -34432,7 +34517,7 @@
 	});
 
 /***/ },
-/* 340 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34448,7 +34533,7 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -34521,7 +34606,7 @@
 	});
 
 /***/ },
-/* 341 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34608,7 +34693,7 @@
 	});
 
 /***/ },
-/* 342 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34627,9 +34712,9 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _iceCreams = __webpack_require__(306);
+	var _iceCreams = __webpack_require__(307);
 
-	var _reviews2 = __webpack_require__(316);
+	var _reviews2 = __webpack_require__(317);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 

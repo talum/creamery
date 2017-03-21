@@ -1,7 +1,7 @@
 import React from 'react'
 import IceCreamListItem from '../iceCreams/IceCreamListItem'
 
-const FilteredIceCreams = ({parlors, iceCreams, searchTerm, loggedIn}) => {
+const FilteredIceCreams = ({parlors, iceCreams, searchTerm, loggedIn, handleAddFavorite}) => {
   let iceCreamItems
 
   if (searchTerm === "") {
@@ -12,7 +12,7 @@ const FilteredIceCreams = ({parlors, iceCreams, searchTerm, loggedIn}) => {
   iceCreamItems = iceCreamItems.map((iceCream) => {
     let parlor = parlors[iceCream.parlor_id]
     return (
-      <IceCreamListItem key={iceCream.id} iceCream={iceCream} parlor={parlor} loggedIn={loggedIn} />
+      <IceCreamListItem key={iceCream.id} iceCream={iceCream} parlor={parlor} loggedIn={loggedIn} handleAddFavorite={handleAddFavorite}/>
     )
   })
 

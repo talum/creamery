@@ -3,6 +3,7 @@ module Api
     class FavoritesController < ApiController
 
       def create
+        binding.pry
       end
 
       def destroy
