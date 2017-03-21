@@ -1,7 +1,7 @@
 import React from 'react'
 import { showIceCreams } from '../../actions/iceCreams'
 import { showParlors } from '../../actions/parlors'
-import { addFavorite } from '../../actions/favorites'
+import { addFavorite, removeFavorite } from '../../actions/favorites'
 import Loader from '../sharedComponents/Loader'
 import SearchBar from '../sharedComponents/SearchBar'
 import FilteredIceCreams from './FilteredIceCreams'
@@ -12,6 +12,7 @@ class IceCreamList extends React.Component {
     this.state = {searchTerm: ""}
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this)
     this.handleAddFavorite = this.handleAddFavorite.bind(this)
+    this.handleRemoveFavorite = this.handleRemoteFavorite.bind(this)
   }
 
   componentDidMount() {
@@ -21,6 +22,10 @@ class IceCreamList extends React.Component {
 
   handleAddFavorite(iceCreamId) {
     this.props.dispatch(addFavorite(iceCreamId))
+  }
+
+  handleRemoveFavorite(favoriteId, iceCreamId) {
+    this.props.dispatch(removeFavorite(favoriteId, iceCreamId))
   }
 
   handleSearchInputChange(event) {
@@ -44,6 +49,7 @@ class IceCreamList extends React.Component {
             searchTerm={this.state.searchTerm}
             loggedIn={this.props.loggedIn}
             handleAddFavorite={this.handleAddFavorite}
+            handleRemoveFavorite={this.handleRemoveFavorite}
           />
         </div>
       )

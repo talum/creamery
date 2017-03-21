@@ -28952,8 +28952,8 @@
 	  return post('/favorites', payload);
 	}
 
-	function deleteFavorite(payload) {
-	  return delete ('/favorites', payload);
+	function deleteFavorite(favoriteId) {
+	  return delete ('/favorites/' + favoriteId);
 	}
 
 	function parseErrors(payload) {
@@ -30999,6 +30999,7 @@
 	    _this.state = { searchTerm: "" };
 	    _this.handleSearchInputChange = _this.handleSearchInputChange.bind(_this);
 	    _this.handleAddFavorite = _this.handleAddFavorite.bind(_this);
+	    _this.handleRemoveFavorite = _this.handleRemoteFavorite.bind(_this);
 	    return _this;
 	  }
 
@@ -31012,6 +31013,11 @@
 	    key: 'handleAddFavorite',
 	    value: function handleAddFavorite(iceCreamId) {
 	      this.props.dispatch((0, _favorites.addFavorite)(iceCreamId));
+	    }
+	  }, {
+	    key: 'handleRemoveFavorite',
+	    value: function handleRemoveFavorite(favoriteId, iceCreamId) {
+	      this.props.dispatch((0, _favorites.removeFavorite)(favoriteId, iceCreamId));
 	    }
 	  }, {
 	    key: 'handleSearchInputChange',
@@ -31041,7 +31047,8 @@
 	            iceCreams: iceCreams,
 	            searchTerm: this.state.searchTerm,
 	            loggedIn: this.props.loggedIn,
-	            handleAddFavorite: this.handleAddFavorite
+	            handleAddFavorite: this.handleAddFavorite,
+	            handleRemoveFavorite: this.handleRemoveFavorite
 	          })
 	        );
 	      }
@@ -31275,8 +31282,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE = undefined;
+	exports.REMOVE_FAVORITE_ERROR = exports.REMOVE_FAVORITE_SUCCESS = exports.REMOVE_FAVORITE = exports.ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE = undefined;
 	exports.addFavorite = addFavorite;
+	exports.removeFavorite = removeFavorite;
 
 	var _creameryApi = __webpack_require__(272);
 
@@ -31308,6 +31316,40 @@
 	function addFavoriteError(error) {
 	  return {
 	    type: ADD_FAVORITE_ERROR
+	  };
+	}
+
+	var REMOVE_FAVORITE = exports.REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+	var REMOVE_FAVORITE_SUCCESS = exports.REMOVE_FAVORITE_SUCCESS = 'REMOVE_FAVORITE_SUCCESS';
+	var REMOVE_FAVORITE_ERROR = exports.REMOVE_FAVORITE_ERROR = 'REMOVE_FAVORITE_ERROR';
+
+	function removeFavorite(favoriteId, iceCreamId) {
+	  return function (dispatch) {
+	    dispatch({
+	      type: REMOVE_FAVORITE,
+	      data: {
+	        favoriteId: favoriteId,
+	        iceCreamId: iceCreamId
+	      }
+	    });
+	    return (0, _creameryApi.deleteFavorite)(favoriteId).then(function (response) {
+	      dispatch(removeFavoriteSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(removeFavoriteError(error));
+	    });
+	  };
+	}
+
+	function removeFavoriteSuccess(response) {
+	  return {
+	    type: REMOVE_FAVORITE_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function removeFavoriteError(error) {
+	  return {
+	    type: REMOVE_FAVORITE_ERROR
 	  };
 	}
 
@@ -31393,7 +31435,8 @@
 	      iceCreams = _ref.iceCreams,
 	      searchTerm = _ref.searchTerm,
 	      loggedIn = _ref.loggedIn,
-	      handleAddFavorite = _ref.handleAddFavorite;
+	      handleAddFavorite = _ref.handleAddFavorite,
+	      handleRemoveFavorite = _ref.handleRemoveFavorite;
 
 	  var iceCreamItems = void 0;
 
@@ -31406,7 +31449,14 @@
 	  }
 	  iceCreamItems = iceCreamItems.map(function (iceCream) {
 	    var parlor = parlors[iceCream.parlor_id];
-	    return _react2.default.createElement(_IceCreamListItem2.default, { key: iceCream.id, iceCream: iceCream, parlor: parlor, loggedIn: loggedIn, handleAddFavorite: handleAddFavorite });
+	    return _react2.default.createElement(_IceCreamListItem2.default, {
+	      key: iceCream.id,
+	      iceCream: iceCream,
+	      parlor: parlor,
+	      loggedIn: loggedIn,
+	      handleAddFavorite: handleAddFavorite,
+	      handleRemoveFavorite: handleRemoveFavorite
+	    });
 	  });
 
 	  return _react2.default.createElement(
@@ -31505,7 +31555,13 @@
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'media-block__media' },
-	                    _react2.default.createElement(_Bookmark2.default, { iceCreamId: iceCream.id, favorites: iceCream.favorites, loggedIn: this.props.loggedIn, handleAddFavorite: this.props.handleAddFavorite })
+	                    _react2.default.createElement(_Bookmark2.default, {
+	                      iceCreamId: iceCream.id,
+	                      favorites: iceCream.favorites,
+	                      loggedIn: this.props.loggedIn,
+	                      handleAddFavorite: this.props.handleAddFavorite,
+	                      handleRemoveFavorite: this.props.handleRemoveFavorite
+	                    })
 	                  ),
 	                  _react2.default.createElement(
 	                    'div',
@@ -31550,20 +31606,21 @@
 	  var iceCreamId = _ref.iceCreamId,
 	      favorites = _ref.favorites,
 	      loggedIn = _ref.loggedIn,
-	      handleAddFavorite = _ref.handleAddFavorite;
+	      handleAddFavorite = _ref.handleAddFavorite,
+	      handleRemoveFavorite = _ref.handleRemoveFavorite;
 
-	  var isLiked = favorites.find(function (favorite) {
+	  var favorite = favorites.find(function (favorite) {
 	    return favorite.user_id === parseInt(sessionStorage.currentUserId);
 	  });
 
 	  var handleClick = void 0,
 	      bookmarkClass = void 0;
 	  if (loggedIn) {
-	    if (!!isLiked) {
+	    if (!!favorite) {
 	      handleClick = function handleClick() {
-	        console.log('delete favorite');
+	        handleRemoveFavorite(favorite.id, favorite.favoritable_id);
 	      };
-	      bookmarkClass = 'svg-container--fill-blue';
+	      bookmarkClass = 'svg-container--fill-green';
 	    } else {
 	      handleClick = function handleClick() {
 	        handleAddFavorite(iceCreamId);
@@ -34266,6 +34323,14 @@
 	    case _favorites.ADD_FAVORITE_SUCCESS:
 	      var iceCream = state[action.data.favoritable_id];
 	      var modifiedIceCream = Object.assign({}, iceCream);
+	      modifiedIceCream.favorites = modifiedIceCream.favorites.concat(action.data);
+
+	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));
+	    case _favorites.REMOVE_FAVORITE:
+	      var favoriteId = action.data.favoriteId;
+	      var iceCream = state[action.data.favoritable_id];
+	      var modifiedIceCream = Object.assign({}, iceCream);
+	      //TODO: Remove the correct favorite from the ice cream
 	      modifiedIceCream.favorites = modifiedIceCream.favorites.concat(action.data);
 
 	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));

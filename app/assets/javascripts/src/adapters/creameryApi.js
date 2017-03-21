@@ -61,8 +61,8 @@ export function postFavorites(payload) {
   return post('/favorites', payload)
 }
 
-export function deleteFavorite(payload) {
-  return delete('/favorites', payload)
+export function deleteFavorite(favoriteId) {
+  return delete(`/favorites/${favoriteId}`)
 }
 
 export function parseErrors(payload) {

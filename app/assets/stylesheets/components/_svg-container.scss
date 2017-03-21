@@ -19,7 +19,13 @@ svg {
   color: $gray-light; fill: $gray-light;
   &.svg-container--hoverable:hover { color: $gray; fill: $gray; }
 }
-.svg-container--fill-blue       {
-  color: $blue; fill: blue;
+.svg-container--fill-blue {
+  color: $blue; fill: $blue;
   &.svg-container--hoverable:hover { color: $blue-light; fill: $blue-light; }
 } 
+
+.svg-container--fill-green {
+  color: $green; fill: $green;
+  &.svg-container--hoverable:hover { color: $green-darker; fill:
+    $green-darker; }
+}

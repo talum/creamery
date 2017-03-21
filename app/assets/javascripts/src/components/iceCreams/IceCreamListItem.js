@@ -26,7 +26,13 @@ class IceCreamListItem extends React.Component {
               <div className="module module--padding--s">
                 <div className="media-block media-block--spread media-block--alt-side">
                   <div className="media-block__media">
-                      <Bookmark iceCreamId={iceCream.id} favorites={iceCream.favorites} loggedIn={this.props.loggedIn} handleAddFavorite={this.props.handleAddFavorite}/>
+                      <Bookmark
+                        iceCreamId={iceCream.id}
+                        favorites={iceCream.favorites}
+                        loggedIn={this.props.loggedIn}
+                        handleAddFavorite={this.props.handleAddFavorite}
+                        handleRemoveFavorite={this.props.handleRemoveFavorite}
+                      />
                   </div>
                   <div className="media-block__content">
                     <Link to={`/parlors/${parlor.id}`} >

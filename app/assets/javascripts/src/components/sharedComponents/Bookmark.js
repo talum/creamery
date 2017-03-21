@@ -1,17 +1,17 @@
 import React from 'react'
 
-const Bookmark = ({iceCreamId, favorites, loggedIn, handleAddFavorite}) => {
-  let isLiked = favorites.find((favorite) => {
+const Bookmark = ({iceCreamId, favorites, loggedIn, handleAddFavorite, handleRemoveFavorite}) => {
+  let favorite = favorites.find((favorite) => {
     return favorite.user_id === parseInt(sessionStorage.currentUserId)
   })
 
   let handleClick, bookmarkClass
   if (loggedIn) {
-    if (!!isLiked) {
+    if (!!favorite) {
       handleClick = function() {
-        console.log('delete favorite')
+        handleRemoveFavorite(favorite.id, favorite.favoritable_id)
       }
-      bookmarkClass = 'svg-container--fill-blue'
+      bookmarkClass = 'svg-container--fill-green'
     } else {
       handleClick = function()  {
         handleAddFavorite(iceCreamId)
