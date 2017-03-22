@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { showUser } from '../../actions/users'
+import ProfileForm from './ProfileForm'
 
 class Profile extends React.Component{
 
@@ -9,8 +10,7 @@ class Profile extends React.Component{
   }
 
   render() {
-    debugger
-    return(<div />)
+    return(<ProfileForm />)
   }
 }
 
