@@ -33,10 +33,10 @@ export function byId(state={}, action) {
       }
     case REMOVE_FAVORITE:
       var favoriteId = action.data.favoriteId
-      var iceCream = state[action.data.favoritable_id]
+      var iceCream = state[action.data.favoritableId]
+      var favoriteIndex = iceCream.favorites.findIndex((favorite) => favorite.id == favoriteId)
       var modifiedIceCream = Object.assign({}, iceCream)
-      //TODO: Remove the correct favorite from the ice cream
-      modifiedIceCream.favorites = modifiedIceCream.favorites.concat(action.data)
+      modifiedIceCream.favorites = [...modifiedIceCream.favorites.slice(0, favoriteIndex), ...modifiedIceCream.favorites.slice(favoriteIndex + 1)]
 
       return {
         ...state,

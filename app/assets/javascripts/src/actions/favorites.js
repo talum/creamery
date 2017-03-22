@@ -37,13 +37,13 @@ export const REMOVE_FAVORITE         = 'REMOVE_FAVORITE'
 export const REMOVE_FAVORITE_SUCCESS = 'REMOVE_FAVORITE_SUCCESS' 
 export const REMOVE_FAVORITE_ERROR   = 'REMOVE_FAVORITE_ERROR'
 
-export function removeFavorite(favoriteId, iceCreamId) {
+export function removeFavorite(favoriteId, favoritableId) {
   return function(dispatch) {
     dispatch({
       type: REMOVE_FAVORITE,
       data: {
         favoriteId: favoriteId,
-        iceCreamId: iceCreamId
+        favoritableId: favoritableId
       } 
     })
     return deleteFavorite(favoriteId)

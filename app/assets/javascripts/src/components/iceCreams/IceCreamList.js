@@ -12,7 +12,7 @@ class IceCreamList extends React.Component {
     this.state = {searchTerm: ""}
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this)
     this.handleAddFavorite = this.handleAddFavorite.bind(this)
-    this.handleRemoveFavorite = this.handleRemoteFavorite.bind(this)
+    this.handleRemoveFavorite = this.handleRemoveFavorite.bind(this)
   }
 
   componentDidMount() {

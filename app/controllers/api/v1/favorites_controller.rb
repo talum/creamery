@@ -16,6 +16,9 @@ module Api
       end
 
       def destroy
+        favorite = Favorite.find(params[:id])
+        favorite.destroy
+        render json: { message: "Success" }
       end
     end
   end
