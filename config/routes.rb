@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :parlors, only: [:index, :create, :update]
       resources :profiles, only: [:create, :update, :show]
       resources :reviews, only: [:create, :update, :index]
-      resources :users, only: :create
+      resources :users, only: [:create, :show]
       resources :favorites, only: [:create, :destroy]
       post '/login', to: "sessions#create"
     end

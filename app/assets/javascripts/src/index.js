@@ -8,6 +8,7 @@ import IceCreamListContainer from './components/iceCreams/IceCreamListContainer'
 import IceCreamDetail from './components/iceCreams/IceCreamDetail'
 import ParlorsContainer from './components/parlors/ParlorsContainer'
 import ParlorContainer from './components/parlors/Parlor'
+import UserProfile from './components/users/Profile'
 import LoginPage from './components/sessions/loginPage'
 import store from './store'
 
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <Route path="/login" component={LoginPage} />
           <Route path="/parlors" component={ParlorsContainer} />
           <Route path="/parlors/:id" component={ParlorContainer} />
+          <Route path="/users/:id" component={UserProfile} />
         </Route>
       </Router>
     </Provider>,

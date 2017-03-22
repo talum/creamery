@@ -37,6 +37,10 @@ export function postUsers(payload) {
   return post('/users', payload) 
 }
 
+export function fetchUser(id) {
+  return fetch(`/users/${id}`)
+}
+
 export function fetchParlors() {
   return fetch('/parlors')
 }
