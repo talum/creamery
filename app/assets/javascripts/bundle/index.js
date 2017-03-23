@@ -86,11 +86,11 @@
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
-	var _loginPage = __webpack_require__(334);
+	var _loginPage = __webpack_require__(335);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _store = __webpack_require__(335);
+	var _store = __webpack_require__(336);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -34074,7 +34074,7 @@
 
 	var _users = __webpack_require__(299);
 
-	var _ProfileForm = __webpack_require__(346);
+	var _ProfileForm = __webpack_require__(334);
 
 	var _ProfileForm2 = _interopRequireDefault(_ProfileForm);
 
@@ -34103,7 +34103,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_ProfileForm2.default, null);
+	      return _react2.default.createElement(_ProfileForm2.default, { currentProfile: this.props.currentProfile });
 	    }
 	  }]);
 
@@ -34122,6 +34122,158 @@
 
 /***/ },
 /* 334 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(233);
+
+	var _Form = __webpack_require__(300);
+
+	var _Form2 = _interopRequireDefault(_Form);
+
+	var _InputField = __webpack_require__(301);
+
+	var _InputField2 = _interopRequireDefault(_InputField);
+
+	var _SubmitButton = __webpack_require__(303);
+
+	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ProfileForm = function (_React$Component) {
+	  _inherits(ProfileForm, _React$Component);
+
+	  function ProfileForm(props) {
+	    _classCallCheck(this, ProfileForm);
+
+	    var _this = _possibleConstructorReturn(this, (ProfileForm.__proto__ || Object.getPrototypeOf(ProfileForm)).call(this, props));
+
+	    debugger;
+	    _this.state = {
+	      email: props.currentProfile.userData.email,
+	      first_name: props.currentProfile.userData.first_name,
+	      last_name: props.currentProfile.userData.last_name,
+	      date_of_birth: props.currentProfile.userData.date_of_birth
+	    };
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    _this.validateForm = _Form2.default.validateForm.bind(_this);
+	    _this.registerField = _Form2.default.registerField.bind(_this);
+	    _this.fields = [];
+	    return _this;
+	  }
+
+	  _createClass(ProfileForm, [{
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      this.setState(_defineProperty({}, event.target.name, event.target.value));
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      //this.props.dispatch(updateUser({user: this.state}))
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.handleSubmit },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module' },
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "email",
+	            value: this.state.email,
+	            placeholder: "Email",
+	            handleChange: this.handleChange,
+	            isRequired: true,
+	            validateForm: this.validateForm,
+	            registerField: this.registerField
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module' },
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "first_name",
+	            value: this.state.first_name,
+	            placeholder: "First name",
+	            handleChange: this.handleChange,
+	            isRequired: true,
+	            validateForm: this.validateForm,
+	            registerField: this.registerField
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module' },
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "last_name",
+	            value: this.state.last_name,
+	            placeholder: "Last name",
+	            handleChange: this.handleChange,
+	            isRequired: true,
+	            validateForm: this.validateForm,
+	            registerField: this.registerField
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module' },
+	          _react2.default.createElement(_InputField2.default, {
+	            name: "date_of_birth",
+	            inputType: "date",
+	            value: this.state.date_of_birth,
+	            placeholder: "Date of birth",
+	            handleChange: this.handleChange,
+	            isRequired: true,
+	            validateForm: this.validateForm,
+	            registerField: this.registerField
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module' },
+	          _react2.default.createElement(_SubmitButton2.default, {
+	            isDisabled: !this.state.isValid,
+	            handleSubmit: this.handleSubmit
+	          })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ProfileForm;
+	}(_react2.default.Component);
+
+	var ConnectedProfileForm = (0, _reactRedux.connect)()(ProfileForm);
+
+	exports.default = ConnectedProfileForm;
+
+/***/ },
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34272,7 +34424,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
 
 /***/ },
-/* 335 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34283,11 +34435,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(336);
+	var _reduxThunk = __webpack_require__(337);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(337);
+	var _reducers = __webpack_require__(338);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -34298,7 +34450,7 @@
 	exports.default = store;
 
 /***/ },
-/* 336 */
+/* 337 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34326,7 +34478,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 337 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34337,21 +34489,21 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(338);
+	var _users = __webpack_require__(339);
 
-	var _iceCreams = __webpack_require__(339);
+	var _iceCreams = __webpack_require__(340);
 
-	var _parlors = __webpack_require__(340);
+	var _parlors = __webpack_require__(341);
 
-	var _flavors = __webpack_require__(341);
+	var _flavors = __webpack_require__(342);
 
-	var _iceCreamFlavors = __webpack_require__(342);
+	var _iceCreamFlavors = __webpack_require__(343);
 
-	var _sessions = __webpack_require__(343);
+	var _sessions = __webpack_require__(344);
 
-	var _reviews = __webpack_require__(344);
+	var _reviews = __webpack_require__(345);
 
-	var _currentProfile = __webpack_require__(345);
+	var _currentProfile = __webpack_require__(346);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -34367,7 +34519,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 338 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34392,7 +34544,7 @@
 	} // users reducer
 
 /***/ },
-/* 339 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34519,7 +34671,7 @@
 	});
 
 /***/ },
-/* 340 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34624,7 +34776,7 @@
 	});
 
 /***/ },
-/* 341 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34713,7 +34865,7 @@
 	});
 
 /***/ },
-/* 342 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34802,7 +34954,7 @@
 	});
 
 /***/ },
-/* 343 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34889,7 +35041,7 @@
 	});
 
 /***/ },
-/* 344 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34999,7 +35151,7 @@
 	});
 
 /***/ },
-/* 345 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35059,71 +35211,6 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
-
-/***/ },
-/* 346 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ProfileForm = function (_React$Component) {
-	  _inherits(ProfileForm, _React$Component);
-
-	  function ProfileForm(props) {
-	    _classCallCheck(this, ProfileForm);
-
-	    var _this = _possibleConstructorReturn(this, (ProfileForm.__proto__ || Object.getPrototypeOf(ProfileForm)).call(this, props));
-
-	    _this.state = {
-	      email: props.email,
-	      first_name: props.first_name,
-	      last_name: props.last_name,
-	      date_of_birth: props.date_of_birth
-	    };
-	    return _this;
-	  }
-
-	  _createClass(ProfileForm, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "form",
-	        null,
-	        _react2.default.createElement("input", { type: "text", placeHolder: "first name", value: this.state.first_name }),
-	        _react2.default.createElement("input", { type: "text", placeHolder: "last name", value: this.state.last_name }),
-	        _react2.default.createElement("input", { type: "date", placeHolder: "date of birth", value: this.state.date_of_birth })
-	      );
-	    }
-	  }]);
-
-	  return ProfileForm;
-	}(_react2.default.Component);
-
-	ProfileForm.defaultProps = {
-	  first_name: "",
-	  last_name: "",
-	  date_of_birth: ""
-	};
-
-	exports.default = ProfileForm;
 
 /***/ }
 /******/ ]);

@@ -10,7 +10,7 @@ class Profile extends React.Component{
   }
 
   render() {
-    return(<ProfileForm />)
+    return(<ProfileForm currentProfile={this.props.currentProfile} />)
   }
 }
 
