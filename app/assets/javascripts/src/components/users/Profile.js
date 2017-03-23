@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { showUser } from '../../actions/users'
+import { showUser, updateUser } from '../../actions/users'
 import ProfileForm from './ProfileForm'
+import Loader from '../sharedComponents/Loader'
 
 class Profile extends React.Component{
 
@@ -10,7 +11,11 @@ class Profile extends React.Component{
   }
 
   render() {
-    return(<ProfileForm currentProfile={this.props.currentProfile} />)
+    if (this.props.currentProfile.isLoading) {
+      return (<Loader />)
+    } else {
+      return(<ProfileForm currentProfile={this.props.currentProfile} />)
+    }
   }
 }
 

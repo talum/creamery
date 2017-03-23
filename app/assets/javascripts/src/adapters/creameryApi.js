@@ -21,6 +21,11 @@ function destroy(route, payload) {
   return axios.delete(`${BASE_URL+route}`, payload)
 }
 
+function patch(route, payload) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.jwt}`
+  return axios.patch(`${BASE_URL+route}`, payload)
+}
+
 export function fetchIceCreams() {
   return fetch('/ice_creams')
 }
@@ -39,6 +44,10 @@ export function postUsers(payload) {
 
 export function fetchUser(id) {
   return fetch(`/users/${id}`)
+}
+
+export function patchUser(id, payload) {
+  return patch(`/users/${id}`, payload)
 }
 
 export function fetchParlors() {

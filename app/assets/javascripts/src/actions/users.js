@@ -1,7 +1,7 @@
 //users actions
 
 import { browserHistory } from 'react-router'
-import { fetchUser, postUsers, parseErrors } from '../adapters/creameryApi'
+import { fetchUser, postUsers, patchUser, parseErrors } from '../adapters/creameryApi'
 
 export const ADD_USER       = 'ADD_USER'
 export const ADD_USER_ERROR = 'ADD_USER_ERROR'
@@ -68,6 +68,44 @@ export function showUser(id) {
     })
     .catch((error) => {
       dispatch(receiveUserError(error))
+    })
+  }
+}
+
+export const UPDATE_USER         = 'UPDATE_USER'
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
+export const UPDATE_USER_ERROR   = 'UPDATE_USER_ERROR'
+
+function initiateUpdateUser() {
+  return {
+    type: UPDATE_USER
+  }
+}
+
+function updateUserSuccess(response) {
+  return {
+    type: UPDATE_USER_SUCCESS,
+    data: response.data
+  }
+}
+
+function updateUserError(error) {
+  return {
+    type: UPDATE_USER_ERROR,
+    errors: parseErrors(error)
+  }
+}
+
+export function updateUser(id, payload) {
+  return function(dispatch) {
+    dispatch(initiateUpdateUser())
+
+    return patchUser(id, payload)
+    .then((response) => {
+      dispatch(updateUserSuccess(response))
+    })
+    .catch((error) => {
+      dispatch(updateUserError(error))
     })
   }
 }

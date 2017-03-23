@@ -7,6 +7,7 @@ module Api
         @user = User.new(user_params)
         @user.build_eater
         @user.build_commentor
+        @user.build_profile
 
         if  @user.save
           render json: @user and return
@@ -23,6 +24,17 @@ module Api
         else
           render json: { errors: "User not found" }, status: 404
         end
+      end
+
+      def update
+        @user = User.find_by(id: params[:user][:id])
+        @user.profile.update({
+          first_name: params[:user][:first_name],
+          last_name: params[:user][:last_name],
+          date_of_birth: DateTime.parse(params[:user][:date_of_birth])
+        })
+
+        render json: @user
       end
 
     private

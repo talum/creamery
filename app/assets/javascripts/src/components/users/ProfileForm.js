@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { updateUser } from '../../actions/users'
 import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
@@ -7,12 +8,12 @@ import SubmitButton from '../sharedComponents/SubmitButton'
 class ProfileForm extends React.Component {
   constructor(props) {
     super(props)
-    debugger
+    let { first_name, last_name, date_of_birth } = props.currentProfile.userData.profile
     this.state = {
-      email: props.currentProfile.userData.email,
-      first_name: props.currentProfile.userData.first_name,
-      last_name: props.currentProfile.userData.last_name,
-      date_of_birth: props.currentProfile.userData.date_of_birth
+      id: props.currentProfile.userData.id,
+      first_name: first_name,
+      last_name: last_name,
+      date_of_birth: date_of_birth
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,23 +28,12 @@ class ProfileForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    //this.props.dispatch(updateUser({user: this.state}))
+    this.props.dispatch(updateUser(this.state.id, {user: this.state}))
   }
 
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
-        <div className="module">
-          <InputField
-            name={"email"} 
-            value={this.state.email}
-            placeholder={"Email"}
-            handleChange={this.handleChange}
-            isRequired={true}
-            validateForm={this.validateForm}
-            registerField={this.registerField}
-          />
-        </div>
         <div className="module">
           <InputField
             name={"first_name"} 

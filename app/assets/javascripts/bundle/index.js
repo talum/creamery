@@ -28882,6 +28882,7 @@
 	exports.postIceCreams = postIceCreams;
 	exports.postUsers = postUsers;
 	exports.fetchUser = fetchUser;
+	exports.patchUser = patchUser;
 	exports.fetchParlors = fetchParlors;
 	exports.postParlors = postParlors;
 	exports.createSession = createSession;
@@ -28918,6 +28919,11 @@
 	  return _axios2.default.delete('' + (BASE_URL + route), payload);
 	}
 
+	function patch(route, payload) {
+	  _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.jwt;
+	  return _axios2.default.patch('' + (BASE_URL + route), payload);
+	}
+
 	function fetchIceCreams() {
 	  return fetch('/ice_creams');
 	}
@@ -28936,6 +28942,10 @@
 
 	function fetchUser(id) {
 	  return fetch('/users/' + id);
+	}
+
+	function patchUser(id, payload) {
+	  return patch('/users/' + id, payload);
 	}
 
 	function fetchParlors() {
@@ -30624,9 +30634,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.RECEIVE_USER_ERROR = exports.RECEIVE_USER_SUCCESS = exports.REQUEST_USER = exports.ADD_USER_ERROR = exports.ADD_USER = undefined;
+	exports.UPDATE_USER_ERROR = exports.UPDATE_USER_SUCCESS = exports.UPDATE_USER = exports.RECEIVE_USER_ERROR = exports.RECEIVE_USER_SUCCESS = exports.REQUEST_USER = exports.ADD_USER_ERROR = exports.ADD_USER = undefined;
 	exports.addUser = addUser;
 	exports.showUser = showUser;
+	exports.updateUser = updateUser;
 
 	var _reactRouter = __webpack_require__(178);
 
@@ -30695,6 +30706,42 @@
 	      dispatch(receiveUserSuccess(response));
 	    }).catch(function (error) {
 	      dispatch(receiveUserError(error));
+	    });
+	  };
+	}
+
+	var UPDATE_USER = exports.UPDATE_USER = 'UPDATE_USER';
+	var UPDATE_USER_SUCCESS = exports.UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+	var UPDATE_USER_ERROR = exports.UPDATE_USER_ERROR = 'UPDATE_USER_ERROR';
+
+	function initiateUpdateUser() {
+	  return {
+	    type: UPDATE_USER
+	  };
+	}
+
+	function updateUserSuccess(response) {
+	  return {
+	    type: UPDATE_USER_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function updateUserError(error) {
+	  return {
+	    type: UPDATE_USER_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
+	  };
+	}
+
+	function updateUser(id, payload) {
+	  return function (dispatch) {
+	    dispatch(initiateUpdateUser());
+
+	    return (0, _creameryApi.patchUser)(id, payload).then(function (response) {
+	      dispatch(updateUserSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(updateUserError(error));
 	    });
 	  };
 	}
@@ -34078,6 +34125,10 @@
 
 	var _ProfileForm2 = _interopRequireDefault(_ProfileForm);
 
+	var _Loader = __webpack_require__(309);
+
+	var _Loader2 = _interopRequireDefault(_Loader);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34103,7 +34154,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_ProfileForm2.default, { currentProfile: this.props.currentProfile });
+	      if (this.props.currentProfile.isLoading) {
+	        return _react2.default.createElement(_Loader2.default, null);
+	      } else {
+	        return _react2.default.createElement(_ProfileForm2.default, { currentProfile: this.props.currentProfile });
+	      }
 	    }
 	  }]);
 
@@ -34138,6 +34193,8 @@
 
 	var _reactRedux = __webpack_require__(233);
 
+	var _users = __webpack_require__(299);
+
 	var _Form = __webpack_require__(300);
 
 	var _Form2 = _interopRequireDefault(_Form);
@@ -34168,12 +34225,16 @@
 
 	    var _this = _possibleConstructorReturn(this, (ProfileForm.__proto__ || Object.getPrototypeOf(ProfileForm)).call(this, props));
 
-	    debugger;
+	    var _props$currentProfile = props.currentProfile.userData.profile,
+	        first_name = _props$currentProfile.first_name,
+	        last_name = _props$currentProfile.last_name,
+	        date_of_birth = _props$currentProfile.date_of_birth;
+
 	    _this.state = {
-	      email: props.currentProfile.userData.email,
-	      first_name: props.currentProfile.userData.first_name,
-	      last_name: props.currentProfile.userData.last_name,
-	      date_of_birth: props.currentProfile.userData.date_of_birth
+	      id: props.currentProfile.userData.id,
+	      first_name: first_name,
+	      last_name: last_name,
+	      date_of_birth: date_of_birth
 	    };
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -34192,7 +34253,7 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
-	      //this.props.dispatch(updateUser({user: this.state}))
+	      this.props.dispatch((0, _users.updateUser)(this.state.id, { user: this.state }));
 	    }
 	  }, {
 	    key: 'render',
@@ -34200,19 +34261,6 @@
 	      return _react2.default.createElement(
 	        'form',
 	        { onSubmit: this.handleSubmit },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'module' },
-	          _react2.default.createElement(_InputField2.default, {
-	            name: "email",
-	            value: this.state.email,
-	            placeholder: "Email",
-	            handleChange: this.handleChange,
-	            isRequired: true,
-	            validateForm: this.validateForm,
-	            registerField: this.registerField
-	          })
-	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'module' },
@@ -35172,6 +35220,8 @@
 
 	  switch (action.type) {
 	    case _users.RECEIVE_USER_SUCCESS:
+	      return action.data;
+	    case _users.UPDATE_USER_SUCCESS:
 	      return action.data;
 	    default:
 	      return state;

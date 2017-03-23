@@ -6,9 +6,8 @@ Rails.application.routes.draw do
       resources :ice_creams, only: [:index, :create, :update, :show]
       resources :comments, only: [:create, :update]
       resources :parlors, only: [:index, :create, :update]
-      resources :profiles, only: [:create, :update, :show]
       resources :reviews, only: [:create, :update, :index]
-      resources :users, only: [:create, :show]
+      resources :users, only: [:create, :show, :update]
       resources :favorites, only: [:create, :destroy]
       post '/login', to: "sessions#create"
     end
