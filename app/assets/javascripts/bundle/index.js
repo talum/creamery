@@ -34125,6 +34125,10 @@
 
 	var _ProfileForm2 = _interopRequireDefault(_ProfileForm);
 
+	var _Modal = __webpack_require__(315);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
 	var _Loader = __webpack_require__(309);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
@@ -34140,10 +34144,16 @@
 	var Profile = function (_React$Component) {
 	  _inherits(Profile, _React$Component);
 
-	  function Profile() {
+	  function Profile(props) {
 	    _classCallCheck(this, Profile);
 
-	    return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
+
+	    _this.state = {
+	      modalIsVisible: false
+	    };
+	    _this.toggleModalVisibility = _this.toggleModalVisibility.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Profile, [{
@@ -34152,12 +34162,64 @@
 	      this.props.dispatch((0, _users.showUser)(this.props.routeParams.id));
 	    }
 	  }, {
+	    key: 'toggleModalVisibility',
+	    value: function toggleModalVisibility() {
+	      this.setState({
+	        modalIsVisible: !this.state.modalIsVisible
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var editProfileButton = _react2.default.createElement(
+	        'button',
+	        { className: 'button button--color-black', onClick: this.toggleModalVisibility },
+	        'Edit Profile'
+	      );
+
 	      if (this.props.currentProfile.isLoading) {
 	        return _react2.default.createElement(_Loader2.default, null);
+	      } else if (this.props.currentProfile.errors.length > 0) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          'User not found'
+	        );
 	      } else {
-	        return _react2.default.createElement(_ProfileForm2.default, { currentProfile: this.props.currentProfile });
+	        var _props$currentProfile = this.props.currentProfile.userData.profile,
+	            first_name = _props$currentProfile.first_name,
+	            last_name = _props$currentProfile.last_name,
+	            date_of_birth = _props$currentProfile.date_of_birth;
+
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          sessionStorage.currentUserId == this.props.routeParams.id && editProfileButton,
+	          _react2.default.createElement(_Modal2.default, {
+	            isVisible: this.state.modalIsVisible,
+	            toggleModal: this.toggleModalVisibility,
+	            modalBody: _react2.default.createElement(_ProfileForm2.default, { currentProfile: this.props.currentProfile })
+	          }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              first_name
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              last_name
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              date_of_birth
+	            )
+	          )
+	        );
 	      }
 	    }
 	  }]);
@@ -34232,9 +34294,9 @@
 
 	    _this.state = {
 	      id: props.currentProfile.userData.id,
-	      first_name: first_name,
-	      last_name: last_name,
-	      date_of_birth: date_of_birth
+	      first_name: first_name || "",
+	      last_name: last_name || "",
+	      date_of_birth: date_of_birth || ""
 	    };
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -34254,6 +34316,7 @@
 	    value: function handleSubmit(event) {
 	      event.preventDefault();
 	      this.props.dispatch((0, _users.updateUser)(this.state.id, { user: this.state }));
+	      this.props.toggleModalVisibility();
 	    }
 	  }, {
 	    key: 'render',

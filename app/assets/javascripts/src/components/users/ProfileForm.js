@@ -11,9 +11,9 @@ class ProfileForm extends React.Component {
     let { first_name, last_name, date_of_birth } = props.currentProfile.userData.profile
     this.state = {
       id: props.currentProfile.userData.id,
-      first_name: first_name,
-      last_name: last_name,
-      date_of_birth: date_of_birth
+      first_name: first_name || "",
+      last_name: last_name || "",
+      date_of_birth: date_of_birth || ""
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -29,6 +29,7 @@ class ProfileForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.dispatch(updateUser(this.state.id, {user: this.state}))
+    this.props.toggleModalVisibility()
   }
 
   render() {
