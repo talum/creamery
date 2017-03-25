@@ -34138,6 +34138,8 @@
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
+	var _iceCreams = __webpack_require__(306);
+
 	var _IceCreamListItem = __webpack_require__(312);
 
 	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
@@ -34168,6 +34170,7 @@
 	  _createClass(Profile, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
+	      this.props.dispatch((0, _iceCreams.showIceCreams)());
 	      this.props.dispatch((0, _users.showUser)(this.props.routeParams.id));
 	    }
 	  }, {
@@ -34180,13 +34183,15 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      var editProfileButton = _react2.default.createElement(
 	        'button',
 	        { className: 'button button--color-black', onClick: this.toggleModalVisibility },
 	        'Edit Profile'
 	      );
 
-	      if (this.props.currentProfile.isLoading) {
+	      if (this.props.currentProfile.isLoading || this.props.iceCreams.isLoading) {
 	        return _react2.default.createElement(_Loader2.default, null);
 	      } else if (this.props.currentProfile.errors.length > 0) {
 	        return _react2.default.createElement(
@@ -34201,10 +34206,13 @@
 	            date_of_birth = _props$currentProfile.date_of_birth;
 	        var favorite_ice_creams = this.props.currentProfile.userData.favorite_ice_creams;
 
-	        favorite_ice_creams = favorite_ice_creams.map(function (favorite_ice_cream) {
+	        var favoriteIceCreamIds = favorite_ice_creams.map(function (favorite_ice_cream) {
+	          return favorite_ice_cream.id;
+	        });
+	        var favoriteIceCreamListItems = favoriteIceCreamIds.map(function (id) {
 	          return _react2.default.createElement(_IceCreamListItem2.default, {
-	            key: favorite_ice_cream.id,
-	            iceCream: favorite_ice_cream,
+	            key: id,
+	            iceCream: _this2.props.iceCreams.byId[id],
 	            parlor: { id: 1, name: "parlor" },
 	            loggedIn: false,
 	            handleAddFavorite: null,
@@ -34247,7 +34255,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'flex-grid flex-grid--thirds' },
-	              favorite_ice_creams
+	              favoriteIceCreamListItems
 	            )
 	          )
 	        );
@@ -34260,7 +34268,8 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    currentProfile: state.currentProfile
+	    currentProfile: state.currentProfile,
+	    iceCreams: state.iceCreams
 	  };
 	};
 
