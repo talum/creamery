@@ -1,6 +1,11 @@
 import React from 'react'
 
 const Bookmark = ({iceCreamId, favorites, loggedIn, handleAddFavorite, handleRemoveFavorite}) => {
+  // TODO: refactor this component
+  if (!favorites) {
+    favorites = []
+  }
+
   let favorite = favorites.find((favorite) => {
     return favorite.user_id === parseInt(sessionStorage.currentUserId)
   })

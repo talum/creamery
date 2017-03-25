@@ -31703,6 +31703,11 @@
 	      handleAddFavorite = _ref.handleAddFavorite,
 	      handleRemoveFavorite = _ref.handleRemoveFavorite;
 
+	  // TODO: refactor this component
+	  if (!favorites) {
+	    favorites = [];
+	  }
+
 	  var favorite = favorites.find(function (favorite) {
 	    return favorite.user_id === parseInt(sessionStorage.currentUserId);
 	  });
@@ -34133,6 +34138,10 @@
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
+	var _IceCreamListItem = __webpack_require__(312);
+
+	var _IceCreamListItem2 = _interopRequireDefault(_IceCreamListItem);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34190,6 +34199,18 @@
 	            first_name = _props$currentProfile.first_name,
 	            last_name = _props$currentProfile.last_name,
 	            date_of_birth = _props$currentProfile.date_of_birth;
+	        var favorite_ice_creams = this.props.currentProfile.userData.favorite_ice_creams;
+
+	        favorite_ice_creams = favorite_ice_creams.map(function (favorite_ice_cream) {
+	          return _react2.default.createElement(_IceCreamListItem2.default, {
+	            key: favorite_ice_cream.id,
+	            iceCream: favorite_ice_cream,
+	            parlor: { id: 1, name: "parlor" },
+	            loggedIn: false,
+	            handleAddFavorite: null,
+	            handleRemoveFavorite: null
+	          });
+	        });
 
 	        return _react2.default.createElement(
 	          'div',
@@ -34217,6 +34238,16 @@
 	              'div',
 	              null,
 	              date_of_birth
+	            ),
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Favorite Ice Creams'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'flex-grid flex-grid--thirds' },
+	              favorite_ice_creams
 	            )
 	          )
 	        );

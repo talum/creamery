@@ -4,6 +4,7 @@ import { showUser, updateUser } from '../../actions/users'
 import ProfileForm from './ProfileForm'
 import Modal from '../sharedComponents/Modal'
 import Loader from '../sharedComponents/Loader'
+import IceCreamListItem from '../iceCreams/IceCreamListItem'
 
 class Profile extends React.Component{
   constructor(props) {
@@ -37,6 +38,20 @@ class Profile extends React.Component{
       return (<div>User not found</div>)
     } else {
       let { first_name, last_name, date_of_birth } = this.props.currentProfile.userData.profile
+      let { favorite_ice_creams } = this.props.currentProfile.userData
+      favorite_ice_creams = favorite_ice_creams.map((favorite_ice_cream) => {
+        return (
+          <IceCreamListItem 
+            key={favorite_ice_cream.id}
+            iceCream={favorite_ice_cream}
+            parlor={{id: 1, name: "parlor"}}
+            loggedIn={false}
+            handleAddFavorite={null}
+            handleRemoveFavorite={null}
+          />
+        )
+      })
+
       return (
         <div>
           { (sessionStorage.currentUserId == this.props.routeParams.id ) && editProfileButton }
@@ -51,6 +66,10 @@ class Profile extends React.Component{
             <div>{ first_name }</div>
             <div>{ last_name }</div>
             <div>{ date_of_birth }</div>
+            <h2>Favorite Ice Creams</h2>
+            <div className="flex-grid flex-grid--thirds">
+              { favorite_ice_creams }
+            </div>
           </div>
         </div>
       )
