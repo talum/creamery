@@ -28704,12 +28704,25 @@
 	    key: 'loggedInLinks',
 	    value: function loggedInLinks() {
 	      return _react2.default.createElement(
-	        'li',
-	        { className: 'nav__link', onClick: this.logOut },
+	        'span',
+	        { className: 'nav__links' },
 	        _react2.default.createElement(
-	          'a',
-	          { href: '#' },
-	          'Logout'
+	          'li',
+	          { className: 'nav__link' },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/users/' + sessionStorage.currentUserId },
+	            'My Profile'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          { className: 'nav__link', onClick: this.logOut },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#' },
+	            'Logout'
+	          )
 	        )
 	      );
 	    }

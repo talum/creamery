@@ -14,7 +14,12 @@ class Nav extends React.Component {
   }
 
   loggedInLinks() {
-    return (<li className="nav__link" onClick={this.logOut}><a href="#">Logout</a></li>)
+    return (
+      <span className="nav__links">
+        <li className="nav__link"><Link to={`/users/${sessionStorage.currentUserId}`}>My Profile</Link></li>
+        <li className="nav__link" onClick={this.logOut}><a href="#">Logout</a></li>
+      </span>
+    )
   }
 
   loggedOutLinks() {
