@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux'
 import * as iceCreamsActions from '../actions/iceCreams'
 import { ADD_REVIEW_SUCCESS } from '../actions/reviews'
-import { ADD_FAVORITE_SUCCESS, REMOVE_FAVORITE } from '../actions/favorites'
+import { ADD_FAVORITE_SUCCESS, REMOVE_FAVORITE, ADD_FAVORITE_PROFILE_SUCCESS, REMOVE_FAVORITE_PROFILE } from '../actions/favorites'
 
 export function byId(state={}, action) {
   switch (action.type) {
@@ -22,7 +22,7 @@ export function byId(state={}, action) {
         ...state, 
         [iceCream.id]: modifiedIceCream  
       }
-    case ADD_FAVORITE_SUCCESS:
+    case ADD_FAVORITE_SUCCESS: case ADD_FAVORITE_PROFILE_SUCCESS:
       var iceCream = state[action.data.favoritable_id]
       var modifiedIceCream = Object.assign({}, iceCream)
       modifiedIceCream.favorites = modifiedIceCream.favorites.concat(action.data)
@@ -31,7 +31,7 @@ export function byId(state={}, action) {
         ...state,
         [iceCream.id]: modifiedIceCream
       }
-    case REMOVE_FAVORITE:
+    case REMOVE_FAVORITE: case REMOVE_FAVORITE_PROFILE:
       var favoriteId = action.data.favoriteId
       var iceCream = state[action.data.favoritableId]
       var favoriteIndex = iceCream.favorites.findIndex((favorite) => favorite.id == favoriteId)

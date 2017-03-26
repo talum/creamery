@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { showUser, updateUser } from '../../actions/users'
 import { showIceCreams } from '../../actions/iceCreams'
 import { showParlors } from '../../actions/parlors'
-import { addFavorite, removeFavorite } from '../../actions/favorites'
+import { addFavoriteProfile, removeFavoriteProfile } from '../../actions/favorites'
 import ProfileForm from './ProfileForm'
 import Modal from '../sharedComponents/Modal'
 import Loader from '../sharedComponents/Loader'
@@ -56,8 +56,8 @@ class Profile extends React.Component{
             iceCream={iceCream}
             parlor={parlor}
             loggedIn={this.props.loggedIn}
-            handleAddFavorite={() => this.props.dispatch(addFavorite(id))}
-            handleRemoveFavorite={() => this.props.dispatch(removeFavorite(favorite.id, id))}
+            handleAddFavorite={() => this.props.dispatch(addFavoriteProfile(id))}
+            handleRemoveFavorite={() => this.props.dispatch(removeFavoriteProfile(favorite.id, id))}
           />
         )
       })

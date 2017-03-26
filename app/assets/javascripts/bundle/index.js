@@ -31376,9 +31376,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.REMOVE_FAVORITE_ERROR = exports.REMOVE_FAVORITE_SUCCESS = exports.REMOVE_FAVORITE = exports.ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE = undefined;
+	exports.REMOVE_FAVORITE_PROFILE_ERROR = exports.REMOVE_FAVORITE_PROFILE_SUCCESS = exports.REMOVE_FAVORITE_PROFILE = exports.ADD_FAVORITE_PROFILE_ERROR = exports.ADD_FAVORITE_PROFILE_SUCCESS = exports.ADD_FAVORITE_PROFILE = exports.REMOVE_FAVORITE_ERROR = exports.REMOVE_FAVORITE_SUCCESS = exports.REMOVE_FAVORITE = exports.ADD_FAVORITE_ERROR = exports.ADD_FAVORITE_SUCCESS = exports.ADD_FAVORITE = undefined;
 	exports.addFavorite = addFavorite;
 	exports.removeFavorite = removeFavorite;
+	exports.addFavoriteProfile = addFavoriteProfile;
+	exports.removeFavoriteProfile = removeFavoriteProfile;
 
 	var _creameryApi = __webpack_require__(272);
 
@@ -31444,6 +31446,71 @@
 	function removeFavoriteError(error) {
 	  return {
 	    type: REMOVE_FAVORITE_ERROR
+	  };
+	}
+
+	var ADD_FAVORITE_PROFILE = exports.ADD_FAVORITE_PROFILE = 'ADD_FAVORITE_PROFILE';
+	var ADD_FAVORITE_PROFILE_SUCCESS = exports.ADD_FAVORITE_PROFILE_SUCCESS = 'ADD_FAVORITE_PROFILE_SUCCESS';
+	var ADD_FAVORITE_PROFILE_ERROR = exports.ADD_FAVORITE_PROFILE_ERROR = 'ADD_FAVORITE_PROFILE_ERROR';
+
+	function addFavoriteProfile(iceCreamId) {
+	  return function (dispatch) {
+	    dispatch({
+	      type: ADD_FAVORITE_PROFILE,
+	      iceCreamId: iceCreamId
+	    });
+	    return (0, _creameryApi.postFavorites)({ favoritableId: iceCreamId, favoritableType: 'IceCream' }).then(function (response) {
+	      dispatch(addFavoriteProfileSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(addFavoriteProfileError(error));
+	    });
+	  };
+	}
+
+	function addFavoriteProfileSuccess(response) {
+	  return {
+	    type: ADD_FAVORITE_PROFILE_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function addFavoriteProfileError(error) {
+	  return {
+	    type: ADD_FAVORITE_PROFILE_ERROR
+	  };
+	}
+
+	var REMOVE_FAVORITE_PROFILE = exports.REMOVE_FAVORITE_PROFILE = 'REMOVE_FAVORITE_PROFILE';
+	var REMOVE_FAVORITE_PROFILE_SUCCESS = exports.REMOVE_FAVORITE_PROFILE_SUCCESS = 'REMOVE_FAVORITE_PROFILE_SUCCESS';
+	var REMOVE_FAVORITE_PROFILE_ERROR = exports.REMOVE_FAVORITE_PROFILE_ERROR = 'REMOVE_FAVORITE_PROFILE_ERROR';
+
+	function removeFavoriteProfile(favoriteId, favoritableId) {
+	  return function (dispatch) {
+	    dispatch({
+	      type: REMOVE_FAVORITE_PROFILE,
+	      data: {
+	        favoriteId: favoriteId,
+	        favoritableId: favoritableId
+	      }
+	    });
+	    return (0, _creameryApi.deleteFavorite)(favoriteId).then(function (response) {
+	      dispatch(removeFavoriteProfileSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(removeFavoriteProfileError(error));
+	    });
+	  };
+	}
+
+	function removeFavoriteProfileSuccess(response) {
+	  return {
+	    type: REMOVE_FAVORITE_PROFILE_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function removeFavoriteProfileError(error) {
+	  return {
+	    type: REMOVE_FAVORITE_PROFILE_ERROR
 	  };
 	}
 
@@ -34232,10 +34299,10 @@
 	              parlor: parlor,
 	              loggedIn: _this2.props.loggedIn,
 	              handleAddFavorite: function handleAddFavorite() {
-	                return _this2.props.dispatch((0, _favorites.addFavorite)(id));
+	                return _this2.props.dispatch((0, _favorites.addFavoriteProfile)(id));
 	              },
 	              handleRemoveFavorite: function handleRemoveFavorite() {
-	                return _this2.props.dispatch((0, _favorites.removeFavorite)(favorite.id, id));
+	                return _this2.props.dispatch((0, _favorites.removeFavoriteProfile)(favorite.id, id));
 	              }
 	            });
 	          });
@@ -34768,13 +34835,13 @@
 	      modifiedIceCream.review_ids = modifiedIceCream.review_ids.concat(action.data.id);
 
 	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));
-	    case _favorites.ADD_FAVORITE_SUCCESS:
+	    case _favorites.ADD_FAVORITE_SUCCESS:case _favorites.ADD_FAVORITE_PROFILE_SUCCESS:
 	      var iceCream = state[action.data.favoritable_id];
 	      var modifiedIceCream = Object.assign({}, iceCream);
 	      modifiedIceCream.favorites = modifiedIceCream.favorites.concat(action.data);
 
 	      return _extends({}, state, _defineProperty({}, iceCream.id, modifiedIceCream));
-	    case _favorites.REMOVE_FAVORITE:
+	    case _favorites.REMOVE_FAVORITE:case _favorites.REMOVE_FAVORITE_PROFILE:
 	      var favoriteId = action.data.favoriteId;
 	      var iceCream = state[action.data.favoritableId];
 	      var favoriteIndex = iceCream.favorites.findIndex(function (favorite) {
@@ -35353,6 +35420,8 @@
 	function userData() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
+	  var userData;
+	  var userData;
 
 	  var _ret = function () {
 	    switch (action.type) {
@@ -35364,18 +35433,22 @@
 	        return {
 	          v: action.data
 	        };
-	      case _favorites.REMOVE_FAVORITE:
-	        var userData = Object.assign({}, state);
+	      case _favorites.ADD_FAVORITE_PROFILE_SUCCESS:
+	        userData = Object.assign({}, state);
+
+	        userData.favorites = state.favorites.concat(action.data);
+	        return {
+	          v: userData
+	        };
+	      case _favorites.REMOVE_FAVORITE_PROFILE:
+	        userData = Object.assign({}, state);
+
 	        var favoriteId = action.data.favoriteId;
 	        var iceCreamId = action.data.favoritableId;
 	        var favoriteIndex = state.favorites.findIndex(function (favorite) {
 	          return favorite.id == favoriteId;
 	        });
-	        var iceCreamIndex = state.favorite_ice_creams.findIndex(function (iceCream) {
-	          return iceCream.id == iceCreamId;
-	        });
 	        userData.favorites = [].concat(_toConsumableArray(state.favorites.slice(0, favoriteIndex)), _toConsumableArray(state.favorites.slice(favoriteIndex + 1)));
-	        userData.favorite_ice_creams = [].concat(_toConsumableArray(state.favorite_ice_creams.slice(0, iceCreamIndex)), _toConsumableArray(state.favorite_ice_creams.slice(iceCreamIndex + 1)));
 	        return {
 	          v: userData
 	        };
