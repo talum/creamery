@@ -34116,6 +34116,8 @@
 	  value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -34125,6 +34127,12 @@
 	var _reactRedux = __webpack_require__(233);
 
 	var _users = __webpack_require__(299);
+
+	var _iceCreams = __webpack_require__(306);
+
+	var _parlors = __webpack_require__(307);
+
+	var _favorites = __webpack_require__(308);
 
 	var _ProfileForm = __webpack_require__(334);
 
@@ -34137,8 +34145,6 @@
 	var _Loader = __webpack_require__(309);
 
 	var _Loader2 = _interopRequireDefault(_Loader);
-
-	var _iceCreams = __webpack_require__(306);
 
 	var _IceCreamListItem = __webpack_require__(312);
 
@@ -34172,6 +34178,7 @@
 	    value: function componentWillMount() {
 	      this.props.dispatch((0, _iceCreams.showIceCreams)());
 	      this.props.dispatch((0, _users.showUser)(this.props.routeParams.id));
+	      this.props.dispatch((0, _parlors.showParlors)());
 	    }
 	  }, {
 	    key: 'toggleModalVisibility',
@@ -34191,7 +34198,7 @@
 	        'Edit Profile'
 	      );
 
-	      if (this.props.currentProfile.isLoading || this.props.iceCreams.isLoading) {
+	      if (this.props.currentProfile.isLoading || this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
 	        return _react2.default.createElement(_Loader2.default, null);
 	      } else if (this.props.currentProfile.errors.length > 0) {
 	        return _react2.default.createElement(
@@ -34200,65 +34207,83 @@
 	          'User not found'
 	        );
 	      } else {
-	        var _props$currentProfile = this.props.currentProfile.userData.profile,
-	            first_name = _props$currentProfile.first_name,
-	            last_name = _props$currentProfile.last_name,
-	            date_of_birth = _props$currentProfile.date_of_birth;
-	        var favorite_ice_creams = this.props.currentProfile.userData.favorite_ice_creams;
+	        var _ret = function () {
+	          var _props$currentProfile = _this2.props.currentProfile.userData.profile,
+	              first_name = _props$currentProfile.first_name,
+	              last_name = _props$currentProfile.last_name,
+	              date_of_birth = _props$currentProfile.date_of_birth;
+	          var _props$currentProfile2 = _this2.props.currentProfile.userData,
+	              favorite_ice_creams = _props$currentProfile2.favorite_ice_creams,
+	              favorites = _props$currentProfile2.favorites;
 
-	        var favoriteIceCreamIds = favorite_ice_creams.map(function (favorite_ice_cream) {
-	          return favorite_ice_cream.id;
-	        });
-	        var favoriteIceCreamListItems = favoriteIceCreamIds.map(function (id) {
-	          return _react2.default.createElement(_IceCreamListItem2.default, {
-	            key: id,
-	            iceCream: _this2.props.iceCreams.byId[id],
-	            parlor: { id: 1, name: "parlor" },
-	            loggedIn: false,
-	            handleAddFavorite: null,
-	            handleRemoveFavorite: null
+	          var favoriteIceCreamIds = favorite_ice_creams.map(function (favorite_ice_cream) {
+	            return favorite_ice_cream.id;
 	          });
-	        });
+	          var favoriteIceCreamListItems = favoriteIceCreamIds.map(function (id) {
+	            var iceCream = _this2.props.iceCreams.byId[id];
+	            var parlor = _this2.props.parlors.byId[iceCream.parlor_id];
+	            var favorite = favorites.find(function (favorite) {
+	              return favorite.favoritable_id == id;
+	            });
 
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          sessionStorage.currentUserId == this.props.routeParams.id && editProfileButton,
-	          _react2.default.createElement(_Modal2.default, {
-	            isVisible: this.state.modalIsVisible,
-	            toggleModal: this.toggleModalVisibility,
-	            modalBody: _react2.default.createElement(_ProfileForm2.default, { currentProfile: this.props.currentProfile })
-	          }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'module' },
-	            _react2.default.createElement(
+	            return _react2.default.createElement(_IceCreamListItem2.default, {
+	              key: id,
+	              iceCream: iceCream,
+	              parlor: parlor,
+	              loggedIn: _this2.props.loggedIn,
+	              handleAddFavorite: function handleAddFavorite() {
+	                return _this2.props.dispatch((0, _favorites.addFavorite)(id));
+	              },
+	              handleRemoveFavorite: function handleRemoveFavorite() {
+	                return _this2.props.dispatch((0, _favorites.removeFavorite)(favorite.id, id));
+	              }
+	            });
+	          });
+
+	          return {
+	            v: _react2.default.createElement(
 	              'div',
 	              null,
-	              first_name
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              null,
-	              last_name
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              null,
-	              date_of_birth
-	            ),
-	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              'Favorite Ice Creams'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'flex-grid flex-grid--thirds' },
-	              favoriteIceCreamListItems
+	              sessionStorage.currentUserId == _this2.props.routeParams.id && editProfileButton,
+	              _react2.default.createElement(_Modal2.default, {
+	                isVisible: _this2.state.modalIsVisible,
+	                toggleModal: _this2.toggleModalVisibility,
+	                modalBody: _react2.default.createElement(_ProfileForm2.default, { currentProfile: _this2.props.currentProfile })
+	              }),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module' },
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  first_name
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  last_name
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  date_of_birth
+	                ),
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  'Favorite Ice Creams'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'flex-grid flex-grid--thirds' },
+	                  favoriteIceCreamListItems
+	                )
+	              )
 	            )
-	          )
-	        );
+	          };
+	        }();
+
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	      }
 	    }
 	  }]);
@@ -34269,7 +34294,9 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    currentProfile: state.currentProfile,
-	    iceCreams: state.iceCreams
+	    iceCreams: state.iceCreams,
+	    parlors: state.parlors,
+	    loggedIn: state.sessions.loggedIn
 	  };
 	};
 
@@ -35312,23 +35339,54 @@
 	});
 	exports.currentProfile = undefined;
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var _users = __webpack_require__(299);
+
+	var _favorites = __webpack_require__(308);
 
 	var _redux = __webpack_require__(242);
 
-	// currentProfile reducer
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } // currentProfile reducer
+
+
 	function userData() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
 
-	  switch (action.type) {
-	    case _users.RECEIVE_USER_SUCCESS:
-	      return action.data;
-	    case _users.UPDATE_USER_SUCCESS:
-	      return action.data;
-	    default:
-	      return state;
-	  }
+	  var _ret = function () {
+	    switch (action.type) {
+	      case _users.RECEIVE_USER_SUCCESS:
+	        return {
+	          v: action.data
+	        };
+	      case _users.UPDATE_USER_SUCCESS:
+	        return {
+	          v: action.data
+	        };
+	      case _favorites.REMOVE_FAVORITE:
+	        var userData = Object.assign({}, state);
+	        var favoriteId = action.data.favoriteId;
+	        var iceCreamId = action.data.favoritableId;
+	        var favoriteIndex = state.favorites.findIndex(function (favorite) {
+	          return favorite.id == favoriteId;
+	        });
+	        var iceCreamIndex = state.favorite_ice_creams.findIndex(function (iceCream) {
+	          return iceCream.id == iceCreamId;
+	        });
+	        userData.favorites = [].concat(_toConsumableArray(state.favorites.slice(0, favoriteIndex)), _toConsumableArray(state.favorites.slice(favoriteIndex + 1)));
+	        userData.favorite_ice_creams = [].concat(_toConsumableArray(state.favorite_ice_creams.slice(0, iceCreamIndex)), _toConsumableArray(state.favorite_ice_creams.slice(iceCreamIndex + 1)));
+	        return {
+	          v: userData
+	        };
+	      default:
+	        return {
+	          v: state
+	        };
+	    }
+	  }();
+
+	  if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	}
 
 	function isLoading() {

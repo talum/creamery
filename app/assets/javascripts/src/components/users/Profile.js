@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { showUser, updateUser } from '../../actions/users'
+import { showIceCreams } from '../../actions/iceCreams'
+import { showParlors } from '../../actions/parlors'
+import { addFavorite, removeFavorite } from '../../actions/favorites'
 import ProfileForm from './ProfileForm'
 import Modal from '../sharedComponents/Modal'
 import Loader from '../sharedComponents/Loader'
-import { showIceCreams } from '../../actions/iceCreams'
 import IceCreamListItem from '../iceCreams/IceCreamListItem'
 
 class Profile extends React.Component{
@@ -19,6 +21,7 @@ class Profile extends React.Component{
   componentWillMount() {
     this.props.dispatch(showIceCreams())
     this.props.dispatch(showUser(this.props.routeParams.id))
+    this.props.dispatch(showParlors())
   }
 
   toggleModalVisibility() {
@@ -34,23 +37,27 @@ class Profile extends React.Component{
       </button>
     )
 
-    if (this.props.currentProfile.isLoading || this.props.iceCreams.isLoading) {
+    if (this.props.currentProfile.isLoading || this.props.iceCreams.isLoading || this.props.parlors.isLoading) {
       return (<Loader />)
     } else if (this.props.currentProfile.errors.length > 0) {
       return (<div>User not found</div>)
     } else {
       let { first_name, last_name, date_of_birth } = this.props.currentProfile.userData.profile
-      let { favorite_ice_creams } = this.props.currentProfile.userData
+      let { favorite_ice_creams, favorites } = this.props.currentProfile.userData
       let favoriteIceCreamIds = favorite_ice_creams.map((favorite_ice_cream) => favorite_ice_cream.id)
       let favoriteIceCreamListItems = favoriteIceCreamIds.map((id) => {
+        let iceCream = this.props.iceCreams.byId[id]
+        let parlor   = this.props.parlors.byId[iceCream.parlor_id]
+        let favorite = favorites.find((favorite) => favorite.favoritable_id == id)
+
         return (
           <IceCreamListItem 
             key={id}
-            iceCream={this.props.iceCreams.byId[id]}
-            parlor={{id: 1, name: "parlor"}}
-            loggedIn={false}
-            handleAddFavorite={null}
-            handleRemoveFavorite={null}
+            iceCream={iceCream}
+            parlor={parlor}
+            loggedIn={this.props.loggedIn}
+            handleAddFavorite={() => this.props.dispatch(addFavorite(id))}
+            handleRemoveFavorite={() => this.props.dispatch(removeFavorite(favorite.id, id))}
           />
         )
       })
@@ -83,7 +90,9 @@ class Profile extends React.Component{
 const mapStateToProps = (state) => {
   return {
     currentProfile: state.currentProfile,
-    iceCreams: state.iceCreams
+    iceCreams: state.iceCreams,
+    parlors: state.parlors,
+    loggedIn: state.sessions.loggedIn
   }
 }
 
