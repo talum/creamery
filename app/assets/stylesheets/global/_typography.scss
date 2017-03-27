@@ -27,11 +27,18 @@ $font-size--xxl: 64px;
   font-size: $font-size--m;
 }
 
-.heading--color-white { color: $white; }
-.heading--color-blue  { color: $blue; }
-.heading--color-pink  { color: $pink; }
+.heading--level-4 {
+  font-size: $font-size--l;
+  font-weight: bold;
+}
+
+.heading--color-white        { color: $white; }
+.heading--color-blue         { color: $blue; }
+.heading--color-pink         { color: $pink; }
+.heading--color-gray-dark    { color: $gray-dark; }
 
 a:hover { color: $blue; }
+a.link-color--blue { color: $blue; &:hover { color: $blue-light; } }
 
 p {
   font-family: 'Archivo Narrow', sans-serif;
