@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { connect } from 'react-redux'
 import { updateUser } from '../../actions/users'
 import Form from '../sharedComponents/Form'
@@ -61,7 +62,7 @@ class ProfileForm extends React.Component {
           <InputField
             name={"date_of_birth"} 
             inputType={"date"}
-            value={this.state.date_of_birth}
+            value={moment(this.state.date_of_birth, 'YYYY-MM-DD HH:mm').format('YYYY-MM-DD')}
             placeholder={"Date of birth"}
             handleChange={this.handleChange}
             isRequired={true}

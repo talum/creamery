@@ -34339,7 +34339,7 @@
 	              _react2.default.createElement(_Modal2.default, {
 	                isVisible: _this2.state.modalIsVisible,
 	                toggleModal: _this2.toggleModalVisibility,
-	                modalBody: _react2.default.createElement(_ProfileForm2.default, { currentProfile: _this2.props.currentProfile })
+	                modalBody: _react2.default.createElement(_ProfileForm2.default, { currentProfile: _this2.props.currentProfile, toggleModalVisibility: _this2.toggleModalVisibility })
 	              }),
 	              _react2.default.createElement(
 	                'div',
@@ -50221,6 +50221,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _moment = __webpack_require__(334);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
 	var _reactRedux = __webpack_require__(233);
 
 	var _users = __webpack_require__(299);
@@ -50324,7 +50328,7 @@
 	          _react2.default.createElement(_InputField2.default, {
 	            name: "date_of_birth",
 	            inputType: "date",
-	            value: this.state.date_of_birth,
+	            value: (0, _moment2.default)(this.state.date_of_birth, 'YYYY-MM-DD HH:mm').format('YYYY-MM-DD'),
 	            placeholder: "Date of birth",
 	            handleChange: this.handleChange,
 	            isRequired: true,

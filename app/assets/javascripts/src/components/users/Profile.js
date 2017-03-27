@@ -73,7 +73,7 @@ class Profile extends React.Component{
             isVisible={this.state.modalIsVisible}
             toggleModal={this.toggleModalVisibility}
             modalBody={
-              <ProfileForm currentProfile={this.props.currentProfile} />
+              <ProfileForm currentProfile={this.props.currentProfile} toggleModalVisibility={this.toggleModalVisibility} />
             }
           />
           <div className="module">
