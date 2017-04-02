@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import IceCreamListItem from '../iceCreams/IceCreamListItem'
 
 const FilteredIceCreams = ({parlors, iceCreams, searchTerm, loggedIn, handleAddFavorite, handleRemoveFavorite}) => {
@@ -24,9 +25,16 @@ const FilteredIceCreams = ({parlors, iceCreams, searchTerm, loggedIn, handleAddF
   })
 
   return (
-    <div className="flex-grid flex-grid--thirds">
-      { iceCreamItems }
-    </div>
+    <ReactCSSTransitionGroup
+      transitionName="example"
+      transitionAppear={true}
+      transitionAppearTimeout={true}
+      transitionEnterTimeout={500}
+      transitionLeaveTimeout={500}>
+        <div className="flex-grid flex-grid--thirds">
+          { iceCreamItems }
+        </div>
+    </ReactCSSTransitionGroup>
   ) 
 }
 

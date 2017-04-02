@@ -19,11 +19,13 @@ const FilteredParlors = ({parlors, searchTerm}) => {
   return (
     <ReactCSSTransitionGroup
       transitionName="example"
+      transitionAppear={true}
+      transitionAppearTimeout={true}
       transitionEnterTimeout={500}
       transitionLeaveTimeout={500}>
-      <div className="flex-grid flex-grid--thirds">
-        { parlorItems }
-      </div>
+        <div className="flex-grid flex-grid--thirds">
+          { parlorItems }
+        </div>
     </ReactCSSTransitionGroup>
   ) 
 }
