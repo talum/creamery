@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ParlorItem from '../parlors/ParlorItem'
 
 const FilteredParlors = ({parlors, searchTerm}) => {
@@ -16,9 +17,14 @@ const FilteredParlors = ({parlors, searchTerm}) => {
     </div>))
 
   return (
-    <div className="flex-grid flex-grid--thirds">
-      { parlorItems }
-    </div>
+    <ReactCSSTransitionGroup
+      transitionName="example"
+      transitionEnterTimeout={500}
+      transitionLeaveTimeout={500}>
+      <div className="flex-grid flex-grid--thirds">
+        { parlorItems }
+      </div>
+    </ReactCSSTransitionGroup>
   ) 
 }
 
