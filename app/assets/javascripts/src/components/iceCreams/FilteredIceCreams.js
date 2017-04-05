@@ -28,7 +28,7 @@ const FilteredIceCreams = ({parlors, iceCreams, searchTerm, loggedIn, handleAddF
     <ReactCSSTransitionGroup
       transitionName="example"
       transitionAppear={true}
-      transitionAppearTimeout={true}
+      transitionAppearTimeout={500}
       transitionEnterTimeout={500}
       transitionLeaveTimeout={500}>
         <div className="flex-grid flex-grid--thirds">
