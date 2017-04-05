@@ -12,5 +12,5 @@ class User < ApplicationRecord
   def admin!
     self.update(admin: true)
   end
-
+  
 end

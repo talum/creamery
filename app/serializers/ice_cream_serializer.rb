@@ -5,4 +5,8 @@ class IceCreamSerializer < ActiveModel::Serializer
     object.image.url
   end
 
+  def reviews
+    object.reviews.includes(eater: [:user]).map{|r| ReviewSerializer.new(r).attributes}
+  end
+
 end
