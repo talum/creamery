@@ -18,7 +18,7 @@ const FilteredParlors = ({parlors, searchTerm}) => {
 
   return (
     <ReactCSSTransitionGroup
-      transitionName="example"
+      transitionName="fade"
       transitionAppear={true}
       transitionAppearTimeout={500}
       transitionEnterTimeout={500}

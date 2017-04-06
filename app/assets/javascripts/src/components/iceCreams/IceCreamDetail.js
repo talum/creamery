@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import Modal from '../sharedComponents/Modal'
 import { showIceCream } from '../../actions/iceCreams'
@@ -43,39 +44,46 @@ class IceCreamDetail extends React.Component {
       const iceCreamReviews = iceCream.review_ids.map((reviewId) => reviews.byId[reviewId] )
 
       return(
-        <div>
-          <div className="module">
-            <h2 className="heading heading--level-1">{iceCream.title}</h2>
-            <h3 className="heading heading--level-3">{iceCream.parlor}</h3>
-          </div>
-          <div className="flex-grid flex-grid--halves">
-            <div className="flex-grid__item">
+        <ReactCSSTransitionGroup
+          transitionName="fade"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}>
+            <div>
               <div className="module">
-                <div className="image-frame">
-                  <img src={iceCream.image_url} />
+                <h2 className="heading heading--level-1">{iceCream.title}</h2>
+                <h3 className="heading heading--level-3">{iceCream.parlor}</h3>
+              </div>
+              <div className="flex-grid flex-grid--halves">
+                <div className="flex-grid__item">
+                  <div className="module">
+                    <div className="image-frame">
+                      <img src={iceCream.image_url} />
+                    </div>
+                  </div>
                 </div>
+                <div className="flex-grid__item">
+                  <div className="module">
+                    <div className="util--padding-ls">
+                      <h3 className="heading heaading--level-3">Reviews</h3>
+                      { this.props.loggedIn && addReviewButton }
+                      <ul>
+                        {iceCreamReviews.map((review) => <Review review={review}/>)}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <Modal
+                  isVisible={this.state.modalIsVisible}
+                  toggleModal={this.toggleModalVisibility}
+                  modalBody={
+                    <NewReviewForm toggleModalVisibility={this.toggleModalVisibility} iceCreamId={iceCream.id}/>
+                  }
+                />
               </div>
             </div>
-            <div className="flex-grid__item">
-              <div className="module">
-                <div className="util--padding-ls">
-                  <h3 className="heading heaading--level-3">Reviews</h3>
-                  { this.props.loggedIn && addReviewButton }
-                  <ul>
-                    {iceCreamReviews.map((review) => <Review review={review}/>)}
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <Modal
-              isVisible={this.state.modalIsVisible}
-              toggleModal={this.toggleModalVisibility}
-              modalBody={
-                <NewReviewForm toggleModalVisibility={this.toggleModalVisibility} iceCreamId={iceCream.id}/>
-              }
-            />
-          </div>
-        </div>
+          </ReactCSSTransitionGroup>
       )
     }
   }

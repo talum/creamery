@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import { showUser, updateUser } from '../../actions/users'
@@ -63,34 +64,41 @@ class Profile extends React.Component{
         )
       })
       return (
-        <div>
-          <div className="module">
-            <div className="util--padding-ls">
-            { (sessionStorage.currentUserId == this.props.routeParams.id ) && editProfileButton }
-            </div>
-          </div>
-          <Modal
-            isVisible={this.state.modalIsVisible}
-            toggleModal={this.toggleModalVisibility}
-            modalBody={
-              <ProfileForm currentProfile={this.props.currentProfile} toggleModalVisibility={this.toggleModalVisibility} />
-            }
-          />
-          <div className="module">
-            <div className="util--padding-ls">
-              <h2 className="heading heading--level-1">{ first_name } { last_name }</h2>
-              <h3 className="heading heading--level-3">Birthday: { moment(date_of_birth, 'YYYY-MM-DD HH:mm').format('MMM DD, YYYY') }</h3>
-            </div>
-            <div className="util--padding-tl">
-              <div className="module">
-                <h2 className="heading heading--level-2">Favorite Ice Creams</h2>
-              </div>
-              <div className="flex-grid flex-grid--thirds">
-                { favoriteIceCreamListItems }
+      <ReactCSSTransitionGroup
+        transitionName="fade"
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}>
+          <div>
+            <div className="module">
+              <div className="util--padding-ls">
+              { (sessionStorage.currentUserId == this.props.routeParams.id ) && editProfileButton }
               </div>
             </div>
+            <Modal
+              isVisible={this.state.modalIsVisible}
+              toggleModal={this.toggleModalVisibility}
+              modalBody={
+                <ProfileForm currentProfile={this.props.currentProfile} toggleModalVisibility={this.toggleModalVisibility} />
+              }
+            />
+            <div className="module">
+              <div className="util--padding-ls">
+                <h2 className="heading heading--level-1">{ first_name } { last_name }</h2>
+                <h3 className="heading heading--level-3">Birthday: { moment(date_of_birth, 'YYYY-MM-DD HH:mm').format('MMM DD, YYYY') }</h3>
+              </div>
+              <div className="util--padding-tl">
+                <div className="module">
+                  <h2 className="heading heading--level-2">Favorite Ice Creams</h2>
+                </div>
+                <div className="flex-grid flex-grid--thirds">
+                  { favoriteIceCreamListItems }
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+      </ReactCSSTransitionGroup>
       )
     }
   }

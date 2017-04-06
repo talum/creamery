@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField' 
@@ -40,41 +41,48 @@ class LoginPage extends React.Component {
 
   render() {
     return(
-      <div>
-        <h1 className="util--padding-ls">Login</h1>
-        <div className="module">{ this.props.sessions.errors }</div>
-        <form onSubmit={this.handleSubmit}>
-            <div className="module">
-              <InputField
-                name={"email"}
-                value={this.state.credentials.email}
-                placeholder={"email"}
-                handleChange={this.handleChange}
-                isRequired={true}
-                validateForm={this.validateForm}
-                registerField={this.registerField}
+      <ReactCSSTransitionGroup
+        transitionName="fade"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}>
+          <div>
+            <h1 className="util--padding-ls">Login</h1>
+            <div className="module">{ this.props.sessions.errors }</div>
+            <form onSubmit={this.handleSubmit}>
+                <div className="module">
+                  <InputField
+                    name={"email"}
+                    value={this.state.credentials.email}
+                    placeholder={"email"}
+                    handleChange={this.handleChange}
+                    isRequired={true}
+                    validateForm={this.validateForm}
+                    registerField={this.registerField}
+                    />
+                </div>
+                <div className="module">
+                  <InputField
+                    name={"password"}
+                    inputType={"password"}
+                    value={this.state.credentials.password}
+                    placeholder={"password"}
+                    handleChange={this.handleChange}
+                    isRequired={true}
+                    validateForm={this.validateForm}
+                    registerField={this.registerField}
+                    />
+                </div>
+                <div className="module">
+                 <SubmitButton 
+                  isDisabled={!this.state.isValid}
+                  handleSubmit={this.handleSubmit}
                 />
-            </div>
-            <div className="module">
-              <InputField
-                name={"password"}
-                inputType={"password"}
-                value={this.state.credentials.password}
-                placeholder={"password"}
-                handleChange={this.handleChange}
-                isRequired={true}
-                validateForm={this.validateForm}
-                registerField={this.registerField}
-                />
-            </div>
-            <div className="module">
-             <SubmitButton 
-              isDisabled={!this.state.isValid}
-              handleSubmit={this.handleSubmit}
-            />
-            </div>
-        </form>
-      </div>
+                </div>
+            </form>
+          </div>
+      </ReactCSSTransitionGroup>
     )
   }
 }

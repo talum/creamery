@@ -26,7 +26,7 @@ const FilteredIceCreams = ({parlors, iceCreams, searchTerm, loggedIn, handleAddF
 
   return (
     <ReactCSSTransitionGroup
-      transitionName="example"
+      transitionName="fade"
       transitionAppear={true}
       transitionAppearTimeout={500}
       transitionEnterTimeout={500}

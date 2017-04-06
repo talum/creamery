@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { showParlors } from '../../actions/parlors'
@@ -45,29 +46,36 @@ class Parlor extends React.Component {
     } else {
       let iceCreams = parlor.ice_creams.map((iceCreamId) => { return this.props.iceCreams.byId[iceCreamId] })
       return(
-        <div>
-          <div className="module">
-            <h1>{parlor.name}</h1>
-            {this.props.isAdmin && addIceCreamButton }
-          </div>
-          <div className="flex-grid flex-grid--thirds">
-            { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream} parlor={parlor}/>)) }
-          </div>
-          <div>
-            { this.props.iceCreams.errors.join(", ") }
-          </div>
-        <Modal
-          isVisible={this.state.modalIsVisible}
-          toggleModal={this.toggleModalVisibility}
-          modalBody={
-          <NewIceCreamForm
-            parlorId={parlorId}
-            toggleModalVisibility={this.toggleModalVisibility}
-          />
-          }
-        />
-        </div>
-      )
+        <ReactCSSTransitionGroup
+          transitionName="fade"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}>
+            <div>
+              <div className="module">
+                <h1>{parlor.name}</h1>
+                {this.props.isAdmin && addIceCreamButton }
+              </div>
+              <div className="flex-grid flex-grid--thirds">
+                { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream} parlor={parlor}/>)) }
+              </div>
+              <div>
+                { this.props.iceCreams.errors.join(", ") }
+              </div>
+            <Modal
+              isVisible={this.state.modalIsVisible}
+              toggleModal={this.toggleModalVisibility}
+              modalBody={
+              <NewIceCreamForm
+                parlorId={parlorId}
+                toggleModalVisibility={this.toggleModalVisibility}
+              />
+              }
+            />
+            </div>
+        </ReactCSSTransitionGroup>
+        )
     }
   }
 }
