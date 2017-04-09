@@ -7,29 +7,24 @@ import SubmitButton from '../sharedComponents/SubmitButton'
 class CommentForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = this.initialState(props)
+    this.state = this.initialState()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  initialState(props) {
+  initialState() {
     return {
-      comment: {
-        review_id: props.routeParams.id,
-        content: ''
-      }
+      content: ''
     }
   }
 
   handleChange(event) {
-    let commentParams = Object.assign({}, this.state.comment)
-    commentParams[event.target.name] = event.target.value
-    this.setState({comment: commentParams})
+    this.setState({[event.target.name]: event.target.value})
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.dispatch(addComment(this.state))
+    this.props.dispatch(addComment({comment: this.state}))
   }
 
   render() {
@@ -37,13 +32,17 @@ class CommentForm extends React.Component {
       <div>
         <h2>Add Comment</h2>
         <form onSubmit={this.handleSubmit}>
-          <InputField
-            name={"content"} 
-            value={this.state.comment.content}
-            placeholder={"add your comment"}
-            handleChange={this.handleChange}
-          />
-          <SubmitButton handleSubmit={this.handleSubmit} />
+          <div className="module">
+            <InputField
+              name={"content"} 
+              value={this.state.content}
+              placeholder={"add your comment"}
+              handleChange={this.handleChange}
+            />
+          </div>
+          <div className="module">
+            <SubmitButton handleSubmit={this.handleSubmit} />
+          </div>
         </form>
       </div>
     )

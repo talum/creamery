@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Modal from '../sharedComponents/Modal'
 import { showIceCream } from '../../actions/iceCreams'
 import NewReviewForm from '../reviews/NewReviewForm'
+import NewCommentForm from '../reviews/NewCommentForm'
 import Review from '../reviews/Review'
 import Loader from '../sharedComponents/Loader'
 
@@ -11,19 +12,33 @@ class IceCreamDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalIsVisible: false
+      reviewModalIsVisible: false,
+      commentModalIsVisible: false,
+      activeReviewId: null
     }
-    this.toggleModalVisibility = this.toggleModalVisibility.bind(this)
+    this.toggleReviewModalVisibility = this.toggleReviewModalVisibility.bind(this)
+    this.toggleCommentModalVisibility = this.toggleCommentModalVisibility.bind(this)
+    this.setActiveReviewId = this.setActiveReviewId.bind(this)
   }
 
   componentWillMount() {
     this.props.dispatch(showIceCream(this.props.routeParams.id))
   }
 
-  toggleModalVisibility() {
+  toggleReviewModalVisibility() {
     this.setState({
-      modalIsVisible: !this.state.modalIsVisible
+      reviewModalIsVisible: !this.state.reviewModalIsVisible
     })
+  }
+
+  toggleCommentModalVisibility() {
+    this.setState({
+      commentModalIsVisible: !this.state.commentModalIsVisible
+    })
+  }
+
+  setActiveReviewId(reviewId) {
+    this.setState({activeReviewId: reviewId})
   }
 
   render() {
@@ -31,7 +46,7 @@ class IceCreamDetail extends React.Component {
     const addReviewButton = (
       <button 
         className="button button--color-black "
-        onClick={this.toggleModalVisibility}>
+        onClick={this.toggleReviewModalVisibility}>
         Add New Review
       </button>
     )
@@ -69,16 +84,30 @@ class IceCreamDetail extends React.Component {
                       <h3 className="heading heaading--level-3">Reviews</h3>
                       { this.props.loggedIn && addReviewButton }
                       <ul>
-                        {iceCreamReviews.map((review) => <Review review={review}/>)}
+                      {iceCreamReviews.map((review) => (
+                        <Review
+                          key={review.id}
+                          review={review}
+                          toggleCommentModalVisibility={this.toggleCommentModalVisibility}
+                          setActiveReviewId={this.setActiveReviewId}
+                        />
+                      ))} 
                       </ul>
                     </div>
                   </div>
                 </div>
                 <Modal
-                  isVisible={this.state.modalIsVisible}
-                  toggleModal={this.toggleModalVisibility}
+                  isVisible={this.state.reviewModalIsVisible}
+                  toggleModal={this.toggleReviewModalVisibility}
                   modalBody={
-                    <NewReviewForm toggleModalVisibility={this.toggleModalVisibility} iceCreamId={iceCream.id}/>
+                    <NewReviewForm toggleModalVisibility={this.toggleReviewModalVisibility} iceCreamId={iceCream.id}/>
+                  }
+                />
+                <Modal
+                  isVisible={this.state.commentModalIsVisible}
+                  toggleModal={this.toggleCommentModalVisibility}
+                  modalBody={
+                    <NewCommentForm toggleModalVisibility={this.toggleCommentModalVisibility} />
                   }
                 />
               </div>
