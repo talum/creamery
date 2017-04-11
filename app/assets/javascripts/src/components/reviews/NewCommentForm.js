@@ -7,14 +7,15 @@ import SubmitButton from '../sharedComponents/SubmitButton'
 class CommentForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = this.initialState()
+    this.state = this.initialState(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  initialState() {
+  initialState(props) {
     return {
-      content: ''
+      content: '',
+      review_id: props.reviewId
     }
   }
 
@@ -25,6 +26,7 @@ class CommentForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.dispatch(addComment({comment: this.state}))
+    this.props.toggleModalVisibility()
   }
 
   render() {

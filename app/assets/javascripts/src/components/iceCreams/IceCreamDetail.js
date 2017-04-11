@@ -107,7 +107,10 @@ class IceCreamDetail extends React.Component {
                   isVisible={this.state.commentModalIsVisible}
                   toggleModal={this.toggleCommentModalVisibility}
                   modalBody={
-                    <NewCommentForm toggleModalVisibility={this.toggleCommentModalVisibility} />
+                    <NewCommentForm 
+                      toggleModalVisibility={this.toggleCommentModalVisibility}
+                      reviewId={this.state.activeReviewId}
+                    />
                   }
                 />
               </div>

@@ -74,27 +74,27 @@
 
 	var _IceCreamDetail2 = _interopRequireDefault(_IceCreamDetail);
 
-	var _ParlorsContainer = __webpack_require__(449);
+	var _ParlorsContainer = __webpack_require__(451);
 
 	var _ParlorsContainer2 = _interopRequireDefault(_ParlorsContainer);
 
-	var _Parlor = __webpack_require__(461);
+	var _Parlor = __webpack_require__(463);
 
 	var _Parlor2 = _interopRequireDefault(_Parlor);
 
-	var _Profile = __webpack_require__(463);
+	var _Profile = __webpack_require__(465);
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
-	var _loginPage = __webpack_require__(465);
+	var _loginPage = __webpack_require__(467);
 
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 
-	var _FaqPage = __webpack_require__(466);
+	var _FaqPage = __webpack_require__(468);
 
 	var _FaqPage2 = _interopRequireDefault(_FaqPage);
 
-	var _store = __webpack_require__(467);
+	var _store = __webpack_require__(469);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -29032,6 +29032,7 @@
 	}
 
 	function parseErrors(payload) {
+	  debugger;
 	  return payload.response.data.errors;
 	}
 
@@ -49831,11 +49832,11 @@
 
 	var _NewReviewForm2 = _interopRequireDefault(_NewReviewForm);
 
-	var _NewCommentForm = __webpack_require__(478);
+	var _NewCommentForm = __webpack_require__(448);
 
 	var _NewCommentForm2 = _interopRequireDefault(_NewCommentForm);
 
-	var _Review = __webpack_require__(448);
+	var _Review = __webpack_require__(450);
 
 	var _Review2 = _interopRequireDefault(_Review);
 
@@ -49998,7 +49999,10 @@
 	                  _react2.default.createElement(_Modal2.default, {
 	                    isVisible: _this2.state.commentModalIsVisible,
 	                    toggleModal: _this2.toggleCommentModalVisibility,
-	                    modalBody: _react2.default.createElement(_NewCommentForm2.default, { toggleModalVisibility: _this2.toggleCommentModalVisibility })
+	                    modalBody: _react2.default.createElement(_NewCommentForm2.default, {
+	                      toggleModalVisibility: _this2.toggleCommentModalVisibility,
+	                      reviewId: _this2.state.activeReviewId
+	                    })
 	                  })
 	                )
 	              )
@@ -50293,6 +50297,171 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(233);
+
+	var _comments = __webpack_require__(449);
+
+	var _InputField = __webpack_require__(431);
+
+	var _InputField2 = _interopRequireDefault(_InputField);
+
+	var _SubmitButton = __webpack_require__(433);
+
+	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CommentForm = function (_React$Component) {
+	  _inherits(CommentForm, _React$Component);
+
+	  function CommentForm(props) {
+	    _classCallCheck(this, CommentForm);
+
+	    var _this = _possibleConstructorReturn(this, (CommentForm.__proto__ || Object.getPrototypeOf(CommentForm)).call(this, props));
+
+	    _this.state = _this.initialState(props);
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(CommentForm, [{
+	    key: 'initialState',
+	    value: function initialState(props) {
+	      return {
+	        content: '',
+	        review_id: props.reviewId
+	      };
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      this.setState(_defineProperty({}, event.target.name, event.target.value));
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      this.props.dispatch((0, _comments.addComment)({ comment: this.state }));
+	      this.props.toggleModalVisibility();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Add Comment'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_InputField2.default, {
+	              name: "content",
+	              value: this.state.content,
+	              placeholder: "add your comment",
+	              handleChange: this.handleChange
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module' },
+	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return CommentForm;
+	}(_react2.default.Component);
+
+	//connect this form to the store
+
+
+	var NewCommentForm = (0, _reactRedux.connect)()(CommentForm);
+
+	exports.default = NewCommentForm;
+
+/***/ },
+/* 449 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ADD_COMMENT_ERROR = exports.ADD_COMMENT_SUCCESS = exports.ADD_COMMENT = undefined;
+	exports.addComment = addComment;
+
+	var _creameryApi = __webpack_require__(272);
+
+	var ADD_COMMENT = exports.ADD_COMMENT = 'ADD_COMMENT';
+	var ADD_COMMENT_SUCCESS = exports.ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
+	var ADD_COMMENT_ERROR = exports.ADD_COMMENT_ERROR = 'ADD_COMMENT_ERROR';
+
+	function initiateAddComment() {
+	  return {
+	    type: ADD_COMMENT
+	  };
+	}
+
+	function addCommentSuccess(response) {
+	  return {
+	    type: ADD_COMMENT_SUCCESS,
+	    data: response.data
+	  };
+	}
+
+	function addCommentError(error) {
+	  return {
+	    type: ADD_COMMENT_ERROR,
+	    errors: (0, _creameryApi.parseErrors)(error)
+	  };
+	}
+
+	function addComment(comment) {
+	  return function (dispatch) {
+	    dispatch(initiateAddComment());
+	    return (0, _creameryApi.postComments)(comment).then(function (response) {
+	      dispatch(addCommentSuccess(response));
+	    }).catch(function (error) {
+	      dispatch(addCommentError(error));
+	    });
+	  };
+	}
+
+/***/ },
+/* 450 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -50359,6 +50528,17 @@
 	        'at ',
 	        (0, _moment2.default)(review.created_at, 'YYYY-MM-DD HH:mm').format('MMM DD, YYYY')
 	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        review.comments.map(function (comment) {
+	          return _react2.default.createElement(
+	            'li',
+	            { key: comment.id },
+	            comment.content
+	          );
+	        })
+	      ),
 	      addCommentButton
 	    )
 	  );
@@ -50367,7 +50547,7 @@
 	exports.default = Review;
 
 /***/ },
-/* 449 */
+/* 451 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50378,7 +50558,7 @@
 
 	var _reactRedux = __webpack_require__(233);
 
-	var _Parlors = __webpack_require__(450);
+	var _Parlors = __webpack_require__(452);
 
 	var _Parlors2 = _interopRequireDefault(_Parlors);
 
@@ -50397,7 +50577,7 @@
 	exports.default = ParlorsContainer;
 
 /***/ },
-/* 450 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50418,11 +50598,11 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _NewParlorForm = __webpack_require__(451);
+	var _NewParlorForm = __webpack_require__(453);
 
 	var _NewParlorForm2 = _interopRequireDefault(_NewParlorForm);
 
-	var _FilteredParlors = __webpack_require__(453);
+	var _FilteredParlors = __webpack_require__(455);
 
 	var _FilteredParlors2 = _interopRequireDefault(_FilteredParlors);
 
@@ -50522,7 +50702,7 @@
 	exports.default = Parlors;
 
 /***/ },
-/* 451 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50549,7 +50729,7 @@
 
 	var _InputField2 = _interopRequireDefault(_InputField);
 
-	var _SelectField = __webpack_require__(452);
+	var _SelectField = __webpack_require__(454);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 
@@ -50727,7 +50907,7 @@
 	exports.default = NewParlorForm;
 
 /***/ },
-/* 452 */
+/* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50869,7 +51049,7 @@
 	exports.default = SelectField;
 
 /***/ },
-/* 453 */
+/* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50886,7 +51066,7 @@
 
 	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 
-	var _ParlorItem = __webpack_require__(454);
+	var _ParlorItem = __webpack_require__(456);
 
 	var _ParlorItem2 = _interopRequireDefault(_ParlorItem);
 
@@ -50933,7 +51113,7 @@
 	exports.default = FilteredParlors;
 
 /***/ },
-/* 454 */
+/* 456 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50948,27 +51128,27 @@
 
 	var _reactRouter = __webpack_require__(178);
 
-	var _IceCreamIcon = __webpack_require__(455);
+	var _IceCreamIcon = __webpack_require__(457);
 
 	var _IceCreamIcon2 = _interopRequireDefault(_IceCreamIcon);
 
-	var _IceCreamCone = __webpack_require__(456);
+	var _IceCreamCone = __webpack_require__(458);
 
 	var _IceCreamCone2 = _interopRequireDefault(_IceCreamCone);
 
-	var _IceCreamCone3 = __webpack_require__(457);
+	var _IceCreamCone3 = __webpack_require__(459);
 
 	var _IceCreamCone4 = _interopRequireDefault(_IceCreamCone3);
 
-	var _IceCreamCone5 = __webpack_require__(458);
+	var _IceCreamCone5 = __webpack_require__(460);
 
 	var _IceCreamCone6 = _interopRequireDefault(_IceCreamCone5);
 
-	var _IceCreamCone7 = __webpack_require__(459);
+	var _IceCreamCone7 = __webpack_require__(461);
 
 	var _IceCreamCone8 = _interopRequireDefault(_IceCreamCone7);
 
-	var _IceCreamCone9 = __webpack_require__(460);
+	var _IceCreamCone9 = __webpack_require__(462);
 
 	var _IceCreamCone10 = _interopRequireDefault(_IceCreamCone9);
 
@@ -51050,7 +51230,7 @@
 	exports.default = ParlorItem;
 
 /***/ },
-/* 455 */
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51081,7 +51261,7 @@
 	exports.default = IceCreamIcon;
 
 /***/ },
-/* 456 */
+/* 458 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51170,7 +51350,7 @@
 	exports.default = IceCreamCone1;
 
 /***/ },
-/* 457 */
+/* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51311,7 +51491,7 @@
 	exports.default = IceCreamCone2;
 
 /***/ },
-/* 458 */
+/* 460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51468,7 +51648,7 @@
 	exports.default = IceCreamCone3;
 
 /***/ },
-/* 459 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51729,7 +51909,7 @@
 	exports.default = IceCreamCone4;
 
 /***/ },
-/* 460 */
+/* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -51940,7 +52120,7 @@
 	exports.default = IceCreamCone5;
 
 /***/ },
-/* 461 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51975,7 +52155,7 @@
 
 	var _Loader2 = _interopRequireDefault(_Loader);
 
-	var _NewIceCreamForm = __webpack_require__(462);
+	var _NewIceCreamForm = __webpack_require__(464);
 
 	var _NewIceCreamForm2 = _interopRequireDefault(_NewIceCreamForm);
 
@@ -52112,7 +52292,7 @@
 	exports.default = ParlorContainer;
 
 /***/ },
-/* 462 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52278,7 +52458,7 @@
 	exports.default = NewIceCreamForm;
 
 /***/ },
-/* 463 */
+/* 465 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52313,7 +52493,7 @@
 
 	var _favorites = __webpack_require__(438);
 
-	var _ProfileForm = __webpack_require__(464);
+	var _ProfileForm = __webpack_require__(466);
 
 	var _ProfileForm2 = _interopRequireDefault(_ProfileForm);
 
@@ -52510,7 +52690,7 @@
 	exports.default = UserProfile;
 
 /***/ },
-/* 464 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52660,7 +52840,7 @@
 	exports.default = ConnectedProfileForm;
 
 /***/ },
-/* 465 */
+/* 467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52824,7 +53004,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(LoginPage);
 
 /***/ },
-/* 466 */
+/* 468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52977,7 +53157,7 @@
 	exports.default = FaqPage;
 
 /***/ },
-/* 467 */
+/* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52988,11 +53168,11 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _reduxThunk = __webpack_require__(468);
+	var _reduxThunk = __webpack_require__(470);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(469);
+	var _reducers = __webpack_require__(471);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -53003,7 +53183,7 @@
 	exports.default = store;
 
 /***/ },
-/* 468 */
+/* 470 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -53031,7 +53211,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 469 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53042,21 +53222,21 @@
 
 	var _redux = __webpack_require__(242);
 
-	var _users = __webpack_require__(470);
+	var _users = __webpack_require__(472);
 
-	var _iceCreams = __webpack_require__(471);
+	var _iceCreams = __webpack_require__(473);
 
-	var _parlors = __webpack_require__(472);
+	var _parlors = __webpack_require__(474);
 
-	var _flavors = __webpack_require__(473);
+	var _flavors = __webpack_require__(475);
 
-	var _iceCreamFlavors = __webpack_require__(474);
+	var _iceCreamFlavors = __webpack_require__(476);
 
-	var _sessions = __webpack_require__(475);
+	var _sessions = __webpack_require__(477);
 
-	var _reviews = __webpack_require__(476);
+	var _reviews = __webpack_require__(478);
 
-	var _currentProfile = __webpack_require__(477);
+	var _currentProfile = __webpack_require__(479);
 
 	var creameryApp = (0, _redux.combineReducers)({
 	  users: _users.users,
@@ -53072,7 +53252,7 @@
 	exports.default = creameryApp;
 
 /***/ },
-/* 470 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53097,7 +53277,7 @@
 	} // users reducer
 
 /***/ },
-/* 471 */
+/* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53224,7 +53404,7 @@
 	});
 
 /***/ },
-/* 472 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53329,7 +53509,7 @@
 	});
 
 /***/ },
-/* 473 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53418,7 +53598,7 @@
 	});
 
 /***/ },
-/* 474 */
+/* 476 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53507,7 +53687,7 @@
 	});
 
 /***/ },
-/* 475 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53594,7 +53774,7 @@
 	});
 
 /***/ },
-/* 476 */
+/* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53617,6 +53797,8 @@
 
 	var _reviews2 = __webpack_require__(447);
 
+	var _comments = __webpack_require__(449);
+
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -53624,6 +53806,8 @@
 	function byId() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	  var action = arguments[1];
+	  var review;
+	  var updatedReview;
 
 	  var _ret = function () {
 	    switch (action.type) {
@@ -53639,6 +53823,13 @@
 	      case _reviews2.ADD_REVIEW_SUCCESS:
 	        return {
 	          v: _extends({}, state, _defineProperty({}, action.data.id, action.data))
+	        };
+	      case _comments.ADD_COMMENT_SUCCESS:
+	        review = state[action.data.review_id];
+	        updatedReview = Object.assign({}, review);
+
+	        return {
+	          v: _extends({}, state, _defineProperty({}, action.data.review_id, updatedReview.comments.concat(action.data)))
 	        };
 	      default:
 	        return {
@@ -53704,7 +53895,7 @@
 	});
 
 /***/ },
-/* 477 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53803,169 +53994,6 @@
 	  isLoading: isLoading,
 	  errors: errors
 	});
-
-/***/ },
-/* 478 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(233);
-
-	var _comments = __webpack_require__(479);
-
-	var _InputField = __webpack_require__(431);
-
-	var _InputField2 = _interopRequireDefault(_InputField);
-
-	var _SubmitButton = __webpack_require__(433);
-
-	var _SubmitButton2 = _interopRequireDefault(_SubmitButton);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CommentForm = function (_React$Component) {
-	  _inherits(CommentForm, _React$Component);
-
-	  function CommentForm(props) {
-	    _classCallCheck(this, CommentForm);
-
-	    var _this = _possibleConstructorReturn(this, (CommentForm.__proto__ || Object.getPrototypeOf(CommentForm)).call(this, props));
-
-	    _this.state = _this.initialState();
-	    _this.handleChange = _this.handleChange.bind(_this);
-	    _this.handleSubmit = _this.handleSubmit.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(CommentForm, [{
-	    key: 'initialState',
-	    value: function initialState() {
-	      return {
-	        content: ''
-	      };
-	    }
-	  }, {
-	    key: 'handleChange',
-	    value: function handleChange(event) {
-	      this.setState(_defineProperty({}, event.target.name, event.target.value));
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(event) {
-	      event.preventDefault();
-	      this.props.dispatch((0, _comments.addComment)({ comment: this.state }));
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'Add Comment'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.handleSubmit },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'module' },
-	            _react2.default.createElement(_InputField2.default, {
-	              name: "content",
-	              value: this.state.content,
-	              placeholder: "add your comment",
-	              handleChange: this.handleChange
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'module' },
-	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return CommentForm;
-	}(_react2.default.Component);
-
-	//connect this form to the store
-
-
-	var NewCommentForm = (0, _reactRedux.connect)()(CommentForm);
-
-	exports.default = NewCommentForm;
-
-/***/ },
-/* 479 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ADD_COMMENT_ERROR = exports.ADD_COMMENT_SUCCESS = exports.ADD_COMMENT = undefined;
-	exports.addComment = addComment;
-
-	var _creameryApi = __webpack_require__(272);
-
-	var ADD_COMMENT = exports.ADD_COMMENT = 'ADD_COMMENT';
-	var ADD_COMMENT_SUCCESS = exports.ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
-	var ADD_COMMENT_ERROR = exports.ADD_COMMENT_ERROR = 'ADD_COMMENT_ERROR';
-
-	function initiateAddComment() {
-	  return {
-	    type: ADD_COMMENT
-	  };
-	}
-
-	function addCommmentSuccess(response) {
-	  return {
-	    type: ADD_COMMENT_SUCCESS,
-	    data: response.data
-	  };
-	}
-
-	function addCommentError(error) {
-	  return {
-	    type: ADD_COMMENT_ERROR,
-	    errors: (0, _creameryApi.parseErrors)(error)
-	  };
-	}
-
-	function addComment(comment) {
-	  return function (dispatch) {
-	    dispatch(initiateAddComment());
-	    return (0, _creameryApi.postComments)(comment).then(function (response) {
-	      dispatch(addCommentSuccess(response));
-	    }).catch(function (error) {
-	      dispatch(addCommentError(error));
-	    });
-	  };
-	}
 
 /***/ }
 /******/ ]);
