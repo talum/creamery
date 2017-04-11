@@ -22,9 +22,11 @@ export function byId(state={}, action) {
     case ADD_COMMENT_SUCCESS:
       var review = state[action.data.review_id]
       var updatedReview = Object.assign({}, review)
+      updatedReview.comments.push(action.data)
+      // TODO: Refactor this
       return {
         ...state,
-        [action.data.review_id]: updatedReview.comments.concat(action.data)
+        [action.data.review_id]: updatedReview
       }
     default:
       return state

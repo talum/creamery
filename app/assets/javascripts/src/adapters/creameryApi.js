@@ -79,6 +79,5 @@ export function deleteFavorite(favoriteId) {
 }
 
 export function parseErrors(payload) {
-  debugger
   return payload.response.data.errors
 }

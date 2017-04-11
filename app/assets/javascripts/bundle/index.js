@@ -29032,7 +29032,6 @@
 	}
 
 	function parseErrors(payload) {
-	  debugger;
 	  return payload.response.data.errors;
 	}
 
@@ -53828,8 +53827,10 @@
 	        review = state[action.data.review_id];
 	        updatedReview = Object.assign({}, review);
 
+	        updatedReview.comments.push(action.data);
+	        // TODO: Refactor this
 	        return {
-	          v: _extends({}, state, _defineProperty({}, action.data.review_id, updatedReview.comments.concat(action.data)))
+	          v: _extends({}, state, _defineProperty({}, action.data.review_id, updatedReview))
 	        };
 	      default:
 	        return {
