@@ -50304,6 +50304,10 @@
 
 	var _reactRedux = __webpack_require__(233);
 
+	var _Form = __webpack_require__(430);
+
+	var _Form2 = _interopRequireDefault(_Form);
+
 	var _comments = __webpack_require__(449);
 
 	var _InputField = __webpack_require__(431);
@@ -50333,8 +50337,12 @@
 	    var _this = _possibleConstructorReturn(this, (CommentForm.__proto__ || Object.getPrototypeOf(CommentForm)).call(this, props));
 
 	    _this.state = _this.initialState(props);
+	    _this.validateForm = _Form2.default.validateForm.bind(_this);
+	    _this.registerField = _Form2.default.registerField.bind(_this);
+	    _this.clearForm = _Form2.default.clearForm.bind(_this);
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    _this.fields = [];
 	    return _this;
 	  }
 
@@ -50379,13 +50387,19 @@
 	              name: "content",
 	              value: this.state.content,
 	              placeholder: "add your comment",
-	              handleChange: this.handleChange
+	              handleChange: this.handleChange,
+	              isRequired: true,
+	              validateForm: this.validateForm,
+	              registerField: this.registerField
 	            })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'module' },
-	            _react2.default.createElement(_SubmitButton2.default, { handleSubmit: this.handleSubmit })
+	            _react2.default.createElement(_SubmitButton2.default, {
+	              isDisabled: !this.state.isValid,
+	              handleSubmit: this.handleSubmit
+	            })
 	          )
 	        )
 	      );
@@ -50534,6 +50548,10 @@
 	          return _react2.default.createElement(
 	            'li',
 	            { key: comment.id },
+	            comment.author.profile.first_name,
+	            ' ',
+	            comment.author.profile.last_name,
+	            ': ',
 	            comment.content
 	          );
 	        })

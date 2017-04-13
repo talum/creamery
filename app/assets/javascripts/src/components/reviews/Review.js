@@ -25,7 +25,7 @@ const Review = ({review, toggleCommentModalVisibility, setActiveReviewId}) => {
         <Link to={`users/${review.user.id}`}> {review.user.profile.first_name} {review.user.profile.last_name} </Link>
         <span>at { moment(review.created_at, 'YYYY-MM-DD HH:mm').format('MMM DD, YYYY') }</span>
         <ul>
-          { review.comments.map((comment) => <li key={comment.id}>{comment.content}</li>) }
+          { review.comments.map((comment) => <li key={comment.id}>{comment.author.profile.first_name} {comment.author.profile.last_name}: {comment.content}</li>) }
         </ul>
         { addCommentButton }
       </p>

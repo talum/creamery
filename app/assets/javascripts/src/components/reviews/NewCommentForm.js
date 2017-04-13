@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Form from '../sharedComponents/Form'
 import { addComment } from '../../actions/comments'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
@@ -8,8 +9,12 @@ class CommentForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState(props)
+    this.validateForm = Form.validateForm.bind(this)
+    this.registerField = Form.registerField.bind(this)
+    this.clearForm = Form.clearForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.fields = []
   }
 
   initialState(props) {
@@ -40,10 +45,16 @@ class CommentForm extends React.Component {
               value={this.state.content}
               placeholder={"add your comment"}
               handleChange={this.handleChange}
+              isRequired={true}
+              validateForm={this.validateForm}
+              registerField={this.registerField}
             />
           </div>
           <div className="module">
-            <SubmitButton handleSubmit={this.handleSubmit} />
+            <SubmitButton 
+              isDisabled={!this.state.isValid}
+              handleSubmit={this.handleSubmit}
+            />
           </div>
         </form>
       </div>
