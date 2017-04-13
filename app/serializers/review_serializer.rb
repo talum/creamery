@@ -5,4 +5,8 @@ class ReviewSerializer < ActiveModel::Serializer
     UserSerializer.new(object.eater.user).attributes
   end
 
+  def comments
+    object.comments.map{|comment| CommentSerializer.new(comment).attributes}
+  end
+
 end
