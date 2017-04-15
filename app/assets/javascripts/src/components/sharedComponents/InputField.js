@@ -59,7 +59,7 @@ class InputField extends React.Component {
     }
   }
 
-  render() {
+  inputField() {
     return(
       <div>
         <input
@@ -77,6 +77,38 @@ class InputField extends React.Component {
         />
       </div>
     )
+  }
+
+  textArea() {
+    return(
+      <div>
+        <textarea
+          className={`input-field ${this.borderColor()}`}
+          type={this.props.inputType}
+          name={this.props.name}
+          value={this.props.value}
+          placeholder={this.props.placeholder}
+          onBlur={this.validateField}
+          onChange={this.props.handleChange}
+        />
+        <InputErrorMessage 
+          isVisible={this.state.errorIsVisible}
+          message={this.state.message}
+        />
+      </div>
+    )
+  }
+
+  isTextArea() {
+    return (this.props.inputType === "textarea")
+  }
+
+  render() {
+    if (this.isTextArea()) {
+      return this.textArea() 
+    } else {
+      return this.inputField()
+    }
   }
 }
 

@@ -50018,8 +50018,8 @@
 	      }
 	    }
 	  }, {
-	    key: 'render',
-	    value: function render() {
+	    key: 'inputField',
+	    value: function inputField() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -50037,6 +50037,41 @@
 	          message: this.state.message
 	        })
 	      );
+	    }
+	  }, {
+	    key: 'textArea',
+	    value: function textArea() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('textarea', {
+	          className: 'input-field ' + this.borderColor(),
+	          type: this.props.inputType,
+	          name: this.props.name,
+	          value: this.props.value,
+	          placeholder: this.props.placeholder,
+	          onBlur: this.validateField,
+	          onChange: this.props.handleChange
+	        }),
+	        _react2.default.createElement(_InputErrorMessage2.default, {
+	          isVisible: this.state.errorIsVisible,
+	          message: this.state.message
+	        })
+	      );
+	    }
+	  }, {
+	    key: 'isTextArea',
+	    value: function isTextArea() {
+	      return this.props.inputType === "textarea";
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.isTextArea()) {
+	        return this.textArea();
+	      } else {
+	        return this.inputField();
+	      }
 	    }
 	  }]);
 
@@ -51382,6 +51417,7 @@
 	            { className: 'module' },
 	            _react2.default.createElement(_InputField2.default, {
 	              name: "content",
+	              inputType: "textarea",
 	              value: this.state.content,
 	              placeholder: "Add your review",
 	              handleChange: this.handleChange,
@@ -51551,7 +51587,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'h2',
-	          null,
+	          { className: 'util--padding-ls' },
 	          'Add Comment'
 	        ),
 	        _react2.default.createElement(
@@ -51562,6 +51598,7 @@
 	            { className: 'module' },
 	            _react2.default.createElement(_InputField2.default, {
 	              name: "content",
+	              inputType: "textarea",
 	              value: this.state.content,
 	              placeholder: "add your comment",
 	              handleChange: this.handleChange,

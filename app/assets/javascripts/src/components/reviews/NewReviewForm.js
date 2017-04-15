@@ -54,6 +54,7 @@ class ReviewForm extends React.Component {
           <div className="module">
             <InputField
               name={"content"} 
+              inputType={"textarea"}
               value={this.state.content}
               placeholder={"Add your review"}
               handleChange={this.handleChange}

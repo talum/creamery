@@ -37,11 +37,12 @@ class CommentForm extends React.Component {
   render() {
     return(
       <div>
-        <h2>Add Comment</h2>
+        <h2 className="util--padding-ls">Add Comment</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="module">
             <InputField
               name={"content"} 
+              inputType={"textarea"}
               value={this.state.content}
               placeholder={"add your comment"}
               handleChange={this.handleChange}
