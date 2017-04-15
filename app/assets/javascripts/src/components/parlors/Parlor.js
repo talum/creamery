@@ -66,11 +66,17 @@ class Parlor extends React.Component {
           transitionLeaveTimeout={500}>
             <div>
               <div className="module">
-                <h1>{parlor.name}</h1>
-                <div className="heading">
+                <div className="media-block media-block--alt-side">
+                  <div className="media-block__media">
+                    {this.props.isAdmin && addIceCreamButton }
+                  </div>
+                  <div className="media-block__content">
+                    <h1>{parlor.name}</h1>
+                  </div>
+                </div>
+                <div className="heading util--padding-ts">
                   {parlor.street_address} | {parlor.city}, {parlor.state} {parlor.zip_code}
                 </div>
-                {this.props.isAdmin && addIceCreamButton }
               </div>
               <div className="flex-grid flex-grid--thirds">
                 { iceCreams.map(iceCream => (<IceCreamListItem

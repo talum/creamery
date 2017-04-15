@@ -73,21 +73,18 @@ class Profile extends React.Component{
           <div>
             <div className="module">
               <div className="util--padding-ls">
-              { (sessionStorage.currentUserId == this.props.routeParams.id ) && editProfileButton }
+                <div className="media-block media-block--alt-side">
+                  <div className="media-block__media">
+                    { (sessionStorage.currentUserId == this.props.routeParams.id ) && editProfileButton }
+                  </div>
+                  <div className="media-block__content">
+                    <h2 className="heading heading--level-1">{ first_name } { last_name }</h2>
+                  </div>
+                </div>
+                <h3 className="heading heading--level-3 util--padding-ts">Birthday: { moment(date_of_birth, 'YYYY-MM-DD HH:mm').format('MMM DD, YYYY') }</h3>
               </div>
             </div>
-            <Modal
-              isVisible={this.state.modalIsVisible}
-              toggleModal={this.toggleModalVisibility}
-              modalBody={
-                <ProfileForm currentProfile={this.props.currentProfile} toggleModalVisibility={this.toggleModalVisibility} />
-              }
-            />
             <div className="module">
-              <div className="util--padding-ls">
-                <h2 className="heading heading--level-1">{ first_name } { last_name }</h2>
-                <h3 className="heading heading--level-3">Birthday: { moment(date_of_birth, 'YYYY-MM-DD HH:mm').format('MMM DD, YYYY') }</h3>
-              </div>
               <div className="util--padding-tl">
                 <div className="module">
                   <h2 className="heading heading--level-2">Favorite Ice Creams</h2>
@@ -97,6 +94,13 @@ class Profile extends React.Component{
                 </div>
               </div>
             </div>
+            <Modal
+              isVisible={this.state.modalIsVisible}
+              toggleModal={this.toggleModalVisibility}
+              modalBody={
+                <ProfileForm currentProfile={this.props.currentProfile} toggleModalVisibility={this.toggleModalVisibility} />
+              }
+            />
           </div>
       </ReactCSSTransitionGroup>
       )
