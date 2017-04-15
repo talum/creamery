@@ -1,12 +1,14 @@
 .media-block {
   display: flex;
   flex-wrap: none;
+  align-items: center;
 
   .media-block__media {
 
   }
 
   .media-block__content {
+    padding-left: $padding--s;
 
   }
 }
@@ -17,6 +19,8 @@
     order: 2;
   }
   .media-block__content {
+    padding-left: 0px;
+    padding-right: $padding--s;
     order: 1;
   }
 }

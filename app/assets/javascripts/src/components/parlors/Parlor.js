@@ -45,6 +45,7 @@ class Parlor extends React.Component {
       return (<div><h1>Sorry, this parlor does not exist</h1></div>)
     } else {
       let iceCreams = parlor.ice_creams.map((iceCreamId) => { return this.props.iceCreams.byId[iceCreamId] })
+
       return(
         <ReactCSSTransitionGroup
           transitionName="fade"
@@ -55,6 +56,9 @@ class Parlor extends React.Component {
             <div>
               <div className="module">
                 <h1>{parlor.name}</h1>
+                <div className="heading">
+                  {parlor.street_address} | {parlor.city}, {parlor.state} {parlor.zip_code}
+                </div>
                 {this.props.isAdmin && addIceCreamButton }
               </div>
               <div className="flex-grid flex-grid--thirds">

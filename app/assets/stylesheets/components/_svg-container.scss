@@ -14,6 +14,11 @@ svg {
   width: 24px;
 }
 
+.svg-container--xsmall {
+  height: 12px;
+  width: 12px;
+}
+
 .svg-container--fill-black      { color: $black; fill: $black; }
 .svg-container--fill-gray-light {
   color: $gray-light; fill: $gray-light;

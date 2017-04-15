@@ -6,6 +6,16 @@
   font-size: $font-size--m;
 }
 
+.button--has-icon {
+  display: flex;
+  .button__icon {
+
+  }
+  .button__text {
+    padding-left: $padding--s;
+  }
+}
+
 .button--color-black {
   background-color: $black;
   &:hover {
@@ -28,13 +38,20 @@
 .button--circle {
   &.button--has-icon {
     padding: $padding--s;
+    font-size: 0px;
   }
 }
 
+$button--icon--size-xs: 12px;
 $button--icon--size-m: 32px;
 .button__icon {
   height: $button--icon--size-m;
   width: $button--icon--size-m;
+}
+
+.button__icon--xs {
+  height: $button--icon--size-xs;
+  width: $button--icon--size-xs;
 }
 
 .button:disabled {

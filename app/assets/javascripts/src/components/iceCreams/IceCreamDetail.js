@@ -4,35 +4,53 @@ import { connect } from 'react-redux'
 import Modal from '../sharedComponents/Modal'
 import { showIceCream } from '../../actions/iceCreams'
 import NewReviewForm from '../reviews/NewReviewForm'
+import NewCommentForm from '../reviews/NewCommentForm'
 import Review from '../reviews/Review'
 import Loader from '../sharedComponents/Loader'
+import Plus from '../sharedComponents/Plus'
 
 class IceCreamDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalIsVisible: false
+      reviewModalIsVisible: false,
+      commentModalIsVisible: false,
+      activeReviewId: null
     }
-    this.toggleModalVisibility = this.toggleModalVisibility.bind(this)
+    this.toggleReviewModalVisibility = this.toggleReviewModalVisibility.bind(this)
+    this.toggleCommentModalVisibility = this.toggleCommentModalVisibility.bind(this)
+    this.setActiveReviewId = this.setActiveReviewId.bind(this)
   }
 
   componentWillMount() {
     this.props.dispatch(showIceCream(this.props.routeParams.id))
   }
 
-  toggleModalVisibility() {
+  toggleReviewModalVisibility() {
     this.setState({
-      modalIsVisible: !this.state.modalIsVisible
+      reviewModalIsVisible: !this.state.reviewModalIsVisible
     })
+  }
+
+  toggleCommentModalVisibility() {
+    this.setState({
+      commentModalIsVisible: !this.state.commentModalIsVisible
+    })
+  }
+
+  setActiveReviewId(reviewId) {
+    this.setState({activeReviewId: reviewId})
   }
 
   render() {
     let iceCreams = this.props.iceCreams
     const addReviewButton = (
       <button 
-        className="button button--color-black "
-        onClick={this.toggleModalVisibility}>
-        Add New Review
+        className="button button--circle button--has-icon button--color-black"
+        onClick={this.toggleReviewModalVisibility}>
+        <div className="button__icon button__icon--xs">
+          <Plus />
+        </div>
       </button>
     )
 
@@ -58,27 +76,51 @@ class IceCreamDetail extends React.Component {
               <div className="flex-grid flex-grid--halves">
                 <div className="flex-grid__item">
                   <div className="module">
-                    <div className="image-frame">
+                    <div className="image-frame image-frame--round">
                       <img src={iceCream.image_url} />
                     </div>
                   </div>
                 </div>
                 <div className="flex-grid__item">
                   <div className="module">
-                    <div className="util--padding-ls">
-                      <h3 className="heading heaading--level-3">Reviews</h3>
-                      { this.props.loggedIn && addReviewButton }
-                      <ul>
-                        {iceCreamReviews.map((review) => <Review review={review}/>)}
-                      </ul>
+                    <div>
+                      <div className="media-block media-block--alt-side">
+                        <div className="media-block__content">
+                          <h3 className="heading heaading--level-3">Reviews</h3>
+                        </div>
+                        <div className="media-block__media">
+                          { this.props.loggedIn && addReviewButton }
+                        </div>
+                      </div>
+                      <div>
+                        {iceCreamReviews.map((review) => (
+                          <Review
+                            key={review.id}
+                            review={review}
+                            toggleCommentModalVisibility={this.toggleCommentModalVisibility}
+                            setActiveReviewId={this.setActiveReviewId}
+                            loggedIn={this.props.loggedIn}
+                          />
+                        ))} 
+                      </div>
                     </div>
                   </div>
                 </div>
                 <Modal
-                  isVisible={this.state.modalIsVisible}
-                  toggleModal={this.toggleModalVisibility}
+                  isVisible={this.state.reviewModalIsVisible}
+                  toggleModal={this.toggleReviewModalVisibility}
                   modalBody={
-                    <NewReviewForm toggleModalVisibility={this.toggleModalVisibility} iceCreamId={iceCream.id}/>
+                    <NewReviewForm toggleModalVisibility={this.toggleReviewModalVisibility} iceCreamId={iceCream.id}/>
+                  }
+                />
+                <Modal
+                  isVisible={this.state.commentModalIsVisible}
+                  toggleModal={this.toggleCommentModalVisibility}
+                  modalBody={
+                    <NewCommentForm 
+                      toggleModalVisibility={this.toggleCommentModalVisibility}
+                      reviewId={this.state.activeReviewId}
+                    />
                   }
                 />
               </div>

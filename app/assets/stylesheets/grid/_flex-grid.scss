@@ -14,8 +14,9 @@
 }
 
 .flex-grid--halves {
+  justify-content: space-between;
   .flex-grid__item {
-    width: 50%;
+    width: 48%;
   }
 }
 

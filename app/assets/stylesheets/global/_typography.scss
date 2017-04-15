@@ -7,6 +7,7 @@ $font-size--xxl: 64px;
 
 .heading {
   font-family: 'Josefin Sans', sans-serif;
+  line-height: 2em;
 }
 
 .heading--splash {
@@ -32,6 +33,12 @@ $font-size--xxl: 64px;
   font-weight: bold;
 }
 
+.heading--level-5 {
+  font-size: $font-size--m;
+  margin-bottom: $margin--s;
+  border-bottom: 1px solid $gray;
+}
+
 .heading--color-white        { color: $white; }
 .heading--color-blue         { color: $blue; }
 .heading--color-pink         { color: $pink; }
@@ -44,10 +51,14 @@ a.link-color--blue { color: $blue; &:hover { color: $blue-light; } }
 p {
   font-family: 'Archivo Narrow', sans-serif;
   font-size: $font-size--m;
+  line-height: 1.4em;
 }
 
 .util--text-align-c {
   text-align: center;
+}
+.util--font-bold {
+  font-weight: bold;
 }
 
 @media (max-width: $breakpoint-medium) {

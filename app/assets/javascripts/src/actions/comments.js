@@ -10,7 +10,7 @@ function initiateAddComment() {
   }
 }
 
-function addCommmentSuccess(response) {
+function addCommentSuccess(response) {
   return {
     type: ADD_COMMENT_SUCCESS,
     data: response.data

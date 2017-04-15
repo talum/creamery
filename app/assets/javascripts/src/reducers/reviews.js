@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux'
 import { RECEIVE_ICECREAM_SUCCESS, RECEIVE_ICECREAM_ERROR } from '../actions/iceCreams'
 import { ADD_REVIEW, ADD_REVIEW_SUCCESS, ADD_REVIEW_ERROR } from '../actions/reviews'
+import { ADD_COMMENT_SUCCESS } from '../actions/comments'
 
 
 export function byId(state={}, action) {
@@ -18,6 +19,15 @@ export function byId(state={}, action) {
         ...state,
         [action.data.id]: action.data   
       } 
+    case ADD_COMMENT_SUCCESS:
+      var review = state[action.data.review_id]
+      var updatedReview = Object.assign({}, review)
+      updatedReview.comments.push(action.data)
+      // TODO: Refactor this
+      return {
+        ...state,
+        [action.data.review_id]: updatedReview
+      }
     default:
       return state
   }
