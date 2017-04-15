@@ -11,9 +11,11 @@ class IceCreamListItem extends React.Component {
         <div className="module">
           <div className="card card--mosaic">
             <div className="card__body">
-              <div className="image-frame image-frame--medium image-frame--top-round">
-                <img src={iceCream.image_url} />
-              </div>
+                <Link to={`/ice-creams/${iceCream.id}`} >
+                  <div className="image-frame image-frame--medium image-frame--top-round">
+                    <img src={iceCream.image_url} />
+                  </div>
+                </Link>
             </div>
             <div className="card__footer">
               <div className="module module--padding--s">
