@@ -1,14 +1,56 @@
 .module {
   padding: $padding--s;
   border-radius: $border-radius;
+
+  .module__body {
+    padding: $padding--s;
+  }
+}
+
+.module--review-block {
+  margin: $margin--l 0;
+
+  .module__head {
+    padding-left: 0;
+  }
+  .module__body {
+  }
+  .module__footer {
+    padding: $padding--m 0 0;
+  }
 }
 
 .module--padding--s {
   padding: $padding--xs;
 }
 
-.module--review-block {
+.module--padding-m  {
+  padding: $padding--m;
+}
+
+.module--padding--wide {
+  padding-left: $padding--m;
+  padding-right: $padding--m;
+}
+
+.module--padding-flat {
   padding-left: 0;
   padding-right: 0;
-  margin: $margin--l 0;
+}
+
+.module--padding-flat-right {
+  padding-right: 0;
+}
+
+.module--margin-wide-left {
+  margin-left: $margin--m;
+}
+
+.module--margin-tall {
+  margin-top: $margin--s;
+  margin-bottom: $margin--s;
+} 
+
+.module--background--gray-lightest {
+  background-color: $gray-lightest;
 }

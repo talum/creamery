@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { showParlors } from '../../actions/parlors'
 import { showIceCreams } from '../../actions/iceCreams'
+import { addFavorite, removeFavorite } from '../../actions/favorites'
 
 import Modal from '../sharedComponents/Modal'
 import Loader from '../sharedComponents/Loader'
@@ -17,6 +18,8 @@ class Parlor extends React.Component {
       modalIsVisible: false
     }
     this.toggleModalVisibility = this.toggleModalVisibility.bind(this)
+    this.handleAddFavorite = this.handleAddFavorite.bind(this)
+    this.handleRemoveFavorite = this.handleRemoveFavorite.bind(this)
   }
 
   componentDidMount() {
@@ -28,6 +31,14 @@ class Parlor extends React.Component {
     this.setState({
       modalIsVisible: !this.state.modalIsVisible
     })
+  }
+
+  handleAddFavorite(iceCreamId) {
+    this.props.dispatch(addFavorite(iceCreamId))
+  }
+
+  handleRemoveFavorite(favoriteId, iceCreamId) {
+    this.props.dispatch(removeFavorite(favoriteId, iceCreamId))
   }
 
   render() {
@@ -62,7 +73,15 @@ class Parlor extends React.Component {
                 {this.props.isAdmin && addIceCreamButton }
               </div>
               <div className="flex-grid flex-grid--thirds">
-                { iceCreams.map(iceCream => (<IceCreamListItem key={iceCream.id} iceCream={iceCream} parlor={parlor}/>)) }
+                { iceCreams.map(iceCream => (<IceCreamListItem
+                  key={iceCream.id}
+                  iceCream={iceCream}
+                  parlor={parlor} 
+                  loggedIn={this.props.loggedIn}
+                  handleAddFavorite={this.handleAddFavorite}
+                  handleRemoveFavorite={this.handleRemoveFavorite}
+                  />)) }
+        
               </div>
               <div>
                 { this.props.iceCreams.errors.join(", ") }

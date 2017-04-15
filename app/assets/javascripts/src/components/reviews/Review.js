@@ -16,18 +16,32 @@ const Review = ({review, toggleCommentModalVisibility, setActiveReviewId, logged
     </a>
   )
 
+  const formatDate = (date) => {
+    return moment(date, 'YYYY-MM-DD HH:mm Z').from(Date.now())
+  }
+
   return (
-    <div key={review.id} className="module module--review-block">
-      <h3 className="heading heading--level-5">{review.title}</h3>
-      <p>{review.content}</p>
-      <div>
+    <div key={review.id} className="module module--review-block module--padding-flat">
+      <div className="module__head">
+        <h3 className="heading heading--level-5">{review.title}</h3>
+        <p>{review.content}</p>
+      </div>
+      <div className="module__footer">
         <Link className="link-color--blue util--font-bold" to={`users/${review.user.id}`}> {review.user.profile.first_name} {review.user.profile.last_name} </Link>
-        <span> &#8901; { moment(review.created_at, 'YYYY-MM-DD HH:mm Z').from(Date.now()) }</span>
+        <span> &#8901; { formatDate(review.created_at) }</span>
       { loggedIn && addCommentButton }
-        <div className="module">
-          { review.comments.map((comment) => <div key={comment.id} className="module"><Link className="util--font-bold" to={`users/${comment.author.user_id}`}>{comment.author.profile.first_name} {comment.author.profile.last_name}</Link> | {moment(comment.created_at, 'YYYY-MM-DD HH:mm Z').from(Date.now())}
-          <p>{comment.content}</p></div>) }
-        </div>
+      </div>
+      <div className="module module--padding-flat-right">
+        { review.comments.map((comment) => <div key={comment.id} className="module module--margin-tall module--margin-wide-left module--background--gray-lightest">
+          <div className="module__body">
+            <div className="heading heading--inline heading--color-gray-dark"><Link className="util--font-bold" to={`users/${comment.author.user_id}`}>{comment.author.profile.first_name} {comment.author.profile.last_name}</Link></div>
+            <div className="heading heading--inline heading--color-gray"> | { formatDate(comment.created_at) }
+            </div>
+          </div>
+          <div className="module__body">
+            <p>{comment.content}</p>
+          </div>
+        </div>) }
       </div>
     </div>
   )

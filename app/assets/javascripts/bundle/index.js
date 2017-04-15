@@ -51683,22 +51683,30 @@
 	    '\u22C5 Reply'
 	  );
 
+	  var formatDate = function formatDate(date) {
+	    return (0, _moment2.default)(date, 'YYYY-MM-DD HH:mm Z').from(Date.now());
+	  };
+
 	  return _react2.default.createElement(
 	    'div',
-	    { key: review.id, className: 'module module--review-block' },
+	    { key: review.id, className: 'module module--review-block module--padding-flat' },
 	    _react2.default.createElement(
-	      'h3',
-	      { className: 'heading heading--level-5' },
-	      review.title
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      review.content
+	      'div',
+	      { className: 'module__head' },
+	      _react2.default.createElement(
+	        'h3',
+	        { className: 'heading heading--level-5' },
+	        review.title
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        review.content
+	      )
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'module__footer' },
 	      _react2.default.createElement(
 	        _reactRouter.Link,
 	        { className: 'link-color--blue util--font-bold', to: 'users/' + review.user.id },
@@ -51712,33 +51720,49 @@
 	        'span',
 	        null,
 	        ' \u22C5 ',
-	        (0, _moment2.default)(review.created_at, 'YYYY-MM-DD HH:mm Z').from(Date.now())
+	        formatDate(review.created_at)
 	      ),
-	      loggedIn && addCommentButton,
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'module' },
-	        review.comments.map(function (comment) {
-	          return _react2.default.createElement(
+	      loggedIn && addCommentButton
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'module module--padding-flat-right' },
+	      review.comments.map(function (comment) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: comment.id, className: 'module module--margin-tall module--margin-wide-left module--background--gray-lightest' },
+	          _react2.default.createElement(
 	            'div',
-	            { key: comment.id, className: 'module' },
+	            { className: 'module__body' },
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { className: 'util--font-bold', to: 'users/' + comment.author.user_id },
-	              comment.author.profile.first_name,
-	              ' ',
-	              comment.author.profile.last_name
+	              'div',
+	              { className: 'heading heading--inline heading--color-gray-dark' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { className: 'util--font-bold', to: 'users/' + comment.author.user_id },
+	                comment.author.profile.first_name,
+	                ' ',
+	                comment.author.profile.last_name
+	              )
 	            ),
-	            ' | ',
-	            (0, _moment2.default)(comment.created_at, 'YYYY-MM-DD HH:mm Z').from(Date.now()),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'heading heading--inline heading--color-gray' },
+	              ' | ',
+	              formatDate(comment.created_at)
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module__body' },
 	            _react2.default.createElement(
 	              'p',
 	              null,
 	              comment.content
 	            )
-	          );
-	        })
-	      )
+	          )
+	        );
+	      })
 	    )
 	  );
 	};
@@ -53376,6 +53400,8 @@
 
 	var _iceCreams = __webpack_require__(443);
 
+	var _favorites = __webpack_require__(445);
+
 	var _Modal = __webpack_require__(452);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
@@ -53412,6 +53438,8 @@
 	      modalIsVisible: false
 	    };
 	    _this.toggleModalVisibility = _this.toggleModalVisibility.bind(_this);
+	    _this.handleAddFavorite = _this.handleAddFavorite.bind(_this);
+	    _this.handleRemoveFavorite = _this.handleRemoveFavorite.bind(_this);
 	    return _this;
 	  }
 
@@ -53427,6 +53455,16 @@
 	      this.setState({
 	        modalIsVisible: !this.state.modalIsVisible
 	      });
+	    }
+	  }, {
+	    key: 'handleAddFavorite',
+	    value: function handleAddFavorite(iceCreamId) {
+	      this.props.dispatch((0, _favorites.addFavorite)(iceCreamId));
+	    }
+	  }, {
+	    key: 'handleRemoveFavorite',
+	    value: function handleRemoveFavorite(favoriteId, iceCreamId) {
+	      this.props.dispatch((0, _favorites.removeFavorite)(favoriteId, iceCreamId));
 	    }
 	  }, {
 	    key: 'render',
@@ -53494,7 +53532,14 @@
 	              'div',
 	              { className: 'flex-grid flex-grid--thirds' },
 	              iceCreams.map(function (iceCream) {
-	                return _react2.default.createElement(_IceCreamListItem2.default, { key: iceCream.id, iceCream: iceCream, parlor: parlor });
+	                return _react2.default.createElement(_IceCreamListItem2.default, {
+	                  key: iceCream.id,
+	                  iceCream: iceCream,
+	                  parlor: parlor,
+	                  loggedIn: _this2.props.loggedIn,
+	                  handleAddFavorite: _this2.handleAddFavorite,
+	                  handleRemoveFavorite: _this2.handleRemoveFavorite
+	                });
 	              })
 	            ),
 	            _react2.default.createElement(

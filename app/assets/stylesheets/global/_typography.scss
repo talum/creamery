@@ -44,8 +44,9 @@ $font-size--xxl: 64px;
 .heading--color-pink         { color: $pink; }
 .heading--color-gray-dark    { color: $gray-dark; }
 .heading--color-gray         { color: $gray; }
+.heading--inline             { display: inline; }
 
-a:hover { color: $blue; }
+a:hover { color: $gray; }
 a.link-color--blue { color: $blue; &:hover { color: $blue-light; } }
 
 p {
@@ -54,12 +55,8 @@ p {
   line-height: 1.4em;
 }
 
-.util--text-align-c {
-  text-align: center;
-}
-.util--font-bold {
-  font-weight: bold;
-}
+.util--text-align-c { text-align: center; }
+.util--font-bold { font-weight: bold; }
 
 @media (max-width: $breakpoint-medium) {
   .heading--splash {
