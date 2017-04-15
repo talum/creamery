@@ -15,6 +15,10 @@ $image-height-medium: 226px;
   border-top-right-radius: $border-radius;
 }
 
+.image-frame--round {
+  border-radius: $border-radius;
+}
+
 .image-frame--upload {
   //no-op
 }

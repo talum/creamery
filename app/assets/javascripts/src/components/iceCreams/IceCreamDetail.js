@@ -7,6 +7,7 @@ import NewReviewForm from '../reviews/NewReviewForm'
 import NewCommentForm from '../reviews/NewCommentForm'
 import Review from '../reviews/Review'
 import Loader from '../sharedComponents/Loader'
+import Plus from '../sharedComponents/Plus'
 
 class IceCreamDetail extends React.Component {
   constructor(props) {
@@ -45,9 +46,11 @@ class IceCreamDetail extends React.Component {
     let iceCreams = this.props.iceCreams
     const addReviewButton = (
       <button 
-        className="button button--color-black "
+        className="button button--circle button--has-icon button--color-black"
         onClick={this.toggleReviewModalVisibility}>
-        Add New Review
+        <div className="button__icon button__icon--xs">
+          <Plus />
+        </div>
       </button>
     )
 
@@ -73,26 +76,33 @@ class IceCreamDetail extends React.Component {
               <div className="flex-grid flex-grid--halves">
                 <div className="flex-grid__item">
                   <div className="module">
-                    <div className="image-frame">
+                    <div className="image-frame image-frame--round">
                       <img src={iceCream.image_url} />
                     </div>
                   </div>
                 </div>
                 <div className="flex-grid__item">
                   <div className="module">
-                    <div className="util--padding-ls">
-                      <h3 className="heading heaading--level-3">Reviews</h3>
-                      { this.props.loggedIn && addReviewButton }
-                      <ul>
-                      {iceCreamReviews.map((review) => (
-                        <Review
-                          key={review.id}
-                          review={review}
-                          toggleCommentModalVisibility={this.toggleCommentModalVisibility}
-                          setActiveReviewId={this.setActiveReviewId}
-                        />
-                      ))} 
-                      </ul>
+                    <div>
+                      <div className="media-block media-block--alt-side">
+                        <div className="media-block__content">
+                          <h3 className="heading heaading--level-3">Reviews</h3>
+                        </div>
+                        <div className="media-block__media">
+                          { this.props.loggedIn && addReviewButton }
+                        </div>
+                      </div>
+                      <div>
+                        {iceCreamReviews.map((review) => (
+                          <Review
+                            key={review.id}
+                            review={review}
+                            toggleCommentModalVisibility={this.toggleCommentModalVisibility}
+                            setActiveReviewId={this.setActiveReviewId}
+                            loggedIn={this.props.loggedIn}
+                          />
+                        ))} 
+                      </div>
                     </div>
                   </div>
                 </div>
