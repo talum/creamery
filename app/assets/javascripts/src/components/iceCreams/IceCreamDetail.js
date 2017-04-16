@@ -57,9 +57,8 @@ class IceCreamDetail extends React.Component {
     if (iceCreams.isLoading) {
       return (<Loader />)
     } else {
-      let reviews = this.props.reviews
       let iceCream = iceCreams.byId[this.props.routeParams.id]
-      const iceCreamReviews = iceCream.review_ids.map((reviewId) => reviews.byId[reviewId] )
+      const iceCreamReviews = iceCream.reviews
 
       return(
         <ReactCSSTransitionGroup
