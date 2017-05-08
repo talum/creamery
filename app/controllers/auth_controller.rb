@@ -12,8 +12,15 @@ class AuthController < ApplicationController
     })
 
     body = JSON.parse(res.body)
-    current_user.update({ig_access_token: body["access_token"]})
-    current_user.profile.update({profile_picture: body["user"]["profile_picture"]})
+    ig_auth = InstagramAuth.find_or_create_by(user_id: current_user.id)
+    ig_auth.update({
+      access_token: body["access_token"],
+      username: body["user"]["username"],
+      bio: body["user"]["bio"],
+      instagram_user_id: body["user"]["id"],
+      full_name: body["user"]["full_name"],
+      profile_picture: body["user"]["profile_picture"]
+    })
 
     redirect_to root_path
   end

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_one :commentor
   has_many :favorites
   has_many :favorite_ice_creams, through: :favorites, source: 'ice_cream'
+  has_one :instagram_auth
 
   validates :email, presence: true, uniqueness: true
 

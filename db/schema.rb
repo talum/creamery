@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508194956) do
+ActiveRecord::Schema.define(version: 20170508230357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(version: 20170508194956) do
     t.string   "image"
   end
 
+  create_table "instagram_auths", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "access_token"
+    t.string  "username"
+    t.string  "bio"
+    t.string  "instagram_user_id"
+    t.string  "full_name"
+    t.string  "profile_picture"
+  end
+
   create_table "parlors", force: :cascade do |t|
     t.string   "name"
     t.string   "street_address"
@@ -81,9 +91,8 @@ ActiveRecord::Schema.define(version: 20170508194956) do
     t.string   "last_name"
     t.datetime "date_of_birth"
     t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "profile_picture"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -101,7 +110,6 @@ ActiveRecord::Schema.define(version: 20170508194956) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.boolean  "admin"
-    t.string   "ig_access_token"
   end
 
 end
