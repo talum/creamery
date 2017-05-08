@@ -17,6 +17,7 @@ export function byId(state={}, action) {
       var iceCream = state[action.data.ice_cream_id]
       var modifiedIceCream = Object.assign({}, iceCream)
       modifiedIceCream.review_ids = modifiedIceCream.review_ids.concat(action.data.id)
+      modifiedIceCream.reviews = modifiedIceCream.reviews.concat(action.data)
 
       return {
         ...state, 

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import Modal from '../sharedComponents/Modal'
-import { showIceCream } from '../../actions/iceCreams'
+import { showIceCreams } from '../../actions/iceCreams'
 import NewReviewForm from '../reviews/NewReviewForm'
 import NewCommentForm from '../reviews/NewCommentForm'
 import Review from '../reviews/Review'
@@ -23,7 +23,7 @@ class IceCreamDetail extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(showIceCream(this.props.routeParams.id))
+    this.props.dispatch(showIceCreams())
   }
 
   toggleReviewModalVisibility() {
