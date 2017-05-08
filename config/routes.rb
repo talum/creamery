@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "landing#index"
-  get '/callback', to: 'landing#callback'
+  get '/callback', to: 'auth#callback'
+  get '/instagram_sub_callback', to: 'instagram_subscriptions#callback'
+  post '/instagram_sub_callback', to: 'instagram_subscriptions#callback'
+  get '/instagram_subscriptions', to: 'instagram_subscriptions#create'
+
   namespace :api do
     namespace :v1 do
       resources :ice_creams, only: [:index, :create, :update, :show]
