@@ -11,6 +11,7 @@ module Api
         if auth_present? && token_present?
           user = User.find(auth["user"])
           @current_user ||= user if user
+          session[:user_id] = user.id
         end
       end
 
