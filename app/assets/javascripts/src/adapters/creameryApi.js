@@ -42,6 +42,10 @@ export function postUsers(payload) {
   return post('/users', payload) 
 }
 
+export function destroySession() {
+  return fetch('/logout')
+}
+
 export function fetchUser(id) {
   return fetch(`/users/${id}`)
 }

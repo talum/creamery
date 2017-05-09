@@ -1,6 +1,6 @@
 // sessions actions
 import { browserHistory } from 'react-router'
-import { createSession, parseErrors } from '../adapters/creameryApi'
+import { createSession, destroySession, parseErrors } from '../adapters/creameryApi'
 
 export const LOGIN         = "LOGIN"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
@@ -53,6 +53,7 @@ export function logInUser(payload) {
 }
 
 export function logOutUser() {
+  destroySession()
   sessionStorage.removeItem('jwt')
   sessionStorage.removeItem('currentUserId')
   sessionStorage.removeItem('isAdmin')

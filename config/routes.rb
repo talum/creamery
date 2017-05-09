@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :show, :update]
       resources :favorites, only: [:create, :destroy]
       post '/login', to: "sessions#create"
+      get '/logout', to: "sessions#destroy"
     end
   end
   get '*path', to: "landing#index", constraints: -> (req) { req.path !~ /\.(png|jpg|js|css)$/ }

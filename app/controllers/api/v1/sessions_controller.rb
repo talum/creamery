@@ -14,6 +14,11 @@ module Api
         end
       end
 
+      def destroy
+        session[:user_id] = nil
+        render json: { message: 'Successfully logged out' }
+      end
+
     private
       def auth_params
         params.require(:session).permit(:email, :password)
