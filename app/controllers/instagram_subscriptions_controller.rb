@@ -11,22 +11,31 @@ class InstagramSubscriptionsController < ApplicationController
       media_id = req["data"]["media_id"]
       res = InstagramClient.new.fetch_media(media_id, user_token)
       response = JSON.parse(res.body)
-      tags = response["data"]["tags"] # see if it includes #icecream
-      caption = response["data"]["caption"] # use this as the review
-      link = response["data"]["link"] # store this just in case
-      ice_cream_image_url = response["data"]["standard_resolution"]["url"] #save this as the ice cream
-      loation = response["data"]["location"] # use this id to hit the api again and parse info to create parlor
-      if tags.include?("icecream")
-        ic = IceCream.new({
-          title: caption,
-          parlor_id: nil,
-          ig_image: ice_cream_image_url
-          ig_link: link
+      tags = response["data"]["tags"]
+      caption = response["data"]["caption"]["text"]
+      link = response["data"]["link"]
+      ice_cream_image_url = response["data"]["standard_resolution"]["url"]
+      location_id = response["data"]["location"]["id"]
+      location_name = response["data"]["location"]["name"]
+      location_latitude = response["data"]["location"]["latitude"]
+      location_longitude = response["data"]["location"]["longitude"]
+
+      if tags.include?("icecreamery")
+        p = Parlor.find_or_create_by(ig_location_id: location_id)
+        p.update({
+          name:           location_name,
+          latitude:       location_latitude,
+          longitude:      location_longitude,
+          ig_location_id: location_id
         })
-        #create the ice cream
-        #
-        # Hit the api again and grab the parlor
-        # save the ice cream and the parlor
+
+        ic = IceCream.create({
+          title: caption,
+          parlor_id: p.id
+          ig_image: ice_cream_image_url
+          ig_link: link,
+          ig_media_id: media_id
+        })
       end
 
       return
