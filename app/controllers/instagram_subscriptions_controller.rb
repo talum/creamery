@@ -9,7 +9,7 @@ class InstagramSubscriptionsController < ApplicationController
     else
       InstaIceCreamCreator.new(params).execute
 
-      return
+      render json: { message: 'Acknowledged' }
     end
   end
 
