@@ -28,7 +28,7 @@ class InstaIceCreamCreator
   def create_ice_cream_and_parlor
     tags     = media_data["tags"]
     location = media_data["location"]
-    ice_cream_image_url = media_data["standard_resolution"]["url"]
+    ice_cream_image_url = media_data["images"]["standard_resolution"]["url"]
 
     if tags.include?("icecreamery")
       p = Parlor.find_or_create_by(ig_location_id: location["id"])
