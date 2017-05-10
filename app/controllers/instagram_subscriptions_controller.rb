@@ -7,9 +7,7 @@ class InstagramSubscriptionsController < ApplicationController
 
       render text: challenge
     else
-      payload = JSON.parse(request.body)
-      puts payload 
-      InstaIceCreamCreator.new(payload).execute
+      InstaIceCreamCreator.new(params).execute
 
       return
     end

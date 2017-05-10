@@ -2,6 +2,7 @@ class InstaIceCreamCreator
   attr_reader :user_id, :media_id, :user_token, :media_data
 
   def initialize(payload)
+    payload   = payload["_json"].first
     @user_id  = payload["object_id"]
     @media_id = payload["data"]["media_id"] 
   end
