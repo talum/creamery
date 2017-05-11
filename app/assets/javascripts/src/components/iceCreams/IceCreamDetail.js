@@ -76,7 +76,7 @@ class IceCreamDetail extends React.Component {
                 <div className="flex-grid__item">
                   <div className="module">
                     <div className="image-frame image-frame--round">
-                      <img src={iceCream.image_url} />
+                      <img src={iceCream.ig_image || iceCream.image_url} />
                     </div>
                   </div>
                 </div>

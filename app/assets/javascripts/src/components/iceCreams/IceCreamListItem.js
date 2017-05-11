@@ -13,7 +13,7 @@ class IceCreamListItem extends React.Component {
             <div className="card__body">
                 <Link to={`/ice-creams/${iceCream.id}`} >
                   <div className="image-frame image-frame--medium image-frame--top-round">
-                    <img src={iceCream.image_url} />
+                    <img src={iceCream.ig_image || iceCream.image_url} />
                   </div>
                 </Link>
             </div>
