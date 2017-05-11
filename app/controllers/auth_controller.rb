@@ -18,5 +18,11 @@ class AuthController < ApplicationController
 
     redirect_to root_path
   end
+
+  def connect_instagram
+    redirect_url = InstagramClient.new.oauth_endpoint
+    
+    render json: { redirect_url: redirect_url }
+  end
 end
 

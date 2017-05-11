@@ -31,5 +31,9 @@ class InstagramClient
   def fetch_location(location_id)
     RestClient.get("#{INSTAGRAM_API_ROOT}/locations/#{location_id}?access_token=#{user_token}")
   end
+
+  def oauth_endpoint
+    "#{INSTAGRAM_URL}/oauth/authorize/?client_id=#{ENV['INSTAGRAM_CLIENT_ID']}&redirect_uri=#{root_url}callback&response_type=code"
+  end
   
 end

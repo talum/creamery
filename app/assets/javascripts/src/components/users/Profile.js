@@ -2,6 +2,7 @@ import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import moment from 'moment'
 import { connect } from 'react-redux'
+import { oauthInstagram } from '../../adapters/creameryApi'
 import { showUser, updateUser } from '../../actions/users'
 import { showIceCreams } from '../../actions/iceCreams'
 import { showParlors } from '../../actions/parlors'
@@ -9,6 +10,7 @@ import { addFavoriteProfile, removeFavoriteProfile } from '../../actions/favorit
 import ProfileForm from './ProfileForm'
 import Modal from '../sharedComponents/Modal'
 import Loader from '../sharedComponents/Loader'
+import InstagramIcon from '../sharedComponents/InstagramIcon.js'
 import IceCreamListItem from '../iceCreams/IceCreamListItem'
 
 class Profile extends React.Component{
@@ -18,6 +20,7 @@ class Profile extends React.Component{
       modalIsVisible: false
     }
     this.toggleModalVisibility = this.toggleModalVisibility.bind(this)
+    this.connectInstagram = this.connectInstagram.bind(this)
   }
 
   componentWillMount() {
@@ -32,10 +35,32 @@ class Profile extends React.Component{
     })
   }
 
+  isCurrentUserProfile() {
+    return (sessionStorage.currentUserId == this.props.routeParams.id )
+  }
+
+  connectInstagram() {
+    oauthInstagram().then((response) => {
+      let redirectUrl = response.data.redirect_url
+      window.location.href = redirectUrl
+    })
+  }
+
   render() {
     const editProfileButton = (
       <button className="button button--color-black" onClick={this.toggleModalVisibility}>
         Edit Profile
+      </button>
+    )
+
+    const connectInstagramButton = (
+      <button className='button button--color-black button--has-icon' onClick={this.connectInstagram}>
+        <div className='button__icon button__icon--s'>
+          <InstagramIcon />
+        </div>
+        <div className='button__text'>
+          Connect Instagram
+        </div>
       </button>
     )
 
@@ -75,13 +100,16 @@ class Profile extends React.Component{
               <div className="util--padding-ls">
                 <div className="media-block media-block--alt-side">
                   <div className="media-block__media">
-                    { (sessionStorage.currentUserId == this.props.routeParams.id ) && editProfileButton }
+                    { this.isCurrentUserProfile() && editProfileButton }
                   </div>
                   <div className="media-block__content">
                     <h2 className="heading heading--level-1">{ first_name } { last_name }</h2>
                   </div>
                 </div>
-                <h3 className="heading heading--level-3 util--padding-ts">Birthday: { moment(date_of_birth, 'YYYY-MM-DD HH:mm').format('MMM DD, YYYY') }</h3>
+                <h3 className="heading heading--level-3 util--padding-ts">Birthday: { moment(date_of_birth, 'YYYY-MM-DD HH:mm').format('MMMM DD, YYYY') }</h3>
+                <div className='module module--padding-flat'>
+                  { this.isCurrentUserProfile() && connectInstagramButton }
+                </div>
               </div>
             </div>
             <div className="module">

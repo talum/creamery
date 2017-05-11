@@ -26,6 +26,10 @@ function patch(route, payload) {
   return axios.patch(`${BASE_URL+route}`, payload)
 }
 
+export function oauthInstagram() {
+  return axios.get(`${process.env.API_URL}/connect_instagram`)
+}
+
 export function fetchIceCreams() {
   return fetch('/ice_creams')
 }

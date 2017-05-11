@@ -8,6 +8,7 @@
 
 .button--has-icon {
   display: flex;
+  align-items: center;
   .button__icon {
 
   }
@@ -43,15 +44,22 @@
 }
 
 $button--icon--size-xs: 12px;
-$button--icon--size-m: 32px;
+$button--icon--size-s:  24px;
+$button--icon--size-m:  32px;
+
 .button__icon {
   height: $button--icon--size-m;
-  width: $button--icon--size-m;
+  width:  $button--icon--size-m;
 }
 
 .button__icon--xs {
   height: $button--icon--size-xs;
-  width: $button--icon--size-xs;
+  width:  $button--icon--size-xs;
+}
+
+.button__icon--s {
+  height: $button--icon--size-s;
+  width:  $button--icon--size-s;
 }
 
 .button:disabled {
