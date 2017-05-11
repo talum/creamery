@@ -49,9 +49,9 @@ class InstaIceCreamCreator
       })
 
       ic.reviews.build({
-        title:  media_data["caption"]["text"],
-        body:   media_data["caption"]["text"],
-        eater:  User.find(user_id).eater
+        title:   media_data["caption"]["text"],
+        content: media_data["caption"]["text"],
+        eater:   User.find(user_id).eater
       })
 
       ic.save!
