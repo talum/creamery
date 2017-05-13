@@ -1,7 +1,7 @@
 module Api
   module V1
     class IceCreamsController < ApiController
-      skip_before_action :authenticate
+      skip_before_action :authenticate, only: [:index]
 
       def index
         @ice_creams = as_nested_hash("IceCream")
@@ -9,7 +9,13 @@ module Api
       end
 
       def create
-        @ice_cream = IceCream.new(title: params[:title], parlor_id: params[:parlorId], image: params[:imageFile])
+        @ice_cream = IceCream.new({
+          title:     params[:title],
+          parlor_id: params[:parlorId],
+          image:     params[:imageFile],
+          user:      current_user
+        })
+
         flavor_titles = params[:flavors].split(",").map(&:strip)
         flavors = flavor_titles.map{|flavor_title| Flavor.find_or_initialize_by(title: flavor_title)}
         flavors.each do |flavor| 

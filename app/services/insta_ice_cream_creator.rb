@@ -37,7 +37,8 @@ class InstaIceCreamCreator
       p.update({
         name:      location["name"],
         latitude:  location["latitude"],
-        longitude: location["longitude"]
+        longitude: location["longitude"],
+        user_id:   user_id
       })
 
       ic = IceCream.new({
@@ -45,7 +46,8 @@ class InstaIceCreamCreator
         parlor_id:   p.id,
         ig_image:    ice_cream_image_url,
         ig_link:     media_data["link"],
-        ig_media_id: media_id
+        ig_media_id: media_id,
+        user_id:     user_id
       })
 
       ic.reviews.build({
