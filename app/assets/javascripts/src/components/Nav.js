@@ -40,6 +40,7 @@ class Nav extends React.Component {
             <ul className="nav__items">
               <li className="nav__link"><Link to='faq'>FAQ</Link></li>
               <li className="nav__link"><Link to='/parlors'>Parlors</Link></li>
+              <li className="nav__link"><Link to='/suggestions'>Suggest a Parlor</Link></li>
               { this.props.loggedIn ? this.loggedInLinks() : this.loggedOutLinks() }
             </ul>
           </div>

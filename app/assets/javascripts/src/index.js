@@ -11,6 +11,7 @@ import ParlorContainer from './components/parlors/Parlor'
 import UserProfile from './components/users/Profile'
 import LoginPage from './components/sessions/loginPage'
 import FaqPage from './components/FaqPage'
+import NewIceCreamSuggestionForm from './components/iceCreamSuggestions/NewIceCreamSuggestionForm'
 import store from './store'
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <Route path="/parlors/:id" component={ParlorContainer} />
           <Route path="/users/:id" component={UserProfile} />
           <Route path="/faq" component={FaqPage} />
+          <Route path="/suggestions" component={NewIceCreamSuggestionForm} />
         </Route>
       </Router>
     </Provider>,
