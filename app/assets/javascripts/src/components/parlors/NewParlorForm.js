@@ -5,17 +5,30 @@ import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
 import SelectField from '../sharedComponents/SelectField'
 import SubmitButton from '../sharedComponents/SubmitButton'
+import { debounce } from 'lodash'
 
 class ParlorForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState()
     this.handleChange = Form.handleChange.bind(this)
-    this.validateForm = Form.validateForm.bind(this)
+    this.validateForm = debounce(Form.validateForm.bind(this), 200)
     this.registerField = Form.registerField.bind(this)
     this.clearForm = Form.clearForm.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fields = []
+    this.handlePlaceSelect = this.handlePlaceSelect.bind(this)
+    this.autocomplete = null
+  }
+
+  componentDidMount() {
+    this.autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), {})
+
+    this.autocomplete.addListener("place_changed", this.handlePlaceSelect)
+  }
+
+  componentDidUpdate() {
+    this.validateForm()
   }
 
   initialState() {
@@ -26,7 +39,8 @@ class ParlorForm extends React.Component {
       state: '',
       zip_code: '',
       chain: false,
-      isValid: false
+      isValid: false,
+      googleMapLink: ''
     }
   }
 
@@ -40,9 +54,17 @@ class ParlorForm extends React.Component {
     }
   }
 
-  stateOptions() {
-    let usStates = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY" ]
-    return usStates.map((abbr, idx) => (<option key={idx} value={abbr}>{abbr}</option>))
+  handlePlaceSelect() {
+    let addressObject = this.autocomplete.getPlace()
+    let address = addressObject.address_components
+    this.setState({
+      name: addressObject.name,
+      street_address: `${address[0].long_name} ${address[1].long_name}`,
+      city: address[4].long_name,
+      state: address[6].short_name,
+      zip_code: address[8].short_name,
+      googleMapLink: addressObject.url
+    })
   }
 
   render() {
@@ -50,6 +72,12 @@ class ParlorForm extends React.Component {
       <div>
         <h1 className="util--padding-ls">Add New Parlor</h1>
         <form onSubmit={this.handleSubmit}>
+          <div className="module">
+            <input id="autocomplete"
+              className="input-field"
+              ref="input"
+              type="text"/>
+          </div>
           <div className="module">
             <InputField 
               name={"name"}
@@ -85,7 +113,7 @@ class ParlorForm extends React.Component {
             />
           </div>
           <div className="module">
-            <SelectField
+            <InputField
               name={"state"}
               value={this.state.state}
               placeholder={"State"}
@@ -93,9 +121,7 @@ class ParlorForm extends React.Component {
               isRequired={true}
               registerField={this.registerField}
               validateForm={this.validateForm}
-            >
-              {this.stateOptions()}
-            </SelectField>
+            />
           </div>
           <div className="module">
             <InputField 

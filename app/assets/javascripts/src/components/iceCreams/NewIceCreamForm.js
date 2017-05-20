@@ -4,13 +4,14 @@ import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
 import { addIceCream } from '../../actions/iceCreams'
+import { debounce } from 'lodash'
 
 class IceCreamForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState(props)
     this.handleChange = Form.handleChange.bind(this)
-    this.validateForm = Form.validateForm.bind(this)
+    this.validateForm = debounce(Form.validateForm.bind(this), 200)
     this.registerField = Form.registerField.bind(this)
     this.clearForm = Form.clearForm.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,6 +28,10 @@ class IceCreamForm extends React.Component {
       parlorId: props.parlorId,
       isValid: false
     }
+  }
+
+  componentDidMount() {
+    this.validateForm()
   }
 
   handleImageChange(event) {

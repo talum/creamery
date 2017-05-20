@@ -4,12 +4,13 @@ import Form from '../sharedComponents/Form'
 import { addReview } from '../../actions/reviews'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
+import { debounce } from 'lodash'
 
 class ReviewForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState(props)
-    this.validateForm = Form.validateForm.bind(this)
+    this.validateForm = debounce(Form.validateForm.bind(this), 200)
     this.registerField = Form.registerField.bind(this)
     this.clearForm = Form.clearForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -23,6 +24,10 @@ class ReviewForm extends React.Component {
       content: '',
       ice_cream_id: props.iceCreamId
     }
+  }
+
+  componentDidUpdate() {
+    this.validateForm()
   }
 
   handleChange(event) {

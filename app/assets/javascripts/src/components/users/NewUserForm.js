@@ -5,6 +5,7 @@ import { addUser } from '../../actions/users'
 import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
+import { debounce } from 'lodash'
 
 class UserForm extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class UserForm extends React.Component {
     this.state = this.initialState()
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.validateForm = Form.validateForm.bind(this)
+    this.validateForm = debounce(Form.validateForm.bind(this), 200)
     this.registerField = Form.registerField.bind(this)
     this.fields = []
   }
@@ -23,6 +24,10 @@ class UserForm extends React.Component {
       password: '',
       password_confirmation: ''
     }
+  }
+
+  componentDidUpdate() {
+    this.validateForm()
   }
 
   handleChange(event) {

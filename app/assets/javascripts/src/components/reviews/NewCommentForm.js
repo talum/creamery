@@ -4,12 +4,13 @@ import Form from '../sharedComponents/Form'
 import { addComment } from '../../actions/comments'
 import InputField from '../sharedComponents/InputField'
 import SubmitButton from '../sharedComponents/SubmitButton'
+import { debounce } from 'lodash'
 
 class CommentForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState(props)
-    this.validateForm = Form.validateForm.bind(this)
+    this.validateForm = debounce(Form.validateForm.bind(this), 200)
     this.registerField = Form.registerField.bind(this)
     this.clearForm = Form.clearForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -22,6 +23,10 @@ class CommentForm extends React.Component {
       content: '',
       review_id: props.reviewId
     }
+  }
+
+  componentDidUpdate() {
+    this.validateForm()
   }
 
   handleChange(event) {
