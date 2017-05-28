@@ -30,6 +30,10 @@ export function oauthInstagram() {
   return axios.get(`${process.env.API_URL}/connect_instagram`)
 }
 
+export function postIceCreamSuggestions(payload) {
+  return post('/ice_cream_suggestions', payload)
+}
+
 export function fetchIceCreams() {
   return fetch('/ice_creams')
 }

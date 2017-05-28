@@ -1,8 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
-import SelectField from '../sharedComponents/SelectField.js'
+import SelectField from '../sharedComponents/SelectField'
 import SubmitButton from '../sharedComponents/SubmitButton'
+import { addIceCreamSuggestion } from '../../actions/iceCreamSuggestions'
+import { showParlors } from '../../actions/parlors'
 import { debounce } from 'lodash'
 
 class NewIceCreamSuggestionForm extends React.Component {
@@ -14,7 +17,7 @@ class NewIceCreamSuggestionForm extends React.Component {
       comment: '',
       name: '',
       email: '',
-      parlor: {}
+      parlor_id: '' 
     }
     
     this.handleChange = Form.handleChange.bind(this)
@@ -25,18 +28,23 @@ class NewIceCreamSuggestionForm extends React.Component {
     this.fields = []
   }
 
+  componentDidMount() {
+    this.props.dispatch(showParlors())
+  }
+
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  handleSubmit() {
-    // send some actions somewhere
+  handleSubmit(event) {
+    event.preventDefault()
+    this.props.dispatch(addIceCreamSuggestion(this.state))  
   }
 
   render() {
-    // fetch all the parlors and use them to display options
-    // one option is Add New
-    // Add New should trigger showing a new form
+    let parlors = this.props.parlors.allIds.map((parlorId) => this.props.parlors.byId[parlorId])
+    let options = parlors.map((parlor) => <option key={parlor.id} value={parlor.id}>{parlor.name}</option>)
+
     return(
       <div>
         <h2 className="util--padding-ls">Suggest an Ice Cream</h2>
@@ -61,7 +69,9 @@ class NewIceCreamSuggestionForm extends React.Component {
             />
           </div>
           <div className="module">
-            <SelectField />
+            <SelectField name={"parlor_id"} value={this.state.parlor_id} handleChange={this.handleChange}>
+              {options}
+            </SelectField>
           </div>
           <div className="module">
             <InputField
@@ -91,5 +101,13 @@ class NewIceCreamSuggestionForm extends React.Component {
   }
 
 }
+
+let mapStateToProps = (state) => {
+  return {
+    parlors: state.parlors
+  }
+}
+
+NewIceCreamSuggestionForm = connect(mapStateToProps)(NewIceCreamSuggestionForm)
 
 export default NewIceCreamSuggestionForm
