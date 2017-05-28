@@ -5,6 +5,7 @@ import Form from '../sharedComponents/Form'
 import InputField from '../sharedComponents/InputField'
 import SelectField from '../sharedComponents/SelectField'
 import SubmitButton from '../sharedComponents/SubmitButton'
+import CancelButton from '../sharedComponents/CancelButton'
 import { debounce } from 'lodash'
 
 class ParlorForm extends React.Component {
@@ -138,6 +139,12 @@ class ParlorForm extends React.Component {
             <SubmitButton
               isDisabled={!this.state.isValid}
               handleSubmit={this.handleSubmit}
+            />
+          </div>
+          <div className="module">
+            <CancelButton
+              isDisabled={!this.state.isValid}
+              handleCancel={this.props.toggleModalVisibility}
             />
           </div>
         </form>
