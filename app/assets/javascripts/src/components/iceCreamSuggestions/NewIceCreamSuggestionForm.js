@@ -144,12 +144,19 @@ class NewIceCreamSuggestionForm extends React.Component {
     return(
       <div>
         <h2 className="util--padding-ls">Suggest an Ice Cream</h2>
+        <h3 className="util--padding-ls">Where should I go next?</h3>
         {!this.state.shouldShowParlorForm && 
-          <div className="module">
-            <SelectField name={"parlor_id"} value={this.state.parlor_id} handleChange={this.handleParlorSelect}>
-              {options}
-            </SelectField>
-          {!this.state.shouldShowNewSuggestionForm &&<div onClick={this.toggleParlorForm}>Add New</div>}
+          <div className='module'>
+            <div className='flex-grid flex-grid--halves'>
+              <div className='flex-grid__item'>
+                <SelectField name={"parlor_id"} value={this.state.parlor_id} handleChange={this.handleParlorSelect}>
+                  {options}
+                </SelectField>
+              </div>
+              <div className='flex-grid__item'>
+                {!this.state.shouldShowNewSuggestionForm &&<div onClick={this.toggleParlorForm}>Add New</div>}
+              </div>
+            </div>
           </div>
         }
         {this.state.shouldShowParlorForm && <NewParlorForm toggleModalVisibility={this.toggleParlorForm}/>}
