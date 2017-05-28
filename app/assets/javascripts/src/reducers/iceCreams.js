@@ -51,9 +51,9 @@ export function byId(state={}, action) {
 function allIds(state=[], action) {
   switch (action.type) {
     case iceCreamsActions.RECEIVE_ICECREAMS_SUCCESS:
-      return Object.keys(action.data)
+      return Object.keys(action.data).reverse()
     case iceCreamsActions.ADD_ICECREAM_SUCCESS: case iceCreamsActions.RECEIVE_ICECREAM_SUCCESS:
-      return state.concat(action.data.id)
+      return [action.data.id, ...state]
     default:
       return state
   }

@@ -11,7 +11,17 @@ const FilteredParlors = ({parlors, searchTerm}) => {
     parlorItems = parlors.filter((parlor) => parlor.name.toLowerCase().includes(searchTerm.toLowerCase()))  
   }
 
-  parlorItems = parlorItems.map((parlor) => (
+  parlorItems = parlorItems.sort((a, b) => {
+    let nameA = a.name.toUpperCase()
+    let nameB = b.name.toUpperCase()
+    if (nameA < nameB) {
+      return -1
+    }
+    if (nameA > nameB) {
+      return 1
+    }
+    return 0
+  }).map((parlor) => (
     <div key={parlor.id} className="flex-grid__item">
       <ParlorItem parlor={parlor} />
     </div>))
