@@ -15,7 +15,9 @@ module Api
           city: params[:parlor][:city],
           state: params[:parlor][:state],
           zip_code: params[:parlor][:zip_code],
-          user: current_user
+          user: current_user,
+          latitude: params[:parlor][:latitude],
+          longitude: params[:parlor][:longitude]
         )
 
         if @parlor.save

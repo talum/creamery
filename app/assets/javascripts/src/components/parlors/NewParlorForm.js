@@ -64,7 +64,9 @@ class ParlorForm extends React.Component {
       city: address[4].long_name,
       state: address[6].short_name,
       zip_code: address[8].short_name,
-      googleMapLink: addressObject.url
+      googleMapLink: addressObject.url,
+      latitude: addressObject.geometry.location.lat(),
+      longitude: addressObject.geometry.location.lng()
     })
   }
 
