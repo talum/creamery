@@ -5,6 +5,7 @@ import NewParlorForm from '../parlors/NewParlorForm'
 import FilteredParlors from '../parlors/FilteredParlors'
 import Loader from '../sharedComponents/Loader'
 import SearchBar from '../sharedComponents/SearchBar'
+import GoogleMap from '../sharedComponents/GoogleMap'
 
 class Parlors extends React.Component {
   constructor(props) {
@@ -61,6 +62,7 @@ class Parlors extends React.Component {
               />
             }
           />
+          <GoogleMap parlors={parlors} />
         </div>
       )
     }
